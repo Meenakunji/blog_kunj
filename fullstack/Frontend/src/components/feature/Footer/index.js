@@ -2,8 +2,6 @@ import { Box, Typography, useMediaQuery } from "@mui/material";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import { useRouter } from "next/router";
-import { useState } from "react";
-import { useSelector } from "react-redux";
 import styles from "./style";
 
 export default function FooterComponent() {
@@ -113,15 +111,16 @@ export default function FooterComponent() {
                       alt="location icon"
                     />
                     <span>
-                      B-20, 20th Floor, Tower B, Bhutani Alphathum,
+                      House No 24, 2th Floor,near Sai Temple
                       <br />
-                      Sector 90, Noida, 201305
+                      Sector 16, Old FaridaBad, 121003
                     </span>
                   </li>
                 </ul>
               </Box>
             </Grid>
             <Grid item md={6} xs={12}>
+              <Typography variant="p">Connect With Us</Typography>
               <Box sx={styles.footerList__socialIcon}>
                 <ul>
                   {data &&
@@ -146,87 +145,6 @@ export default function FooterComponent() {
             <a href="#">2023-24 ©️ Copyright © 2023 All rights reserved </a>
           </Box>
         </Container>
-      </Box>
-
-      <Box sx={styles.sidebar}>
-        <Box sx={styles.sidebarNav}>
-          <ul>
-            <li
-              className={router?.asPath === "/" && "activeNav"}
-              onClick={() => {
-                router?.push(`/`);
-              }}
-            >
-              <span>
-                {router?.asPath === "/" ? (
-                  <img
-                    src="/images/fantv/menu/color-home.svg"
-                    alt="userimage"
-                  />
-                ) : (
-                  <img src="/images/fantv/menu/home.svg" alt="userimage" />
-                )}
-              </span>
-              Home
-            </li>
-            <li
-              className={router?.asPath === "/invest" && "activeNav"}
-              onClick={() => {
-                router?.push(`/invest`);
-              }}
-            >
-              <span>
-                {router?.asPath === "/invest" ? (
-                  <img
-                    src="/images/fantv/menu/color-card.svg"
-                    alt="userimage"
-                  />
-                ) : (
-                  <img src="/images/fantv/menu/card.svg" alt="userimage" />
-                )}
-              </span>
-              Music Cards
-            </li>
-            <li
-              className={router?.asPath === "/reedemcoin" && "activeNav"}
-              onClick={() => {
-                router?.push(`/reedemcoin`);
-              }}
-            >
-              <span>
-                {router?.asPath === "/reedemcoin" ? (
-                  <img
-                    src="/images/fantv/menu/color-reward.svg"
-                    alt="userimage"
-                  />
-                ) : (
-                  <img src="/images/fantv/menu/reward.svg" alt="userimage" />
-                )}
-              </span>
-              Rewards
-            </li>
-            <li
-              className={
-                router?.asPath === "/profile?type=overview" && "activeNav"
-              }
-              onClick={() => {
-                router?.push(`/profile?type=overview`);
-              }}
-            >
-              <span>
-                {router?.asPath === "/profile?type=overview" ? (
-                  <img
-                    src="/images/fantv/menu/color-profile.svg"
-                    alt="userimage"
-                  />
-                ) : (
-                  <img src="/images/fantv/menu/community.svg" alt="userimage" />
-                )}
-              </span>
-              Profile
-            </li>
-          </ul>
-        </Box>
       </Box>
     </Box>
   );
