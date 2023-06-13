@@ -132,7 +132,7 @@ export const HomeComponet = () => {
     {
       id: "10",
       name: "Blog10",
-      image: "/images/home/kerala.jpg",
+      image: "/images/home/jiraf.jpg",
       blogTag: "education",
       user: "Jupiter",
       blogTitle: "The AI magically removes moving objects from videos.",
@@ -146,7 +146,7 @@ export const HomeComponet = () => {
     {
       id: "11",
       name: "Blog11",
-      image: "/images/home/kerala.jpg",
+      image: "/images/home/cheetha.jpg",
       blogTag: "education",
       user: "Jupiter",
       blogTitle: "The AI magically removes moving objects from videos.",
@@ -160,7 +160,7 @@ export const HomeComponet = () => {
     {
       id: "12",
       name: "Blog12",
-      image: "/images/home/kerala.jpg",
+      image: "/images/home/tiger.jpg",
       blogTag: "education",
       user: "Jupiter",
       blogTitle: "The AI magically removes moving objects from videos.",
@@ -174,7 +174,7 @@ export const HomeComponet = () => {
     {
       id: "13",
       name: "Blog13",
-      image: "/images/home/kerala.jpg",
+      image: "/images/home/deer.jpg",
       blogTag: "education",
       user: "Jupiter",
       blogTitle: "The AI magically removes moving objects from videos.",

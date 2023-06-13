@@ -21,45 +21,45 @@ const HeaderComponent = () => {
     {
       id: 1,
       label: "Home",
-      path: "/nft_launch?tab=artist_assets",
+      path: "/home",
     },
     {
       id: 2,
       label: "Politics",
-      path: "/videocms?tab=videos_category",
+      path: "/politics",
     },
     {
       id: 3,
       label: "Tech",
-      path: "/approvingvideocms?tab=approving_videos",
+      path: "/tech",
     },
     {
       id: 4,
       label: "Entertainment",
-      path: "/game-engine/create",
+      path: "/entertainment",
     },
     {
       id: 5,
       label: "Travel",
-      path: "/communitycms?tab=coin_giveaways",
+      path: "/travel",
     },
     {
       id: 6,
       label: "Sports",
-      path: "/androidcms?tab=home_feed",
+      path: "/sports",
     },
   ];
 
   const handleNavbarTitleRedirect = (item) => {
-    if (item?.label == "FanCard CMS") {
+    if (item?.label == "Home") {
       router.push(item?.path);
-    } else if (item?.label == "Artist CMS") {
+    } else if (item?.label == "Politics") {
       router.push(item?.path);
-    } else if (item?.label == "Approving Videos CMS") {
+    } else if (item?.label == "Tech") {
       router.push(item?.path);
-    } else if (item?.label == "Game Engine CMS") {
+    } else if (item?.label == "Entertainment") {
       router.push(item?.path);
-    } else if (item?.label == "Other CMS") {
+    } else if (item?.label == "Travel") {
       router.push(item?.path);
     }
   };
