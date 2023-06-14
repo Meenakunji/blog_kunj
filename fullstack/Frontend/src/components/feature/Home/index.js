@@ -187,44 +187,49 @@ export const HomeComponet = () => {
     },
   ];
   return (
-    <Box sx={style.mainContainer}>
+    <>
       {HomePageObj &&
         HomePageObj?.map((item, index) => {
           return (
-            <Box sx={style.mediaCard} key={index}>
-              {/* <Typography variant="h1">{item?.name}</Typography> */}
-              <Box
-                sx={style.blogTagcss}
-                style={{ backgroundColor: item?.color }}
-              >
-                <Typography variant="h1">{item?.blogTag}</Typography>
-              </Box>
-              <Box
-                component="img"
-                src={item?.image}
-                style={{
-                  borderRadius: "8px",
-                }}
-              />
-              <Typography variant="p">{item?.blogTitle}</Typography>
-              <Box>
-                <Box
-                  component="img"
-                  src={item?.profilepic}
-                  style={{
-                    borderRadius: "10px",
-                    width: "30px",
-                    height: "30px",
-                  }}
-                />
-                <Typography variant="p">
-                  By {item?.user} - {item?.creatAt}
-                </Typography>
-              </Box>
-              <Typography variant="p">{item?.description}</Typography>
-            </Box>
+            <div className="col-md-4 mt-3">
+              <div className="card p-3">
+                <Box sx={style.mediaCard} key={index}>
+                  {/* <Typography variant="h1">{item?.name}</Typography> */}
+
+                  {/* <Typography variant="h1"></Typography> */}
+                  <Box sx={style.chip} style={{ backgroundColor: item?.color }}>
+                    {item?.blogTag}
+                  </Box>
+
+                  <Box
+                    component="img"
+                    src={item?.image}
+                    style={{
+                      borderRadius: "8px",
+                    }}
+                  />
+                  <Typography variant="h2">{item?.blogTitle}</Typography>
+                  <Box sx={style.userdetails}>
+                    <Box
+                      component="img"
+                      src={item?.profilepic}
+                      style={{
+                        borderRadius: "100px",
+                        width: "30px",
+                        height: "30px",
+                        border: "1px solid #c3c3c3",
+                      }}
+                    />
+                    <Typography variant="p">
+                      By {item?.user} - {item?.creatAt}
+                    </Typography>
+                  </Box>
+                  <Typography variant="p">{item?.description}</Typography>
+                </Box>
+              </div>
+            </div>
           );
         })}
-    </Box>
+    </>
   );
 };

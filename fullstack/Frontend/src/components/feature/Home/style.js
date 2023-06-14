@@ -1,16 +1,13 @@
 const style = {
-  mainContainer: {
-    display: "flex",
-    background: "#000",
-    flexFlow: "wrap",
-    gap: "15px",
-  },
   mediaCard: {
-    width: "49%",
-    marginTop: "30px",
     "& h1": {
       fontSize: "30px",
       fontWeight: 400,
+    },
+    "& h2": {
+      fontSize: "15px",
+      fontWeight: "700",
+      marginTop: "20px",
     },
     "& img": {
       width: "100%",
@@ -29,6 +26,20 @@ const style = {
       textAlign: "center",
       padding: "5px",
     },
+  },
+  chip: {
+    borderRadius: "5px",
+    width: "fit-content",
+    padding: "2px 16px",
+    color: "#fff",
+    marginBottom: "10px",
+    height: "26px",
+    fontSize: "14px",
+  },
+  userdetails: {
+    margin: "10px 0",
+    display: "flex",
+    gap: "10px",
   },
 };
 

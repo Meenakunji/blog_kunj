@@ -4,8 +4,10 @@ import style from "../src/components/feature/Home/style";
 
 export default function Home() {
   return (
-    <Box sx={style.container}>
-      <HomeComponet />
-    </Box>
+    <div className="container-fluid">
+      <div className="row">
+        <HomeComponet />
+      </div>
+    </div>
   );
 }

@@ -499,6 +499,14 @@ const style = {
       fontWeight: "700 !important",
     },
   },
+
+  // farhan
+
+  navbarbrand: {
+    "& img": {
+      width: "90px",
+    },
+  },
 };
 
 export default style;

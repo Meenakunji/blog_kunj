@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import Layout from "../src/components/feature/Layout";
 import store from "../src/redux/store";
 import "../styles/globals.css";
+import "bootstrap/dist/css/bootstrap.css";
 
 function MyApp({ Component, pageProps }) {
   const queryClient = new QueryClient({
