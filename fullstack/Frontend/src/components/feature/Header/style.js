@@ -503,6 +503,7 @@ const style = {
   // farhan
 
   navbarbrand: {
+    cursor: "pointer",
     "& img": {
       width: "90px",
     },

@@ -1,5 +1,6 @@
 import { Box } from "@mui/system";
-import FooterComponent from "../../Footer";
+import { FooterComponent } from "../../Footer";
+// import FooterComponent from "../../Footer";
 import HeaderComponent from "../../Header";
 import style from "../style";
 
