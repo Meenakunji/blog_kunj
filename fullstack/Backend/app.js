@@ -5,9 +5,9 @@ const mongoSanitize = require("express-mongo-sanitize");
 const compression = require("compression");
 const cors = require("cors");
 const httpStatus = require("http-status");
-const config = require("../Backend/src/config/config");
-const routes = require("../Backend/src/routes/v1");
-const ApiError = require("../Backend/src/utils/ApiError");
+// const config = require("../Backend/src/config/config");
+const routes = require("./src/routes/v1");
+const ApiError = require("./src/utils/ApiError");
 const rTracer = require("cls-rtracer");
 
 const app = express();

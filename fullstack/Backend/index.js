@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 const app = require("./app");
-const config = require("../Backend/src/config/config");
+const config = require("./src/config/config");
 
 let server;
 mongoose.connect(config.mongoose.url, config.mongoose.options).then(() => {
   server = app.listen(config.port, () => {
-    console.log(`Listening to port ${config.port}`);
+    console.log(`Listening to port connected ${config.port}`);
   });
 });
 
