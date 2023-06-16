@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function LoginComponent() {
+const LoginComponent = () => {
   return (
     <div>
       <section className="">
@@ -142,4 +142,6 @@ export default function LoginComponent() {
       </section>
     </div>
   );
-}
+};
+
+export default LoginComponent;

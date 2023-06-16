@@ -162,15 +162,21 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import styles from "./style";
+import AuthenticationComponent from "../auth";
 
 const HeaderComponent = () => {
   const router = useRouter();
+  const [open, setOpen] = useState(false);
   const [click, setClick] = useState(false);
   const dispatch = useDispatch();
   const handleClick = () => setClick(!click);
   const Close = () => setClick(false);
   const isMobile = useMediaQuery("(max-width:768px)");
   const [isLoggin, setIsLoggin] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const navbarCMSItems = [
     {
@@ -222,9 +228,14 @@ const HeaderComponent = () => {
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-light">
-        <Box sx={styles.navbarbrand}>
+        <Box sx={styles.navbarbrand} onClick={() => router.push("/")}>
           <img src="/images/home/bloggerlogo.png" />
         </Box>
+        <AuthenticationComponent
+          callBackName={"uniqueCommunity"}
+          open={open}
+          handleModalClose={() => handleClose()}
+        />
         <div
           className="collapse navbar-collapse justify-content-end"
           id="navbarSupportedContent"
@@ -287,7 +298,7 @@ const HeaderComponent = () => {
                 <button
                   type="button"
                   className="btn btn-link px-3 me-2"
-                  onClick={() => setIsLoggin(true)}
+                  onClick={() => setOpen(true)}
                 >
                   Login
                 </button>

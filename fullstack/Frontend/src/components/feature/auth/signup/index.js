@@ -1,6 +1,6 @@
 import React from "react";
 
-export const SignupComponent = () => {
+const SignupComponent = () => {
   return (
     <div>
       <section className="background-radial-gradient overflow-hidden">
@@ -196,3 +196,5 @@ export const SignupComponent = () => {
     </div>
   );
 };
+
+export default SignupComponent;
