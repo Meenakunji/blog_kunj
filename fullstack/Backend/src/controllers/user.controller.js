@@ -21,6 +21,14 @@ const getArtists = catchAsync(async (req, res) => {
   // }
 });
 
+const loginUser = catchAsync(async (req, res) => {
+  const body = req.body;
+  const data = await userService.loginUser({ body });
+  res
+    .status(httpStatus.OK)
+    .send({ code: httpStatus.OK, message: "success", data: data });
+});
 module.exports = {
   getArtists,
+  loginUser,
 };
