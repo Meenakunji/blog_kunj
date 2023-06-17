@@ -29,7 +29,7 @@
 module.exports = {
   port: 3003,
   mongoose: {
-    url: "mongodb://localhost:27017/local",
+    url: "mongodb+srv://Pankaj1999:jupiter123@jupiter-blog.smfhyei.mongodb.net/jupiter",
     options: {
       useNewUrlParser: true,
       useUnifiedTopology: true,

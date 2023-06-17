@@ -229,7 +229,7 @@ const HeaderComponent = () => {
     <>
       <nav className="navbar navbar-expand-lg bg-light">
         <Box sx={styles.navbarbrand} onClick={() => router.push("/")}>
-          <img src="/images/home/bloggerlogo.png" />
+          <img src="https://i.postimg.cc/3wgSvKbP/bloggerlogo.png" />
         </Box>
         <AuthenticationComponent
           callBackName={"uniqueCommunity"}
