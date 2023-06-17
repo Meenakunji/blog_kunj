@@ -7,6 +7,11 @@ const getBlogContent = async () => {
   return data;
 };
 
+const createBlog = async (body) => {
+  console.log("Print create-blog API", body);
+};
+
 module.exports = {
   getBlogContent,
+  createBlog,
 };

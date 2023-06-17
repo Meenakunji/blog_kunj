@@ -18,22 +18,46 @@ export const FooterComponent = () => {
             <span>Get connected with us on social networks:</span>
           </div>
           <div>
-            <a href="/" className="me-4 text-reset">
+            <a
+              href="/"
+              className="me-4 text-reset"
+              style={{ color: "#3b5998 !important" }}
+            >
               <FacebookIcon />
             </a>
-            <a href="/" className="me-4 text-reset">
+            <a
+              href="/"
+              className="me-4 text-reset"
+              style={{ color: "#55acee !important" }}
+            >
               <TwitterIcon />
             </a>
-            <a href="/" className="me-4 text-reset">
+            <a
+              href="/"
+              className="me-4 text-reset"
+              style={{ color: "#dd4b39 !important" }}
+            >
               <GoogleIcon />
             </a>
-            <a href="/" className="me-4 text-reset">
+            <a
+              href="/"
+              className="me-4 text-reset"
+              style={{ color: "#ac2bac !important" }}
+            >
               <InstagramIcon />
             </a>
-            <a href="/" className="me-4 text-reset">
+            <a
+              href="/"
+              className="me-4 text-reset"
+              style={{ color: "##0082ca !important" }}
+            >
               <LinkedInIcon />
             </a>
-            <a href="/" className="me-4 text-reset">
+            <a
+              href="/"
+              className="me-4 text-reset"
+              style={{ color: "#333333 !important" }}
+            >
               <GitHubIcon />
             </a>
           </div>

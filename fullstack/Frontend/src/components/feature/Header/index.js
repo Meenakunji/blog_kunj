@@ -154,6 +154,7 @@
 // export default HeaderComponent;
 
 import React from "react";
+import DriveFileRenameOutlineTwoToneIcon from "@mui/icons-material/DriveFileRenameOutlineTwoTone";
 import { Box, useMediaQuery } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Typography from "@mui/material/Typography";
@@ -240,6 +241,14 @@ const HeaderComponent = () => {
           className="collapse navbar-collapse justify-content-end"
           id="navbarSupportedContent"
         >
+          <Box
+            onClick={() => {
+              router.push(`/new-blog/1`);
+            }}
+            style={{ cursor: "pointer" }}
+          >
+            <DriveFileRenameOutlineTwoToneIcon /> Create Blog
+          </Box>
           <ul className="navbar-nav">
             {navbarCMSItems.map((item) => (
               <li className="nav-item" key={item.id}>
