@@ -1,12 +1,8 @@
 const mongoose = require("mongoose");
-// const { paginate } = require("./plugins");
 
 const blogContentSchema = mongoose.Schema(
   {
     name: {
-      type: String,
-    },
-    description: {
       type: String,
     },
     image: {
@@ -15,29 +11,31 @@ const blogContentSchema = mongoose.Schema(
     blogTag: {
       type: String,
     },
+    user: {
+      type: String,
+    },
     blogTitle: {
       type: String,
     },
-    user: {
+    description: {
+      type: String,
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
+    color: {
       type: String,
     },
     profilepic: {
       type: String,
     },
-    creatAt: {
-      type: String,
-    },
+  },
+  {
+    timestamps: true,
   }
-  // {
-  //   timestamps: true,
-  // }
 );
 
-// blogContentSchema.plugin(paginate);
-
-/**
- * @typedef Blog
- */
-const BlogContent = mongoose.model("jupiter_blog_content", blogContentSchema);
+const BlogContent = mongoose.model("jupiter_blog_contents", blogContentSchema);
 
 module.exports = BlogContent;
