@@ -58,10 +58,14 @@ export const HomeComponet = () => {
                       }}
                     />
                     <Typography variant="p">
-                      By {item?.user} - {item?.creatAt}
+                      By {item?.user} -{" "}
+                      {new Date(item?.creatAt).toLocaleDateString("en-US", {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                      })}
                     </Typography>
                   </Box>
-                  {/* <a href="https://i.postimg.cc/13DfxTd9/kedarnath.jpg"><img src="https://i.postimg.cc/13DfxTd9/kedarnath.jpg" title="source: imgur.com" /></a> */}
                   <Typography variant="p">{item?.description}</Typography>
                 </Box>
               </div>
