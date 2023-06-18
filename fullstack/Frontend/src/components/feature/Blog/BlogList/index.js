@@ -2,10 +2,12 @@ import { Box, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import style from "../../Home/style";
 import { useMutation } from "react-query";
+import { useRouter } from "next/router";
 import fetcher from "../../../../dataProvider";
 import ImageSlider from "../../../common/ImageSlider";
 
 export const BlogContentTypeList = () => {
+  const router = useRouter();
   const [homePageBlogContents, setHomePageBlogContents] = useState([]);
 
   // get all cms details based on category
@@ -49,7 +51,11 @@ export const BlogContentTypeList = () => {
 
                   <Typography variant="p">
                     {item?.description?.split(" ").slice(0, 30).join(" ")}
-                    <a href="#" onClick={() => console.log("hii")}>
+                    <a
+                      href="#"
+                      onClick={() => router.push("/home")}
+                      style={{ cursor: "pointer" }}
+                    >
                       ...Read More
                     </a>
                   </Typography>
