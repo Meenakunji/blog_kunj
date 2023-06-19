@@ -40,21 +40,21 @@ const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
       label: "Tech",
       path: "/tech",
     },
-    {
-      id: 4,
-      label: "Entertainment",
-      path: "/entertainment",
-    },
-    {
-      id: 5,
-      label: "Travel",
-      path: "/travel",
-    },
-    {
-      id: 6,
-      label: "Sports",
-      path: "/sports",
-    },
+    // {
+    //   id: 4,
+    //   label: "Entertainment",
+    //   path: "/entertainment",
+    // },
+    // {
+    //   id: 5,
+    //   label: "Travel",
+    //   path: "/travel",
+    // },
+    // {
+    //   id: 6,
+    //   label: "Sports",
+    //   path: "/sports",
+    // },
   ];
 
   const handleNavbarTitleRedirect = (item) => {
