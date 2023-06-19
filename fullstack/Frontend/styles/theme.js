@@ -1,0 +1,217 @@
+import { createTheme } from "@mui/material/styles";
+
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+    custom: {
+      white: "#fff",
+      ebony: "#0C091B",
+      seashell: "rgb(0 0 0 / 70%)",
+      buttonHover: "#fff",
+      mirage: "#111329",
+      headerCoin: "#fff",
+      primaryHowItWork: "#0C091B",
+      PrimaryBgColor: "#0C091B",
+      PrimaryButtonBgColor: "#251D3E",
+      PrimaryButtonBorderColor: "#251D3E",
+      primaryWatchBg: "#181626",
+      activeCategoryBg: "rgba(255, 255, 255, 0.1)",
+      fansRoyaltyBoxText: "rgba(255, 255, 255, 0.75)",
+      borderColor: "#fff",
+      returnCalculatorBg: "#242033",
+      totalReturnBg: "#fff",
+      collectorsIconsBorder: "#fff",
+      leaderBoardHeaderBg: "#16132D",
+      tabContainerNewButtonBg: "rgba(255, 255, 255, 0.1)",
+      tabContainerNewButtonText: "#e8e2e5 !important",
+      headerCoinBorder: "#fff",
+      FanTigerWalletBorder: "rgba(255,255,255,0.5)",
+      sideBarBg: "#0C0A1D",
+      videoUploadInputBg: "#211f37",
+      videoUploadInputSelectColor: "#D8D8D8",
+      currentBoxBg: "#16132d",
+      currentRightBg: "#5D5E3D",
+      howMuchCanEarn: "#222947",
+      monthlyLimitPro: "#fff",
+      earnCoinBg: "#16132D",
+      walletIconBg: "#2D293A",
+      myContentBg: "#191E36",
+      marketPlaceBuyBg: "#0c091b",
+      marketPlaceBuyBorder: "#fff",
+      marketPlaceBuyInput: "#2F2D3C",
+      marketPlaceBuyInputBorder: "#3D3A51",
+      privacyBg: "#fff",
+      tradableContainerBg: "rgba(255, 255, 255, 0.1)",
+      onBoardingBg: "#19132A",
+      subscribeMobileBg: "#232133",
+      descriptionColor: "rgb(204, 204, 204)",
+      miniPlayerBottomContainerBg: "#0c091b",
+      coinEarnProgressBg: "#222a49",
+      graphLabelColor: "#000",
+      activeCategorySecond: "rgba(255, 255, 255, 0.1)",
+      editProfileBg: "#130e25",
+      editProfileBgTop: "#282543",
+      contrastText: "#000",
+    },
+    background: {
+      bannerGradient:
+        "linear-gradient(269.1deg, rgb(12 10 29 / 0%) 9.11%, rgb(12 10 29 / 55%) 34.69%, #0c091b 58.04%)",
+      bannerGradientBottom:
+        "linear-gradient(180deg, rgba(12, 10, 29, 0) 0%, #0c091b 45.57%)",
+      bannerGradientMobile:
+        "linear-gradient(180deg,hsla(0,0%,8%,0) 0,hsla(0,0%,8%,.15) 15%,hsl(0,0%,8%,.35) 29%,hsl(0,0%,8%,.58) 44%,#0b0819 68%,#0b0818)",
+      levelBg: "linear-gradient(transparent, rgb(22, 19, 45))",
+      headerSectionLight:
+        "linear-gradient(rgb(255 255 255 / 48%),rgb(12 9 27))",
+      wonRewardBg: "linear-gradient(180deg, #222A49 0%, #191E36 100%);",
+      commonButtonGradientBg:
+        "linear-gradient(90.52deg, #E14084 4.01%, #3454FA 57.04%, #54B5BB 103.77%)",
+    },
+    boxShadow: {
+      wonRewardBgShadow: "inset 0px 2px 4px #384056",
+    },
+  },
+});
+
+const lightTheme = createTheme({
+  palette: {
+    mode: "light",
+    custom: {
+      white: "#171527",
+      ebony: "#fff",
+      seashell: "#F1F1F3",
+      buttonHover: "#fff",
+      mirage: "#fff",
+      headerCoin: "#d8d8d8",
+      primaryHowItWork: "#F1F1F3",
+      PrimaryBgColor: "#f4f6fa",
+      PrimaryButtonBgColor: "#f4f6fa",
+      PrimaryButtonBorderColor: "#D0D2E1",
+      primaryWatchBg: "#fff",
+      activeCategoryBg: "#251D3E",
+      fansRoyaltyBoxText: "#5d5d5d",
+      borderColor: "#000",
+      returnCalculatorBg: "#fff",
+      totalReturnBg: "#c8c8c8",
+      collectorsIconsBorder: "#adadad",
+      leaderBoardHeaderBg: "#f4f6fa",
+      tabContainerNewButtonBg: "#cdcdcd",
+      tabContainerNewButtonText: "#000",
+      FanTigerWalletBorder: "#898890",
+      sideBarBg: "#ffffff",
+      videoUploadInputBg: "#c3c3c3",
+      videoUploadInputSelectColor: "#171527",
+      currentBoxBg: "#fff",
+      currentRightBg: "#fff",
+      howMuchCanEarn: "#fff",
+      monthlyLimitPro: "#5b596c",
+      earnCoinBg: "#f4f6fa",
+      walletIconBg: "#f4f6fa",
+      myContentBg: "#fff",
+      marketPlaceBuyBg: "#f4f6fa",
+      marketPlaceBuyBorder: "#898890",
+      marketPlaceBuyInput: "#c3c3c3",
+      marketPlaceBuyInputBorder: "#c3c3c3",
+      privacyBg: "#f4f6fa",
+      tradableContainerBg: "#f4f6fa",
+      onBoardingBg: "#fff",
+      subscribeMobileBg: "#f4f6fa",
+      descriptionColor: "#171527",
+      miniPlayerBottomContainerBg: "#fff",
+      coinEarnProgressBg: "#fff",
+      graphLabelColor: "#fff",
+      activeCategorySecond: "#888888",
+      editProfileBg: "#fff",
+      editProfileBgTop: "#f4f6fa",
+      contrastText: "#000",
+    },
+    background: {
+      bannerGradient:
+        "linear-gradient(269.1deg, rgb(255 255 255 / 0%) 9.11%, rgb(255 255 255 / 55%) 34.69%, #f6f6f6 58.04%)",
+      bannerGradientBottom:
+        "linear-gradient(180deg, rgba(12, 10, 29, 0) 0%, #f4f6fa 45.57%)",
+      bannerGradientMobile:
+        "linear-gradient(180deg,hsla(0,0%,8%,0) 0,hsl(0deg 0% 96.85% / 15%) 15%,hsl(0deg 0% 86.54% / 35%) 29%,hsl(0deg 0% 87.69% / 74%) 44%,#f4f6fa 68%,#f4f6fa)",
+      levelBg: "linear-gradient(transparent,#f4f6fa)",
+      headerSectionLight:
+        "linear-gradient(rgb(255 255 255 / 48%),rgb(244 244 244))",
+      wonRewardBg: "linear-gradient(180deg, #ffffff 0%, #ffffff 100%)",
+      commonButtonGradientBg:
+        "linear-gradient(90.52deg, #E14084 4.01%, #3454FA 57.04%, #54B5BB 103.77%)",
+    },
+    boxShadow: {
+      wonRewardBgShadow: "inset 0px 2px 4px #ffffff",
+    },
+  },
+});
+
+let theme = createTheme({
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: "capitalize",
+        },
+      },
+    },
+  },
+  breakpoints: {
+    values: {
+      xs: 320,
+      xm: 375,
+      mobile: 480,
+      tablet: 768,
+      laptop: 1024,
+      lg: 1200,
+      xl: 1440,
+      xxl: 1920,
+    },
+  },
+  typography: {
+    fontFamily: ["Inter", "sans-serif"].join(","),
+    font: {
+      montserrat: {
+        fontFamily: ["Montserrat", "sans-serif"].join(", "),
+      },
+      openSans: {
+        fontFamily: ["Open Sans", "sans-serif"].join(", "),
+      },
+    },
+  },
+});
+
+const customTypography = {
+  primaryBackground: {
+    background:
+      "linear-gradient(90.48deg, rgba(225, 64, 132, 0.1) 3.73%, rgba(52, 84, 250, 0.1) 53.09%, rgba(84, 181, 187, 0.1) 96.58%)",
+    filter: "blur(234px)",
+  },
+  primaryBtn: {
+    background:
+      "linear-gradient(90.48deg, #E14084 3.73%, #3454FA 53.09%, #54B5BB 96.58%)",
+  },
+  disabledBtn: {
+    background:
+      "linear-gradient(90.52deg, #C4C4C4 4.01%, #C4C4C4 57.04%, #B0B0B0 103.77%)",
+  },
+  h1: {
+    fontSize: "42px",
+    fontWeight: 700,
+    lineHeight: "54px",
+  },
+  h2: { fontSize: "36px", fontWeight: 700, lineHeight: "42px" },
+  h3: { fontSize: "24px", fontWeight: 600, lineHeight: "32px" },
+  h4: { fontSize: "20px", fontWeight: 400, lineHeight: "28px" },
+};
+
+theme = {
+  ...theme,
+  typography: {
+    ...theme.typography,
+    ...customTypography,
+  },
+};
+
+export default theme;
+
+export { lightTheme, darkTheme };

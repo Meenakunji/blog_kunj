@@ -1,8 +1,10 @@
 import { combineReducers } from "redux";
 import { persistReducer } from "redux-persist";
-import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
 import storage from "redux-persist/lib/storage";
+import layout from "./slices/layout";
 import user from "./slices/user";
+
+import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
 
 const rootPersistConfig = {
   key: "root",
@@ -11,7 +13,13 @@ const rootPersistConfig = {
   whitelist: ["user"],
 };
 
+const layoutPersistConfig = {
+  key: "layout",
+  storage: storage,
+};
+
 const rootReducer = combineReducers({
+  layout: persistReducer(layoutPersistConfig, layout),
   user,
 });
 

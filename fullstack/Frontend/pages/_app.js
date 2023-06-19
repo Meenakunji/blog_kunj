@@ -5,6 +5,8 @@ import Layout from "../src/components/feature/Layout";
 import store from "../src/redux/store";
 import "../styles/globals.css";
 import "bootstrap/dist/css/bootstrap.css";
+import CssBaseline from "@mui/material/CssBaseline";
+import PageThemeProvider from "../styles/PageThemeProvider";
 
 function MyApp({ Component, pageProps }) {
   const queryClient = new QueryClient({
@@ -19,9 +21,12 @@ function MyApp({ Component, pageProps }) {
         <Hydrate state={pageProps.dehydratedState}>
           <ReactQueryDevtools initialIsOpen={false} />
           <Provider store={store}>
-            <Layout {...pageProps}>
-              <Component {...pageProps} />
-            </Layout>
+            <PageThemeProvider {...pageProps}>
+              <CssBaseline />
+              <Layout {...pageProps}>
+                <Component {...pageProps} />
+              </Layout>
+            </PageThemeProvider>
           </Provider>
         </Hydrate>
       </QueryClientProvider>

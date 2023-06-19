@@ -21,7 +21,6 @@ const ImageSlider = ({ images, thumbnails, intervalTime = 3000 }) => {
   return (
     <div className="slider-container">
       <div className="slider">
-        {console.log("Imagesssss ===>", images)}
         {images.map((image, index) => (
           <img
             key={index}
