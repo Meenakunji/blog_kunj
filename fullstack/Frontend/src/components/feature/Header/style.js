@@ -43,6 +43,7 @@ const style = {
   },
   navbar: {
     backgroundColor: "custom.PrimaryBgColor",
+    color: "custom.white",
   },
 };
 
