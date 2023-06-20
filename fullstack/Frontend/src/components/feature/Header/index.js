@@ -9,6 +9,7 @@ import AuthenticationComponent from "../auth";
 import ToggleThemeBtn from "../../common/TheameBtn";
 import { setTheme } from "../../../redux/slices/layout";
 import { EnhancedSearch } from "../../common/SearchInput";
+import cookie from "js-cookie";
 
 const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
   const router = useRouter();
@@ -41,21 +42,6 @@ const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
       label: "Tech",
       path: "/tech",
     },
-    // {
-    //   id: 4,
-    //   label: "Entertainment",
-    //   path: "/entertainment",
-    // },
-    // {
-    //   id: 5,
-    //   label: "Travel",
-    //   path: "/travel",
-    // },
-    // {
-    //   id: 6,
-    //   label: "Sports",
-    //   path: "/sports",
-    // },
   ];
 
   const handleNavbarTitleRedirect = (item) => {
@@ -76,8 +62,10 @@ const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
     let currentTheme = theme;
     if (currentTheme === "dark") {
       dispatch(setTheme("light"));
+      cookie.set("appTheme", "light");
     } else {
       dispatch(setTheme("dark"));
+      cookie.set("appTheme", "dark");
     }
   };
 
