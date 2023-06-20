@@ -8,6 +8,7 @@ import styles from "./style";
 import AuthenticationComponent from "../auth";
 import ToggleThemeBtn from "../../common/TheameBtn";
 import { setTheme } from "../../../redux/slices/layout";
+import { EnhancedSearch } from "../../common/SearchInput";
 
 const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
   const router = useRouter();
@@ -85,6 +86,16 @@ const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
       <nav className="navbar navbar-expand-lg ">
         <Box sx={styles.navbarbrand} onClick={() => router.push("/")}>
           <img src="https://i.postimg.cc/3wgSvKbP/bloggerlogo.png" />
+        </Box>
+        <Box sx={styles.searchBox}>
+          <EnhancedSearch
+            // rows={rows}
+            // setRows={setRows}
+            // originalRows={originalRows}
+            // setRowsPerPage={setRowsPerPage}
+            // setPage={setPage}
+            sx={{ backgroundColor: "white" }}
+          />
         </Box>
         <AuthenticationComponent
           callBackName={"uniqueCommunity"}

@@ -45,6 +45,16 @@ const style = {
     backgroundColor: "custom.PrimaryBgColor",
     color: "custom.white",
   },
+  searchBox: {
+    // marginBottom: "30px",
+    // marginTop: "30px",
+    marginLeft: "94px",
+    width: "30%",
+    "& input": {
+      position: "absolute",
+      bottom: "-6px",
+    },
+  },
 };
 
 export default style;
