@@ -63,9 +63,9 @@ export const FooterComponent = () => {
           </div>
         </section>
         <section className="">
-          <div className="container text-center text-md-start mt-5">
+          <div className="container text-center text-md-start mt-4">
             <div className="row mt-3">
-              <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+              <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-2">
                 <h6 className="text-uppercase fw-bold mb-4">
                   <i className="fas fa-gem me-3"></i>Jupiter Blogger
                 </h6>
