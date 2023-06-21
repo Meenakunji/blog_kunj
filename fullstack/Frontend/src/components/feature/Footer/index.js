@@ -1,12 +1,13 @@
 import React from "react";
-import GoogleIcon from "@mui/icons-material/Google";
+// import GoogleIcon from "@mui/icons-material/Google";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import GitHubIcon from "@mui/icons-material/GitHub";
+// import GitHubIcon from "@mui/icons-material/GitHub";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import HomeWorkIcon from "@mui/icons-material/HomeWork";
 
 export const FooterComponent = () => {
@@ -32,13 +33,13 @@ export const FooterComponent = () => {
             >
               <TwitterIcon />
             </a>
-            <a
+            {/* <a
               href="/"
               className="me-4 text-reset"
               style={{ color: "#dd4b39 !important" }}
             >
               <GoogleIcon />
-            </a>
+            </a> */}
             <a
               href="/"
               className="me-4 text-reset"
@@ -53,12 +54,19 @@ export const FooterComponent = () => {
             >
               <LinkedInIcon />
             </a>
-            <a
+            {/* <a
               href="/"
               className="me-4 text-reset"
               style={{ color: "#333333 !important" }}
             >
               <GitHubIcon />
+            </a> */}
+            <a
+              href="whatsapp://send?text=8003356924"
+              title="Share on whatsapp"
+              style={{ color: "#25d366" }}
+            >
+              <WhatsAppIcon />
             </a>
           </div>
         </section>
