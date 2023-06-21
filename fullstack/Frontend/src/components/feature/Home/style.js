@@ -41,6 +41,19 @@ const style = {
     display: "flex",
     gap: "10px",
   },
+  howit__workSection: {
+    position: "relative",
+    marginTop: "60px",
+    "& h2": {
+      fontFamily: "Inter",
+      fontSize: "50px",
+      fontWeight: "700",
+      color: "#0C091B",
+      width: "100%",
+      textAlign: "center",
+      textTransform: "uppercase",
+    },
+  },
 };
 
 export default style;
