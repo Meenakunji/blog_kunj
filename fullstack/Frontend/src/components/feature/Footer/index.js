@@ -27,7 +27,8 @@ export const FooterComponent = () => {
               <FacebookIcon />
             </a>
             <a
-              href="/"
+              href="https://twitter.com/pankajk66711680"
+              target="_blank"
               className="me-4 text-reset"
               style={{ color: "#55acee !important" }}
             >
@@ -48,7 +49,8 @@ export const FooterComponent = () => {
               <InstagramIcon />
             </a>
             <a
-              href="/"
+              href="https://www.linkedin.com/in/pankaj-kumar-meena-1b3922176/"
+              target="_blank"
               className="me-4 text-reset"
               style={{ color: "##0082ca !important" }}
             >
@@ -63,6 +65,7 @@ export const FooterComponent = () => {
             </a> */}
             <a
               href="whatsapp://send?text=8003356924"
+              target="_blank"
               title="Share on whatsapp"
               style={{ color: "#25d366" }}
             >
