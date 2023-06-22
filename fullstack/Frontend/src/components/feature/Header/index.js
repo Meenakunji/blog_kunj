@@ -170,9 +170,9 @@ const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
                 >
                   Login
                 </button>
-                <button type="button" className="btn btn-primary me-3">
+                {/* <button type="button" className="btn btn-primary me-3">
                   Sign up for free
-                </button>
+                </button> */}
               </>
             )}
           </div>
