@@ -1,18 +1,14 @@
+const paginateQuery = (options) => {
+	const limit = options && options.limit && parseInt(options.limit, 10) > 0 ? parseInt(options.limit, 10) : 10;
+	const page = options && options.page && parseInt(options.page, 10) > 0 ? parseInt(options.page, 10) : 1;
+	const sortOrder = options && options.sortOrder && parseInt(options.sortOrder) ? parseInt(options.sortOrder) : 1;
+	const skip = (page - 1) * limit;
+	return {
+		limit,
+		page,
+		skip,
+		sortOrder
+	};
+};
 
-// const selectRequestDomain = (domainReq = JSON.stringify({domainOrigin: 'FanTiger'})) => {
-// 	let req = JSON.parse(domainReq)
-// 	if(!req) req = {
-// 		domainOrigin: 'FanTv'
-// 	}
-// 	if(req.domainOrigin == 'FanTiger' || req.domainOrigin == 'FanTv') {
-// 		return req.domainOrigin;
-// 	}
-// 	if(req.domainOrigin == 'unknown' && req.osType == 'android') {
-// 		return 'FanTiger';
-// 	}
-// 	return 'FanTv';
-// }
-
-// module.exports = { 
-// 	selectRequestDomain
-// }
+module.exports={paginateQuery}

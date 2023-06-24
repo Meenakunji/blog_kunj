@@ -33,8 +33,20 @@ const createBlogContent = async (body) => {
 
 // get all Blog Lists
 
-const getBlogList = async () => {
-  const data = await BlogLists.find().lean();
+const getBlogList = async (options) => {
+  const pipeline =
+    [
+      {
+        '$sort': {
+          'creatAt': options.sortOrder
+        }
+      }, {
+        '$skip': options.skip
+      }, {
+        '$limit': options.limit
+      }
+    ]
+  const data = await BlogLists.aggregate(pipeline);
   return data;
 };
 
