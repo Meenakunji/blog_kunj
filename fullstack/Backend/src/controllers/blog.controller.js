@@ -20,6 +20,26 @@ const getBlogContent = catchAsync(async (req, res) => {
   }
 });
 
+const createBlogContent = catchAsync(async (req, res) => {
+  console.log(
+    `createBlogContent Controller -> createBlogContent :: ${rTracer.id()}`
+  );
+  try {
+    const body = req.body;
+    const data = await blogService.createBlogContent(body);
+    res
+      .status(httpStatus.OK)
+      .send({ code: httpStatus.OK, message: "success", data: data });
+  } catch (error) {
+    console.log(
+      `Exception :: CMS createBlogContent -> createBlogContent -> ${
+        error.message
+      } :: ${rTracer.id()}`
+    );
+    return {};
+  }
+});
+
 const createBlog = catchAsync(async (req, res) => {
   console.log(`createBlog Controller -> createBlog :: ${rTracer.id()}`);
   try {
@@ -30,7 +50,7 @@ const createBlog = catchAsync(async (req, res) => {
       .send({ code: httpStatus.OK, message: "success", data: data });
   } catch (error) {
     console.log(
-      `Exception :: CMS getBlogContent -> getBlogContent -> ${
+      `Exception :: CMS createBlog -> createBlog -> ${
         error.message
       } :: ${rTracer.id()}`
     );
@@ -57,6 +77,7 @@ const getBlogList = catchAsync(async (req, res) => {
 
 module.exports = {
   getBlogContent,
+  createBlogContent,
   createBlog,
   getBlogList,
 };
