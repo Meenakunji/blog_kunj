@@ -1,11 +1,11 @@
 // const mongoose = require("mongoose");
 // mongoose.connect("mongodb://localhost:27017/local");
 
-// const dotenv = require("dotenv");
-// const path = require("path");
+const dotenv = require("dotenv");
+const path = require("path");
 // const Joi = require("joi");
 
-// dotenv.config({ path: path.join(__dirname, "../../.env") });
+dotenv.config({ path: path.join(__dirname, "../../.env") });
 
 // const envVarsSchema = Joi.object()
 //   .keys({

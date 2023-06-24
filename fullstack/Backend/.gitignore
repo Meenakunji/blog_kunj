@@ -4,7 +4,8 @@
 /node_modules
 /.pnp
 .pnp.js
-
+.package-lock.json
+yarn.lock
 # testing
 /coverage
 
@@ -34,3 +35,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+#upload folder
+tmp
