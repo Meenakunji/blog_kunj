@@ -13,6 +13,16 @@ const createBlogList = {
   }),
 };
 
+const getBlogList = {
+	query: Joi.object().keys({
+		sortOrder : Joi.number().valid(-1,1).optional().default(1),
+		limit: Joi.number().optional().default(10),
+		page: Joi.number().optional().default(0),
+	}),
+};
+
+
 module.exports = {
   createBlogList,
+  getBlogList
 };

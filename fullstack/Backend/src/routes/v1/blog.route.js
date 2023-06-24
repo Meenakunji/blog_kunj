@@ -1,9 +1,8 @@
 const express = require("express");
 const multer = require("multer");
 const upload = multer({ dest: 'tmp/csv/' });
-
 const { blogController } = require("../../controllers");
-const { validate } = require("../../models/blog-content.model");
+const { validate } = require("../../middlewares/validate");
 const { blogValidation } = require("../../validations");
 const router = express.Router();
 
@@ -16,7 +15,8 @@ router
   .post(blogController.createBlog);
 
 // get Blog Type List
-router.route("/list").get(blogController.getBlogList);
+router.route("/list")
+    .get(validate(blogValidation.getBlogList),blogController.getBlogList);
 
 //create blog
 router.route("/create-blog").post(blogController.createBlog);
@@ -25,7 +25,6 @@ router.route("/create-blog").post(blogController.createBlog);
 router.route("/upload-file")
     .post(upload.single('file'),blogController.uploadFiles);
 
-//.post(blogController.uploadFiles);
 
 
 module.exports = router;
