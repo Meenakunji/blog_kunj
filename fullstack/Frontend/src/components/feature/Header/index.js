@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import DriveFileRenameOutlineTwoToneIcon from "@mui/icons-material/DriveFileRenameOutlineTwoTone";
 import { Box, useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./style";
 import AuthenticationComponent from "../auth";
@@ -10,6 +9,9 @@ import ToggleThemeBtn from "../../common/TheameBtn";
 import { setTheme } from "../../../redux/slices/layout";
 import { EnhancedSearch } from "../../common/SearchInput";
 import cookie from "js-cookie";
+import { initWeb3, getSigner } from "../../../../utils/web3";
+import Web3Modal from "web3modal";
+import WalletConnectProvider from "@walletconnect/web3-provider";
 
 const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
   const router = useRouter();
@@ -21,6 +23,27 @@ const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
   const Close = () => setClick(false);
   const isMobile = useMediaQuery("(max-width:768px)");
   const [isLoggin, setIsLoggin] = useState(false);
+  const [walletAddress, setWalletAddress] = useState("");
+
+  const INFURA_ID = "460f40a260564ac4a4f4b3fffb032dad";
+  const providerOptions = {
+    walletconnect: {
+      package: WalletConnectProvider,
+      options: {
+        infuraId: INFURA_ID,
+      },
+    },
+  };
+
+  let web3Modal;
+
+  if (typeof window !== "undefined") {
+    web3Modal = new Web3Modal({
+      network: "mainnet", // optional
+      cacheProvider: true,
+      providerOptions: providerOptions,
+    });
+  }
 
   const handleClose = () => {
     setOpen(false);
@@ -45,17 +68,7 @@ const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
   ];
 
   const handleNavbarTitleRedirect = (item) => {
-    if (item?.label == "Home") {
-      router.push(item?.path);
-    } else if (item?.label == "Politics") {
-      router.push(item?.path);
-    } else if (item?.label == "Tech") {
-      router.push(item?.path);
-    } else if (item?.label == "Entertainment") {
-      router.push(item?.path);
-    } else if (item?.label == "Travel") {
-      router.push(item?.path);
-    }
+    router.push(item?.path);
   };
 
   const handleThemeSwitch = () => {
@@ -68,6 +81,51 @@ const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
       cookie.set("appTheme", "dark");
     }
   };
+
+  // const connectMetaMask = async () => {
+  //   const isConnected = await initWeb3();
+  //   if (isConnected) {
+  //     const signer = getSigner();
+  //     // Use the signer to interact with Ethereum network
+  //     console.log(signer);
+  //     const address = await signer.getAddress();
+  //     setWalletAddress(address);
+  //   } else {
+  //     // MetaMask not available or not connected
+  //     console.log("MetaMask not available");
+  //   }
+  // };
+
+  const connectMetaMask = async () => {
+    try {
+      const provider = await web3Modal.connect();
+      const web3 = new Web3(provider);
+
+      // Access different wallet options
+      const accounts = await web3.eth.getAccounts();
+      console.log("Connected wallet accounts:", accounts);
+
+      // Continue with the desired actions using the selected wallet provider
+      // For example, you can retrieve the selected address:
+      const selectedAddress = accounts[0];
+      console.log("Selected address:", selectedAddress);
+
+      // Update the wallet address in the state
+      setWalletAddress(selectedAddress);
+
+      // Close the Web3Modal provider connection
+      web3Modal.clearCachedProvider();
+    } catch (error) {
+      console.error("Error connecting to wallet:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && isLoggin) {
+      // Check if the user is logged in and update the wallet address
+      connectMetaMask();
+    }
+  }, [isLoggin]);
 
   return (
     <Box sx={styles.navbar}>
@@ -107,6 +165,16 @@ const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
             style={{ cursor: "pointer" }}
           >
             <DriveFileRenameOutlineTwoToneIcon /> Create Blog
+          </Box>
+          {/* add metamask wallet */}
+          <Box
+            onClick={() => {
+              connectMetaMask();
+            }}
+            style={{ cursor: "pointer" }}
+          >
+            <img src="/images/home/metamask.jpeg" style={{ width: "45px" }} />{" "}
+            Connect Wallet
           </Box>
           <ul className="navbar-nav">
             {navbarCMSItems.map((item) => (
@@ -177,6 +245,7 @@ const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
             )}
           </div>
         </div>
+        {walletAddress && <div>{`Connected Wallet: ${walletAddress}`}</div>}
       </nav>
     </Box>
   );
