@@ -1,13 +1,21 @@
-import { useTheme } from "@mui/material";
+import { Button, useTheme } from "@mui/material";
 import { useSelector } from "react-redux";
 import { BlogContentTypeList } from "../src/components/feature/Blog/BlogList";
 import Head from "next/head";
 import FAQs from "../components/Home/FAQs";
-// import { HomeComponet } from "../src/components/feature/Home";
-// import style from "../src/components/feature/Home/style";
+import { useRouter } from "next/router";
 
-export default function Home({ toggleTheme, selectedTheme }) {
+export default function Home() {
   const { theme } = useSelector((state) => state.layout);
+  // const { locale, push, locales } = useRouter();
+
+  // const { t } = useTranslation("common");
+
+  // const handleClick = (index) => () => {
+  //   // Handle language selection here
+  //   // You can update the state, redirect to a localized page, etc.
+  // };
+
   return (
     <div className="container-fluid">
       <Head>
@@ -52,9 +60,20 @@ export default function Home({ toggleTheme, selectedTheme }) {
         />
       </Head>
       <div className="row">
-        {/* <HomeComponet /> */}
+        {/* <h1>
+          Pankaj {"   "}
+          {locale}
+        </h1>
+        <div>
+          <h3>Welcome to Jupiter Blogger Website</h3>
+          <h2>Choose your language</h2>
+          {locales.map((index) => (
+            <Button key={index} onClick={handleClick(index)}>
+              {index}
+            </Button>
+          ))}
+        </div> */}
         <BlogContentTypeList />
-        {/* <FAQs /> */}
       </div>
     </div>
   );
