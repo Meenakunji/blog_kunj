@@ -9,7 +9,4 @@ const NextI18NextInstance = new NextI18Next({
   },
 });
 
-module.exports = {
-  NextI18NextInstance,
-  useTranslation: NextI18NextInstance.useTranslation.bind(NextI18NextInstance),
-};
+module.exports = NextI18NextInstance;
