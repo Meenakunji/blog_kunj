@@ -1,30 +1,39 @@
 import { Box, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "../../Home/style";
 import { NextSeo } from "next-seo";
+import { useMutation } from "react-query";
 import { useRouter } from "next/router";
+import fetcher from "../../../../dataProvider";
+import { useDispatch } from "react-redux";
 import ImageSlider from "../../../common/ImageSlider";
-import { calculateReadingTime } from "../../../../../utils/common";
-import BookmarkAddOutlinedIcon from "@mui/icons-material/BookmarkAddOutlined";
-import BookmarkOutlinedIcon from "@mui/icons-material/BookmarkOutlined";
+import { setBlogDetails } from "../../../../redux/slices/user";
 
-export default function BlogContentListComponent({ data }) {
+export const BlogCategoryList = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
+  const [homePageBlogContents, setHomePageBlogContents] = useState([]);
 
-  function createSlug(username, title) {
-    const lowercaseTitle = title.toLowerCase();
-    const slug = lowercaseTitle
-      .replace(/\s+/g, "-") // Replace spaces with hyphens
-      .replace(/[^a-z0-9-]/g, "") // Remove special characters except hyphens
-      .replace(/-+/g, "-") // Replace multiple consecutive hyphens with a single hyphen
-      .substring(0, 60); // Truncate the slug to a desired length (e.g., 60 characters)
+  // get all cms details based on category
+  const { mutate: getAllcategoryDetails } = useMutation(
+    () => fetcher.get(`http://localhost:3003/v1/blog/list`),
+    {
+      onSuccess: (resData) => {
+        setHomePageBlogContents(resData?.data);
+      },
+      onError: (error) => {
+        alert(error?.response?.data?.message);
+      },
+    }
+  );
 
-    return `@${username}/${slug}`;
-  }
+  useEffect(() => {
+    getAllcategoryDetails();
+  }, []);
 
   const handleBlogContentListPage = (item) => {
-    const urlSlug = createSlug(item?.user, item?.blogTitle);
-    router.push(`/${urlSlug}`);
+    dispatch(setBlogDetails(item));
+    router.push(`/blog/${item?.blogTag}`);
   };
 
   return (
@@ -71,50 +80,28 @@ export default function BlogContentListComponent({ data }) {
               ) + "...",
           },
           { property: "twitter.image", content: "https://jupiterblogger.com/" },
-          // { name: "keywords", content: "jupiter"?.join(",") },
         ]}
       />
-      {data &&
-        data?.map((item, index) => {
-          const readingTime = calculateReadingTime(item?.description, 2);
+      {homePageBlogContents &&
+        homePageBlogContents?.map((item, index) => {
           return (
             <div
               className="col-md-4 mt-3"
               key={index}
+              style={{ cursor: "pointer" }}
               onClick={() => {
                 handleBlogContentListPage(item);
               }}
             >
               <div className="card p-3">
                 <Box sx={style.mediaCard} key={index}>
-                  <Box
-                    component="img"
-                    src={item?.image}
-                    style={{
-                      borderRadius: "8px",
-                    }}
-                  />
-                  <Typography variant="h2">{item?.blogTitle}</Typography>
-                  <Box sx={style.userdetails}>
-                    <Box
-                      component="img"
-                      src={item?.profilepic}
-                      style={{
-                        borderRadius: "100px",
-                        width: "30px",
-                        height: "30px",
-                        border: "1px solid #c3c3c3",
-                      }}
-                    />
-                    <Typography variant="p">
-                      By {item?.user} -{" "}
-                      {new Date(item?.creatAt).toLocaleDateString("en-US", {
-                        day: "numeric",
-                        month: "long",
-                        year: "numeric",
-                      })}
-                    </Typography>
+                  <Box sx={style.chip} style={{ backgroundColor: item?.color }}>
+                    {item?.blogTag}
                   </Box>
+
+                  <ImageSlider images={item?.image} thumbnails={item?.image} />
+                  <Typography variant="h2">{item?.blogTitle}</Typography>
+
                   <Typography variant="p">
                     {item?.description?.split(" ").slice(0, 30).join(" ")}
                     <a
@@ -125,27 +112,6 @@ export default function BlogContentListComponent({ data }) {
                       ...Read More
                     </a>
                   </Typography>
-                  <Box
-                    style={{
-                      fontSize: "13px",
-                      fontFamily:
-                        "sohne, Helvetica Neue, Helvetica, Arial, sans-serif",
-                      display: "flex",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <Typography variant="p">
-                      <a
-                        href={`/blog/${item?.blogTag}`}
-                        onClick={() => router.push(`/blog/${item?.blogTag}`)}
-                        style={{ cursor: "pointer", textDecoration: "none" }}
-                      >
-                        {readingTime} min read
-                      </a>
-                    </Typography>
-
-                    <BookmarkAddOutlinedIcon />
-                  </Box>
                 </Box>
               </div>
             </div>
@@ -153,4 +119,4 @@ export default function BlogContentListComponent({ data }) {
         })}
     </>
   );
-}
+};
