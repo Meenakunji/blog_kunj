@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useId, useState } from "react";
 import DriveFileRenameOutlineTwoToneIcon from "@mui/icons-material/DriveFileRenameOutlineTwoTone";
 import { Box, useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
@@ -25,7 +25,7 @@ const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
   const [isLoggin, setIsLoggin] = useState(false);
   const [walletAddress, setWalletAddress] = useState("");
 
-  const INFURA_ID = "460f40a260564ac4a4f4b3fffb032dad";
+  const INFURA_ID = "aec8651d16b0461a844ba5a6cc70e08c";
   const providerOptions = {
     walletconnect: {
       package: WalletConnectProvider,
@@ -81,20 +81,6 @@ const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
       cookie.set("appTheme", "dark");
     }
   };
-
-  // const connectMetaMask = async () => {
-  //   const isConnected = await initWeb3();
-  //   if (isConnected) {
-  //     const signer = getSigner();
-  //     // Use the signer to interact with Ethereum network
-  //     console.log(signer);
-  //     const address = await signer.getAddress();
-  //     setWalletAddress(address);
-  //   } else {
-  //     // MetaMask not available or not connected
-  //     console.log("MetaMask not available");
-  //   }
-  // };
 
   const connectMetaMask = async () => {
     try {
