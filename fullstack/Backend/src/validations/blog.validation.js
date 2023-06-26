@@ -1,4 +1,5 @@
 const Joi = require("joi");
+const { objectId } = require("./custom.validation");
 
 const createBlogList = {
   body: Joi.object().keys({
@@ -14,15 +15,21 @@ const createBlogList = {
 };
 
 const getBlogList = {
-	query: Joi.object().keys({
-		sortOrder : Joi.number().valid(-1,1).optional().default(1),
-		limit: Joi.number().optional().default(10),
-		page: Joi.number().optional().default(0),
-	}),
+  query: Joi.object().keys({
+    sortOrder: Joi.number().valid(-1, 1).optional().default(1),
+    limit: Joi.number().optional().default(10),
+    page: Joi.number().optional().default(0),
+  }),
 };
 
+const blogMarked = {
+  params: Joi.object().keys({
+    blogId: Joi.required().custom(objectId),
+  }),
+};
 
 module.exports = {
   createBlogList,
-  getBlogList
+  getBlogList,
+  blogMarked,
 };

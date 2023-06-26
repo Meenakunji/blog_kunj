@@ -5,13 +5,12 @@ const catchAsync = require("../utils/catchAsync");
 const blogService = require("../services/blog.service");
 const rTracer = require("cls-rtracer");
 const { paginateQuery } = require("../utils/utility");
-
-
+const { objectId } = require("../validations/custom.validation");
 
 const getBlogContent = catchAsync(async (req, res) => {
   console.log(`getBlogContent Controller -> getBlogContent :: ${rTracer.id()}`);
   try {
-    const data = await blogService.getBlogContent({});
+    const data = await blogService.getBlogContent(req.query);
     res
       .status(httpStatus.OK)
       .send({ code: httpStatus.OK, message: "success", data: data });
@@ -83,13 +82,13 @@ const getBlogList = catchAsync(async (req, res) => {
 });
 
 const uploadFiles = catchAsync(async (req, res) => {
-    const client = new S3Client({
-      credentials: {
-        accessKeyId: process.env.AWS_ACCESS_KEY,
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-      },
-      region: 'ap-south-1',
-    });
+  const client = new S3Client({
+    credentials: {
+      accessKeyId: process.env.AWS_ACCESS_KEY,
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    },
+    region: "ap-south-1",
+  });
   const command = new PutObjectCommand({
     Bucket: "jupiter-blog-content-images",
     Key: req.file.originalname,
@@ -98,15 +97,33 @@ const uploadFiles = catchAsync(async (req, res) => {
   try {
     const response = await client.send(command);
     console.log(response);
-    res
-    .status(httpStatus.OK)
-    .send({ code: httpStatus.OK, message: "success"});  
+    res.status(httpStatus.OK).send({ code: httpStatus.OK, message: "success" });
   } catch (err) {
     console.error(err);
   }
+});
 
-})
+const getBlogMarked = catchAsync(async (req, res) => {
+  console.log("Print query params====>", req.params.blogId);
+  // let filter = {
+  //   _id: new objectId(req.params.blogId),
+  // };
 
+  // try {
+  //   const paginateOptions = paginateQuery(filter);
+  //   const data = await blogService.getBlogList(paginateOptions);
+  //   res
+  //     .status(httpStatus.OK)
+  //     .send({ code: httpStatus.OK, message: "success", data: data });
+  // } catch (error) {
+  //   console.log(
+  //     `Exception :: CMS getBlogList -> getBlogList -> ${
+  //       error.message
+  //     } :: ${rTracer.id()}`
+  //   );
+  //   return {};
+  // }
+});
 
 module.exports = {
   getBlogContent,
@@ -114,4 +131,5 @@ module.exports = {
   createBlog,
   getBlogList,
   uploadFiles,
+  getBlogMarked,
 };

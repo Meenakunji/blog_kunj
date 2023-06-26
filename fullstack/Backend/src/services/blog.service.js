@@ -2,8 +2,17 @@ const { BlogContent, BlogLists } = require("../models");
 
 const rTracer = require("cls-rtracer");
 
-const getBlogContent = async () => {
-  const data = await BlogContent.find().lean();
+const getBlogContent = async (Parmas) => {
+  const query = {
+    blogTag: { $regex: Parmas.blogTag, $options: "i" },
+  };
+  const pipeline = [
+    {
+      $match: query,
+    },
+  ];
+
+  const data = await BlogContent.aggregate(pipeline);
   return data;
 };
 
@@ -34,18 +43,19 @@ const createBlogContent = async (body) => {
 // get all Blog Lists
 
 const getBlogList = async (options) => {
-  const pipeline =
-    [
-      {
-        '$sort': {
-          'creatAt': options.sortOrder
-        }
-      }, {
-        '$skip': options.skip
-      }, {
-        '$limit': options.limit
-      }
-    ]
+  const pipeline = [
+    {
+      $sort: {
+        creatAt: options.sortOrder,
+      },
+    },
+    {
+      $skip: options.skip,
+    },
+    {
+      $limit: options.limit,
+    },
+  ];
   const data = await BlogLists.aggregate(pipeline);
   return data;
 };
