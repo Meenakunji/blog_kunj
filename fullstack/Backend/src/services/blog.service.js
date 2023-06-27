@@ -1,6 +1,8 @@
 const { BlogContent, BlogLists } = require("../models");
 
 const rTracer = require("cls-rtracer");
+const ApiError = require("../utils/ApiError");
+const httpStatus = require("http-status");
 
 const getBlogContent = async (Parmas) => {
   const query = {
@@ -82,9 +84,29 @@ const createBlog = async (body) => {
   const newBlogListdata = await newBlogList.save();
 };
 
+const getBlogMarked = async (blogId) => {
+  // Find the blog content by its ID
+  const blogContent = await BlogContent.findById(blogId);
+
+  if (!blogContent) {
+    throw new ApiError(httpStatus.NOT_FOUND, "Blog content not found");
+  }
+  // Toggle the value of isMarkedBlog
+  const newIsMarkedValue = !blogContent.isMarkedBlog;
+
+  // Update the blog content
+  const updatedBlogContent = await BlogContent.findByIdAndUpdate(
+    blogId,
+    { $set: { isMarkedBlog: newIsMarkedValue } },
+    { new: true }
+  );
+  return updatedBlogContent;
+};
+
 module.exports = {
   getBlogContent,
   createBlogContent,
   createBlog,
   getBlogList,
+  getBlogMarked,
 };

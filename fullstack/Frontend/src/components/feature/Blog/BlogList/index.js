@@ -3,28 +3,38 @@ import React, { useState } from "react";
 import style from "../../Home/style";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
-import ImageSlider from "../../../common/ImageSlider";
-import { calculateReadingTime } from "../../../../../utils/common";
+import { calculateReadingTime, createSlug } from "../../../../../utils/common";
 import BookmarkAddOutlinedIcon from "@mui/icons-material/BookmarkAddOutlined";
 import BookmarkOutlinedIcon from "@mui/icons-material/BookmarkOutlined";
+import fetcher from "../../../../dataProvider";
+import { useMutation } from "react-query";
 
 export default function BlogContentListComponent({ data }) {
   const router = useRouter();
-
-  function createSlug(username, title) {
-    const lowercaseTitle = title.toLowerCase();
-    const slug = lowercaseTitle
-      .replace(/\s+/g, "-") // Replace spaces with hyphens
-      .replace(/[^a-z0-9-]/g, "") // Remove special characters except hyphens
-      .replace(/-+/g, "-") // Replace multiple consecutive hyphens with a single hyphen
-      .substring(0, 60); // Truncate the slug to a desired length (e.g., 60 characters)
-
-    return `@${username}/${slug}`;
-  }
+  const [markedBlogContent, setMarkedBlogContent] = useState(
+    data?.isMarkedBlog
+  );
 
   const handleBlogContentListPage = (item) => {
     const urlSlug = createSlug(item?.user, item?.blogTitle);
     router.push(`/${urlSlug}`);
+  };
+
+  // marked blog
+  const { mutate: getMarkedBlogContent } = useMutation(
+    (blogId) => fetcher.post(`http://localhost:3003/v1/blog/mark/${blogId}`),
+    {
+      onSuccess: (resData) => {
+        setMarkedBlogContent(resData?.data?.isMarkedBlog);
+      },
+      onError: (error) => {
+        alert(error?.response?.data?.message);
+      },
+    }
+  );
+
+  const handleMarkedBlog = (item) => {
+    getMarkedBlogContent(item?._id);
   };
 
   return (
@@ -78,13 +88,7 @@ export default function BlogContentListComponent({ data }) {
         data?.map((item, index) => {
           const readingTime = calculateReadingTime(item?.description, 2);
           return (
-            <div
-              className="col-md-4 mt-3"
-              key={index}
-              onClick={() => {
-                handleBlogContentListPage(item);
-              }}
-            >
+            <div className="col-md-4 mt-3" key={index}>
               <div className="card p-3">
                 <Box sx={style.mediaCard} key={index}>
                   <Box
@@ -92,6 +96,10 @@ export default function BlogContentListComponent({ data }) {
                     src={item?.image}
                     style={{
                       borderRadius: "8px",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => {
+                      handleBlogContentListPage(item);
                     }}
                   />
                   <Typography variant="h2">{item?.blogTitle}</Typography>
@@ -143,8 +151,16 @@ export default function BlogContentListComponent({ data }) {
                         {readingTime} min read
                       </a>
                     </Typography>
-
-                    <BookmarkAddOutlinedIcon />
+                    <Box
+                      onClick={() => handleMarkedBlog(item)}
+                      style={{ cursor: "pointer" }}
+                    >
+                      {markedBlogContent ? (
+                        <BookmarkOutlinedIcon />
+                      ) : (
+                        <BookmarkAddOutlinedIcon />
+                      )}
+                    </Box>
                   </Box>
                 </Box>
               </div>
