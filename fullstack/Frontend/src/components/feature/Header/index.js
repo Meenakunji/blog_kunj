@@ -1,7 +1,8 @@
-import React, { useEffect, useId, useState } from "react";
+import React, { useEffect } from "react";
 import DriveFileRenameOutlineTwoToneIcon from "@mui/icons-material/DriveFileRenameOutlineTwoTone";
-import { Box, useMediaQuery } from "@mui/material";
+import { Box, Button, useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./style";
 import AuthenticationComponent from "../auth";
@@ -9,6 +10,8 @@ import ToggleThemeBtn from "../../common/TheameBtn";
 import { setTheme } from "../../../redux/slices/layout";
 import { EnhancedSearch } from "../../common/SearchInput";
 import cookie from "js-cookie";
+import LoginIcon from "@mui/icons-material/Login";
+import EditIcon from "@mui/icons-material/Edit";
 import { initWeb3, getSigner } from "../../../../utils/web3";
 import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
@@ -24,6 +27,35 @@ const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
   const isMobile = useMediaQuery("(max-width:768px)");
   const [isLoggin, setIsLoggin] = useState(false);
   const [walletAddress, setWalletAddress] = useState("");
+
+  const [isScrolled, setIsScrolled] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset;
+      const scrollThreshold = 100;
+      if (scrollTop > scrollThreshold) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const navbarCMSItems = [
+    {
+      id: 1,
+      label: "Home",
+      path: "/home",
+    },
+  ];
 
   const INFURA_ID = "aec8651d16b0461a844ba5a6cc70e08c";
   const providerOptions = {
@@ -45,30 +77,18 @@ const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
     });
   }
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const navbarCMSItems = [
-    {
-      id: 1,
-      label: "Home",
-      path: "/home",
-    },
-    {
-      id: 2,
-      label: "Politics",
-      path: "/politics",
-    },
-    {
-      id: 3,
-      label: "Tech",
-      path: "/tech",
-    },
-  ];
-
   const handleNavbarTitleRedirect = (item) => {
-    router.push(item?.path);
+    if (item?.label == "Home") {
+      router.push(item?.path);
+    } else if (item?.label == "Politics") {
+      router.push(item?.path);
+    } else if (item?.label == "Tech") {
+      router.push(item?.path);
+    } else if (item?.label == "Entertainment") {
+      router.push(item?.path);
+    } else if (item?.label == "Travel") {
+      router.push(item?.path);
+    }
   };
 
   const handleThemeSwitch = () => {
@@ -115,124 +135,90 @@ const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
 
   return (
     <Box sx={styles.navbar}>
-      <nav className="navbar navbar-expand-lg ">
-        <Box sx={styles.navbarbrand} onClick={() => router.push("/")}>
-          <img src="https://i.postimg.cc/3wgSvKbP/bloggerlogo.png" />
-        </Box>
-        <Box sx={styles.searchBox}>
-          <EnhancedSearch
-            // rows={rows}
-            // setRows={setRows}
-            // originalRows={originalRows}
-            // setRowsPerPage={setRowsPerPage}
-            // setPage={setPage}
-            sx={{ backgroundColor: "white" }}
-          />
-        </Box>
-        <AuthenticationComponent
-          callBackName={"uniqueCommunity"}
-          open={open}
-          handleModalClose={() => handleClose()}
-        />
-        <div
-          className="collapse navbar-collapse justify-content-end"
-          id="navbarSupportedContent"
-        >
-          <Box
-            sx={{ ...styles.lightDark, ...styles.lightDarkMobile }}
-            onClick={handleThemeSwitch}
-          >
-            {theme} Button <ToggleThemeBtn theme={theme} />
+      <nav
+        className={`navbar navbar-expand-lg fixed-top ${
+          isScrolled ? "scrolled" : ""
+        }`}
+      >
+        <div className="container-fluid">
+          <Box sx={styles.navbarbrand} onClick={() => router.push("/")}>
+            <img src="https://i.postimg.cc/3wgSvKbP/bloggerlogo.png" />
           </Box>
-          <Box
-            onClick={() => {
-              router.push(`/new-blog/1`);
-            }}
-            style={{ cursor: "pointer" }}
+          <div
+            className="collapse navbar-collapse justify-content-end"
+            id="navbarSupportedContent"
           >
-            <DriveFileRenameOutlineTwoToneIcon /> Create Blog
-          </Box>
-          {/* add metamask wallet */}
-          <Box
-            onClick={() => {
-              connectMetaMask();
-            }}
-            style={{ cursor: "pointer" }}
-          >
-            <img src="/images/home/metamask.jpeg" style={{ width: "45px" }} />{" "}
-            Connect Wallet
-          </Box>
-          <ul className="navbar-nav">
-            {navbarCMSItems.map((item) => (
-              <li className="nav-item" key={item.id}>
-                <a
-                  className="nav-link"
-                  href="#"
-                  onClick={() => handleNavbarTitleRedirect(item)}
-                >
-                  {item.label}
+            <div className="mx-auto my-2">
+              <EnhancedSearch
+                // rows={rows}
+                // setRows={setRows}
+                // originalRows={originalRows}
+                // setRowsPerPage={setRowsPerPage}
+                // setPage={setPage}
+                sx={{ backgroundColor: "white" }}
+              />
+            </div>
+            <AuthenticationComponent
+              callBackName={"uniqueCommunity"}
+              open={open}
+              handleModalClose={() => handleClose()}
+            />
+            <ul className="navbar-nav">
+              <li
+                className="nav-item"
+                onClick={() => {
+                  router.push(`/new-blog/1`);
+                }}
+                style={{ cursor: "pointer" }}
+              >
+                <EditIcon /> Create Blog
+              </li>
+              <li
+                onClick={() => {
+                  connectMetaMask();
+                }}
+                style={{ cursor: "pointer" }}
+              >
+                {/* <img
+                  src="/images/home/metamask.jpeg"
+                  style={{ width: "45px" }}
+                />{" "} */}
+                Connect Wallet
+              </li>
+              {/* {navbarCMSItems.map((item) => (
+                <li className="nav-item" key={item.id}>
+                  <a href="#" onClick={() => handleNavbarTitleRedirect(item)}>
+                    {item.label}
+                  </a>
+                </li>
+              ))} */}
+              <li className="nav-item">
+                <a className="dropdown-item" href="#">
+                  My profile
                 </a>
               </li>
-            ))}
-          </ul>
-          <div className="d-flex align-items-center">
-            {isLoggin ? (
-              <div className="dropdown">
-                <a
-                  className="dropdown-toggle d-flex align-items-center hidden-arrow"
-                  href="#"
-                  id="navbarDropdownMenuAvatar"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  <img
-                    src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-                    className="rounded-circle"
-                    height="25"
-                    alt="Black and White Portrait of a Man"
-                    loading="lazy"
-                  />
+              <li className="nav-item">
+                <a className="dropdown-item" href="#">
+                  Settings
                 </a>
-                <ul
-                  className="dropdown-menu dropdown-menu-end"
-                  aria-labelledby="navbarDropdownMenuAvatar"
-                >
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      My profile
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Settings
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Logout
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            ) : (
-              <>
-                <button
-                  type="button"
-                  className="btn btn-link px-3 me-2"
-                  onClick={() => setOpen(true)}
-                >
-                  Login
-                </button>
-                {/* <button type="button" className="btn btn-primary me-3">
-                  Sign up for free
-                </button> */}
-              </>
-            )}
+              </li>
+              <li className="nav-item">
+                <a className="dropdown-item" href="#">
+                  Logout
+                </a>
+              </li>
+            </ul>
+            <button
+              className="btn btn-light allBtn"
+              type="button"
+              onClick={() => setOpen(true)}
+            >
+              <LoginIcon /> Login
+            </button>
           </div>
         </div>
-        {walletAddress && <div>{`Connected Wallet: ${walletAddress}`}</div>}
       </nav>
+      {walletAddress && <div>{`Connected Wallet: ${walletAddress}`}</div>}
     </Box>
   );
 };

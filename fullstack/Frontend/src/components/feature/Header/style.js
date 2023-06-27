@@ -44,6 +44,25 @@ const style = {
   navbar: {
     backgroundColor: "custom.PrimaryBgColor",
     color: "custom.white",
+
+    "& .navbar-nav": {
+      "& li": {
+        fontSize: "15px",
+        padding: "10px",
+        "& a": {
+          color: "#fff",
+          textDecoration: "none",
+          fontWeight: "600",
+        },
+      },
+      "& svg": {
+        fontSize: "19px",
+      },
+    },
+    "& .scrolled": {
+      background: "#2f2f2f",
+      transition: "all 0.3s ease",
+    },
   },
   searchBox: {
     // marginBottom: "30px",
@@ -53,6 +72,12 @@ const style = {
     "& input": {
       position: "absolute",
       bottom: "-6px",
+    },
+  },
+  createblog: {
+    fontSize: "14px",
+    "& svg": {
+      fontSize: "15px",
     },
   },
 };
