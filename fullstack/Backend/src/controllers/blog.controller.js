@@ -103,26 +103,21 @@ const uploadFiles = catchAsync(async (req, res) => {
   }
 });
 
+/* Blog Marked  */
 const getBlogMarked = catchAsync(async (req, res) => {
-  console.log("Print query params====>", req.params.blogId);
-  // let filter = {
-  //   _id: new objectId(req.params.blogId),
-  // };
-
-  // try {
-  //   const paginateOptions = paginateQuery(filter);
-  //   const data = await blogService.getBlogList(paginateOptions);
-  //   res
-  //     .status(httpStatus.OK)
-  //     .send({ code: httpStatus.OK, message: "success", data: data });
-  // } catch (error) {
-  //   console.log(
-  //     `Exception :: CMS getBlogList -> getBlogList -> ${
-  //       error.message
-  //     } :: ${rTracer.id()}`
-  //   );
-  //   return {};
-  // }
+  try {
+    const data = await blogService.getBlogMarked(req.params.blogId);
+    res
+      .status(httpStatus.OK)
+      .send({ code: httpStatus.OK, message: "success", data: data });
+  } catch (error) {
+    console.log(
+      `Exception :: CMS getBlogMarked -> getBlogMarked -> ${
+        error.message
+      } :: ${rTracer.id()}`
+    );
+    return {};
+  }
 });
 
 module.exports = {

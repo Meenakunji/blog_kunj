@@ -89,11 +89,13 @@ export const BlogCategoryList = () => {
               className="col-md-4 mt-3"
               key={index}
               style={{ cursor: "pointer" }}
-              onClick={() => {
-                handleBlogContentListPage(item);
-              }}
             >
-              <div className="card p-3">
+              <div
+                className="card p-3"
+                onClick={() => {
+                  handleBlogContentListPage(item);
+                }}
+              >
                 <Box sx={style.mediaCard} key={index}>
                   <Box sx={style.chip} style={{ backgroundColor: item?.color }}>
                     {item?.blogTag}
