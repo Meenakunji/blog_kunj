@@ -54,6 +54,30 @@ const style = {
       },
     },
   },
+  buttongroup: {
+    marginTop: "25px",
+    marginBottom: "25px",
+    display: "flex",
+    justifyContent: "center",
+    gap: "20px",
+    "& button": {
+      textAlign: "center",
+      fontWeight: "600",
+      width: "225px",
+      maxWidth: "100%",
+      background: "#a881af",
+      borderRadius: "10px",
+      height: "45px",
+      lineHeight: "45px",
+      color: "#000",
+      textDecoration: "none",
+      textTransform: "none",
+      fontSize: "15px",
+      "&:hover": {
+        background: "#33b249",
+      },
+    },
+  },
 };
 
 export default style;
