@@ -78,9 +78,10 @@ const FooterComponent = () => {
                     decoding="async"
                   />
                   <p>
-                    Here you can use rows and columns to organize your footer
-                    content. Lorem ipsum dolor sit amet, consectetur adipisicing
-                    elit.
+                    Jupiter Blogger: Your go-to blogging website for sharing
+                    ideas, stories, and experiences with a vibrant community of
+                    writers and readers. Unleash your creativity and connect
+                    with like-minded individuals at Jupiter Blogger.
                   </p>
                 </Box>
               </div>
