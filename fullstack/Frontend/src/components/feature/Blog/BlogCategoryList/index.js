@@ -1,35 +1,15 @@
 import { Box, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import style from "../../Home/style";
 import { NextSeo } from "next-seo";
-import { useMutation } from "react-query";
 import { useRouter } from "next/router";
-import fetcher from "../../../../dataProvider";
+import React from "react";
 import { useDispatch } from "react-redux";
-import ImageSlider from "../../../common/ImageSlider";
 import { setBlogDetails } from "../../../../redux/slices/user";
+import ImageSlider from "../../../common/ImageSlider";
+import style from "../../Home/style";
 
-export const BlogCategoryList = () => {
+export const BlogCategoryList = ({ blogListData }) => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const [homePageBlogContents, setHomePageBlogContents] = useState([]);
-
-  // get all cms details based on category
-  const { mutate: getAllcategoryDetails } = useMutation(
-    () => fetcher.get(`http://localhost:3003/v1/blog/list`),
-    {
-      onSuccess: (resData) => {
-        setHomePageBlogContents(resData?.data);
-      },
-      onError: (error) => {
-        alert(error?.response?.data?.message);
-      },
-    }
-  );
-
-  useEffect(() => {
-    getAllcategoryDetails();
-  }, []);
 
   const handleBlogContentListPage = (item) => {
     dispatch(setBlogDetails(item));
@@ -82,8 +62,8 @@ export const BlogCategoryList = () => {
           { property: "twitter.image", content: "https://jupiterblogger.com/" },
         ]}
       />
-      {homePageBlogContents &&
-        homePageBlogContents?.map((item, index) => {
+      {blogListData &&
+        blogListData?.map((item, index) => {
           return (
             <div
               className="col-md-4 mt-3"
