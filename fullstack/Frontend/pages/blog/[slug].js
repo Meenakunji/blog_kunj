@@ -37,3 +37,25 @@ export default function Index() {
     </div>
   );
 }
+
+// export async function getServerSideProps(ctx) {
+//   try {
+//     const { blogTag } = ctx.query;
+
+//     const response = await fetch(
+//       `http://localhost:3003/v1/blog/content?blogTag=${blogTag}`
+//     );
+//     const blogContentData = await response.json();
+
+//     return {
+//       props: {
+//         blogContentData,
+//       },
+//     };
+//   } catch (err) {
+//     console.log("Error occurred while fetching data:", err);
+//     return {
+//       props: {},
+//     };
+//   }
+// }
