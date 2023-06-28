@@ -163,7 +163,10 @@ const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
               open={open}
               handleModalClose={() => handleClose()}
             />
-            <ul className="navbar-nav">
+            <ul
+              className="navbar-nav"
+              style={{ color: !isScrolled ? "#000" : "#fff" }}
+            >
               <li
                 className="nav-item"
                 onClick={() => {
@@ -193,17 +196,29 @@ const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
                 </li>
               ))} */}
               <li className="nav-item">
-                <a className="dropdown-item" href="#">
+                <a
+                  className="dropdown-item"
+                  href="#"
+                  style={{ color: !isScrolled ? "#000" : "#fff" }}
+                >
                   My profile
                 </a>
               </li>
               <li className="nav-item">
-                <a className="dropdown-item" href="#">
+                <a
+                  className="dropdown-item"
+                  href="#"
+                  style={{ color: !isScrolled ? "#000" : "#fff" }}
+                >
                   Settings
                 </a>
               </li>
               <li className="nav-item">
-                <a className="dropdown-item" href="#">
+                <a
+                  className="dropdown-item"
+                  href="#"
+                  style={{ color: !isScrolled ? "#000" : "#fff" }}
+                >
                   Logout
                 </a>
               </li>
