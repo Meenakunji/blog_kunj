@@ -4,7 +4,6 @@ const style = {
   },
 
   // farhan
-
   navbarbrand: {
     cursor: "pointer",
     "& img": {

@@ -24,7 +24,7 @@ const SliderHomne = () => {
       <Box sx={styles.sliderSection}>
         <Slider {...settings}>
           <Box sx={styles.slider}>
-            <video ref={videoRef} width="100%" autoplay>
+            <video ref={videoRef} width="100%" autoPlay>
               <source
                 src="images/home/blogvideo.mp4"
                 type="video/mp4"
@@ -33,12 +33,12 @@ const SliderHomne = () => {
             </video>
           </Box>
           <Box sx={styles.slider}>
-            <video width="100%" autoplay>
+            <video width="100%" autoPlay>
               <source src="images/home/blogvideo.mp4" type="video/mp4" />
             </video>
           </Box>
           <Box sx={styles.slider}>
-            <video width="100%" autoplay>
+            <video width="100%" autoPlay>
               <source src="images/home/blogvideo.mp4" type="video/mp4" />
             </video>
           </Box>
