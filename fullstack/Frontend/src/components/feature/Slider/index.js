@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
 import styles from "./styles";
 import "slick-carousel/slick/slick-theme.css";
@@ -9,6 +9,7 @@ const SliderHome = ({ videos }) => {
   const videoRef = useRef(null);
   const sliderRef = useRef(null);
   const speechSynthRef = useRef(null);
+  const [cachedVideos, setCachedVideos] = useState([]);
 
   useEffect(() => {
     // Hide the video control bar on component mount
@@ -18,6 +19,23 @@ const SliderHome = ({ videos }) => {
   useEffect(() => {
     speechSynthRef.current = window.speechSynthesis;
   }, []);
+
+  useEffect(() => {
+    // Check for cached videos on component mount
+    checkCachedVideos();
+  }, []);
+
+  const checkCachedVideos = async () => {
+    try {
+      const cache = await caches.open("video-cache");
+      const cachedRequests = await cache.keys();
+      const cachedVideoUrls = cachedRequests.map((request) => request.url);
+
+      setCachedVideos(cachedVideoUrls);
+    } catch (error) {
+      console.log("Error occurred while checking cached videos:", error);
+    }
+  };
 
   const settings = {
     dots: true,
@@ -71,10 +89,16 @@ const SliderHome = ({ videos }) => {
     }
   };
 
+  const isVideoCached = (videoUrl) => {
+    return cachedVideos.includes(videoUrl);
+  };
+
   return (
     <Box sx={styles.sliderSection}>
       <Slider {...settings} ref={sliderRef} beforeChange={handleSlideChange}>
         {videos?.map((item, index) => {
+          const isCached = isVideoCached(item.url);
+
           return (
             <Box sx={styles.slider} key={index}>
               <div style={videoContainerStyle}>
@@ -86,11 +110,20 @@ const SliderHome = ({ videos }) => {
                   onEnded={handleVideoEnd}
                   onPlay={handleVideoPlay}
                 >
-                  <source src={item?.url} type="video/mp4" />
+                  {isCached ? (
+                    <source src={item.url} type="video/mp4" />
+                  ) : (
+                    <source
+                      src={`http://localhost:3000/${item.url}`}
+                      type="video/mp4"
+                    />
+                  )}
                 </video>
               </div>
-              <Typography variant="h2">{item?.message}</Typography>
-              <Typography variant="body1">{item?.description}</Typography>
+              <Box sx={styles.sliderTextContainer}>
+                <Typography variant="h4">{item.message}</Typography>
+                <Typography variant="body1">{item.description}</Typography>
+              </Box>
             </Box>
           );
         })}
