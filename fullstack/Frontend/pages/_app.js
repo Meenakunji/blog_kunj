@@ -7,6 +7,7 @@ import "../styles/globals.css";
 import "bootstrap/dist/css/bootstrap.css";
 import CssBaseline from "@mui/material/CssBaseline";
 import PageThemeProvider from "../styles/PageThemeProvider";
+import Script from "next/script"; // Import next/script component
 import Head from "next/head";
 
 function MyApp({ Component, pageProps }) {
@@ -19,7 +20,11 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <script src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js"></script>
+        {/* Replace the script tag with next/script */}
+        <Script
+          src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js"
+          strategy="beforeInteractive"
+        />
       </Head>
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
@@ -37,4 +42,5 @@ function MyApp({ Component, pageProps }) {
     </>
   );
 }
+
 export default MyApp;
