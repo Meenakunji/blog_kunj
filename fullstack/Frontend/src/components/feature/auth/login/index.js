@@ -4,6 +4,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import { Box, Button } from "@mui/material";
+import GoogleSignInButton from "../googlelogin";
 
 const LoginComponent = () => {
   return (
@@ -108,10 +109,10 @@ const LoginComponent = () => {
                         >
                           <Box>
                             <Box>
-                              {/* <GoogleLogin
+                              <GoogleSignInButton
                                 text={"Sign in with Google"}
                                 // handleModalClose={handleModalClose}
-                              /> */}
+                              />
                             </Box>
                             <Button
                             // sx={styles.SignWithEmail}
