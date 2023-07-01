@@ -3,6 +3,7 @@ import GoogleIcon from "@mui/icons-material/Google";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
+import { Box, Button } from "@mui/material";
 
 const LoginComponent = () => {
   return (
@@ -105,7 +106,20 @@ const LoginComponent = () => {
                           type="button"
                           className="btn btn-link btn-floating mx-1"
                         >
-                          <GoogleIcon />
+                          <Box>
+                            <Box>
+                              {/* <GoogleLogin
+                                text={"Sign in with Google"}
+                                // handleModalClose={handleModalClose}
+                              /> */}
+                            </Box>
+                            <Button
+                            // sx={styles.SignWithEmail}
+                            // onClick={() => setIsLoginOpen(true)}
+                            >
+                              <GoogleIcon />
+                            </Button>
+                          </Box>
                         </button>
                         <button
                           type="button"
