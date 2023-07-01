@@ -27,18 +27,12 @@ const loginWithGoogle = async (token) => {
         })
         const user = await Users.findOne({email : payload.email}) 
         if(user?.length){
-          const tkn = jwt.sign({id:user[0]._id}, process.env.JWT_SECRET)
-          res.send({
-            auth: true,
-            token: tkn
-          })
+          const token = jwt.sign({id:user[0]._id}, process.env.JWT_SECRET)
+          return token
         }
       } else {
         const token = jwt.sign({id:user[0]._id}, process.env.JWT_SECRET)
-        res.send({
-          auth: true,
-          token: token
-        })
+        return token
       }
 
     } else {
