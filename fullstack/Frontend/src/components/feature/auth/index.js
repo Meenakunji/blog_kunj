@@ -1,8 +1,3 @@
-// import React from "react";
-
-// export const AuthenticationComponent = () => {
-//   return <div>AuthenticationComponent</div>;
-// };
 import { Box, Modal } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
 import styles from "./style";
