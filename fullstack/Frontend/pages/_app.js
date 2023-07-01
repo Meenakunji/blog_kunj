@@ -7,8 +7,9 @@ import "../styles/globals.css";
 import "bootstrap/dist/css/bootstrap.css";
 import CssBaseline from "@mui/material/CssBaseline";
 import PageThemeProvider from "../styles/PageThemeProvider";
-import Script from "next/script"; // Import next/script component
+import Script from "next/script";
 import Head from "next/head";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 function MyApp({ Component, pageProps }) {
   const queryClient = new QueryClient({
@@ -20,7 +21,6 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-        {/* Replace the script tag with next/script */}
         <Script
           src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js"
           strategy="beforeInteractive"
@@ -29,14 +29,16 @@ function MyApp({ Component, pageProps }) {
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <ReactQueryDevtools initialIsOpen={false} />
-          <Provider store={store}>
-            <PageThemeProvider {...pageProps}>
-              <CssBaseline />
-              <Layout {...pageProps}>
-                <Component {...pageProps} />
-              </Layout>
-            </PageThemeProvider>
-          </Provider>
+          <GoogleOAuthProvider clientId="326983461013-r3ej3ecqlon91rc9olrq1fakslq435fn.apps.googleusercontent.com">
+            <Provider store={store}>
+              <PageThemeProvider>
+                <CssBaseline />
+                <Layout>
+                  <Component {...pageProps} />
+                </Layout>
+              </PageThemeProvider>
+            </Provider>
+          </GoogleOAuthProvider>
         </Hydrate>
       </QueryClientProvider>
     </>
