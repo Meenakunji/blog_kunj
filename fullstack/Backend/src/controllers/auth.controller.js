@@ -25,10 +25,13 @@ const register = catchAsync(async (req, res) => {
 });
 
 const loginWithGoogle = catchAsync(async (req, res) => {
-  const { email, password } = req.body;
-  console.log("Google login api", email, password);
-  // logger.error(`Login Attempt :: Email -> ${email},  Password -> ${password}`);
-  const user = await authService.loginWithGoogle(email, password);
+  const {id_token} = req.query;
+  console.log("Google login api")
+  const token = await authService.loginWithGoogle(id_token);
+  return res.send({
+    auth: true,
+    token: token
+  })
 });
 
 module.exports = {
