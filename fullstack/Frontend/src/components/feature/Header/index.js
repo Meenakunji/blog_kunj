@@ -198,7 +198,7 @@ const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
               <li className="nav-item">
                 <a
                   className="dropdown-item"
-                  href="#"
+                  href="/profile?tab=home"
                   style={{ color: !isScrolled ? "#000" : "#fff" }}
                 >
                   My profile

@@ -1,0 +1,21 @@
+{
+  "name": "Jupiter Blogger",
+  "short_name": "jupiter",
+  "description": "The website aims to inspire and educate aspiring bloggers by providing expert insights, strategies, and practical advice on various aspects of blogging. Whether you are just starting your blogging journey or looking to enhance your existing blog, Jupiter Blogger offers a wealth of information to help you succeed.",
+  "start_url": "/",
+"display": "fullscreen",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "https://i.postimg.cc/3wgSvKbP/bloggerlogo.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "https://i.postimg.cc/3wgSvKbP/bloggerlogo.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

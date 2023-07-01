@@ -120,6 +120,22 @@ const getBlogMarked = catchAsync(async (req, res) => {
   }
 });
 
+const getBlogMarkedList = catchAsync (async (req, res)=> {
+  try {
+    const data = await blogService.getBlogMarkedList();
+    res
+      .status(httpStatus.OK)
+      .send({ code: httpStatus.OK, message: "success", data: data });
+  } catch (error) {
+    console.log(
+      `Exception :: CMS getBlogMarkedList -> getBlogMarkedList -> ${
+        error.message
+      } :: ${rTracer.id()}`
+    );
+    return {};
+  }
+})
+
 module.exports = {
   getBlogContent,
   createBlogContent,
@@ -127,4 +143,5 @@ module.exports = {
   getBlogList,
   uploadFiles,
   getBlogMarked,
+  getBlogMarkedList,
 };
