@@ -32,4 +32,6 @@ router
   .route("/mark/:blogId")
   .post(validate(blogValidation.blogMarked), blogController.getBlogMarked);
 
+// blog mark
+router.route("/bookmark-blog-list").get(blogController.getBlogMarkedList);
 module.exports = router;

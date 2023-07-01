@@ -103,10 +103,45 @@ const getBlogMarked = async (blogId) => {
   return updatedBlogContent;
 };
 
+const getBlogMarkedList = async () => {
+  const pipeline = [
+    {
+      $match: {
+        isMarkedBlog: true,
+      },
+    },
+    {
+      $project: {
+        name: 1,
+        blogTag: 1,
+        user: 1,
+        image: 1,
+        description: 1,
+        blogTitle: 1,
+        profilepic: 1,
+        color: 1,
+      },
+    },
+  ];
+
+  let data = [];
+
+  try {
+    // Assuming BlogContent is a function that executes the pipeline and returns the result
+    data = await BlogContent.aggregate(pipeline);
+    return data;
+    // Process the fetched data or perform any necessary actions
+  } catch (error) {
+    console.error("Error fetching marked blog data:", error);
+    // Handle the error appropriately
+  }
+};
+
 module.exports = {
   getBlogContent,
   createBlogContent,
   createBlog,
   getBlogList,
   getBlogMarked,
+  getBlogMarkedList,
 };

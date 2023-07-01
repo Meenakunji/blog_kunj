@@ -13,7 +13,9 @@ const SliderHome = ({ videos }) => {
 
   useEffect(() => {
     // Hide the video control bar on component mount
-    videoRef.current.controls = false;
+    if (videoRef.current) {
+      videoRef.current.controls = false;
+    }
   }, []);
 
   useEffect(() => {
@@ -69,7 +71,7 @@ const SliderHome = ({ videos }) => {
   };
 
   const handleVideoEnd = () => {
-    sliderRef.current.slickNext(); // Auto slide to the next video
+    sliderRef.current?.slickNext(); // Auto slide to the next video
   };
 
   const handleVideoPlay = () => {
@@ -80,11 +82,11 @@ const SliderHome = ({ videos }) => {
   };
 
   const handleSlideChange = (index) => {
-    const currentVideo = videos[index];
+    const currentVideo = videos?.[index];
 
     // Speak the message for the current video
     if (speechSynthRef.current && !speechSynthRef.current.speaking) {
-      const utterance = new SpeechSynthesisUtterance(currentVideo.message);
+      const utterance = new SpeechSynthesisUtterance(currentVideo?.message);
       speechSynthRef.current.speak(utterance);
     }
   };
@@ -97,7 +99,7 @@ const SliderHome = ({ videos }) => {
     <Box sx={styles.sliderSection}>
       <Slider {...settings} ref={sliderRef} beforeChange={handleSlideChange}>
         {videos?.map((item, index) => {
-          const isCached = isVideoCached(item.url);
+          const isCached = isVideoCached(item?.url);
 
           return (
             <Box sx={styles.slider} key={index}>
@@ -111,18 +113,18 @@ const SliderHome = ({ videos }) => {
                   onPlay={handleVideoPlay}
                 >
                   {isCached ? (
-                    <source src={item.url} type="video/mp4" />
+                    <source src={item?.url} type="video/mp4" />
                   ) : (
                     <source
-                      src={`http://localhost:3000/${item.url}`}
+                      src={`http://localhost:3000/${item?.url}`}
                       type="video/mp4"
                     />
                   )}
                 </video>
               </div>
               <Box sx={styles.sliderTextContainer}>
-                <Typography variant="h4">{item.message}</Typography>
-                <Typography variant="body1">{item.description}</Typography>
+                <Typography variant="h4">{item?.message}</Typography>
+                <Typography variant="body1">{item?.description}</Typography>
               </Box>
             </Box>
           );
