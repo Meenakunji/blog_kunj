@@ -1,0 +1,103 @@
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import { useRouter } from "next/router";
+import { BlogList } from "../../src/components/feature/Profile/BlogList";
+import { BookMarkBlogList } from "../../src/components/feature/Profile/BookmarkBlogList";
+
+export default function Profile() {
+  const [value, setValue] = React.useState(0);
+  const router = useRouter();
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+    if (newValue === 0) {
+      router.push("/profile?tab=home");
+    } else if (newValue === 1) {
+      router.push("/profile?tab=blog_list");
+    } else if (newValue === 2) {
+      router.push("/profile?tab=bookmark_blog_list");
+    }
+  };
+
+  // Sample user details
+  const userDetails = {
+    name: "John Doe",
+    email: "john.doe@example.com",
+    location: "New York, USA",
+    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  };
+
+  React.useEffect(() => {
+    const { tab } = router.query;
+    if (tab === "home") {
+      setValue(0);
+    } else if (tab === "blog_list") {
+      setValue(1);
+    } else if (tab === "bookmark_blog_list") {
+      setValue(2);
+    } else {
+      // Redirect to the default tab
+      router.push("/profile?tab=home");
+    }
+  }, [router.query]);
+
+  return (
+    <Box sx={{ width: "100%", fontFamily: "Arial, sans-serif" }}>
+      <div style={{ marginBottom: "20px" }}>
+        <h2>User Details:</h2>
+        <p>
+          <strong>Name:</strong> {userDetails.name}
+        </p>
+        <p>
+          <strong>Email:</strong> {userDetails.email}
+        </p>
+        <p>
+          <strong>Location:</strong> {userDetails.location}
+        </p>
+        <p>
+          <strong>Bio:</strong> {userDetails.bio}
+        </p>
+      </div>
+      <Tabs
+        value={value}
+        onChange={handleChange}
+        centered
+        sx={{
+          marginBottom: "20px",
+          bgcolor: "background.paper",
+          boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+        }}
+      >
+        <Tab label="Home" sx={{ marginLeft: "20px" }} />
+        <Tab label="Blog List" sx={{ marginLeft: "20px" }} />
+        <Tab label="Bookmark Blog List" sx={{ marginLeft: "20px" }} />
+      </Tabs>
+      <Box>
+        {router?.query?.tab === "home" && (
+          <TabPanel value={value} index={0}>
+            <h1>Home Tab Content</h1>
+          </TabPanel>
+        )}
+        {router?.query?.tab === "blog_list" && (
+          <TabPanel value={value} index={1}>
+            <h1>Blog List Tab Content</h1>
+            <BlogList />
+          </TabPanel>
+        )}
+        {router?.query?.tab === "bookmark_blog_list" && (
+          <TabPanel value={value} index={2}>
+            <h1>Bookmark Blog List Tab Content</h1>
+            <BookMarkBlogList />
+          </TabPanel>
+        )}
+      </Box>
+    </Box>
+  );
+}
+
+function TabPanel(props) {
+  const { children, value, index } = props;
+  return <div>{value === index && <div>{children}</div>}</div>;
+}

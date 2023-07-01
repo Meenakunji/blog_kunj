@@ -30,6 +30,10 @@ const blogContentSchema = mongoose.Schema(
     profilepic: {
       type: String,
     },
+    isMarkedBlog: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,

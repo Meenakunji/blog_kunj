@@ -1,22 +1,31 @@
 import { Box, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import style from "../../Home/style";
 import { NextSeo } from "next-seo";
-import { useMutation } from "react-query";
 import { useRouter } from "next/router";
+import { calculateReadingTime, createSlug } from "../../../../../utils/common";
+import BookmarkAddOutlinedIcon from "@mui/icons-material/BookmarkAddOutlined";
+import BookmarkOutlinedIcon from "@mui/icons-material/BookmarkOutlined";
 import fetcher from "../../../../dataProvider";
-import ImageSlider from "../../../common/ImageSlider";
+import { useMutation } from "react-query";
 
-export const BlogContentTypeList = () => {
+export default function BlogContentListComponent({ data }) {
   const router = useRouter();
-  const [homePageBlogContents, setHomePageBlogContents] = useState([]);
+  const [markedBlogContent, setMarkedBlogContent] = useState(
+    data?.isMarkedBlog
+  );
 
-  // get all cms details based on category
-  const { mutate: getAllcategoryDetails } = useMutation(
-    () => fetcher.get(`http://localhost:3003/v1/blog/list`),
+  const handleBlogContentListPage = (item) => {
+    const urlSlug = createSlug(item?.user, item?.blogTitle);
+    router.push(`/${urlSlug}`);
+  };
+
+  // marked blog
+  const { mutate: getMarkedBlogContent } = useMutation(
+    (blogId) => fetcher.post(`http://localhost:3003/v1/blog/mark/${blogId}`),
     {
       onSuccess: (resData) => {
-        setHomePageBlogContents(resData?.data);
+        setMarkedBlogContent(resData?.data?.isMarkedBlog);
       },
       onError: (error) => {
         alert(error?.response?.data?.message);
@@ -24,9 +33,9 @@ export const BlogContentTypeList = () => {
     }
   );
 
-  useEffect(() => {
-    getAllcategoryDetails();
-  }, []);
+  const handleMarkedBlog = (item) => {
+    getMarkedBlogContent(item?._id);
+  };
 
   return (
     <>
@@ -75,36 +84,84 @@ export const BlogContentTypeList = () => {
           // { name: "keywords", content: "jupiter"?.join(",") },
         ]}
       />
-      {homePageBlogContents &&
-        homePageBlogContents?.map((item, index) => {
+      {data &&
+        data?.map((item, index) => {
+          const readingTime = calculateReadingTime(item?.description, 2);
           return (
             <div className="col-md-4 mt-3" key={index}>
               <div className="card p-3">
                 <Box sx={style.mediaCard} key={index}>
-                  <Box sx={style.chip} style={{ backgroundColor: item?.color }}>
-                    {item?.blogTag}
-                  </Box>
-
-                  {/* <Box
+                  <Box
                     component="img"
-                    src={item?.image?.[0]?.parentUrl}
+                    src={item?.image}
                     style={{
                       borderRadius: "8px",
+                      cursor: "pointer",
                     }}
-                  /> */}
-                  <ImageSlider images={item?.image} thumbnails={item?.image} />
+                    onClick={() => {
+                      handleBlogContentListPage(item);
+                    }}
+                  />
                   <Typography variant="h2">{item?.blogTitle}</Typography>
-
+                  <Box sx={style.userdetails}>
+                    <Box
+                      component="img"
+                      src={item?.profilepic}
+                      style={{
+                        borderRadius: "100px",
+                        width: "30px",
+                        height: "30px",
+                        border: "1px solid #c3c3c3",
+                      }}
+                    />
+                    <Typography variant="p">
+                      By {item?.user} -{" "}
+                      {new Date(item?.creatAt).toLocaleDateString("en-US", {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                      })}
+                    </Typography>
+                  </Box>
                   <Typography variant="p">
                     {item?.description?.split(" ").slice(0, 30).join(" ")}
                     <a
-                      href="#"
-                      onClick={() => router.push("/home")}
+                      href={`/blog/${item?.blogTag}`}
+                      onClick={() => router.push(`/blog/${item?.blogTag}`)}
                       style={{ cursor: "pointer" }}
                     >
                       ...Read More
                     </a>
                   </Typography>
+                  <Box
+                    style={{
+                      fontSize: "13px",
+                      fontFamily:
+                        "sohne, Helvetica Neue, Helvetica, Arial, sans-serif",
+                      display: "flex",
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Typography variant="p">
+                      <a
+                        href={`/blog/${item?.blogTag}`}
+                        onClick={() => router.push(`/blog/${item?.blogTag}`)}
+                        style={{ cursor: "pointer", textDecoration: "none" }}
+                      >
+                        {readingTime} min read
+                      </a>
+                    </Typography>
+                    <Box
+                      onClick={() => handleMarkedBlog(item)}
+                      style={{ cursor: "pointer" }}
+                    >
+                      {markedBlogContent ? (
+                        <BookmarkOutlinedIcon />
+                      ) : (
+                        <BookmarkAddOutlinedIcon />
+                      )}
+                    </Box>
+                  </Box>
                 </Box>
               </div>
             </div>
@@ -112,4 +169,4 @@ export const BlogContentTypeList = () => {
         })}
     </>
   );
-};
+}

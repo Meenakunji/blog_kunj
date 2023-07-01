@@ -1,80 +1,80 @@
-import { Button, useTheme } from "@mui/material";
-import { useSelector } from "react-redux";
-import { BlogContentTypeList } from "../src/components/feature/Blog/BlogList";
-import Head from "next/head";
-import FAQs from "../components/Home/FAQs";
-import { useRouter } from "next/router";
+import SliderHome from "../src/components/feature/Slider";
+import { BlogCategoryList } from "../src/components/feature/Blog/BlogCategoryList";
+import fetch from "node-fetch";
 
-export default function Home() {
-  const { theme } = useSelector((state) => state.layout);
-  // const { locale, push, locales } = useRouter();
+const videos = [
+  {
+    id: 1,
+    url: "images/home/blogvideo1.mp4",
+    message: "Explore the world of blogging with our expert tips!",
+    description:
+      "Learn valuable insights and strategies to excel in the blogging world. Discover how to engage your audience, optimize your content, and much more.",
+  },
+  {
+    id: 2,
+    url: "images/home/blogvideo2.mp4",
+    message: "Unleash your culinary skills with our delicious recipes!",
+    description:
+      "Indulge in a gastronomic journey as we share mouthwatering recipes from around the globe. From appetizers to desserts, there's something for everyone.",
+  },
+  {
+    id: 3,
+    url: "images/home/food.mp4",
+    message: "Immerse yourself in the wonders of the universe!",
+    description:
+      "Embark on an awe-inspiring exploration of space, galaxies, and celestial phenomena. Learn about the latest discoveries and unravel the mysteries of the cosmos.",
+  },
+  {
+    id: 4,
+    url: "images/home/spaceblog.mp4",
+    message: "Stay fit and active with our sports and fitness tips!",
+    description:
+      "Discover effective workout routines, training strategies, and sports-related articles to enhance your athletic performance and lead a healthy lifestyle.",
+  },
+  {
+    id: 5,
+    url: "images/home/sports.mp4",
+    message: "Delve into the realm of food and culinary delights!",
+    description:
+      "Get ready to tantalize your taste buds with delectable dishes, chef interviews, and insider insights from the culinary world. Prepare to embark on a gastronomic adventure.",
+  },
+  {
+    id: 6,
+    url: "images/home/blog3.mp4",
+    message: "Experience the thrill of outdoor adventures and travel!",
+    description:
+      "Join us as we explore breathtaking destinations, share travel tips, and inspire you to embark on unforgettable journeys around the globe.",
+  },
+];
 
-  // const { t } = useTranslation("common");
-
-  // const handleClick = (index) => () => {
-  //   // Handle language selection here
-  //   // You can update the state, redirect to a localized page, etc.
-  // };
-
+export default function Home({ blogListData, videos }) {
   return (
-    <div className="container-fluid">
-      <Head>
-        <meta
-          name="description"
-          content="Welcome to Jupiter Blogger, your gateway to the cosmos. Ignite your curiosity as we delve into the realms of astronomy, planetary science, and space exploration. From captivating articles to mesmerizing visuals, let us take you on an awe-inspiring journey across the vast expanse of space."
-        />
-        <meta
-          name="name"
-          content="Jupiter Blogger: Your Gateway to Inspiring Blogging Adventures"
-        />
-        <meta
-          name="image"
-          content="https://i.postimg.cc/3wgSvKbP/bloggerlogo.png"
-        />
-        <meta property="og:url" content="https://jupiterblogger.com/" />
-        <meta property="og:type" content="website" />
-        <meta
-          property="og:title"
-          content="Jupiter Blogger: Your Gateway to Inspiring Blogging Adventures"
-        />
-        <meta
-          property="og:description"
-          content="Welcome to Jupiter Blogger, your gateway to the cosmos. Ignite your curiosity as we delve into the realms of astronomy, planetary science, and space exploration. From captivating articles to mesmerizing visuals, let us take you on an awe-inspiring journey across the vast expanse of space."
-        />
-        <meta
-          property="og:image"
-          content="https://i.postimg.cc/3wgSvKbP/bloggerlogo.png"
-        />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:title"
-          content="Jupiter Blogger: Your Gateway to Inspiring Blogging Adventures"
-        />
-        <meta
-          name="twitter:description"
-          content="Welcome to Jupiter Blogger, your gateway to the cosmos.Ignite your curiosity as we delve into the realms of astronomy, planetary science, and space exploration. From captivating articles to mesmerizing visuals, let us take you on an awe-inspiring journey across the vast expanse of space."
-        />
-        <meta
-          name="twitter:image"
-          content="https://i.postimg.cc/3wgSvKbP/bloggerlogo.png"
-        />
-      </Head>
-      <div className="row">
-        {/* <h1>
-          Pankaj {"   "}
-          {locale}
-        </h1>
-        <div>
-          <h3>Welcome to Jupiter Blogger Website</h3>
-          <h2>Choose your language</h2>
-          {locales.map((index) => (
-            <Button key={index} onClick={handleClick(index)}>
-              {index}
-            </Button>
-          ))}
-        </div> */}
-        <BlogContentTypeList />
+    <>
+      <SliderHome videos={videos} />
+      <div className="container-fluid">
+        <div className="row">
+          <BlogCategoryList blogListData={blogListData?.data} />
+        </div>
       </div>
-    </div>
+    </>
   );
+}
+
+export async function getServerSideProps(ctx) {
+  try {
+    const response = await fetch("http://localhost:3003/v1/blog/list");
+    const blogListData = await response.json();
+
+    return {
+      props: {
+        blogListData,
+        videos,
+      },
+    };
+  } catch (err) {
+    console.log("Error occurred while fetching data:", err);
+    return {
+      props: {},
+    };
+  }
 }

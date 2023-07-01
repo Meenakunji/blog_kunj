@@ -17,6 +17,7 @@ const initialState = {
   languagePrefNameObj: [],
   artistID: null,
   creatorID: null,
+  blogDetails: null,
 };
 
 const user = createSlice({
@@ -49,6 +50,9 @@ const user = createSlice({
     setCreatorID: (state, action) => {
       state.creatorID = action.payload;
     },
+    setBlogDetails: (state, action) => {
+      state.blogDetails = action.payload;
+    },
   },
 });
 
@@ -59,6 +63,7 @@ export const {
   setLanguagePrefNameObj,
   setArtistID,
   setCreatorID,
+  setBlogDetails,
 } = user.actions;
 
 export default user.reducer;
