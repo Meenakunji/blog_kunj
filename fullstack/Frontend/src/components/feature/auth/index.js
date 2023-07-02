@@ -5,7 +5,6 @@ import SignupComponent from "./signup";
 import LoginComponent from "./login";
 
 const AuthenticationComponent = ({ open, handleModalClose }) => {
-  const [isSignUp, setIsSignUp] = useState(false);
   const [isOpen, setOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isLoginandSignupModal, setIsLoginandSignupModal] = useState(false);
@@ -22,7 +21,6 @@ const AuthenticationComponent = ({ open, handleModalClose }) => {
     return () => {
       if (handleModalClose) {
         setOpen(false);
-        setIsSignUp(false);
         setIsLoginOpen(false);
         setIsLoginandSignupModal(false);
       }

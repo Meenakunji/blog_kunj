@@ -1,10 +1,11 @@
 import React from "react";
-import GoogleIcon from "@mui/icons-material/Google";
+
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
-import { Box, Button } from "@mui/material";
+import GoogleIcon from "@mui/icons-material/Google";
 import GoogleSignInButton from "../googlelogin";
+import { Box, Button } from "@mui/material";
 
 const LoginComponent = () => {
   return (
@@ -18,14 +19,15 @@ const LoginComponent = () => {
             <div className="row gx-lg-5 align-items-center">
               <div className="col-lg-6 mb-5 mb-lg-0">
                 <h1 className="my-5 display-3 fw-bold ls-tight">
-                  The best offer <br />
-                  <span className="text-primary">for your business</span>
+                  Login for Exclusive Offers <br />
+                  <span className="text-primary">- Jupiter Blogger</span>
                 </h1>
                 <p style={{ color: "hsl(217, 10%, 50.8%)" }}>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Eveniet, itaque accusantium odio, soluta, corrupti aliquam
-                  quibusdam tempora at cupiditate quis eum maiores libero
-                  veritatis? Dicta facilis sint aliquid ipsum atque?
+                  Unlock exclusive business offers at Jupiter Blogger. Boost
+                  your growth with tailored deals and discounts on a wide range
+                  of products and services. Sign up today for incredible
+                  opportunities to accelerate your success. Join Jupiter Blogger
+                  now!
                 </p>
               </div>
 
@@ -107,20 +109,7 @@ const LoginComponent = () => {
                           type="button"
                           className="btn btn-link btn-floating mx-1"
                         >
-                          <Box>
-                            <Box>
-                              <GoogleSignInButton
-                                text={"Sign in with Google"}
-                                // handleModalClose={handleModalClose}
-                              />
-                            </Box>
-                            <Button
-                            // sx={styles.SignWithEmail}
-                            // onClick={() => setIsLoginOpen(true)}
-                            >
-                              <GoogleIcon />
-                            </Button>
-                          </Box>
+                          <GoogleSignInButton />
                         </button>
                         <button
                           type="button"
