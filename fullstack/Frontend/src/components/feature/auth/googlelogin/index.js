@@ -1,49 +1,58 @@
-import React, { useState } from "react";
-import { useGoogleLogin } from "@react-oauth/google";
+import React, { useEffect } from "react";
+import GoogleLogin from "react-google-login";
 import axios from "axios";
+import GoogleIcon from "@mui/icons-material/Google"; // Make sure the correct import is used
+import useGoogleLogin from "../../../../hooks/useGoogleLogin";
+// import { gapi } from "gapi-script";
 
-export default function GoogleSignInButton(prop) {
-  const [profile, setProfile] = useState(null);
+export default function GoogleSignInButton(props) {
+  const [_, loginGoogle] = useGoogleLogin();
 
-  const login = useGoogleLogin({
-    clientId:
-      "326983461013-r3ej3ecqlon91rc9olrq1fakslq435fn.apps.googleusercontent.com",
-    onSuccess: (response) => {
-      console.log("Print resposne google login======>>>>", response);
-      getUserProfile(response.access_token);
-    },
-    onFailure: (error) => {
-      console.log("Print resposne google login error ======>>>>", error);
-      console.log("Login Failed:", error);
-    },
-  });
+  const handleFailure = (error) => {
+    console.log("Google sign-in failed:", error);
+  };
 
   const getUserProfile = (accessToken) => {
     axios
       .get(
         `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${accessToken}`
       )
-      .then((res) => {
-        console.log("Print resposne google getUserProfile", response);
-        setProfile(res.data);
+      .then((response) => {
+        console.log("Google user profile:", response.data);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((error) => {
+        console.log("Failed to fetch user profile:", error);
       });
   };
 
+  const handleSuccess = (response) => {
+    console.log("Google sign-in success:", response);
+    const { tokenId, accessToken } = response;
+    debugger;
+    loginGoogle({ id_token: tokenId });
+    getUserProfile(accessToken);
+  };
+
+  const { text } = props;
+
   return (
-    <>
-      {profile ? (
-        <div>
-          <img src={profile.picture} alt="user image" />
-          <h3>User Logged in</h3>
-          <p>Name: {profile.name}</p>
-          <p>Email Address: {profile.email}</p>
-        </div>
-      ) : (
-        <button onClick={login}>Sign in with Google</button>
+    <GoogleLogin
+      clientId="326983461013-kvephqb8tu4d9svvivbsk5irhf8q11oe.apps.googleusercontent.com"
+      buttonText={text}
+      onSuccess={handleSuccess}
+      onFailure={handleFailure}
+      // cookiePolicy={"single_host_origin"}
+      render={(renderProps) => (
+        <button
+          type="button"
+          style={{ border: "none", cursor: "pointer" }}
+          onClick={renderProps.onClick}
+          disabled={renderProps.disabled}
+          className="btn btn-link btn-floating mx-1"
+        >
+          <GoogleIcon />
+        </button>
       )}
-    </>
+    />
   );
 }

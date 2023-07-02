@@ -8,7 +8,7 @@ import TextArea from "../../common/TextArea";
 import { useMutation } from "react-query";
 import fetcher from "../../../dataProvider";
 import SnackBar from "../../common/Snackbar";
-import useRouter from "next/router";
+import { useRouter } from "next/router";
 
 const BlogCreate = () => {
   const router = useRouter();
@@ -137,18 +137,6 @@ const BlogCreate = () => {
                     register={register}
                     errors={errors}
                   />
-                  {errors?.blogTitle && (
-                    <span
-                      style={{
-                        color: "red",
-                        position: "absolute",
-                        bottom: "auto",
-                        left: "0",
-                      }}
-                    >
-                      {errors?.blogTitle?.message}
-                    </span>
-                  )}
                 </Box>
               </Box>
               <Box sx={style.formRowSection}>
@@ -159,18 +147,6 @@ const BlogCreate = () => {
                     register={register}
                     errors={errors}
                   />
-                  {errors.description && (
-                    <span
-                      style={{
-                        color: "red",
-                        position: "absolute",
-                        bottom: "auto",
-                        left: "0",
-                      }}
-                    >
-                      {errors.description.message}
-                    </span>
-                  )}
                 </Box>
               </Box>
               <Box sx={style.buttongroup}>

@@ -34,7 +34,6 @@ const FooterComponent = () => {
               >
                 <TwitterIcon />
               </a>
-
               <a
                 href="/"
                 className="me-4 text-reset"
@@ -50,7 +49,6 @@ const FooterComponent = () => {
               >
                 <LinkedInIcon />
               </a>
-
               <a
                 href="whatsapp://send?text=8003356924"
                 target="_blank"
@@ -96,7 +94,6 @@ const FooterComponent = () => {
                   </List>
                 </Box>
               </div>
-
               <div className="col-md-3">
                 <Box sx={style.footerList}>
                   <h5>Products</h5>
@@ -113,7 +110,7 @@ const FooterComponent = () => {
                   <h5>Contact</h5>
                   <List>
                     <ListItem>
-                      <HomeWorkIcon /> House No 24, 2th Floor,near Sai Temple{" "}
+                      <HomeWorkIcon /> House No 24, 2th Floor, near Sai Temple{" "}
                       <br />
                       Sector 16, Old FaridaBad, 121003
                     </ListItem>

@@ -204,7 +204,7 @@ const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
                   My profile
                 </a>
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item">
                 <a
                   className="dropdown-item"
                   href="#"
@@ -212,7 +212,7 @@ const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
                 >
                   Settings
                 </a>
-              </li>
+              </li> */}
               <li className="nav-item">
                 <a
                   className="dropdown-item"

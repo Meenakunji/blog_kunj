@@ -1,3 +1,7 @@
-const style = {};
+const style = {
+  root: {
+    color: "#fff",
+  },
+};
 
 export default style;
