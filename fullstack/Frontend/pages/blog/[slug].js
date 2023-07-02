@@ -7,27 +7,51 @@ import { useSelector } from "react-redux";
 
 export default function Index() {
   const [blogContentList, setBlogContentList] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
   const { blogDetails } = useSelector((state) => state.user);
 
-  // get all cms details based on category
-  const { mutate: getAllcategoryDetails } = useMutation(
-    () =>
-      fetcher.get(
-        `http://localhost:3003/v1/blog/content?blogTag=${blogDetails?.blogTag}`
-      ),
-    {
-      onSuccess: (resData) => {
-        setBlogContentList(resData?.data);
-      },
-      onError: (error) => {
-        alert(error?.response?.data?.message);
-      },
+  const fetchBlogContent = async (page) => {
+    try {
+      const response = await fetcher.get(
+        `http://localhost:3003/v1/blog/content?blogTag=${blogDetails?.blogTag}&page=${page}`
+      );
+      const { data, totalPages } = response;
+      setBlogContentList((prevList) => [...prevList, ...data]);
+      setTotalPages(totalPages);
+    } catch (error) {
+      console.log("Error occurred while fetching data:", error);
     }
-  );
+  };
+
+  const { mutate: getAllCategoryDetails } = useMutation(fetchBlogContent, {
+    onSuccess: () => {
+      setCurrentPage((prevPage) => prevPage + 1);
+    },
+    onError: (error) => {
+      alert(error?.response?.data?.message);
+    },
+  });
+
+  const handleScroll = () => {
+    if (
+      window.innerHeight + window.scrollY >= document.body.offsetHeight &&
+      currentPage < totalPages
+    ) {
+      getAllCategoryDetails(currentPage);
+    }
+  };
 
   useEffect(() => {
-    getAllcategoryDetails();
+    getAllCategoryDetails(currentPage);
   }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [currentPage]);
 
   return (
     <div className="container-fluid">

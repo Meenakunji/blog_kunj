@@ -1,5 +1,5 @@
-import { Box, Button, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { Box, Button } from "@mui/material";
+import React, { useState } from "react";
 import style from "./styles";
 import HomeBanner from "../../common/HomeBanner";
 import { useForm } from "react-hook-form";
@@ -8,11 +8,13 @@ import TextArea from "../../common/TextArea";
 import { useMutation } from "react-query";
 import fetcher from "../../../dataProvider";
 import SnackBar from "../../common/Snackbar";
+import useRouter from "next/router";
 
 const BlogCreate = () => {
+  const router = useRouter();
   const {
     register,
-    formState: { errors, isValid },
+    formState: { errors },
     getValues,
   } = useForm({
     criteriaMode: "all",
@@ -39,6 +41,7 @@ const BlogCreate = () => {
           status: "success",
           message: "Blog New Entry created successfully.",
         });
+        router.push(`/`);
       },
       onError: (error) => {
         alert(error?.response?.data?.message);
@@ -129,7 +132,7 @@ const BlogCreate = () => {
                 <Box sx={style.formgroup}>
                   <TextField
                     label="Blog Title"
-                    name={"name"}
+                    name={"blogTitle"}
                     placeholder="Blog Title"
                     register={register}
                     errors={errors}
