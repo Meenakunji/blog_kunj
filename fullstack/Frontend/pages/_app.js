@@ -11,7 +11,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import PageThemeProvider from "../styles/PageThemeProvider";
 import Script from "next/script";
 import Head from "next/head";
-// import { GoogleOAuthProvider } from "@react-oauth/google";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 // import { SessionProvider } from "next-auth/react";
 
 function MyApp({ Component, pageProps }) {
@@ -33,16 +33,16 @@ function MyApp({ Component, pageProps }) {
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <ReactQueryDevtools initialIsOpen={false} />
-          {/* <GoogleOAuthProvider clientId="326983461013-r3ej3ecqlon91rc9olrq1fakslq435fn.apps.googleusercontent.com"> */}
-          <Provider store={store}>
-            <PageThemeProvider>
-              <CssBaseline />
-              <Layout>
-                <Component {...pageProps} />
-              </Layout>
-            </PageThemeProvider>
-          </Provider>
-          {/* </GoogleOAuthProvider> */}
+          <GoogleOAuthProvider clientId="426734307285-dlk38v03lrrbl6moh2lcja09gmsn9uip.apps.googleusercontent.com">
+            <Provider store={store}>
+              <PageThemeProvider>
+                <CssBaseline />
+                <Layout>
+                  <Component {...pageProps} />
+                </Layout>
+              </PageThemeProvider>
+            </Provider>
+          </GoogleOAuthProvider>
         </Hydrate>
       </QueryClientProvider>
       {/* </SessionProvider> */}

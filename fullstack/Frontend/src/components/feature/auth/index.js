@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import styles from "./style";
 import SignupComponent from "./signup";
 import LoginComponent from "./login";
+import CloseIcon from "@mui/icons-material/Close";
 
 const AuthenticationComponent = ({ open, handleModalClose }) => {
   const [isOpen, setOpen] = useState(false);
@@ -36,8 +37,8 @@ const AuthenticationComponent = ({ open, handleModalClose }) => {
         closeAfterTransition
       >
         <Box sx={styles.wrapper}>
-          <Box
-            sx={{
+          <CloseIcon
+            style={{
               cursor: "pointer",
               background: "#fff",
               borderRadius: "16px",
@@ -45,8 +46,6 @@ const AuthenticationComponent = ({ open, handleModalClose }) => {
               right: "5px",
               top: "5px",
             }}
-            component="img"
-            src="/images/community/close.svg"
             onClick={handleModalClose}
           />
           <Box sx={styles.FanSinUp}>

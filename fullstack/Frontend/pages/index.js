@@ -2,12 +2,30 @@ import React, { useEffect, useState } from "react";
 import SliderHome from "../src/components/feature/Slider";
 import { BlogCategoryList } from "../src/components/feature/Blog/BlogCategoryList";
 import fetch from "node-fetch";
+import { useMutation } from "react-query";
+import fetcher from "../src/dataProvider";
 
-export default function Home({ blogListData }) {
+export default function Home() {
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
-  const [blogList, setBlogList] = useState(blogListData?.data || []);
+  const [blogList, setBlogList] = useState([]);
   const [hasMorePages, setHasMorePages] = useState(true);
+
+  const { mutate: getBlogCategoryData } = useMutation(
+    () => fetcher.get(`http://localhost:3003/v1/blog/list`),
+    {
+      onSuccess: ({ data }) => {
+        setBlogList(data);
+      },
+      onError: (error) => {
+        alert(error?.response?.data?.message);
+      },
+    }
+  );
+
+  useEffect(() => {
+    getBlogCategoryData();
+  }, []);
 
   const videos = [
     {
@@ -53,7 +71,6 @@ export default function Home({ blogListData }) {
         "Join us as we explore breathtaking destinations, share travel tips, and inspire you to embark on unforgettable journeys around the globe.",
     },
   ];
-
   useEffect(() => {
     const handleScroll = () => {
       const { scrollTop, clientHeight, scrollHeight } =
@@ -105,22 +122,4 @@ export default function Home({ blogListData }) {
       </div>
     </>
   );
-}
-
-export async function getServerSideProps(ctx) {
-  try {
-    const response = await fetch("http://localhost:3003/v1/blog/list");
-    const blogListData = await response.json();
-
-    return {
-      props: {
-        blogListData,
-      },
-    };
-  } catch (err) {
-    console.log("Error occurred while fetching data:", err);
-    return {
-      props: {},
-    };
-  }
 }
