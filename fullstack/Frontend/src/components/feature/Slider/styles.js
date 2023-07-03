@@ -1,5 +1,6 @@
 const styles = {
   sliderSection: {
+    position: "relative",
     "& .slick-dots": {
       bottom: "10px",
       "& li": {
@@ -47,6 +48,21 @@ const styles = {
     width: "100%",
     margin: "0",
     padding: "0",
+  },
+  sliderTextContainer: {
+    position: "absolute",
+    transform: "translateY(-50%)",
+    top: "50%",
+    width: "750px",
+    margin: "auto",
+    color: "#fff",
+    textAlign: "center",
+    "& h4": {
+      fontSize: "55px",
+      fontWeight: "800",
+      lineHeight: "49px",
+      marginBottom: "20px",
+    },
   },
 };
 export default styles;

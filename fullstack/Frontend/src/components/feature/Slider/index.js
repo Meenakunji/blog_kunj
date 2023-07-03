@@ -58,7 +58,7 @@ const SliderHome = ({ videos }) => {
   };
 
   const videoContainerStyle = {
-    height: "50vh",
+    height: "70vh",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -121,11 +121,11 @@ const SliderHome = ({ videos }) => {
                     />
                   )}
                 </video>
+                <Box sx={styles.sliderTextContainer}>
+                  <Typography variant="h4">{item?.message}</Typography>
+                  <Typography variant="body1">{item?.description}</Typography>
+                </Box>
               </div>
-              <Box sx={styles.sliderTextContainer}>
-                <Typography variant="h4">{item?.message}</Typography>
-                <Typography variant="body1">{item?.description}</Typography>
-              </Box>
             </Box>
           );
         })}
