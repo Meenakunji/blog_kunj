@@ -31,44 +31,44 @@ export default function Home() {
     {
       id: 1,
       url: "images/home/blogvideo1.mp4",
-      message: "Explore the world of blogging with our expert tips!",
+      message: "Explore the World: Unforgettable Travel Adventures!",
       description:
-        "Learn valuable insights and strategies to excel in the blogging world. Discover how to engage your audience, optimize your content, and much more.",
+        "Join us on a thrilling expedition across the globe as we uncover hidden gems, immerse ourselves in diverse cultures, and embark on unforgettable travel adventures. From ancient landmarks to vibrant cities, picturesque landscapes to mouthwatering cuisines, our travel blog is your passport to wanderlust. Get ready to ignite your wanderlust and create lifelong memories through immersive travel experiences.",
     },
     {
       id: 2,
       url: "images/home/blogvideo2.mp4",
-      message: "Unleash your culinary skills with our delicious recipes!",
+      message: "Inside the Media: Unveiling the World of Entertainment!",
       description:
-        "Indulge in a gastronomic journey as we share mouthwatering recipes from around the globe. From appetizers to desserts, there's something for everyone.",
+        "Step into the captivating world of media with our blog that delves into the realms of movies, television, music, and more. From behind-the-scenes insights to exclusive interviews with industry experts, we bring you the latest buzz and fascinating stories from the world of entertainment. Explore the magic of cinema, discover new music trends, and stay up-to-date with the ever-evolving media landscape. Join us as we unravel the secrets and celebrate the power of media in shaping our culture and inspiring creativity.",
     },
     {
       id: 3,
       url: "images/home/food.mp4",
-      message: "Immerse yourself in the wonders of the universe!",
+      message: "Foodie Faves: Bite-Sized Culinary Bliss",
       description:
-        "Embark on an awe-inspiring exploration of space, galaxies, and celestial phenomena. Learn about the latest discoveries and unravel the mysteries of the cosmos.",
+        "Indulge in delectable flavors and culinary delights as we take you on a tantalizing food journey. From savory dishes to sweet treats, join us for a taste sensation like no other.",
     },
     {
       id: 4,
       url: "images/home/spaceblog.mp4",
-      message: "Stay fit and active with our sports and fitness tips!",
+      message: "Beyond Earth: Exploring the Wonders of Space!",
       description:
-        "Discover effective workout routines, training strategies, and sports-related articles to enhance your athletic performance and lead a healthy lifestyle.",
+        "Embark on an extraordinary journey through the vastness of space. Discover captivating celestial bodies, witness awe-inspiring astronomical phenomena, and delve into the mysteries of the universe. Join us as we explore the wonders that lie beyond Earth's boundaries.",
     },
     {
       id: 5,
       url: "images/home/sports.mp4",
-      message: "Delve into the realm of food and culinary delights!",
+      message: "Unleashing the Passion: Sports Stories That Inspire!",
       description:
-        "Get ready to tantalize your taste buds with delectable dishes, chef interviews, and insider insights from the culinary world. Prepare to embark on a gastronomic adventure.",
+        "Experience the thrill, dedication, and triumph of athletes as they push their limits and defy expectations. From adrenaline-pumping moments to heartwarming tales of perseverance, our sports blog brings you closer to the world of sports. Join us on this captivating journey where passion meets greatness.",
     },
     {
       id: 6,
       url: "images/home/blog3.mp4",
-      message: "Experience the thrill of outdoor adventures and travel!",
+      message: "Immerse Yourself in the Wonders of Nature!",
       description:
-        "Join us as we explore breathtaking destinations, share travel tips, and inspire you to embark on unforgettable journeys around the globe.",
+        "Embark on a captivating journey through awe-inspiring landscapes, vibrant ecosystems, and the marvels of the natural world. Our nature blog invites you to discover the beauty and tranquility of our planet, from breathtaking mountains to pristine beaches. Get ready to be inspired, educated, and amazed by the wonders that nature has to offer.",
     },
   ];
   useEffect(() => {

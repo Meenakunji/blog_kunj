@@ -28,19 +28,26 @@ const loginWithGoogle = async (token) => {
           picture: payload.picture,
         });
         const user = await Users.findOne({ email: payload.email });
-        if (user?.length) {
+        if (user) {
           const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-          return token;
+          return {
+            token: token,
+            user: user, // Include the user data in the response
+          };
         }
       } else {
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-        return token;
+        return {
+          token: token,
+          user: user, // Include the user data in the response
+        };
       }
     } else {
-      res.send({
+      // Handle unauthorized user
+      return {
         auth: false,
         message: "User unauthorized",
-      });
+      };
     }
   } catch (error) {
     console.error(error);
