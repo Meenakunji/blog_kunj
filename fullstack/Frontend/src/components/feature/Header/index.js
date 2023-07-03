@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import DriveFileRenameOutlineTwoToneIcon from "@mui/icons-material/DriveFileRenameOutlineTwoTone";
-import { Box, Button, useMediaQuery } from "@mui/material";
+import { Box, Button, MenuItem, useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,10 +15,14 @@ import EditIcon from "@mui/icons-material/Edit";
 import { initWeb3, getSigner } from "../../../../utils/web3";
 import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
+import { googleLogout } from "@react-oauth/google";
+import logout from "../../../../components/Layout/util/logout";
 
 const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
   const router = useRouter();
   const { theme } = useSelector((state) => state.layout);
+  const { isLoggedIn } = useSelector((state) => state.user);
+  console.log("Print islogiin data=====>>>", isLoggedIn);
   const [open, setOpen] = useState(false);
   const [click, setClick] = useState(false);
   const dispatch = useDispatch();
@@ -210,11 +214,19 @@ const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
                   Settings
                 </a>
               </li> */}
-              <li className="nav-item">
-                <a className="dropdown-item" href="#" style={{ color: "#fff" }}>
-                  Logout
-                </a>
-              </li>
+
+              {isLoggedIn && (
+                <li className="nav-item">
+                  <a
+                    className="dropdown-item"
+                    href="#"
+                    style={{ color: "#fff" }}
+                    onClick={() => googleLogout()}
+                  >
+                    Logout
+                  </a>
+                </li>
+              )}
             </ul>
             <button
               className="btn btn-light allBtn"

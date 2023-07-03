@@ -1,11 +1,27 @@
 import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
-import React from "react";
+import React, { useState } from "react";
 import { useMutation } from "react-query";
 import fetcher from "../../../../dataProvider";
+import { setToken, setUserData } from "../../../../redux/slices/user";
+import useLocalStorage from "../../../../hooks/useLocalStorage";
+import { useDispatch, useSelector } from "react-redux";
+import loginfunc from "../../../../../components/Layout/util/login";
+import SnackBar from "../../../common/Snackbar";
+import { useRouter } from "next/router";
 
 export default function GoogleSignInButton(props) {
+  const [, setAccessToken] = useLocalStorage("accessToken", null);
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const [snackbar, setSnackbar] = useState({
+    show: false,
+    status: "",
+    message: "",
+  });
+
   const handleFailure = (error) => {
     console.log("Google sign-in failed:", error);
   };
@@ -14,10 +30,30 @@ export default function GoogleSignInButton(props) {
     (id_token) => fetcher.post(`v1/auth/login?id_token=${id_token}`),
     {
       onSuccess: (res) => {
-        // const accessToken = res.tokens?.access?.token;
+        const accessToken = res.data.token;
+        dispatch(setUserData(res?.data.user));
+        loginfunc(
+          res?.data.token,
+          res?.data.user.name,
+          res?.data.user.email,
+          res?.data.user._id
+        );
         // const refreshToken = res.tokens?.refresh?.token;
-        console.log("accessToken", res);
-        // Perform actions on success, such as setting tokens in local storage
+        setAccessToken(accessToken);
+        dispatch(
+          setToken({
+            accessToken: accessToken,
+            //  refreshToken: refreshToken,
+            isLoggedIn: true,
+          })
+        );
+        setSnackbar({
+          show: true,
+          status: "success",
+          message: "Blog New Entry created successfully.",
+        });
+
+        router.push(`/`);
       },
       onError: (error) => {
         console.log("Error:", error);
@@ -45,14 +81,6 @@ export default function GoogleSignInButton(props) {
   });
 
   const handleSuccess = (credentialResponse) => {
-    console.log(
-      "Google sign-in success:",
-      credentialResponse
-      // credentialResponse?.credential
-    );
-
-    // const { credential } = credentialResponse;
-    // var decoded = jwt_decode(credentialResponse?.credential);
     console.log("decode======>>>>", credentialResponse?.credential);
     loginGoogle(credentialResponse?.credential);
   };
@@ -78,10 +106,10 @@ export default function GoogleSignInButton(props) {
     //   )}
     // />
     <>
-      <button onClick={login}>
+      {/* <button onClick={login}>
         <i class="fa-brands fa-google"></i>
         Continue with google
-      </button>
+      </button> */}
       <GoogleLogin onSuccess={handleSuccess} onError={handleFailure} />
     </>
   );
