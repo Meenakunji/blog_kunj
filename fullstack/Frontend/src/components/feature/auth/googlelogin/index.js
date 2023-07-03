@@ -1,39 +1,61 @@
-import React, { useEffect } from "react";
-// import GoogleLogin from "react-google-login";
+import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
-import GoogleIcon from "@mui/icons-material/Google"; // Make sure the correct import is used
-import useGoogleLogin from "../../../../hooks/useGoogleLogin";
-import { GoogleLogin } from "@react-oauth/google";
+import jwt_decode from "jwt-decode";
+import React from "react";
+import { useMutation } from "react-query";
+import fetcher from "../../../../dataProvider";
 
 export default function GoogleSignInButton(props) {
-  const [_, loginGoogle] = useGoogleLogin();
-
   const handleFailure = (error) => {
     console.log("Google sign-in failed:", error);
   };
 
-  const getUserProfile = (accessToken) => {
-    axios
-      .get(
-        `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${accessToken}`
-      )
-      .then((response) => {
-        console.log("Google user profile:", response.data);
-      })
-      .catch((error) => {
-        console.log("Failed to fetch user profile:", error);
-      });
-  };
+  const { mutate: loginGoogle } = useMutation(
+    (id_token) => fetcher.post(`v1/auth/login?id_token=${id_token}`),
+    {
+      onSuccess: (res) => {
+        // const accessToken = res.tokens?.access?.token;
+        // const refreshToken = res.tokens?.refresh?.token;
+        console.log("accessToken", res);
+        // Perform actions on success, such as setting tokens in local storage
+      },
+      onError: (error) => {
+        console.log("Error:", error);
+      },
+    }
+  );
 
-  const handleSuccess = (response) => {
-    console.log("Google sign-in success:", response);
-    const { tokenId, accessToken } = response;
-    debugger;
-    loginGoogle({ id_token: tokenId });
-    getUserProfile(accessToken);
-  };
+  const login = useGoogleLogin({
+    onSuccess: async (respose) => {
+      try {
+        const res = await axios.get(
+          "https://www.googleapis.com/oauth2/v3/userinfo",
+          {
+            headers: {
+              Authorization: `Bearer ${respose.access_token}`,
+            },
+          }
+        );
 
-  const { text } = props;
+        console.log(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+  });
+
+  const handleSuccess = (credentialResponse) => {
+    console.log(
+      "Google sign-in success:",
+      credentialResponse
+      // credentialResponse?.credential
+    );
+
+    // const { credential } = credentialResponse;
+    // var decoded = jwt_decode(credentialResponse?.credential);
+    console.log("decode======>>>>", credentialResponse?.credential);
+    loginGoogle(credentialResponse?.credential);
+  };
 
   return (
     // <GoogleLogin
@@ -55,6 +77,12 @@ export default function GoogleSignInButton(props) {
     //     </button>
     //   )}
     // />
-    <GoogleLogin onSuccess={handleSuccess} onError={handleFailure} />
+    <>
+      <button onClick={login}>
+        <i class="fa-brands fa-google"></i>
+        Continue with google
+      </button>
+      <GoogleLogin onSuccess={handleSuccess} onError={handleFailure} />
+    </>
   );
 }
