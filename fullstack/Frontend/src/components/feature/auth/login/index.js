@@ -35,39 +35,6 @@ const LoginComponent = () => {
                 <div className="card">
                   <div className="card-body py-5 px-md-5">
                     <form>
-                      <div className="row">
-                        <div className="col-md-6 mb-4">
-                          <div className="form-outline">
-                            <label
-                              className="form-label"
-                              htmlFor="form3Example1"
-                            >
-                              First name
-                            </label>
-                            <input
-                              type="text"
-                              id="form3Example1"
-                              className="form-control"
-                            />
-                          </div>
-                        </div>
-                        <div className="col-md-6 mb-4">
-                          <div className="form-outline">
-                            <label
-                              className="form-label"
-                              htmlFor="form3Example2"
-                            >
-                              Last name
-                            </label>
-                            <input
-                              type="text"
-                              id="form3Example2"
-                              className="form-control"
-                            />
-                          </div>
-                        </div>
-                      </div>
-
                       <div className="form-outline mb-4">
                         <label className="form-label" htmlFor="form3Example3">
                           Email address
