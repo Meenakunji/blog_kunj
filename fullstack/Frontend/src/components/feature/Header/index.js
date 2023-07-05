@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
-import DriveFileRenameOutlineTwoToneIcon from "@mui/icons-material/DriveFileRenameOutlineTwoTone";
+import EditIcon from "@mui/icons-material/Edit";
+import LoginIcon from "@mui/icons-material/Login";
+import Logout from "@mui/icons-material/Logout";
+import Settings from "@mui/icons-material/Settings";
 import {
   Avatar,
   Box,
-  Button,
   IconButton,
   ListItemIcon,
   Menu,
@@ -11,34 +12,23 @@ import {
   Tooltip,
   useMediaQuery,
 } from "@mui/material";
-import { useRouter } from "next/router";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import styles from "./style";
-import AuthenticationComponent from "../auth";
-import ToggleThemeBtn from "../../common/TheameBtn";
-import { setTheme } from "../../../redux/slices/layout";
-import { EnhancedSearch } from "../../common/SearchInput";
-import cookie from "js-cookie";
-import LoginIcon from "@mui/icons-material/Login";
-import EditIcon from "@mui/icons-material/Edit";
-import { initWeb3, getSigner } from "../../../../utils/web3";
-import Web3Modal from "web3modal";
-import WalletConnectProvider from "@walletconnect/web3-provider";
 import { googleLogout } from "@react-oauth/google";
-import logout from "../../../../components/Layout/util/logout";
-
-import Divider from "@mui/material/Divider";
-import Typography from "@mui/material/Typography";
-import PersonAdd from "@mui/icons-material/PersonAdd";
-import Settings from "@mui/icons-material/Settings";
-import Logout from "@mui/icons-material/Logout";
+import WalletConnectProvider from "@walletconnect/web3-provider";
+import cookie from "js-cookie";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Web3Modal from "web3modal";
+import { setTheme } from "../../../redux/slices/layout";
+import { setToken } from "../../../redux/slices/user";
+import { EnhancedSearch } from "../../common/SearchInput";
+import AuthenticationComponent from "../auth";
+import styles from "./style";
 
 const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
   const router = useRouter();
   const { theme } = useSelector((state) => state.layout);
-  const { isLoggedIn } = useSelector((state) => state.user);
-  console.log("Print islogiin data=====>>>", isLoggedIn);
+  const { isLoggedIn, userData } = useSelector((state) => state.user);
   const [open, setOpen] = useState(false);
   const [click, setClick] = useState(false);
   const dispatch = useDispatch();
@@ -163,6 +153,16 @@ const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
     }
   }, [isLoggin]);
 
+  const handleLogut = () => {
+    googleLogout();
+    dispatch(
+      setToken({
+        accessToken: null,
+        isLoggedIn: false,
+      })
+    );
+  };
+
   return (
     <Box sx={styles.navbar}>
       <nav
@@ -222,19 +222,6 @@ const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
                   </a>
                 </li>
               ))} */}
-
-              {/* {isLoggedIn && (
-                <li className="nav-item">
-                  <a
-                    className="dropdown-item"
-                    href="#"
-                    style={{ color: "#fff" }}
-                    onClick={() => googleLogout()}
-                  >
-                    Logout
-                  </a>
-                </li>
-              )} */}
             </ul>
             {/* user Profile section */}
             {isLoggedIn ? (
@@ -255,7 +242,21 @@ const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
                       aria-haspopup="true"
                       aria-expanded={open1 ? "true" : undefined}
                     >
-                      <Avatar sx={{ width: 32, height: 32 }}>M</Avatar>
+                      <Avatar sx={{ width: 32, height: 32 }}>
+                        {userData?.picture ? (
+                          <img
+                            src={userData.picture}
+                            alt="Profile Picture"
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              objectFit: "cover",
+                            }}
+                          />
+                        ) : (
+                          "P" // Display a fallback initial if no picture is available
+                        )}
+                      </Avatar>
                     </IconButton>
                   </Tooltip>
                 </Box>
@@ -304,7 +305,7 @@ const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
                     </ListItemIcon>
                     Settings
                   </MenuItem>
-                  <MenuItem onClick={handleClose1}>
+                  <MenuItem onClick={handleLogut}>
                     <ListItemIcon>
                       <Logout fontSize="small" />
                     </ListItemIcon>

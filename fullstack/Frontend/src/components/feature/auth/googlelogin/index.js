@@ -10,8 +10,9 @@ import { useDispatch, useSelector } from "react-redux";
 import loginfunc from "../../../../../components/Layout/util/login";
 import SnackBar from "../../../common/Snackbar";
 import { useRouter } from "next/router";
+import Snackbar from "../../../common/Snackbar";
 
-export default function GoogleSignInButton(props) {
+export default function GoogleSignInButton(handleModalClose) {
   const [, setAccessToken] = useLocalStorage("accessToken", null);
   const dispatch = useDispatch();
   const router = useRouter();
@@ -50,9 +51,9 @@ export default function GoogleSignInButton(props) {
         setSnackbar({
           show: true,
           status: "success",
-          message: "Blog New Entry created successfully.",
+          message: `${res?.data.user.name} login successfully.`,
         });
-
+        handleModalClose(); // Close the login modal
         router.push(`/`);
       },
       onError: (error) => {
@@ -81,7 +82,6 @@ export default function GoogleSignInButton(props) {
   });
 
   const handleSuccess = (credentialResponse) => {
-    console.log("decode======>>>>", credentialResponse?.credential);
     loginGoogle(credentialResponse?.credential);
   };
 
@@ -111,6 +111,7 @@ export default function GoogleSignInButton(props) {
         Continue with google
       </button> */}
       <GoogleLogin onSuccess={handleSuccess} onError={handleFailure} />
+      {snackbar.show ? <Snackbar {...snackbar} onClose={setSnackbar} /> : null}
     </>
   );
 }
