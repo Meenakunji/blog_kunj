@@ -18,9 +18,15 @@ const layoutPersistConfig = {
   storage: storage,
 };
 
+const userPersistConfig = {
+  key: "user",
+  storage: storage,
+  // Add any additional configuration options if needed
+};
+
 const rootReducer = combineReducers({
   layout: persistReducer(layoutPersistConfig, layout),
-  user,
+  user: persistReducer(userPersistConfig, user), // Apply persistReducer to the user slice
 });
 
 const persistedReducer = persistReducer(rootPersistConfig, rootReducer);

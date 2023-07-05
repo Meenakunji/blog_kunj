@@ -7,7 +7,7 @@ import GoogleIcon from "@mui/icons-material/Google";
 import GoogleSignInButton from "../googlelogin";
 import { Box, Button } from "@mui/material";
 
-const LoginComponent = () => {
+const LoginComponent = (handleModalClose) => {
   return (
     <div>
       <section className="">
@@ -76,7 +76,9 @@ const LoginComponent = () => {
                           type="button"
                           className="btn btn-link btn-floating mx-1"
                         >
-                          <GoogleSignInButton />
+                          <GoogleSignInButton
+                            handleModalClose={handleModalClose}
+                          />
                         </button>
                         <button
                           type="button"
