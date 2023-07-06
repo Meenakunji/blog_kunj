@@ -5,7 +5,7 @@ import styles from "./styles";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 
-const SliderHome = ({ videos }) => {
+const SliderHome = ({ sliderVideos }) => {
   const videoRef = useRef(null);
   const sliderRef = useRef(null);
   const speechSynthRef = useRef(null);
@@ -82,7 +82,7 @@ const SliderHome = ({ videos }) => {
   };
 
   const handleSlideChange = (index) => {
-    const currentVideo = videos?.[index];
+    const currentVideo = sliderVideos?.[index];
 
     // Speak the message for the current video
     if (speechSynthRef.current && !speechSynthRef.current.speaking) {
@@ -98,7 +98,7 @@ const SliderHome = ({ videos }) => {
   return (
     <Box sx={styles.sliderSection}>
       <Slider {...settings} ref={sliderRef} beforeChange={handleSlideChange}>
-        {videos?.map((item, index) => {
+        {sliderVideos?.map((item, index) => {
           const isCached = isVideoCached(item?.url);
 
           return (
