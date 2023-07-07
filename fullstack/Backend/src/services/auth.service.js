@@ -3,6 +3,7 @@ const { OAuth2Client } = require("google-auth-library");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { Users } = require("../models");
+const ApiError = require("../utils/ApiError");
 
 const loginWithGoogle = async (token) => {
   try {
@@ -54,6 +55,56 @@ const loginWithGoogle = async (token) => {
   }
 };
 
+/**
+ * Get user by id
+ * @param {ObjectId} id
+ * @returns {Promise<User>}
+ */
+const getUserById = async (id) => {
+  console.log(`User Service -> getUserById ::}`);
+  return (
+    Users.findOne({ _id: id, deletedAt: { $eq: null } })
+      // .populate([{ path: "referralId" }])
+      .exec()
+  );
+};
+
+/**
+ * Get user by email
+ * @param {string} email
+ * @returns {Promise<User>}
+ */
+const getUserByEmail = async (email) => {
+  console.log(`User Service -> getUserByEmail }`);
+  return (
+    Users.findOne({ email })
+      // .populate([{ path: "referralId" }])
+      // .select("-kycDocuments")
+      .exec()
+  );
+};
+
+const updateUserById = async (userId, updateBody) => {
+  console.log(`User Service -> updateUserById ::`);
+  const user = await getUserById(userId);
+  if (!user) {
+    throw new ApiError(httpStatus.NOT_FOUND, "User not found");
+  }
+  if (
+    updateBody.email &&
+    (await Users.isEmailTaken(updateBody.email, userId))
+  ) {
+    throw new ApiError(httpStatus.CONFLICT, "Email already taken");
+  }
+
+  Object.assign(user, updateBody);
+  await user.save();
+  return user;
+};
+
 module.exports = {
   loginWithGoogle,
+  getUserByEmail,
+  // createUserLog,
+  updateUserById,
 };
