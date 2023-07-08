@@ -3,9 +3,11 @@ const { OAuth2Client } = require("google-auth-library");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { Users } = require("../models");
+const {userService} = require("../services")
+const ApiError = require("../utils/ApiError");
+
 
 const loginWithGoogle = async (token) => {
-  try {
     const client = new OAuth2Client(process.env.GOOGLE_CLOUD_CLIENT_ID);
 
     const ticket = await client.verifyIdToken({
@@ -14,44 +16,15 @@ const loginWithGoogle = async (token) => {
     });
 
     const payload = ticket.getPayload();
-    const userid = payload["sub"];
-    // If request specified a G Suite domain:
-    // const domain = payload['hd'];
-
-    if (payload.email_verified) {
-      const user = await Users.findOne({ email: payload.email });
-      if (!user) {
-        await Users.create({
-          name: payload.name,
-          email: payload.email,
-          password: bcrypt.hashSync(payload.sub, 8),
-          picture: payload.picture,
-        });
-        const user = await Users.findOne({ email: payload.email });
-        if (user) {
-          const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-          return {
-            token: token,
-            user: user, // Include the user data in the response
-          };
-        }
-      } else {
-        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-        return {
-          token: token,
-          user: user, // Include the user data in the response
-        };
-      }
-    } else {
-      // Handle unauthorized user
-      return {
-        auth: false,
-        message: "User unauthorized",
-      };
+    if (!payload.email_verified) {
+      throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Email not verified')
     }
-  } catch (error) {
-    console.error(error);
-  }
+    const user = await userService.findUserByEmail( payload.email );
+      if (!user) {
+        return userService.createUser(payload.name, payload.email, payload.picture)
+      } else {
+        return user
+      }  
 };
 
 module.exports = {

@@ -27,18 +27,12 @@ const register = catchAsync(async (req, res) => {
 const loginWithGoogle = catchAsync(async (req, res) => {
   const { id_token } = req.query;
   console.log("Google login api", id_token);
-  const { token, user } = await authService.loginWithGoogle(id_token);
+  const user = await authService.loginWithGoogle(id_token);
 
-  // return res.send({
-  //   auth: true,
-  //   token: token,
-  //   user: user, // Include the user data in the response
-  // });
-
+  const tokens = await tokenService.generateAuthTokens(user);
   return res.status(httpStatus.OK).send({
-    code: httpStatus.OK,
     message: "success",
-    data: { auth: true, token: token, user: user },
+    data: { user: user, tokens: tokens },
   });
 });
 
