@@ -1,16 +1,17 @@
 const httpStatus = require("http-status");
 const catchAsync = require("../utils/catchAsync");
-const { authService } = require("../services");
+const { authService, tokenService } = require("../services");
 
 // for google login
 const loginWithGoogle = catchAsync(async (req, res) => {
   const { id_token } = req.query;
   console.log("Google login api", id_token);
-  const { token, user } = await authService.loginWithGoogle(id_token);
-  res.status(httpStatus.OK).send({
-    code: httpStatus.OK,
+  const user = await authService.loginWithGoogle(id_token);
+
+  const tokens = await tokenService.generateAuthTokens(user);
+  return res.status(httpStatus.OK).send({
     message: "success",
-    data: { auth: true, token: token, user: user },
+    data: { user: user, tokens: tokens },
   });
 });
 

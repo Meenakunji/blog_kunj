@@ -8,9 +8,10 @@ const {
   getNormalizedEmail,
   generateRandomNumber,
 } = require("../utils/utility");
+const {userService} = require("../services")
+
 
 const loginWithGoogle = async (token) => {
-  try {
     const client = new OAuth2Client(process.env.GOOGLE_CLOUD_CLIENT_ID);
 
     const ticket = await client.verifyIdToken({
@@ -19,34 +20,15 @@ const loginWithGoogle = async (token) => {
     });
 
     const payload = ticket.getPayload();
-    const userid = payload.sub;
-
-    if (payload.email_verified) {
-      let user = await Users.findOne({ email: payload.email });
-
-      if (!user) {
-        user = await Users.create({
-          name: payload.name,
-          email: payload.email,
-          password: bcrypt.hashSync(payload.sub, 8),
-          picture: payload.picture,
-        });
-      }
-
-      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-      return {
-        token: token,
-        user: user,
-      };
-    } else {
-      throw new ApiError(httpStatus.UNAUTHORIZED, "User unauthorized");
+    if (!payload.email_verified) {
+      throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Email not verified')
     }
-  } catch (error) {
-    throw new ApiError(
-      httpStatus.INTERNAL_SERVER_ERROR,
-      "Internal Server Error"
-    );
-  }
+    const user = await userService.findUserByEmail( payload.email );
+      if (!user) {
+        return userService.createUser(payload.name, payload.email, payload.picture)
+      } else {
+        return user
+      }  
 };
 
 const getUsername = async (name = "") => {
