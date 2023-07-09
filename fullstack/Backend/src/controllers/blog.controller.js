@@ -30,7 +30,8 @@ const createBlogContent = catchAsync(async (req, res) => {
   );
   try {
     const body = req.body;
-    const data = await blogService.createBlogContent(body);
+    const user = req.user
+    const data = await blogService.createBlogContent(body, user);
     res
       .status(httpStatus.OK)
       .send({ code: httpStatus.OK, message: "success", data: data });
