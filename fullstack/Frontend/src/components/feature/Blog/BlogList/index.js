@@ -8,14 +8,18 @@ import BookmarkAddOutlinedIcon from "@mui/icons-material/BookmarkAddOutlined";
 import BookmarkOutlinedIcon from "@mui/icons-material/BookmarkOutlined";
 import fetcher from "../../../../dataProvider";
 import { useMutation } from "react-query";
+import { useDispatch } from "react-redux";
+import { setParticularBlogContent } from "../../../../redux/slices/user";
 
 export default function BlogContentListComponent({ data }) {
   const router = useRouter();
+  const dispatch = useDispatch();
   const [markedBlogContent, setMarkedBlogContent] = useState(
     data?.isMarkedBlog
   );
 
   const handleBlogContentListPage = (item) => {
+    dispatch(setParticularBlogContent(item));
     const urlSlug = createSlug(item?.user, item?.blogTitle);
     router.push(`/${urlSlug}`);
   };
