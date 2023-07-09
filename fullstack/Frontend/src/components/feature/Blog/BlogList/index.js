@@ -116,10 +116,11 @@ export default function BlogContentListComponent({ data }) {
                     />
                     <Typography variant="p">
                       By {item?.user} -{" "}
-                      {new Date(item?.creatAt).toLocaleDateString("en-US", {
-                        day: "numeric",
-                        month: "long",
+                      {new Date(item?.createdAt).toLocaleDateString("en-US", {
+                        weekday: "long",
                         year: "numeric",
+                        month: "long",
+                        day: "numeric",
                       })}
                     </Typography>
                   </Box>
