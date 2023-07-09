@@ -132,9 +132,17 @@ const updateUserById = async (userId, updateBody) => {
   return user;
 };
 
+const loginWithEmail = async (email, password) => {
+  const user = await userService.findUserByEmail(email)
+  if(!user || !(await user.isPasswordMatch(password)))
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'Invalid email or password')
+  return user
+}
+
 module.exports = {
   loginWithGoogle,
   getUserByEmail,
   createUser,
   updateUserById,
+  loginWithEmail,
 };

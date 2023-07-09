@@ -4,11 +4,6 @@ const httpStatus = require("http-status");
 
 const rTracer = require("cls-rtracer");
 
-const loginUser = async (data) => {
-  console.log("data", data);
-  // const data = await User.findOneandUpdate()
-};
-
 const createUser = async (name, email, picture) => {
   const data = {
     name: name,
@@ -28,6 +23,5 @@ const findUserByEmail = async(email) => {
 
 module.exports = {
   createUser,
-  loginUser,
   findUserByEmail,
 };
