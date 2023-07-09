@@ -49,7 +49,16 @@ const createUser = catchAsync(async (req, res) => {
   }
 });
 
+//email login
+const loginWithEmail = catchAsync(async (req, res) => {
+  const {email, password} = req.body;
+  const user = await authService.loginWithEmail(email, password);
+  const tokens = await tokenService.generateAuthTokens(user);
+
+  res.send({ user, tokens });
+})
 module.exports = {
   loginWithGoogle,
   createUser,
+  loginWithEmail,
 };

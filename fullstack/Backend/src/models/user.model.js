@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
+const bcrypt = require('bcryptjs');
 
 const userSchema = mongoose.Schema(
   {
@@ -73,7 +74,6 @@ userSchema.statics.isNormalizedEmailTaken = async function (
 /**
  * @typedef user
  */
-const user = mongoose.model("user", userSchema);
 
 /**
  * Check if email is taken
@@ -85,5 +85,23 @@ userSchema.statics.isEmailTaken = async function (email, excludeUserId) {
   const user = await this.findOne({ email, _id: { $ne: excludeUserId } });
   return !!user;
 };
+
+userSchema.methods.isPasswordMatch = async function (password) {
+  const user = this;
+  const flag = await bcrypt.compare(password, user.password );
+  return flag
+};
+
+userSchema.pre('save', async function (next) {
+  const user = this;
+  if (user.isModified('password')) {
+    user.password = await bcrypt.hash(user.password, 8);
+  }
+  next();
+});
+
+const user = mongoose.model("user", userSchema);
+
+
 
 module.exports = user;
