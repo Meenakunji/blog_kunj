@@ -34,6 +34,14 @@ const blogContentSchema = mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    codeSnippet: {
+      type: String,
+    },
+    codeLanguage: {
+      type: String,
+      enum: ["html", "css", "python", "java", "php", "javascript", "go"],
+      default: "javascript",
+    },
   },
   {
     timestamps: true,
