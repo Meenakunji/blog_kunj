@@ -1,6 +1,6 @@
 const httpStatus = require("http-status");
 const catchAsync = require("../utils/catchAsync");
-const { authService } = require("../services");
+const { authService, tokenService } = require("../services");
 
 // for google login
 const loginWithGoogle = catchAsync(async (req, res) => {
