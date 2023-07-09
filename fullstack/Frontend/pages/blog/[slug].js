@@ -17,7 +17,7 @@ export default function Index() {
         `http://localhost:3003/v1/blog/content?blogTag=${blogDetails?.blogTag}&page=${page}`
       );
       const { data, totalPages } = response;
-      setBlogContentList((prevList) => [...prevList, ...data]);
+      setBlogContentList(data);
       setTotalPages(totalPages);
     } catch (error) {
       console.log("Error occurred while fetching data:", error);

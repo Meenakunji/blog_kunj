@@ -28,6 +28,8 @@ const createBlogContent = async (body) => {
     description,
     color,
     profilepic,
+    codeSnippet,
+    codeLanguage,
   } = body;
   const data = await BlogContent({
     name,
@@ -38,6 +40,8 @@ const createBlogContent = async (body) => {
     color,
     profilepic,
     user,
+    codeSnippet,
+    codeLanguage,
   });
   const createdContent = await data.save();
 };

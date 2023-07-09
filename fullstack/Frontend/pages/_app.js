@@ -29,12 +29,11 @@ const queryClient = new QueryClient({
 function MyApp({ Component, pageProps }) {
   return (
     <StrictMode>
-      <Head>
-        <Script
-          src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js"
-          strategy="beforeInteractive"
-        />
-      </Head>
+      <Head>{/* Move other head-related components or metadata here */}</Head>
+      <Script
+        src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js"
+        strategy="beforeInteractive"
+      />
       {/* <SessionProvider session={pageProps.session}> */}
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
