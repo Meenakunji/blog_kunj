@@ -8,7 +8,7 @@ const { blogValidation } = require("../../validations");
 const router = express.Router();
 
 router.route("/content").get(VerifyUser,blogController.getBlogContent);
-router.route("/create-blog-content").post(blogController.createBlogContent);
+router.route("/create-blog-content").post(VerifyUser,blogController.createBlogContent);
 
 router
   .route("/create-blog-list")
@@ -17,7 +17,7 @@ router
 // get Blog Type List
 router
   .route("/list")
-  .get(validate(blogValidation.getBlogList), VerifyUser, blogController.getBlogList);
+  .get(validate(blogValidation.getBlogList), blogController.getBlogList);
 
 //create blog
 router.route("/create-blog").post(blogController.createBlog);

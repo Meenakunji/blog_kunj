@@ -12,7 +12,7 @@ const blogContentSchema = mongoose.Schema(
       type: String,
     },
     user: {
-      type: String,
+      type: mongoose.SchemaTypes.ObjectId,
     },
     blogTitle: {
       type: String,

@@ -18,11 +18,10 @@ const getBlogContent = async (Parmas) => {
   return data;
 };
 
-const createBlogContent = async (body) => {
+const createBlogContent = async (body, user) => {
   const {
     name,
     image,
-    user,
     blogTag,
     blogTitle,
     description,
