@@ -7,6 +7,7 @@ import { BlogList } from "../../src/components/feature/Profile/BlogList";
 import { BookMarkBlogList } from "../../src/components/feature/Profile/BookmarkBlogList";
 import UserProfile from "../../src/components/feature/Profile/UserProfile";
 import UserBlog from "../../src/components/feature/Profile/UserBlog";
+import { Divider, Typography } from "@mui/material";
 
 export default function Profile() {
   const [value, setValue] = React.useState(0);
@@ -83,14 +84,44 @@ export default function Profile() {
       )}
       {router?.query?.tab === "blog_list" && (
         <TabPanel value={value} index={1}>
-          <h1>Blog List Tab Content</h1>
-          <BlogList />
+          <Typography
+            variant="h4"
+            style={{ textAlign: "center", marginBottom: "20px" }}
+          >
+            Blog List Tab Content
+          </Typography>
+          <Divider style={{ backgroundColor: "#fff", height: "2px" }} />
+          <Box
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              flexWrap: "wrap",
+              gap: "20px",
+            }}
+          >
+            <BlogList />
+          </Box>
         </TabPanel>
       )}
       {router?.query?.tab === "bookmark_blog_list" && (
         <TabPanel value={value} index={2}>
-          <h1>Bookmark Blog List Tab Content</h1>
-          <BookMarkBlogList />
+          <Typography
+            variant="h4"
+            style={{ textAlign: "center", marginBottom: "20px" }}
+          >
+            Bookmark Blog List Tab Content
+          </Typography>
+          <Divider style={{ backgroundColor: "#fff", height: "2px" }} />
+          <Box
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              flexWrap: "wrap",
+              gap: "20px",
+            }}
+          >
+            <BookMarkBlogList />
+          </Box>
         </TabPanel>
       )}
     </div>
