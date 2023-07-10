@@ -47,4 +47,20 @@ app.use((req, res, next) => {
   next(new ApiError(httpStatus.NOT_FOUND, "Not found"));
 });
 
+// Error handling middleware
+app.use((err, req, res, next) => {
+  // Check if the request accepts JSON responses
+  if (req.accepts("json")) {
+    // Respond with JSON error
+    res.status(err.statusCode || httpStatus.INTERNAL_SERVER_ERROR).json({
+      code: err.statusCode || httpStatus.INTERNAL_SERVER_ERROR,
+      error: err.statusCode,
+      message: err.message || "Internal Server Error",
+    });
+  } else {
+    // Fall back to default error handling behavior (e.g., render HTML error page)
+    next(err);
+  }
+});
+
 module.exports = app;
