@@ -1,15 +1,13 @@
 import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
-import jwt_decode from "jwt-decode";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { useMutation } from "react-query";
-import fetcher from "../../../../dataProvider";
-import { setToken, setUserData } from "../../../../redux/slices/user";
-import useLocalStorage from "../../../../hooks/useLocalStorage";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import loginfunc from "../../../../../components/Layout/util/login";
-import SnackBar from "../../../common/Snackbar";
-import { useRouter } from "next/router";
+import fetcher from "../../../../dataProvider";
+import useLocalStorage from "../../../../hooks/useLocalStorage";
+import { setToken, setUserData } from "../../../../redux/slices/user";
 import Snackbar from "../../../common/Snackbar";
 
 export default function GoogleSignInButton(handleModalClose) {
@@ -28,23 +26,23 @@ export default function GoogleSignInButton(handleModalClose) {
   };
 
   const { mutate: loginGoogle } = useMutation(
-    (id_token) => fetcher.post(`v1/auth/login?id_token=${id_token}`),
+    (id_token) => fetcher.post(`v1/auth/login-google?id_token=${id_token}`),
     {
       onSuccess: (res) => {
-        const accessToken = res.data.token;
+        const accessToken = res?.data?.tokens?.access?.token;
         dispatch(setUserData(res?.data.user));
         loginfunc(
-          res?.data.token,
+          res?.data.tokens?.access?.token,
           res?.data.user.name,
           res?.data.user.email,
           res?.data.user._id
         );
-        // const refreshToken = res.tokens?.refresh?.token;
+        const refreshToken = res?.data?.tokens?.refresh?.token;
         setAccessToken(accessToken);
         dispatch(
           setToken({
             accessToken: accessToken,
-            //  refreshToken: refreshToken,
+            refreshToken: refreshToken,
             isLoggedIn: true,
           })
         );

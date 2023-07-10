@@ -1,5 +1,5 @@
 import axios from "axios";
-// import logout from "../components/Layout/util/logout";
+import logout from "../components/Layout/util/logout";
 // import { API_BASE_URL } from "../src/constant/appConstants";
 let Api = axios.create({
   baseURL: "http://localhost:3003",
@@ -7,16 +7,8 @@ let Api = axios.create({
 });
 
 const getToken = () => {
-  if (
-    typeof window !== "undefined" &&
-    (localStorage.getItem("aToken") || localStorage.getItem("guestAccessToken"))
-  ) {
+  if (typeof window !== "undefined" && localStorage.getItem("aToken")) {
     let token = localStorage.getItem("aToken");
-
-    if (!!!token) {
-      let guestAccesToken = localStorage.getItem("guestAccessToken");
-      return guestAccesToken;
-    }
     return token;
   }
 };
@@ -50,7 +42,7 @@ Api.interceptors.response.use(
       error?.response?.status === 401 ||
       error?.response?.data?.errorCode === 403
     ) {
-      // logout();
+      logout();
     }
 
     return Promise.reject(error);
