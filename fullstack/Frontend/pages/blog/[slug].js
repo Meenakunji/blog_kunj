@@ -1,9 +1,8 @@
-import { Box } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useMutation } from "react-query";
-import fetcher from "../../src/dataProvider";
-import BlogContentListComponent from "../../src/components/feature/Blog/BlogList";
 import { useSelector } from "react-redux";
+import BlogContentListComponent from "../../src/components/feature/Blog/BlogList";
+import fetcher from "../../src/dataProvider";
 
 export default function Index() {
   const [blogContentList, setBlogContentList] = useState([]);

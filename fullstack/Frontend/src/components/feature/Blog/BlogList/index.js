@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import style from "../../Home/style";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
@@ -14,9 +14,7 @@ import { setParticularBlogContent } from "../../../../redux/slices/user";
 export default function BlogContentListComponent({ data }) {
   const router = useRouter();
   const dispatch = useDispatch();
-  const [markedBlogContent, setMarkedBlogContent] = useState(
-    data?.isMarkedBlog
-  );
+  const [markedBlogContent, setMarkedBlogContent] = useState([]);
 
   const handleBlogContentListPage = (item) => {
     dispatch(setParticularBlogContent(item));
@@ -29,7 +27,16 @@ export default function BlogContentListComponent({ data }) {
     (blogId) => fetcher.post(`http://localhost:3003/v1/blog/mark/${blogId}`),
     {
       onSuccess: (resData) => {
-        setMarkedBlogContent(resData?.data?.isMarkedBlog);
+        const marked = resData?.data?.isMarkedBlog;
+        setMarkedBlogContent((prevMarkedBlogContent) => {
+          if (marked) {
+            return [...prevMarkedBlogContent, resData.data];
+          } else {
+            return prevMarkedBlogContent.filter(
+              (blog) => blog._id !== resData.data._id
+            );
+          }
+        });
       },
       onError: (error) => {
         alert(error?.response?.data?.message);
@@ -40,6 +47,12 @@ export default function BlogContentListComponent({ data }) {
   const handleMarkedBlog = (item) => {
     getMarkedBlogContent(item?._id);
   };
+
+  useEffect(() => {
+    // Extract the isMarkedBlog values from the initial data and update the markedBlogContent state
+    const initialMarkedBlogContent = data.filter((item) => item?.isMarkedBlog);
+    setMarkedBlogContent(initialMarkedBlogContent);
+  }, [data]);
 
   return (
     <>
@@ -85,12 +98,15 @@ export default function BlogContentListComponent({ data }) {
               ) + "...",
           },
           { property: "twitter.image", content: "https://jupiterblogger.com/" },
-          // { name: "keywords", content: "jupiter"?.join(",") },
         ]}
       />
       {data &&
-        data?.map((item, index) => {
+        data.map((item, index) => {
           const readingTime = calculateReadingTime(item?.description, 2);
+          const isMarked = markedBlogContent.some(
+            (blog) => blog._id === item._id
+          );
+
           return (
             <div className="col-md-4 mt-3" key={index}>
               <div className="card p-3">
@@ -107,19 +123,23 @@ export default function BlogContentListComponent({ data }) {
                     }}
                   />
                   <Typography variant="h2">{item?.blogTitle}</Typography>
-                  <Box sx={style.userdetails}>
+                  <Box
+                    sx={style.userdetails}
+                    onClick={() => router.push(`/profile?tab=home`)}
+                  >
                     <Box
                       component="img"
-                      src={item?.profilepic}
+                      src={item?.userData?.[0]?.picture}
                       style={{
                         borderRadius: "100px",
                         width: "30px",
                         height: "30px",
                         border: "1px solid #c3c3c3",
+                        cursor: "pointer",
                       }}
                     />
-                    <Typography variant="p">
-                      By {item?.user} -{" "}
+                    <Typography variant="p" style={{ cursor: "pointer" }}>
+                      By {item?.userData?.[0]?.name} -{" "}
                       {new Date(item?.createdAt).toLocaleDateString("en-US", {
                         weekday: "long",
                         year: "numeric",
@@ -160,7 +180,7 @@ export default function BlogContentListComponent({ data }) {
                       onClick={() => handleMarkedBlog(item)}
                       style={{ cursor: "pointer" }}
                     >
-                      {markedBlogContent ? (
+                      {isMarked ? (
                         <BookmarkOutlinedIcon />
                       ) : (
                         <BookmarkAddOutlinedIcon />

@@ -12,6 +12,14 @@ const getBlogContent = async (Parmas) => {
     {
       $match: query,
     },
+    {
+      $lookup: {
+        from: "users",
+        localField: "user",
+        foreignField: "_id",
+        as: "userData",
+      },
+    },
   ];
 
   const data = await BlogContent.aggregate(pipeline);
