@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useMutation } from "react-query";
 import fetcher from "../../../../dataProvider";
@@ -6,6 +7,7 @@ import style from "../../Home/style";
 
 export const BookMarkBlogList = () => {
   const [markedblogList, setMarkedblogList] = useState([]);
+  const router = useRouter();
   // create New ArtistEntery
   const { mutate: getMarkedBlogList } = useMutation(
     () => fetcher.get(`http://localhost:3003/v1/blog/bookmark-blog-list`),
@@ -41,10 +43,13 @@ export const BookMarkBlogList = () => {
                     }}
                   />
                   <Typography variant="h2">{item?.blogTitle}</Typography>
-                  <Box sx={style.userdetails}>
+                  <Box
+                    sx={style.userdetails}
+                    onClick={() => router.push(`/profile?tab=home`)}
+                  >
                     <Box
                       component="img"
-                      src={item?.profilepic}
+                      src={item?.userData?.[0].picture}
                       style={{
                         borderRadius: "100px",
                         width: "30px",
@@ -53,7 +58,7 @@ export const BookMarkBlogList = () => {
                       }}
                     />
                     <Typography variant="p">
-                      By {item?.user} -{" "}
+                      By {item?.userData?.[0]?.name} -{" "}
                       {new Date(item?.creatAt).toLocaleDateString("en-US", {
                         day: "numeric",
                         month: "long",

@@ -33,5 +33,10 @@ router
   .post(validate(blogValidation.blogMarked), blogController.getBlogMarked);
 
 // blog mark
-router.route("/bookmark-blog-list").get(blogController.getBlogMarkedList);
+router
+  .route("/bookmark-blog-list")
+  .get(VerifyUser, blogController.getBlogMarkedList);
+
+/*user blog list */
+router.route("/user-blog-list").get(VerifyUser, blogController.getUserBlogList);
 module.exports = router;
