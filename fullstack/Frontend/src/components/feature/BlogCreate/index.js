@@ -76,7 +76,6 @@ const BlogCreate = () => {
     BlogContentDataObj.codeLanguage = detectedLanguage;
 
     BlogContentDataObj.user = "jupiter";
-    debugger;
     getCreateBlogContentData(BlogContentDataObj);
   };
 
