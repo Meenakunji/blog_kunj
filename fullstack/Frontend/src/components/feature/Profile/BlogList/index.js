@@ -1,18 +1,24 @@
 import { Box, Typography } from "@mui/material";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useMutation } from "react-query";
+import { useSelector } from "react-redux";
 import fetcher from "../../../../dataProvider";
 import style from "../../Home/style";
 
 export const BlogList = () => {
-  const [markedblogList, setMarkedblogList] = useState([]);
+  const [userBlogList, setUserBlogList] = useState([]);
+  const router = useRouter();
+  const { userData } = useSelector((state) => state.user);
   // create New ArtistEntery
   const { mutate: getMarkedBlogList } = useMutation(
-    () => fetcher.get(`http://localhost:3003/v1/blog/bookmark-blog-list`),
+    () =>
+      fetcher.get(
+        `http://localhost:3003/v1/blog/user-blog-list?userId=${userData?._id}`
+      ),
     {
       onSuccess: ({ data }) => {
-        setMarkedblogList(data);
-        console.log("data =====>>>", data);
+        setUserBlogList(data);
       },
       onError: (error) => {
         alert(error?.response?.data?.message);
@@ -24,8 +30,8 @@ export const BlogList = () => {
   }, []);
   return (
     <>
-      {markedblogList &&
-        markedblogList.map((item, index) => {
+      {userBlogList &&
+        userBlogList.map((item, index) => {
           return (
             <div className="col-md-4 mt-3" key={index}>
               <div className="card p-3">
@@ -42,10 +48,13 @@ export const BlogList = () => {
                     }}
                   />
                   <Typography variant="h2">{item?.blogTitle}</Typography>
-                  <Box sx={style.userdetails}>
+                  <Box
+                    sx={style.userdetails}
+                    onClick={() => router.push(`/profile?tab=home`)}
+                  >
                     <Box
                       component="img"
-                      src={item?.profilepic}
+                      src={item?.userData?.[0].picture}
                       style={{
                         borderRadius: "100px",
                         width: "30px",
@@ -54,7 +63,7 @@ export const BlogList = () => {
                       }}
                     />
                     <Typography variant="p">
-                      By {item?.user} -{" "}
+                      By {item?.userData?.[0]?.name} -{" "}
                       {new Date(item?.creatAt).toLocaleDateString("en-US", {
                         day: "numeric",
                         month: "long",

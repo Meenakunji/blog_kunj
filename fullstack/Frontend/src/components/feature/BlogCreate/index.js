@@ -1,5 +1,5 @@
+import React, { useEffect, useRef, useState } from "react";
 import { Box, Button } from "@mui/material";
-import React, { useState } from "react";
 import style from "./styles";
 import HomeBanner from "../../common/HomeBanner";
 import { useForm } from "react-hook-form";
@@ -9,6 +9,17 @@ import { useMutation } from "react-query";
 import fetcher from "../../../dataProvider";
 import SnackBar from "../../common/Snackbar";
 import { useRouter } from "next/router";
+import hljs from "highlight.js/lib/core";
+import "highlight.js/styles/monokai-sublime.css";
+import javascript from "highlight.js/lib/languages/javascript";
+import python from "highlight.js/lib/languages/python";
+import go from "highlight.js/lib/languages/go";
+import java from "highlight.js/lib/languages/java";
+
+hljs.registerLanguage("javascript", javascript);
+hljs.registerLanguage("python", python);
+hljs.registerLanguage("go", go);
+hljs.registerLanguage("java", java);
 
 const BlogCreate = () => {
   const router = useRouter();
@@ -27,7 +38,14 @@ const BlogCreate = () => {
     message: "",
   });
 
-  // create New ArtistEntery
+  const codeSnippetRef = useRef(null);
+
+  useEffect(() => {
+    if (codeSnippetRef.current) {
+      hljs.highlightElement(codeSnippetRef.current);
+    }
+  }, []);
+
   const { mutate: getCreateBlogContentData } = useMutation(
     (BlogContentDataObj) =>
       fetcher.post(
@@ -51,6 +69,13 @@ const BlogCreate = () => {
 
   const handleCreateBlogContentEntry = () => {
     let BlogContentDataObj = getValues();
+    const codeSnippetValue = BlogContentDataObj.codeSnippet;
+    const detectedLanguage = hljs.highlightAuto(codeSnippetValue).language;
+
+    // Add the detected language to the request body
+    BlogContentDataObj.codeLanguage = detectedLanguage;
+
+    BlogContentDataObj.user = "jupiter";
     getCreateBlogContentData(BlogContentDataObj);
   };
 
@@ -149,17 +174,36 @@ const BlogCreate = () => {
                   />
                 </Box>
               </Box>
+              <Box sx={style.formRowSection}>
+                <Box sx={style.formgroup}>
+                  <TextArea
+                    label="Code Snippet"
+                    name={"codeSnippet"}
+                    ref={codeSnippetRef}
+                    register={register}
+                    errors={errors}
+                  />
+                  {errors?.codeSnippet && (
+                    <span
+                      style={{
+                        color: "red",
+                        position: "absolute",
+                        bottom: "auto",
+                        left: "0",
+                      }}
+                    >
+                      {errors?.codeSnippet?.message}
+                    </span>
+                  )}
+                </Box>
+              </Box>
               <Box sx={style.buttongroup}>
-                <Button onClick={() => handleCreateBlogContentEntry()}>
-                  Save
-                </Button>
+                <Button onClick={handleCreateBlogContentEntry}>Save</Button>
               </Box>
             </form>
           </Box>
         </div>
-        {snackbar.show ? (
-          <SnackBar {...snackbar} onClose={setSnackbar} />
-        ) : null}
+        {snackbar.show && <SnackBar {...snackbar} onClose={setSnackbar} />}
       </div>
     </>
   );

@@ -5,6 +5,9 @@ import Tab from "@mui/material/Tab";
 import { useRouter } from "next/router";
 import { BlogList } from "../../src/components/feature/Profile/BlogList";
 import { BookMarkBlogList } from "../../src/components/feature/Profile/BookmarkBlogList";
+import UserProfile from "../../src/components/feature/Profile/UserProfile";
+import UserBlog from "../../src/components/feature/Profile/UserBlog";
+import { Divider, Typography } from "@mui/material";
 
 export default function Profile() {
   const [value, setValue] = React.useState(0);
@@ -44,22 +47,7 @@ export default function Profile() {
   }, [router.query]);
 
   return (
-    <Box sx={{ width: "100%", fontFamily: "Arial, sans-serif" }}>
-      <div style={{ marginBottom: "20px" }}>
-        <h2>User Details:</h2>
-        <p>
-          <strong>Name:</strong> {userDetails.name}
-        </p>
-        <p>
-          <strong>Email:</strong> {userDetails.email}
-        </p>
-        <p>
-          <strong>Location:</strong> {userDetails.location}
-        </p>
-        <p>
-          <strong>Bio:</strong> {userDetails.bio}
-        </p>
-      </div>
+    <div className="container">
       <Tabs
         value={value}
         onChange={handleChange}
@@ -74,30 +62,73 @@ export default function Profile() {
         <Tab label="Blog List" sx={{ marginLeft: "20px" }} />
         <Tab label="Bookmark Blog List" sx={{ marginLeft: "20px" }} />
       </Tabs>
-      <Box>
-        {router?.query?.tab === "home" && (
-          <TabPanel value={value} index={0}>
-            <h1>Home Tab Content</h1>
-          </TabPanel>
-        )}
-        {router?.query?.tab === "blog_list" && (
-          <TabPanel value={value} index={1}>
-            <h1>Blog List Tab Content</h1>
+
+      {router?.query?.tab === "home" && (
+        <TabPanel value={value} index={0}>
+          <div className="row">
+            <div className="col-md-9 mx-auto">
+              <Box
+                style={{
+                  borderColor: "#1e1e1e",
+                  backgroundColor: "#282828",
+                  padding: "30px",
+                  overflow: "hidden",
+                }}
+              >
+                <UserProfile />
+                <UserBlog />
+              </Box>
+            </div>
+          </div>
+        </TabPanel>
+      )}
+      {router?.query?.tab === "blog_list" && (
+        <TabPanel value={value} index={1}>
+          <Typography
+            variant="h4"
+            style={{ textAlign: "center", marginBottom: "20px" }}
+          >
+            Blog List Tab Content
+          </Typography>
+          <Divider style={{ backgroundColor: "#fff", height: "2px" }} />
+          <Box
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              flexWrap: "wrap",
+              gap: "20px",
+            }}
+          >
             <BlogList />
-          </TabPanel>
-        )}
-        {router?.query?.tab === "bookmark_blog_list" && (
-          <TabPanel value={value} index={2}>
-            <h1>Bookmark Blog List Tab Content</h1>
+          </Box>
+        </TabPanel>
+      )}
+      {router?.query?.tab === "bookmark_blog_list" && (
+        <TabPanel value={value} index={2}>
+          <Typography
+            variant="h4"
+            style={{ textAlign: "center", marginBottom: "20px" }}
+          >
+            Bookmark Blog List Tab Content
+          </Typography>
+          <Divider style={{ backgroundColor: "#fff", height: "2px" }} />
+          <Box
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              flexWrap: "wrap",
+              gap: "20px",
+            }}
+          >
             <BookMarkBlogList />
-          </TabPanel>
-        )}
-      </Box>
-    </Box>
+          </Box>
+        </TabPanel>
+      )}
+    </div>
   );
 }
 
 function TabPanel(props) {
   const { children, value, index } = props;
-  return <div>{value === index && <div>{children}</div>}</div>;
+  return <>{value === index && <>{children}</>}</>;
 }

@@ -12,7 +12,7 @@ const blogContentSchema = mongoose.Schema(
       type: String,
     },
     user: {
-      type: String,
+      type: mongoose.SchemaTypes.ObjectId,
     },
     blogTitle: {
       type: String,
@@ -33,6 +33,14 @@ const blogContentSchema = mongoose.Schema(
     isMarkedBlog: {
       type: Boolean,
       default: false,
+    },
+    codeSnippet: {
+      type: String,
+    },
+    codeLanguage: {
+      type: String,
+      enum: ["html", "css", "python", "java", "php", "javascript", "go"],
+      default: "javascript",
     },
   },
   {

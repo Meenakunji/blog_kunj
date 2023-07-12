@@ -5,7 +5,7 @@ const catchAsync = require("../utils/catchAsync");
 const blogService = require("../services/blog.service");
 const rTracer = require("cls-rtracer");
 const { paginateQuery } = require("../utils/utility");
-const { objectId } = require("../validations/custom.validation");
+const { ObjectId } = require("mongodb");
 
 const getBlogContent = catchAsync(async (req, res) => {
   console.log(`getBlogContent Controller -> getBlogContent :: ${rTracer.id()}`);
@@ -30,7 +30,8 @@ const createBlogContent = catchAsync(async (req, res) => {
   );
   try {
     const body = req.body;
-    const data = await blogService.createBlogContent(body);
+    const user = req.user;
+    const data = await blogService.createBlogContent(body, user);
     res
       .status(httpStatus.OK)
       .send({ code: httpStatus.OK, message: "success", data: data });
@@ -120,7 +121,7 @@ const getBlogMarked = catchAsync(async (req, res) => {
   }
 });
 
-const getBlogMarkedList = catchAsync (async (req, res)=> {
+const getBlogMarkedList = catchAsync(async (req, res) => {
   try {
     const data = await blogService.getBlogMarkedList();
     res
@@ -134,7 +135,26 @@ const getBlogMarkedList = catchAsync (async (req, res)=> {
     );
     return {};
   }
-})
+});
+
+const getUserBlogList = catchAsync(async (req, res) => {
+  let filter = {
+    user: new ObjectId(req.query.userId),
+  };
+  try {
+    const data = await blogService.getUserBlogList(filter);
+    res
+      .status(httpStatus.OK)
+      .send({ code: httpStatus.OK, message: "success", data: data });
+  } catch (error) {
+    console.log(
+      `Exception :: API getUserBlogList -> getUserBlogList -> ${
+        error.message
+      } :: ${rTracer.id()}`
+    );
+    return {};
+  }
+});
 
 module.exports = {
   getBlogContent,
@@ -144,4 +164,5 @@ module.exports = {
   uploadFiles,
   getBlogMarked,
   getBlogMarkedList,
+  getUserBlogList,
 };

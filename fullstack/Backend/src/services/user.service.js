@@ -1,19 +1,27 @@
-const { Artists } = require("../models");
+const { Users } = require("../models");
+const ApiError = require("../utils/ApiError");
+const httpStatus = require("http-status");
 
 const rTracer = require("cls-rtracer");
 
-const getArtists = async () => {
-  const data = await Artists.find().lean();
-  const newData = [];
-  return newData;
-};
+const createUser = async (name, email, picture) => {
+  const data = {
+    name: name,
+    email: email,
+    picture: picture
+  }
+  return Users.create(data)
+}
 
-const loginUser = async (data) => {
-  console.log("data", data);
-  // const data = await User.findOneandUpdate()
-};
+const findUserByEmail = async(email) => {
+  if(email){
+    const user = await Users.findOne({email: email})
+    return user
+  }
+  return new ApiError(httpStatus.INTERNAL_SERVER_ERROR, "Email not found")
+}
 
 module.exports = {
-  getArtists,
-  loginUser,
+  createUser,
+  findUserByEmail,
 };

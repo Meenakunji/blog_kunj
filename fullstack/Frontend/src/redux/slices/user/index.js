@@ -18,6 +18,7 @@ const initialState = {
   artistID: null,
   creatorID: null,
   blogDetails: null,
+  particularBlogContent: null,
 };
 
 const user = createSlice({
@@ -53,6 +54,9 @@ const user = createSlice({
     setBlogDetails: (state, action) => {
       state.blogDetails = action.payload;
     },
+    setParticularBlogContent: (state, action) => {
+      state.particularBlogContent = action.payload;
+    },
   },
 });
 
@@ -64,6 +68,7 @@ export const {
   setArtistID,
   setCreatorID,
   setBlogDetails,
+  setParticularBlogContent,
 } = user.actions;
 
 export default user.reducer;

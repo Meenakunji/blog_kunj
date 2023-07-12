@@ -1,9 +1,8 @@
-import { Box } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useMutation } from "react-query";
-import fetcher from "../../src/dataProvider";
-import BlogContentListComponent from "../../src/components/feature/Blog/BlogList";
 import { useSelector } from "react-redux";
+import BlogContentListComponent from "../../src/components/feature/Blog/BlogList";
+import fetcher from "../../src/dataProvider";
 
 export default function Index() {
   const [blogContentList, setBlogContentList] = useState([]);
@@ -17,7 +16,7 @@ export default function Index() {
         `http://localhost:3003/v1/blog/content?blogTag=${blogDetails?.blogTag}&page=${page}`
       );
       const { data, totalPages } = response;
-      setBlogContentList((prevList) => [...prevList, ...data]);
+      setBlogContentList(data);
       setTotalPages(totalPages);
     } catch (error) {
       console.log("Error occurred while fetching data:", error);

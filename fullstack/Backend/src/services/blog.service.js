@@ -12,22 +12,31 @@ const getBlogContent = async (Parmas) => {
     {
       $match: query,
     },
+    {
+      $lookup: {
+        from: "users",
+        localField: "user",
+        foreignField: "_id",
+        as: "userData",
+      },
+    },
   ];
 
   const data = await BlogContent.aggregate(pipeline);
   return data;
 };
 
-const createBlogContent = async (body) => {
+const createBlogContent = async (body, user) => {
   const {
     name,
     image,
-    user,
     blogTag,
     blogTitle,
     description,
     color,
     profilepic,
+    codeSnippet,
+    codeLanguage,
   } = body;
   const data = await BlogContent({
     name,
@@ -38,6 +47,8 @@ const createBlogContent = async (body) => {
     color,
     profilepic,
     user,
+    codeSnippet,
+    codeLanguage,
   });
   const createdContent = await data.save();
 };
@@ -111,6 +122,14 @@ const getBlogMarkedList = async () => {
       },
     },
     {
+      $lookup: {
+        from: "users",
+        localField: "user",
+        foreignField: "_id",
+        as: "userData",
+      },
+    },
+    {
       $project: {
         name: 1,
         blogTag: 1,
@@ -120,6 +139,7 @@ const getBlogMarkedList = async () => {
         blogTitle: 1,
         profilepic: 1,
         color: 1,
+        userData: 1,
       },
     },
   ];
@@ -137,6 +157,48 @@ const getBlogMarkedList = async () => {
   }
 };
 
+const getUserBlogList = async (filter) => {
+  const pipeline = [
+    {
+      $match: {
+        user: filter.user,
+      },
+    },
+    {
+      $lookup: {
+        from: "users",
+        localField: "user",
+        foreignField: "_id",
+        as: "userData",
+      },
+    },
+    {
+      $project: {
+        name: 1,
+        blogTag: 1,
+        //  user: 1,
+        image: 1,
+        description: 1,
+        blogTitle: 1,
+        profilepic: 1,
+        color: 1,
+        userData: 1,
+        creatAt: 1,
+        isMarkedBlog: 1,
+      },
+    },
+  ];
+
+  let data = [];
+
+  try {
+    data = await BlogContent.aggregate(pipeline);
+    return data;
+  } catch (error) {
+    console.error("Error fetching marked blog data:", error);
+  }
+};
+
 module.exports = {
   getBlogContent,
   createBlogContent,
@@ -144,4 +206,5 @@ module.exports = {
   getBlogList,
   getBlogMarked,
   getBlogMarkedList,
+  getUserBlogList,
 };

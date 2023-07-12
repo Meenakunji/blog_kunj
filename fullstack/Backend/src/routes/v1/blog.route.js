@@ -3,16 +3,16 @@ const multer = require("multer");
 const upload = multer({ dest: "tmp/csv/" });
 const { blogController } = require("../../controllers");
 const { validate } = require("../../middlewares/validate");
+const { VerifyUser } = require("../../middlewares/api.middleware");
 const { blogValidation } = require("../../validations");
 const router = express.Router();
 
-router.route("/content").get(blogController.getBlogContent);
-router.route("/create-blog-content").post(blogController.createBlogContent);
-
+router.route("/content").get(VerifyUser, blogController.getBlogContent);
 router
-  .route("/create-blog-list")
-  //   .post(validate(blogValidation.createBlogList), blogController.createBlog);
-  .post(blogController.createBlog);
+  .route("/create-blog-content")
+  .post(VerifyUser, blogController.createBlogContent);
+
+router.route("/create-blog-list").post(blogController.createBlog);
 
 // get Blog Type List
 router
@@ -33,5 +33,10 @@ router
   .post(validate(blogValidation.blogMarked), blogController.getBlogMarked);
 
 // blog mark
-router.route("/bookmark-blog-list").get(blogController.getBlogMarkedList);
+router
+  .route("/bookmark-blog-list")
+  .get(VerifyUser, blogController.getBlogMarkedList);
+
+/*user blog list */
+router.route("/user-blog-list").get(VerifyUser, blogController.getUserBlogList);
 module.exports = router;
