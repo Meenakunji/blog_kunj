@@ -28,6 +28,10 @@ const AuthenticationComponent = ({ open, handleModalClose }) => {
     };
   }, [handleModalClose]);
 
+  const toggleDivs = () => {
+    setIsLoginOpen(!isLoginOpen);
+  };
+
   return (
     <>
       <Modal
@@ -68,23 +72,105 @@ const AuthenticationComponent = ({ open, handleModalClose }) => {
                       </div>
                     </div>
                   </div>
-                  {isLoginOpen ? (
-                    <SignupComponent
-                      handleLoginFlowwithUser={handleLoginFlowwithUser}
-                      handleModalClose={handleModalClose}
-                      toggleSnackbar={(val) => setSnackbar(val)}
-                      setIsLoginOpen={setIsLoginOpen}
-                      setIsLoginandSignupModal={setIsLoginandSignupModal}
-                    />
-                  ) : (
-                    <LoginComponent
-                      handleSignupwithnewuser={handleSignupwithnewuser}
-                      handleModalClose={handleModalClose}
-                      toggleSnackbar={(val) => setSnackbar(val)}
-                      setIsLoginOpen={setIsLoginOpen}
-                      setIsLoginandSignupModal={setIsLoginandSignupModal}
-                    />
-                  )}
+
+                  <div class="col-lg-6 col-md-12 form-info">
+                    <div class="login-inner-form">
+                      {isLoginOpen ? (
+                        <SignupComponent
+                          handleLoginFlowwithUser={handleLoginFlowwithUser}
+                          handleModalClose={handleModalClose}
+                          toggleSnackbar={(val) => setSnackbar(val)}
+                          setIsLoginOpen={setIsLoginOpen}
+                          setIsLoginandSignupModal={setIsLoginandSignupModal}
+                        />
+                      ) : (
+                        <LoginComponent
+                          handleSignupwithnewuser={handleSignupwithnewuser}
+                          handleModalClose={handleModalClose}
+                          toggleSnackbar={(val) => setSnackbar(val)}
+                          setIsLoginOpen={setIsLoginOpen}
+                          setIsLoginandSignupModal={setIsLoginandSignupModal}
+                        />
+                      )}
+
+                      {isLoginOpen ? (
+                        <Box>
+                          <div className="checkbox form-group form-box">
+                            <div class="form-check checkbox-theme">
+                              <input
+                                class="form-check-input"
+                                type="checkbox"
+                                value=""
+                                id="rememberMe"
+                              />
+                              <label class="form-check-label" for="rememberMe">
+                                Remember me
+                              </label>
+                              <a href="forgot-password-2.html">
+                                Forgot Password
+                              </a>
+                            </div>
+                          </div>
+                          <div className="form-group mb-0">
+                            <button
+                              type="submit"
+                              class="btn-md btn-theme w-100"
+                            >
+                              Login
+                            </button>
+                          </div>
+                          <p class="text">
+                            Don't have an account?
+                            <a href="#" onClick={toggleDivs}>
+                              {" "}
+                              Register here
+                            </a>
+                          </p>
+                          <div className="loginSection">
+                            <button>
+                              <img src="/images/home/new-google.svg" alt="" />
+                              Google
+                            </button>
+                            <button>
+                              <img src="/images/home/email.svg" alt="" />
+                              Email
+                            </button>
+                          </div>
+                        </Box>
+                      ) : (
+                        <Box>
+                          <div class="checkbox form-group form-box">
+                            <div class="form-check checkbox-theme">
+                              <input
+                                class="form-check-input"
+                                type="checkbox"
+                                value=""
+                                id="rememberMe"
+                              />
+                              <label class="form-check-label" for="rememberMe">
+                                I agree to the <a href="#">terms of service</a>
+                              </label>
+                            </div>
+                          </div>
+                          <div class="form-group mb-0">
+                            <button
+                              type="submit"
+                              class="btn-md btn-theme w-100"
+                            >
+                              Sign Up
+                            </button>
+                          </div>
+                          <p class="text">
+                            Already a member?
+                            <a href="#" onClick={toggleDivs}>
+                              {" "}
+                              Login here
+                            </a>
+                          </p>
+                        </Box>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
