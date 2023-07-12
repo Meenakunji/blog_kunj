@@ -1,198 +1,61 @@
 import React from "react";
+import { useState } from "react";
+
+// import FacebookIcon from "@mui/icons-material/Facebook";
+// import InstagramIcon from "@mui/icons-material/Instagram";
+// import TwitterIcon from "@mui/icons-material/Twitter";
+// import GoogleIcon from "@mui/icons-material/Google";
+// import GoogleSignInButton from "../googlelogin";
+// import { Box, Button } from "@mui/material";
+
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import EmailIcon from "@mui/icons-material/Email";
+import LockIcon from "@mui/icons-material/Lock";
 
 const SignupComponent = () => {
   return (
-    <div>
-      <section className="background-radial-gradient overflow-hidden">
-        <style>
-          {`
-          .background-radial-gradient {
-            background-color: hsl(218, 41%, 15%);
-            background-image: radial-gradient(650px circle at 0% 0%,
-                hsl(218, 41%, 35%) 15%,
-                hsl(218, 41%, 30%) 35%,
-                hsl(218, 41%, 20%) 75%,
-                hsl(218, 41%, 19%) 80%,
-                transparent 100%),
-              radial-gradient(1250px circle at 100% 100%,
-                hsl(218, 41%, 45%) 15%,
-                hsl(218, 41%, 30%) 35%,
-                hsl(218, 41%, 20%) 75%,
-                hsl(218, 41%, 19%) 80%,
-                transparent 100%);
-          }
+    <div class="form-section">
+      <div class="logo clearfix">
+        <a href="login-20.html">
+          <img src="https://i.postimg.cc/3wgSvKbP/bloggerlogo.png" alt="logo" />
+        </a>
+      </div>
+      <h3>Create An Cccount</h3>
 
-          #radius-shape-1 {
-            height: 220px;
-            width: 220px;
-            top: -60px;
-            left: -130px;
-            background: radial-gradient(#44006b, #ad1fff);
-            overflow: hidden;
-          }
+      <form action="#" method="GET">
+        <div class="form-group form-box">
+          <input
+            type="text"
+            name="name"
+            class="form-control"
+            placeholder="Full Name"
+            aria-label="Full Name"
+          />
 
-          #radius-shape-2 {
-            border-radius: 38% 62% 63% 37% / 70% 33% 67% 30%;
-            bottom: -60px;
-            right: -110px;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(#44006b, #ad1fff);
-            overflow: hidden;
-          }
-
-          .bg-glass {
-            background-color: hsla(0, 0%, 100%, 0.9) !important;
-            backdrop-filter: saturate(200%) blur(25px);
-          }
-          `}
-        </style>
-
-        <div className="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
-          <div className="row gx-lg-5 align-items-center mb-5">
-            <div className="col-lg-6 mb-5 mb-lg-0" style={{ zIndex: 10 }}>
-              <h1
-                className="my-5 display-5 fw-bold ls-tight"
-                style={{ color: "hsl(218, 81%, 95%)" }}
-              >
-                The best offer <br />
-                <span style={{ color: "hsl(218, 81%, 75%)" }}>
-                  for your business
-                </span>
-              </h1>
-              <p
-                className="mb-4 opacity-70"
-                style={{ color: "hsl(218, 81%, 85%)" }}
-              >
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Temporibus, expedita iusto veniam atque, magni tempora mollitia
-                dolorum consequatur nulla, neque debitis eos reprehenderit quasi
-                ab ipsum nisi dolorem modi. Quos?
-              </p>
-            </div>
-
-            <div className="col-lg-6 mb-5 mb-lg-0 position-relative">
-              <div
-                id="radius-shape-1"
-                className="position-absolute rounded-circle shadow-5-strong"
-              ></div>
-              <div
-                id="radius-shape-2"
-                className="position-absolute shadow-5-strong"
-              ></div>
-
-              <div className="card bg-glass">
-                <div className="card-body px-4 py-5 px-md-5">
-                  <form>
-                    <div className="row">
-                      <div className="col-md-6 mb-4">
-                        <div className="form-outline">
-                          <input
-                            type="text"
-                            id="form3Example1"
-                            className="form-control"
-                          />
-                          <label className="form-label" htmlFor="form3Example1">
-                            First name
-                          </label>
-                        </div>
-                      </div>
-                      <div className="col-md-6 mb-4">
-                        <div className="form-outline">
-                          <input
-                            type="text"
-                            id="form3Example2"
-                            className="form-control"
-                          />
-                          <label className="form-label" htmlFor="form3Example2">
-                            Last name
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="form-outline mb-4">
-                      <input
-                        type="email"
-                        id="form3Example3"
-                        className="form-control"
-                      />
-                      <label className="form-label" htmlFor="form3Example3">
-                        Email address
-                      </label>
-                    </div>
-
-                    <div className="form-outline mb-4">
-                      <input
-                        type="password"
-                        id="form3Example4"
-                        className="form-control"
-                      />
-                      <label className="form-label" htmlFor="form3Example4">
-                        Password
-                      </label>
-                    </div>
-
-                    <div className="form-check d-flex justify-content-center mb-4">
-                      <input
-                        className="form-check-input me-2"
-                        type="checkbox"
-                        value=""
-                        id="form2Example33"
-                        checked
-                      />
-                      <label
-                        className="form-check-label"
-                        htmlFor="form2Example33"
-                      >
-                        Subscribe to our newsletter
-                      </label>
-                    </div>
-
-                    <button
-                      type="submit"
-                      className="btn btn-primary btn-block mb-4"
-                    >
-                      Sign up
-                    </button>
-
-                    <div className="text-center">
-                      <p>or sign up with:</p>
-                      <button
-                        type="button"
-                        className="btn btn-link btn-floating mx-1"
-                      >
-                        <i className="fab fa-facebook-f"></i>
-                      </button>
-
-                      <button
-                        type="button"
-                        className="btn btn-link btn-floating mx-1"
-                      >
-                        <i className="fab fa-google"></i>
-                      </button>
-
-                      <button
-                        type="button"
-                        className="btn btn-link btn-floating mx-1"
-                      >
-                        <i className="fab fa-twitter"></i>
-                      </button>
-
-                      <button
-                        type="button"
-                        className="btn btn-link btn-floating mx-1"
-                      >
-                        <i className="fab fa-github"></i>
-                      </button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
+          <AccountCircleIcon />
         </div>
-      </section>
+        <div class="form-group form-box">
+          <input
+            type="email"
+            name="email"
+            class="form-control"
+            placeholder="Email Address"
+            aria-label="Email Address"
+          />
+          <EmailIcon />
+        </div>
+        <div class="form-group form-box">
+          <input
+            type="password"
+            name="password"
+            class="form-control"
+            autocomplete="off"
+            placeholder="Password"
+            aria-label="Password"
+          />
+          <LockIcon />
+        </div>
+      </form>
     </div>
   );
 };

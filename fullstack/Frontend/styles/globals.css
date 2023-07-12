@@ -9,7 +9,9 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+
 }
+
 
 * {
   box-sizing: border-box;
@@ -61,6 +63,7 @@ p {
   position: relative;
   border-radius: 5px;
   z-index: 0;
+  height: 90vh;
 }
 
 .juperterLogin .social-button:focus::after,
@@ -85,7 +88,7 @@ p {
 .juperterLogin .form-info {
   justify-content: center;
   align-items: center;
-  padding: 50px 30px;
+  padding: 30px 30px;
 }
 
 .juperterLogin .social-button::after {
@@ -113,6 +116,11 @@ p {
   margin-bottom: 20px;
 }
 
+.welcomeHeading p {
+  margin-bottom: 25px;
+  font-size: 15px;
+  color: #000;
+}
 .juperterLogin p {
   margin-bottom: 25px;
   font-size: 15px;
@@ -131,6 +139,10 @@ p {
 
 .login-inner-form {
   width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .juperterLogin .login-inner-form .form-box {
@@ -140,12 +152,12 @@ p {
 }
 
 .juperterLogin .login-inner-form .form-control {
-  font-size: 16px;
+  font-size: 14px;
   outline: none;
   color: #535353;
   border-radius: 100px;
   border: 1px solid #d9d9d9;
-  padding: 14.5px 45px 14.5px 20px;
+  padding: 12px 45px 12px 20px;
 }
 
 .juperterLogin .login-inner-form .form-box i {
@@ -157,13 +169,16 @@ p {
 }
 
 .juperterLogin .login-inner-form .form-check {
-  float: left;
-  margin-bottom: 0;
-  padding-left: 0;
+display: flex;
+justify-content: center;
+color: #535353;
+gap: 10px;
+align-items: center;
+font-size: 14px;
 }
 
 .juperterLogin .login-inner-form .checkbox a {
-  font-size: 16px;
+  font-size: 14px;
   color: #535353;
   float: right;
   margin-left: 3px;
@@ -178,12 +193,23 @@ p {
 
 .juperterLogin .login-inner-form .form-box svg {
   position: absolute;
-  top: 17px;
+  top: 14px;
   right: 20px;
-  font-size: 23px;
+  font-size: 18px;
   color: #969696;
 }
 
+.juperterLogin .text a {
+  color: #5c3f22;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+}
+.juperterLogin .text{
+    color: #5c3f22;
+    text-align: center;
+    margin-top: 10px;
+}
 .juperterLogin .form-section .text a {
   color: #5c3f22;
   text-decoration: none;
@@ -210,7 +236,7 @@ p {
 }
 
 .juperterLogin .login-inner-form .form-group {
-  margin-bottom: 25px;
+  margin-bottom: 15px;
 }
 
 .loginSection {
