@@ -22,7 +22,9 @@ const createUser = catchAsync(async (req, res) => {
     const checkUser = await authService.getUserByEmail(req.body.email);
     console.log("Promptn console check user ===>>>", checkUser);
     if (checkUser) {
-      return res.status(httpStatus.CONFLICT).send({ data: checkUser });
+      return res
+        .status(httpStatus.OK)
+        .send({ code: httpStatus.OK, message: "success", data: checkUser });
     }
 
     let user;
@@ -51,12 +53,12 @@ const createUser = catchAsync(async (req, res) => {
 
 //email login
 const loginWithEmail = catchAsync(async (req, res) => {
-  const {email, password} = req.body;
+  const { email, password } = req.body;
   const user = await authService.loginWithEmail(email, password);
   const tokens = await tokenService.generateAuthTokens(user);
 
   res.send({ user, tokens });
-})
+});
 module.exports = {
   loginWithGoogle,
   createUser,

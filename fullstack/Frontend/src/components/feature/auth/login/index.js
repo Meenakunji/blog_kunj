@@ -19,9 +19,14 @@ const LoginComponent = () => {
   });
 
   const [passwordShown, setPasswordShown] = useState(false);
+  const [agree, setAgree] = useState(false);
 
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
+  };
+
+  const checkboxHandler = () => {
+    setAgree(!agree);
   };
 
   return (
@@ -70,6 +75,32 @@ const LoginComponent = () => {
             {/* <KeyIcon /> */}
           </div>
         </form>
+        <div className="checkbox form-group form-box">
+          <div className="form-check checkbox-theme">
+            <input
+              className="form-check-input"
+              type="checkbox"
+              value=""
+              id="rememberMe"
+              onClick={checkboxHandler}
+              defaultChecked={agree}
+            />
+            <label className="form-check-label" htmlFor="rememberMe">
+              I agree to the <a href="#">terms of service</a>
+            </label>
+          </div>
+        </div>
+        <div className="form-group mb-0">
+          <button
+            type="submit"
+            className="btn-md btn-theme w-100"
+            style={{
+              background: "hsl(161deg 87.73% 42.73%)",
+            }}
+          >
+            Login
+          </button>
+        </div>
       </div>
     </>
   );
