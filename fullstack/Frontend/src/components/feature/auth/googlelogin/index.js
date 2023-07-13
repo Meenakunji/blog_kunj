@@ -84,30 +84,7 @@ export default function GoogleSignInButton(handleModalClose) {
   };
 
   return (
-    // <GoogleLogin
-    //   // clientId="601621850906-1nn03iov4d6uin8g5lpvgt2ujccmmipb.apps.googleusercontent.com"
-    //   clientId="426734307285-dlk38v03lrrbl6moh2lcja09gmsn9uip.apps.googleusercontent.com"
-    //   buttonText={text}
-    //   onSuccess={handleSuccess}
-    //   onFailure={handleFailure}
-    //   // cookiePolicy={"single_host_origin"}
-    //   render={(renderProps) => (
-    //     <button
-    //       type="button"
-    //       style={{ border: "none", cursor: "pointer" }}
-    //       onClick={renderProps.onClick}
-    //       disabled={renderProps.disabled}
-    //       className="btn btn-link btn-floating mx-1"
-    //     >
-    //       <GoogleIcon />
-    //     </button>
-    //   )}
-    // />
     <>
-      {/* <button onClick={login}>
-        <i class="fa-brands fa-google"></i>
-        Continue with google
-      </button> */}
       <GoogleLogin onSuccess={handleSuccess} onError={handleFailure} />
       {snackbar.show ? <Snackbar {...snackbar} onClose={setSnackbar} /> : null}
     </>

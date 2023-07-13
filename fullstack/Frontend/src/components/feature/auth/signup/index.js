@@ -1,18 +1,29 @@
-import React from "react";
-import { useState } from "react";
-
-// import FacebookIcon from "@mui/icons-material/Facebook";
-// import InstagramIcon from "@mui/icons-material/Instagram";
-// import TwitterIcon from "@mui/icons-material/Twitter";
-// import GoogleIcon from "@mui/icons-material/Google";
-// import GoogleSignInButton from "../googlelogin";
-// import { Box, Button } from "@mui/material";
-
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import EmailIcon from "@mui/icons-material/Email";
 import LockIcon from "@mui/icons-material/Lock";
+import LockOpenIcon from "@mui/icons-material/LockOpen";
+import { Box } from "@mui/material";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import TextField from "../../../common/TextField/index";
 
 const SignupComponent = () => {
+  const {
+    register,
+    formState: { errors, isValid },
+    trigger,
+    getValues,
+  } = useForm({
+    criteriaMode: "all",
+    mode: "all",
+  });
+
+  const [passwordShown, setPasswordShown] = useState(false);
+
+  const togglePassword = () => {
+    setPasswordShown(!passwordShown);
+  };
+
   return (
     <div class="form-section">
       <div class="logo clearfix">
@@ -24,36 +35,48 @@ const SignupComponent = () => {
 
       <form action="#" method="GET">
         <div class="form-group form-box">
-          <input
+          <TextField
             type="text"
-            name="name"
-            class="form-control"
-            placeholder="Full Name"
-            aria-label="Full Name"
+            name={"fullname"}
+            placeholder="Full name"
+            className="form-control"
+            // rules={{
+            //   required: "Name is required",
+            // }}
+            register={register}
+            errors={errors}
           />
-
           <AccountCircleIcon />
         </div>
         <div class="form-group form-box">
-          <input
-            type="email"
-            name="email"
-            class="form-control"
+          <TextField
+            name={"email"}
             placeholder="Email Address"
-            aria-label="Email Address"
+            className="form-control"
+            type="text"
+            register={register}
+            errors={errors}
           />
           <EmailIcon />
         </div>
         <div class="form-group form-box">
-          <input
-            type="password"
-            name="password"
-            class="form-control"
-            autocomplete="off"
+          <TextField
+            name={"password"}
             placeholder="Password"
-            aria-label="Password"
+            className="form-control"
+            type={passwordShown ? "text" : "password"}
+            register={register}
+            errors={errors}
           />
-          <LockIcon />
+          {passwordShown ? (
+            <Box onClick={togglePassword}>
+              <LockOpenIcon />
+            </Box>
+          ) : (
+            <Box onClick={togglePassword}>
+              <LockIcon />
+            </Box>
+          )}
         </div>
       </form>
     </div>
