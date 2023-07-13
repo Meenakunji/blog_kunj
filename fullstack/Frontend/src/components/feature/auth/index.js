@@ -1,13 +1,15 @@
-import { Box, Modal } from "@mui/material";
+import { Box, Checkbox, Modal } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
 import styles from "./style";
 import SignupComponent from "./signup";
 import LoginComponent from "./login";
 import CloseIcon from "@mui/icons-material/Close";
+import GoogleSignInButton from "./googlelogin/index";
 
 const AuthenticationComponent = ({ open, handleModalClose }) => {
   const [isOpen, setOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [agree, setAgree] = useState(false);
   const [isLoginandSignupModal, setIsLoginandSignupModal] = useState(false);
 
   const handleSignupwithnewuser = useCallback(() => {
@@ -17,6 +19,17 @@ const AuthenticationComponent = ({ open, handleModalClose }) => {
   const handleLoginFlowwithUser = useCallback(() => {
     setIsLoginandSignupModal(false);
   }, []);
+
+  useEffect(() => {
+    const storedIsLoginOpen = localStorage.getItem("isLoginOpen");
+    if (storedIsLoginOpen) {
+      setIsLoginOpen(storedIsLoginOpen === "true");
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("isLoginOpen", isLoginOpen.toString());
+  }, [isLoginOpen]);
 
   useEffect(() => {
     return () => {
@@ -32,6 +45,10 @@ const AuthenticationComponent = ({ open, handleModalClose }) => {
     setIsLoginOpen(!isLoginOpen);
   };
 
+  const checkboxHandler = () => {
+    setAgree(!agree);
+  };
+
   return (
     <>
       <Modal
@@ -40,7 +57,6 @@ const AuthenticationComponent = ({ open, handleModalClose }) => {
         onClose={handleModalClose}
         closeAfterTransition
       >
-        {/* <Box sx={styles.wrapper}> */}
         <div className="juperterLogin">
           <div className="container">
             <div className="row">
@@ -54,6 +70,8 @@ const AuthenticationComponent = ({ open, handleModalClose }) => {
                       position: "absolute",
                       right: "5px",
                       top: "5px",
+                      color: "#fff", // Add this line to set the icon color
+                      padding: "4px", // Add some padding to the icon
                     }}
                     onClick={handleModalClose}
                   />
@@ -73,13 +91,12 @@ const AuthenticationComponent = ({ open, handleModalClose }) => {
                     </div>
                   </div>
 
-                  <div class="col-lg-6 col-md-12 form-info">
-                    <div class="login-inner-form">
+                  <div className="col-lg-6 col-md-12 form-info">
+                    <div className="login-inner-form">
                       {isLoginOpen ? (
                         <SignupComponent
                           handleLoginFlowwithUser={handleLoginFlowwithUser}
                           handleModalClose={handleModalClose}
-                          toggleSnackbar={(val) => setSnackbar(val)}
                           setIsLoginOpen={setIsLoginOpen}
                           setIsLoginandSignupModal={setIsLoginandSignupModal}
                         />
@@ -87,7 +104,6 @@ const AuthenticationComponent = ({ open, handleModalClose }) => {
                         <LoginComponent
                           handleSignupwithnewuser={handleSignupwithnewuser}
                           handleModalClose={handleModalClose}
-                          toggleSnackbar={(val) => setSnackbar(val)}
                           setIsLoginOpen={setIsLoginOpen}
                           setIsLoginandSignupModal={setIsLoginandSignupModal}
                         />
@@ -96,14 +112,19 @@ const AuthenticationComponent = ({ open, handleModalClose }) => {
                       {isLoginOpen ? (
                         <Box>
                           <div className="checkbox form-group form-box">
-                            <div class="form-check checkbox-theme">
+                            <div className="form-check checkbox-theme">
                               <input
-                                class="form-check-input"
+                                className="form-check-input"
                                 type="checkbox"
                                 value=""
                                 id="rememberMe"
+                                onClick={checkboxHandler}
+                                defaultChecked={agree}
                               />
-                              <label class="form-check-label" for="rememberMe">
+                              <label
+                                className="form-check-label"
+                                htmlFor="rememberMe"
+                              >
                                 Remember me
                               </label>
                               <a href="forgot-password-2.html">
@@ -114,23 +135,25 @@ const AuthenticationComponent = ({ open, handleModalClose }) => {
                           <div className="form-group mb-0">
                             <button
                               type="submit"
-                              class="btn-md btn-theme w-100"
+                              className="btn-md btn-theme w-100"
+                              disabled={!agree}
                             >
-                              Login
+                              Sign Up
                             </button>
                           </div>
-                          <p class="text">
+                          <p className="text">
                             Don't have an account?
                             <a href="#" onClick={toggleDivs}>
-                              {" "}
                               Register here
                             </a>
                           </p>
                           <div className="loginSection">
                             <button>
-                              <img src="/images/home/new-google.svg" alt="" />
-                              Google
+                              <GoogleSignInButton
+                                handleModalClose={handleModalClose}
+                              />
                             </button>
+
                             <button>
                               <img src="/images/home/email.svg" alt="" />
                               Email
@@ -139,32 +162,34 @@ const AuthenticationComponent = ({ open, handleModalClose }) => {
                         </Box>
                       ) : (
                         <Box>
-                          <div class="checkbox form-group form-box">
-                            <div class="form-check checkbox-theme">
+                          <div className="checkbox form-group form-box">
+                            <div className="form-check checkbox-theme">
                               <input
-                                class="form-check-input"
+                                className="form-check-input"
                                 type="checkbox"
                                 value=""
                                 id="rememberMe"
                               />
-                              <label class="form-check-label" for="rememberMe">
+                              <label
+                                className="form-check-label"
+                                htmlFor="rememberMe"
+                              >
                                 I agree to the <a href="#">terms of service</a>
                               </label>
                             </div>
                           </div>
-                          <div class="form-group mb-0">
+                          <div className="form-group mb-0">
                             <button
                               type="submit"
-                              class="btn-md btn-theme w-100"
+                              className="btn-md btn-theme w-100"
                             >
-                              Sign Up
+                              Login
                             </button>
                           </div>
-                          <p class="text">
+                          <p className="text">
                             Already a member?
                             <a href="#" onClick={toggleDivs}>
-                              {" "}
-                              Login here
+                              Sign Up here
                             </a>
                           </p>
                         </Box>
@@ -176,7 +201,6 @@ const AuthenticationComponent = ({ open, handleModalClose }) => {
             </div>
           </div>
         </div>
-        {/* </Box> */}
       </Modal>
     </>
   );

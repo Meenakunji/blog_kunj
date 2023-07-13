@@ -114,7 +114,7 @@ const BlogCreate = () => {
                   <TextField
                     label="Blog Image"
                     name={"image"}
-                    placeholder="Blog Name"
+                    placeholder="Blog Image"
                     register={register}
                     errors={errors}
                   />
