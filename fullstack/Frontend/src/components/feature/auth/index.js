@@ -75,16 +75,22 @@ const AuthenticationComponent = ({ open, handleModalClose }) => {
                     }}
                     onClick={handleModalClose}
                   />
-                  <div className="col-lg-6 col-md-12 bg-img">
+                  <div
+                    className="col-lg-6 col-md-12 bg-img"
+                    style={{ backgroundColor: "hsl(161deg 87.73% 42.73%)" }}
+                  >
                     <div className="info">
                       <div className="info-text">
                         <div className="welcomeHeading">
-                          <h1>WELCOME jUPITER BLOG</h1>
+                          <h1>WELCOME JUPITER BLOG</h1>
                           <p>
-                            Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry. Lorem Ipsum has been the
-                            industry's standard dummy text ever since the 1500s,
-                            when
+                            WELCOME JUPITER BLOG is a platform where you can
+                            explore the latest news, articles, and insights
+                            about various topics. Whether you're interested in
+                            technology, lifestyle, travel, or any other subject,
+                            our blog provides valuable content to keep you
+                            informed and engaged. Join our community today and
+                            embark on a journey of knowledge and discovery!
                           </p>
                         </div>
                       </div>

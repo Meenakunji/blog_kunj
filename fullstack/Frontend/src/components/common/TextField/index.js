@@ -13,7 +13,7 @@ const TextField = ({
 }) => {
   return (
     <>
-      {/* <label htmlFor={name}>{label}</label> */}
+      <label htmlFor={name}>{label}</label>
       <input
         id={name}
         {...register(`${name}`, rules)}

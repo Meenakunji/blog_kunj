@@ -15,6 +15,7 @@ import javascript from "highlight.js/lib/languages/javascript";
 import python from "highlight.js/lib/languages/python";
 import go from "highlight.js/lib/languages/go";
 import java from "highlight.js/lib/languages/java";
+import FileUploader from "../../common/FileUploader";
 
 hljs.registerLanguage("javascript", javascript);
 hljs.registerLanguage("python", python);
@@ -27,11 +28,13 @@ const BlogCreate = () => {
     register,
     formState: { errors },
     getValues,
+    setValue,
   } = useForm({
     criteriaMode: "all",
     mode: "all",
   });
 
+  const [imageUploadUrl, setImageUploadUrl] = useState("");
   const [snackbar, setSnackbar] = useState({
     show: false,
     status: "",
@@ -111,25 +114,14 @@ const BlogCreate = () => {
                 </Box>
 
                 <Box sx={style.formgroup}>
-                  <TextField
-                    label="Blog Image"
+                  <FileUploader
+                    label="Blog Image Upload (csv) *"
                     name={"image"}
-                    placeholder="Blog Image"
+                    placeholder="FIle Upload (csv)"
                     register={register}
                     errors={errors}
+                    setValue={setValue}
                   />
-                  {errors?.image && (
-                    <span
-                      style={{
-                        color: "red",
-                        position: "absolute",
-                        bottom: "auto",
-                        left: "0",
-                      }}
-                    >
-                      {errors?.image?.message}
-                    </span>
-                  )}
                 </Box>
               </Box>
               <Box sx={style.formRowSection}>
@@ -137,7 +129,7 @@ const BlogCreate = () => {
                   <TextField
                     label="Blog Tag"
                     name={"blogTag"}
-                    placeholder="Blog Name"
+                    placeholder="Blog Tag"
                     register={register}
                     errors={errors}
                   />
