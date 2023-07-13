@@ -3,11 +3,17 @@ import EmailIcon from "@mui/icons-material/Email";
 import LockIcon from "@mui/icons-material/Lock";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 import { Box } from "@mui/material";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useMutation } from "react-query";
+import { useDispatch } from "react-redux";
+import fetcher from "../../../../dataProvider";
+import { setToken } from "../../../../redux/slices/user";
+import Snackbar from "../../../common/Snackbar";
 import TextField from "../../../common/TextField/index";
 
-const SignupComponent = () => {
+const SignupComponent = ({ handleModalClose }) => {
   const {
     register,
     formState: { errors, isValid },
@@ -18,10 +24,80 @@ const SignupComponent = () => {
     mode: "all",
   });
 
+  const [snackbar, setSnackbar] = useState({
+    show: false,
+    status: "",
+    message: "",
+  });
+
   const [passwordShown, setPasswordShown] = useState(false);
+  const [agree, setAgree] = useState(false);
+  const router = useRouter();
+  const dispatch = useDispatch();
 
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
+  };
+
+  const checkboxHandler = () => {
+    setAgree(!agree);
+  };
+
+  // user signup API
+  const { mutate: userEmailSignup } = useMutation(
+    (signupFormObj) =>
+      fetcher.post(`http://localhost:3003/v1/auth/user-signup`, signupFormObj),
+    {
+      onSuccess: (res) => {
+        console.log("Print signup obj", res);
+        // const accessToken = res?.data?.tokens?.access?.token;
+        //  dispatch(setUserData(res?.data.user));
+        //  loginfunc(
+        //    res?.data.tokens?.access?.token,
+        //    res?.data.user.name,
+        //    res?.data.user.email,
+        //    res?.data.user._id
+        //  );
+        //  const refreshToken = res?.data?.tokens?.refresh?.token;
+        //  setAccessToken(accessToken);
+        dispatch(
+          setToken({
+            //  accessToken: accessToken,
+            //  refreshToken: refreshToken,
+            isLoggedIn: true,
+          })
+        );
+        setSnackbar({
+          show: true,
+          status: "success",
+          message: ` login successfully.`,
+        });
+        handleModalClose(); // Close the login modal
+        router.push(`/`);
+      },
+      onError: (error) => {
+        setSnackbar({
+          show: true,
+          status: "error",
+          message: `login failed.`,
+        });
+        console.log("Error:", error);
+      },
+    }
+  );
+
+  const handleSubmitSingup = () => {
+    if (!isValid) {
+      trigger();
+      alert("Please fill all required filed");
+      return false;
+    } else {
+      let signupFormObj = getValues();
+      // append file path and url
+      signupFormObj.role = "user";
+      userEmailSignup(signupFormObj);
+      console.log("Print form value===>>>", signupFormObj);
+    }
   };
 
   return (
@@ -37,12 +113,9 @@ const SignupComponent = () => {
         <div class="form-group form-box">
           <TextField
             type="text"
-            name={"fullname"}
+            name={"name"}
             placeholder="Full name"
             className="form-control"
-            // rules={{
-            //   required: "Name is required",
-            // }}
             register={register}
             errors={errors}
           />
@@ -79,6 +152,36 @@ const SignupComponent = () => {
           )}
         </div>
       </form>
+      <div className="checkbox form-group form-box">
+        <div className="form-check checkbox-theme">
+          <input
+            className="form-check-input"
+            type="checkbox"
+            value=""
+            id="rememberMe"
+            onClick={checkboxHandler}
+            defaultChecked={agree}
+          />
+          <label className="form-check-label" htmlFor="rememberMe">
+            Remember me
+          </label>
+          <a href="forgot-password-2.html">Forgot Password</a>
+        </div>
+      </div>
+      <div className="form-group mb-0">
+        <button
+          type="submit"
+          className="btn-md btn-theme w-100"
+          disabled={!agree}
+          style={{
+            background: "hsl(161deg 87.73% 42.73%)",
+          }}
+          onClick={() => handleSubmitSingup()}
+        >
+          Sign Up
+        </button>
+      </div>
+      {snackbar.show ? <Snackbar {...snackbar} onClose={setSnackbar} /> : null}
     </div>
   );
 };
