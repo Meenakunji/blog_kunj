@@ -10,7 +10,7 @@ import useLocalStorage from "../../../../hooks/useLocalStorage";
 import { setToken, setUserData } from "../../../../redux/slices/user";
 import Snackbar from "../../../common/Snackbar";
 
-export default function GoogleSignInButton(handleModalClose) {
+export default function GoogleSignInButton({ handleModalClose }) {
   const [, setAccessToken] = useLocalStorage("accessToken", null);
   const dispatch = useDispatch();
   const router = useRouter();

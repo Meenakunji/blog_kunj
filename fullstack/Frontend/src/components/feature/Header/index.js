@@ -19,6 +19,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Web3Modal from "web3modal";
+import eventBus from "../../../../utils/eventBus";
 import { setTheme } from "../../../redux/slices/layout";
 import { setToken } from "../../../redux/slices/user";
 import { EnhancedSearch } from "../../common/SearchInput";
@@ -123,26 +124,30 @@ const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
   };
 
   const connectMetaMask = async () => {
-    try {
-      const provider = await web3Modal.connect();
-      const web3 = new Web3(provider);
+    if (!isLoggedIn) {
+      eventBus.dispatch("openLoginModal", { function_name: "unique" });
+    } else {
+      try {
+        const provider = await web3Modal.connect();
+        const web3 = new Web3(provider);
 
-      // Access different wallet options
-      const accounts = await web3.eth.getAccounts();
-      console.log("Connected wallet accounts:", accounts);
+        // Access different wallet options
+        const accounts = await web3.eth.getAccounts();
+        console.log("Connected wallet accounts:", accounts);
 
-      // Continue with the desired actions using the selected wallet provider
-      // For example, you can retrieve the selected address:
-      const selectedAddress = accounts[0];
-      console.log("Selected address:", selectedAddress);
+        // Continue with the desired actions using the selected wallet provider
+        // For example, you can retrieve the selected address:
+        const selectedAddress = accounts[0];
+        console.log("Selected address:", selectedAddress);
 
-      // Update the wallet address in the state
-      setWalletAddress(selectedAddress);
+        // Update the wallet address in the state
+        setWalletAddress(selectedAddress);
 
-      // Close the Web3Modal provider connection
-      web3Modal.clearCachedProvider();
-    } catch (error) {
-      console.error("Error connecting to wallet:", error);
+        // Close the Web3Modal provider connection
+        web3Modal.clearCachedProvider();
+      } catch (error) {
+        console.error("Error connecting to wallet:", error);
+      }
     }
   };
 
@@ -161,6 +166,26 @@ const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
         isLoggedIn: false,
       })
     );
+    router.push("/");
+  };
+
+  useEffect(() => {
+    eventBus.on("openLoginModal", (cb) => {
+      if (!open) {
+        setOpen(true);
+      }
+    });
+    return () => {
+      eventBus.remove("openLoginModal");
+    };
+  }, []);
+
+  const handleCreateBlog = () => {
+    if (!isLoggedIn) {
+      eventBus.dispatch("openLoginModal", { function_name: "unique" });
+    } else {
+      router.push(`/new-blog/1`);
+    }
   };
 
   return (
@@ -197,7 +222,7 @@ const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
               <li
                 className="nav-item"
                 onClick={() => {
-                  router.push(`/new-blog/1`);
+                  handleCreateBlog();
                 }}
                 style={{ cursor: "pointer" }}
               >

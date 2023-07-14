@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import SliderHome from "../src/components/feature/Slider";
 import { BlogCategoryList } from "../src/components/feature/Blog/BlogCategoryList";
 import fetch from "node-fetch";
-import { useMutation } from "react-query";
 import fetcher from "../src/dataProvider";
 
 export default function Home() {
