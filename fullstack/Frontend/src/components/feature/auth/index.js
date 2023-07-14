@@ -9,7 +9,7 @@ import GoogleSignInButton from "./googlelogin/index";
 const AuthenticationComponent = ({ open, handleModalClose }) => {
   const [isOpen, setOpen] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
-  const [agree, setAgree] = useState(false);
+
   const [isLoginandSignupModal, setIsLoginandSignupModal] = useState(false);
 
   const handleSignupwithnewuser = useCallback(() => {
@@ -45,10 +45,6 @@ const AuthenticationComponent = ({ open, handleModalClose }) => {
     setIsLoginOpen(!isLoginOpen);
   };
 
-  const checkboxHandler = () => {
-    setAgree(!agree);
-  };
-
   return (
     <>
       <Modal
@@ -75,16 +71,22 @@ const AuthenticationComponent = ({ open, handleModalClose }) => {
                     }}
                     onClick={handleModalClose}
                   />
-                  <div className="col-lg-6 col-md-12 bg-img">
+                  <div
+                    className="col-lg-6 col-md-12 bg-img"
+                    style={{ backgroundColor: "hsl(161deg 87.73% 42.73%)" }}
+                  >
                     <div className="info">
                       <div className="info-text">
                         <div className="welcomeHeading">
-                          <h1>WELCOME jUPITER BLOG</h1>
+                          <h1>WELCOME JUPITER BLOG</h1>
                           <p>
-                            Lorem Ipsum is simply dummy text of the printing and
-                            typesetting industry. Lorem Ipsum has been the
-                            industry's standard dummy text ever since the 1500s,
-                            when
+                            WELCOME JUPITER BLOG is a platform where you can
+                            explore the latest news, articles, and insights
+                            about various topics. Whether you're interested in
+                            technology, lifestyle, travel, or any other subject,
+                            our blog provides valuable content to keep you
+                            informed and engaged. Join our community today and
+                            embark on a journey of knowledge and discovery!
                           </p>
                         </div>
                       </div>
@@ -111,36 +113,6 @@ const AuthenticationComponent = ({ open, handleModalClose }) => {
 
                       {isLoginOpen ? (
                         <Box>
-                          <div className="checkbox form-group form-box">
-                            <div className="form-check checkbox-theme">
-                              <input
-                                className="form-check-input"
-                                type="checkbox"
-                                value=""
-                                id="rememberMe"
-                                onClick={checkboxHandler}
-                                defaultChecked={agree}
-                              />
-                              <label
-                                className="form-check-label"
-                                htmlFor="rememberMe"
-                              >
-                                Remember me
-                              </label>
-                              <a href="forgot-password-2.html">
-                                Forgot Password
-                              </a>
-                            </div>
-                          </div>
-                          <div className="form-group mb-0">
-                            <button
-                              type="submit"
-                              className="btn-md btn-theme w-100"
-                              disabled={!agree}
-                            >
-                              Sign Up
-                            </button>
-                          </div>
                           <p className="text">
                             Don't have an account?
                             <a href="#" onClick={toggleDivs}>
@@ -162,30 +134,8 @@ const AuthenticationComponent = ({ open, handleModalClose }) => {
                         </Box>
                       ) : (
                         <Box>
-                          <div className="checkbox form-group form-box">
-                            <div className="form-check checkbox-theme">
-                              <input
-                                className="form-check-input"
-                                type="checkbox"
-                                value=""
-                                id="rememberMe"
-                              />
-                              <label
-                                className="form-check-label"
-                                htmlFor="rememberMe"
-                              >
-                                I agree to the <a href="#">terms of service</a>
-                              </label>
-                            </div>
-                          </div>
-                          <div className="form-group mb-0">
-                            <button
-                              type="submit"
-                              className="btn-md btn-theme w-100"
-                            >
-                              Login
-                            </button>
-                          </div>
+                        
+
                           <p className="text">
                             Already a member?
                             <a href="#" onClick={toggleDivs}>

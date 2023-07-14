@@ -105,7 +105,12 @@ const uploadFiles = catchAsync(async (req, res) => {
   try {
     const response = await client.send(command);
     console.log(response);
-    res.status(httpStatus.OK).send({ code: httpStatus.OK, message: "success" });
+    // Construct the image URL based on your S3 bucket and the uploaded file's key
+    const imageUrl = `https://s3.ap-south-1.amazonaws.com/jupiter-blog-content-images/${req.file.originalname}`;
+
+    res
+      .status(httpStatus.OK)
+      .send({ code: httpStatus.OK, message: "success", imageUrl });
   } catch (err) {
     console.error(err);
   }
