@@ -31,8 +31,8 @@ const LoginComponent = () => {
 
   return (
     <>
-      <div class="form-section">
-        <div class="logo clearfix">
+      <div className="form-section">
+        <div className="logo clearfix">
           <a href="login-2.html">
             <img
               src="https://i.postimg.cc/3wgSvKbP/bloggerlogo.png"
@@ -43,7 +43,7 @@ const LoginComponent = () => {
         <h3>Sign Into Your Account</h3>
 
         <form action="#" method="GET">
-          <div class="form-group form-box">
+          <div className="form-group form-box">
             <TextField
               name={"email"}
               placeholder="Email Address"
@@ -54,7 +54,7 @@ const LoginComponent = () => {
             />
             <MailIcon />
           </div>
-          <div class="form-group form-box">
+          <div className="form-group form-box">
             <TextField
               name={"password"}
               placeholder="Password"
