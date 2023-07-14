@@ -3,12 +3,13 @@ import { useMutation } from "react-query";
 import { useSelector } from "react-redux";
 import BlogContentListComponent from "../../src/components/feature/Blog/BlogList";
 import fetcher from "../../src/dataProvider";
+import eventBus from "../../utils/eventBus";
 
 export default function Index() {
   const [blogContentList, setBlogContentList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
-  const { blogDetails } = useSelector((state) => state.user);
+  const { blogDetails, isLoggedIn } = useSelector((state) => state.user);
 
   const fetchBlogContent = async (page) => {
     try {
@@ -51,6 +52,12 @@ export default function Index() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [currentPage]);
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      eventBus.dispatch("openLoginModal", { function_name: "unique" });
+    }
+  }, [isLoggedIn]);
 
   return (
     <div className="container-fluid">
