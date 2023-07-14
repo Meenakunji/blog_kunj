@@ -6,6 +6,7 @@ const blogService = require("../services/blog.service");
 const rTracer = require("cls-rtracer");
 const { paginateQuery } = require("../utils/utility");
 const { ObjectId } = require("mongodb");
+const fs = require("fs")
 
 const getBlogContent = catchAsync(async (req, res) => {
   console.log(`getBlogContent Controller -> getBlogContent :: ${rTracer.id()}`);
@@ -90,9 +91,15 @@ const uploadFiles = catchAsync(async (req, res) => {
     },
     region: "ap-south-1",
   });
+  console.log(req.file)
+  imagePath = req.file.path 
+  const blob = fs.readFileSync(imagePath)
+
   const command = new PutObjectCommand({
     Bucket: "jupiter-blog-content-images",
     Key: req.file.originalname,
+    Body: blob,
+    ContentType: req.file.mimetype
   });
 
   try {
