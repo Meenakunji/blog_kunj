@@ -5,14 +5,17 @@ import PauseCircleFilledIcon from "@mui/icons-material/PauseCircleFilled";
 import PlayCircleOutlineIcon from "@mui/icons-material/PlayCircleOutline";
 import { Box, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { useMutation } from "react-query";
 import { useSelector } from "react-redux";
+import fetcher from "../../../../dataProvider";
 import styles from "../style";
 
-export const BlogDetailComponent = () => {
+const BlogDetailComponent = () => {
   const { particularBlogContent } = useSelector((state) => state.user);
 
   const [isReading, setIsReading] = useState(false);
   const [speechUtterance, setSpeechUtterance] = useState(null);
+  const [userFollowBlog, setUserFollowBlog] = useState(false);
 
   const handleRead = () => {
     const contentText = particularBlogContent?.description;
@@ -57,6 +60,24 @@ export const BlogDetailComponent = () => {
     };
   }, [isReading, speechUtterance]);
 
+  // marked blog
+  const { mutate: BlogUserFollow } = useMutation(
+    (BlogUserId) =>
+      fetcher.post(`http://localhost:3003/v1/user/follow/${BlogUserId}`),
+    {
+      onSuccess: (resData) => {
+        setUserFollowBlog(resData?.data?.isFollowing);
+      },
+      onError: (error) => {
+        alert(error?.response?.data?.message);
+      },
+    }
+  );
+
+  const handleBlogUserFollow = (id) => {
+    BlogUserFollow(id);
+  };
+
   return (
     <>
       <div className="container">
@@ -80,9 +101,19 @@ export const BlogDetailComponent = () => {
                 </Typography>
                 <Typography
                   variant="body1"
-                  style={{ color: "#156D12", fontWeight: "600" }}
+                  style={{
+                    color: "#156D12",
+                    fontWeight: "600",
+                    cursor: "pointer",
+                  }}
+                  onClick={() =>
+                    handleBlogUserFollow(
+                      particularBlogContent?.userData?.[0]?._id
+                    )
+                  }
                 >
-                  Follow
+                  {/* Follow */}
+                  {userFollowBlog === true ? "Unfollow" : "Follow"}
                 </Typography>
               </Box>
               <Box sx={styles.profileName}>
@@ -151,3 +182,5 @@ export const BlogDetailComponent = () => {
     </>
   );
 };
+
+export default BlogDetailComponent;
