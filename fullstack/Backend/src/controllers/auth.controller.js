@@ -41,8 +41,20 @@ const createUser = catchAsync(async (req, res) => {
       });
     }
 
+    // Omit the 'password' property from the 'user' object
+    const { password, ...userWithoutPassword } = user._doc;
+
     const tokens = await tokenService.generateAuthTokens(user);
-    return res.status(httpStatus.CREATED).send({ user, tokens });
+    return res.status(httpStatus.OK).send({
+      message: "success",
+      data: {
+        user: {
+          ...userWithoutPassword,
+          profilePic: `https://avatars.dicebear.com/api/bottts/${user._id}.svg`,
+        },
+        tokens: tokens,
+      },
+    });
   } catch (error) {
     console.log(
       `Exception :: User Controller -> createUser -> ${error.message}`
@@ -54,14 +66,33 @@ const createUser = catchAsync(async (req, res) => {
   }
 });
 
-//email login
+// email login
 const loginWithEmail = catchAsync(async (req, res) => {
   const { email, password } = req.body;
   const user = await authService.loginWithEmail(email, password);
   const tokens = await tokenService.generateAuthTokens(user);
 
-  res.send({ user, tokens });
+  // Check if the user has a profile picture, otherwise assign a random one
+  let profilePic = user.profilePic;
+  if (!profilePic) {
+    // Generate a random profile picture URL or use a default one
+    profilePic = `https://avatars.dicebear.com/api/bottts/${user._id}.svg`;
+    // Alternatively, you can generate a random profile picture using a library or service
+    // profilePic = generateRandomProfilePic();
+  }
+
+  // Omit the 'password' property from the 'user' object
+  const { password: _, ...userWithoutPassword } = user._doc;
+
+  return res.status(httpStatus.OK).send({
+    message: "success",
+    data: {
+      user: { ...userWithoutPassword, profilePic },
+      tokens: tokens,
+    },
+  });
 });
+
 module.exports = {
   loginWithGoogle,
   createUser,

@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { useDispatch } from "react-redux";
 import fetcher from "../../../../dataProvider";
+import useLocalStorage from "../../../../hooks/useLocalStorage";
 import { setToken } from "../../../../redux/slices/user";
 import Snackbar from "../../../common/Snackbar";
 import TextField from "../../../common/TextField/index";
@@ -34,6 +35,8 @@ const SignupComponent = ({ handleModalClose }) => {
   const [agree, setAgree] = useState(false);
   const router = useRouter();
   const dispatch = useDispatch();
+  const [, setAccessToken] = useLocalStorage("accessToken", null);
+  const [, setRefreshToken] = useLocalStorage("refreshToken", null);
 
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
@@ -49,28 +52,28 @@ const SignupComponent = ({ handleModalClose }) => {
       fetcher.post(`http://localhost:3003/v1/auth/user-signup`, signupFormObj),
     {
       onSuccess: (res) => {
-        console.log("Print signup obj", res);
-        // const accessToken = res?.data?.tokens?.access?.token;
-        //  dispatch(setUserData(res?.data.user));
-        //  loginfunc(
-        //    res?.data.tokens?.access?.token,
-        //    res?.data.user.name,
-        //    res?.data.user.email,
-        //    res?.data.user._id
-        //  );
-        //  const refreshToken = res?.data?.tokens?.refresh?.token;
-        //  setAccessToken(accessToken);
+        const accessToken = res?.data?.tokens?.access?.token;
+        dispatch(setUserData(res?.data.user));
+        loginfunc(
+          res?.data.tokens?.access?.token,
+          res?.data.user.name,
+          res?.data.user.email,
+          res?.data.user._id
+        );
+        const refreshToken = res?.data?.tokens?.refresh?.token;
+        setAccessToken(accessToken);
+        setRefreshToken(refreshToken);
         dispatch(
           setToken({
-            //  accessToken: accessToken,
-            //  refreshToken: refreshToken,
+            accessToken: accessToken,
+            refreshToken: refreshToken,
             isLoggedIn: true,
           })
         );
         setSnackbar({
           show: true,
           status: "success",
-          message: ` login successfully.`,
+          message: `login successfully.`,
         });
         handleModalClose(); // Close the login modal
         router.push(`/`);

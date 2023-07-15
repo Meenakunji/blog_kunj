@@ -1,13 +1,20 @@
-import React, { useState } from "react";
-import MailIcon from "@mui/icons-material/Mail";
-import KeyIcon from "@mui/icons-material/Key";
-import TextField from "../../../common/TextField";
-import { useForm } from "react-hook-form";
-import { Box } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
+import MailIcon from "@mui/icons-material/Mail";
+import { Box } from "@mui/material";
+import { useRouter } from "next/router";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useMutation } from "react-query";
+import { useDispatch } from "react-redux";
+import loginfunc from "../../../../../components/Layout/util/login";
+import fetcher from "../../../../dataProvider";
+import useLocalStorage from "../../../../hooks/useLocalStorage";
+import { setToken, setUserData } from "../../../../redux/slices/user";
+import Snackbar from "../../../common/Snackbar";
+import TextField from "../../../common/TextField";
 
-const LoginComponent = () => {
+const LoginComponent = ({ handleModalClose }) => {
   const {
     register,
     formState: { errors, isValid },
@@ -20,6 +27,16 @@ const LoginComponent = () => {
 
   const [passwordShown, setPasswordShown] = useState(false);
   const [agree, setAgree] = useState(false);
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const [, setAccessToken] = useLocalStorage("accessToken", null);
+  const [, setRefreshToken] = useLocalStorage("refreshToken", null);
+
+  const [snackbar, setSnackbar] = useState({
+    show: false,
+    status: "",
+    message: "",
+  });
 
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
@@ -27,6 +44,61 @@ const LoginComponent = () => {
 
   const checkboxHandler = () => {
     setAgree(!agree);
+  };
+
+  // // user Login API
+  const { mutate: userEmailLogin } = useMutation(
+    (LoginFormObj) =>
+      fetcher.post(`http://localhost:3003/v1/auth/login-email`, LoginFormObj),
+    {
+      onSuccess: (res) => {
+        const accessToken = res?.data?.tokens?.access?.token;
+        dispatch(setUserData(res?.data.user));
+        loginfunc(
+          res?.data.tokens?.access?.token,
+          res?.data.user.name,
+          res?.data.user.email,
+          res?.data.user._id
+        );
+        const refreshToken = res?.data?.tokens?.refresh?.token;
+        setAccessToken(accessToken);
+        setRefreshToken(refreshToken);
+        dispatch(
+          setToken({
+            accessToken: accessToken,
+            refreshToken: refreshToken,
+            isLoggedIn: true,
+          })
+        );
+        setSnackbar({
+          show: true,
+          status: "success",
+          message: `login with email successfully.`,
+        });
+        handleModalClose(); // Close the login modal
+        router.push(`/`);
+      },
+      onError: (error) => {
+        setSnackbar({
+          show: true,
+          status: "error",
+          message: `login failed.`,
+        });
+        console.log("Error:", error);
+      },
+    }
+  );
+
+  const handleLoginSubmit = () => {
+    if (!isValid) {
+      trigger();
+      alert("Please fill all required filed");
+      return false;
+    } else {
+      let loginFormObj = getValues();
+      console.log("loginFormObj", loginFormObj);
+      userEmailLogin(loginFormObj);
+    }
   };
 
   return (
@@ -97,10 +169,14 @@ const LoginComponent = () => {
             style={{
               background: "hsl(161deg 87.73% 42.73%)",
             }}
+            onClick={() => handleLoginSubmit()}
           >
             Login
           </button>
         </div>
+        {snackbar.show ? (
+          <Snackbar {...snackbar} onClose={setSnackbar} />
+        ) : null}
       </div>
     </>
   );
