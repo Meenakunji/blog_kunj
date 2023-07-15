@@ -66,8 +66,8 @@ const AuthenticationComponent = ({ open, handleModalClose }) => {
                       position: "absolute",
                       right: "5px",
                       top: "5px",
-                      color: "#fff", // Add this line to set the icon color
-                      padding: "4px", // Add some padding to the icon
+                      color: "#fff",
+                      padding: "4px",
                     }}
                     onClick={handleModalClose}
                   />
@@ -134,8 +134,6 @@ const AuthenticationComponent = ({ open, handleModalClose }) => {
                         </Box>
                       ) : (
                         <Box>
-                        
-
                           <p className="text">
                             Already a member?
                             <a href="#" onClick={toggleDivs}>
