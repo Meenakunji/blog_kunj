@@ -4,9 +4,9 @@ const rTracer = require("cls-rtracer");
 const ApiError = require("../utils/ApiError");
 const httpStatus = require("http-status");
 
-const getBlogContent = async (Parmas) => {
+const getBlogContent = async (Params) => {
   const query = {
-    blogTag: { $regex: Parmas.blogTag, $options: "i" },
+    blogTag: { $regex: Params.blogTag, $options: "i" },
   };
   const pipeline = [
     {
@@ -23,6 +23,20 @@ const getBlogContent = async (Parmas) => {
   ];
 
   const data = await BlogContent.aggregate(pipeline);
+
+  // Modify the userData to exclude the password field and add a random profilePic if missing
+  data.forEach((blog) => {
+    blog.userData = blog.userData.map((user) => ({
+      ...user,
+      password: undefined,
+      profilePic:
+        user.profilePic ||
+        `https://random-profile-photos.com/api/portraits/men/${Math.floor(
+          Math.random() * 100
+        )}.jpg`,
+    }));
+  });
+
   return data;
 };
 
