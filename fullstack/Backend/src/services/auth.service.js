@@ -8,27 +8,26 @@ const {
   getNormalizedEmail,
   generateRandomNumber,
 } = require("../utils/utility");
-const {userService} = require("../services")
-
+const { userService } = require("../services");
 
 const loginWithGoogle = async (token) => {
-    const client = new OAuth2Client(process.env.GOOGLE_CLOUD_CLIENT_ID);
+  const client = new OAuth2Client(process.env.GOOGLE_CLOUD_CLIENT_ID);
 
-    const ticket = await client.verifyIdToken({
-      idToken: token,
-      audience: process.env.GOOGLE_CLOUD_CLIENT_ID,
-    });
+  const ticket = await client.verifyIdToken({
+    idToken: token,
+    audience: process.env.GOOGLE_CLOUD_CLIENT_ID,
+  });
 
-    const payload = ticket.getPayload();
-    if (!payload.email_verified) {
-      throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, 'Email not verified')
-    }
-    const user = await userService.findUserByEmail( payload.email );
-      if (!user) {
-        return userService.createUser(payload.name, payload.email, payload.picture)
-      } else {
-        return user
-      }  
+  const payload = ticket.getPayload();
+  if (!payload.email_verified) {
+    throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, "Email not verified");
+  }
+  const user = await userService.findUserByEmail(payload.email);
+  if (!user) {
+    return userService.createUser(payload.name, payload.email, payload.picture);
+  } else {
+    return user;
+  }
 };
 
 const getUsername = async (name = "") => {
@@ -133,11 +132,11 @@ const updateUserById = async (userId, updateBody) => {
 };
 
 const loginWithEmail = async (email, password) => {
-  const user = await userService.findUserByEmail(email)
-  if(!user || !(await user.isPasswordMatch(password)))
-    throw new ApiError(httpStatus.UNAUTHORIZED, 'Invalid email or password')
-  return user
-}
+  const user = await userService.findUserByEmail(email);
+  if (!user || !(await user.isPasswordMatch(password)))
+    throw new ApiError(httpStatus.UNAUTHORIZED, "Invalid email or password");
+  return user;
+};
 
 module.exports = {
   loginWithGoogle,
@@ -145,4 +144,5 @@ module.exports = {
   createUser,
   updateUserById,
   loginWithEmail,
+  getUserById,
 };
