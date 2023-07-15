@@ -22,9 +22,10 @@ const createUser = catchAsync(async (req, res) => {
     const checkUser = await authService.getUserByEmail(req.body.email);
     console.log("Promptn console check user ===>>>", checkUser);
     if (checkUser) {
-      return res
-        .status(httpStatus.OK)
-        .send({ code: httpStatus.OK, message: "success", data: checkUser });
+      return res.status(httpStatus.CONFLICT).send({
+        code: httpStatus.CONFLICT,
+        message: "User already exists",
+      });
     }
 
     let user;
@@ -35,19 +36,21 @@ const createUser = catchAsync(async (req, res) => {
     } else {
       const createdUser = await authService.createUser(req.body);
       user = await authService.getUserById(createdUser._id);
-      await authService.updateUserById(user?._id, {
-        profilePic: `https://avatars.dicebear.com/api/bottts/${user?._id}.svg`,
+      await authService.updateUserById(user._id, {
+        profilePic: `https://avatars.dicebear.com/api/bottts/${user._id}.svg`,
       });
     }
 
-    return res.status(httpStatus.CREATED).send({ data: user });
+    const tokens = await tokenService.generateAuthTokens(user);
+    return res.status(httpStatus.CREATED).send({ user, tokens });
   } catch (error) {
     console.log(
-      `Exception :: User Controller -> verifyEmail -> ${error.message}`
+      `Exception :: User Controller -> createUser -> ${error.message}`
     );
-    return res
-      .status(httpStatus.BAD_REQUEST)
-      .send({ code: httpStatus.BAD_REQUEST, message: error.message });
+    return res.status(httpStatus.BAD_REQUEST).send({
+      code: httpStatus.BAD_REQUEST,
+      message: error.message,
+    });
   }
 });
 
