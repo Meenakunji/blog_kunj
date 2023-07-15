@@ -129,7 +129,7 @@ export default function BlogContentListComponent({ data }) {
                   >
                     <Box
                       component="img"
-                      src={item?.userData?.[0]?.picture}
+                      src={item?.userData?.[0]?.profilePic}
                       style={{
                         borderRadius: "100px",
                         width: "30px",
