@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
-const bcrypt = require('bcryptjs');
+const bcrypt = require("bcryptjs");
 
 const userSchema = mongoose.Schema(
   {
@@ -34,7 +34,7 @@ const userSchema = mongoose.Schema(
         }
       },
     },
-    picture: {
+    profilePic: {
       type: String,
     },
   },
@@ -88,20 +88,18 @@ userSchema.statics.isEmailTaken = async function (email, excludeUserId) {
 
 userSchema.methods.isPasswordMatch = async function (password) {
   const user = this;
-  const flag = await bcrypt.compare(password, user.password );
-  return flag
+  const flag = await bcrypt.compare(password, user.password);
+  return flag;
 };
 
-userSchema.pre('save', async function (next) {
+userSchema.pre("save", async function (next) {
   const user = this;
-  if (user.isModified('password')) {
+  if (user.isModified("password")) {
     user.password = await bcrypt.hash(user.password, 8);
   }
   next();
 });
 
 const user = mongoose.model("user", userSchema);
-
-
 
 module.exports = user;
