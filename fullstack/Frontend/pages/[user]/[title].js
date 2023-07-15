@@ -1,4 +1,4 @@
-import { BlogDetailComponent } from "../../src/components/feature/Blog/BlogDetailComponent";
+import BlogDetailComponent from "../../src/components/feature/Blog/BlogDetailComponent";
 
 export default function UserNamePage() {
   return (
