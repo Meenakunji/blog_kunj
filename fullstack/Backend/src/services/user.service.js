@@ -1,27 +1,59 @@
 const { Users } = require("../models");
-const ApiError = require("../utils/ApiError");
-const httpStatus = require("http-status");
 
-const rTracer = require("cls-rtracer");
-
-const createUser = async (name, email, picture) => {
-  const data = {
-    name: name,
-    email: email,
-    picture: picture
+const followUser = async (followerUserId, userIdToFollow) => {
+  // Find the user who is following
+  const follower = await Users.findById(followerUserId).select(
+    "-password -createdAt -updatedAt"
+  );
+  if (!follower) {
+    throw new Error("Follower user not found.");
   }
-  return Users.create(data)
-}
 
-const findUserByEmail = async(email) => {
-  if(email){
-    const user = await Users.findOne({email: email})
-    return user
+  // Find the user to be followed
+  const userToFollow = await Users.findById(userIdToFollow).select(
+    "-password -createdAt -updatedAt"
+  );
+  if (!userToFollow) {
+    throw new Error("User to follow not found.");
   }
-  return new ApiError(httpStatus.INTERNAL_SERVER_ERROR, "Email not found")
-}
+
+  // Check if the user is already followed
+  const isFollowing = follower.following.includes(userIdToFollow);
+
+  if (isFollowing) {
+    // Unfollow the user
+    follower.following = follower.following.filter(
+      (followedUserId) => followedUserId.toString() !== userIdToFollow
+    );
+
+    // Remove the follower from the userToFollow's followers list
+    userToFollow.followers = userToFollow.followers.filter(
+      (followerId) => followerId.toString() !== followerUserId
+    );
+
+    // Decrease the follower count of the userToFollow
+    userToFollow.followCount -= 1;
+  } else {
+    // Follow the user
+    follower.following.push(userIdToFollow);
+
+    // Add the follower to the userToFollow's followers list
+    userToFollow.followers.push(followerUserId);
+
+    // Increase the follower count of the userToFollow
+    userToFollow.followCount += 1;
+  }
+
+  await Promise.all([follower.save(), userToFollow.save()]);
+
+  // Return the updated user data, or any other relevant data as needed
+  return {
+    follower: follower,
+    userToFollow: userToFollow,
+    isFollowing: !isFollowing, // Return a boolean indicating if the user is now following or unfollowing
+  };
+};
 
 module.exports = {
-  createUser,
-  findUserByEmail,
+  followUser,
 };

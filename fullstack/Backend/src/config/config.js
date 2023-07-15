@@ -37,4 +37,5 @@ module.exports = {
     accessExpirationMinutes: envVars.JWT_ACCESS_EXPIRATION_MINUTES,
     refreshExpirationDays: envVars.JWT_REFRESH_EXPIRATION_DAYS,
   },
+  JWT_SECRET: envVars.JWT_SECRET, // Add this line to export the JWT_SECRET variable
 };
