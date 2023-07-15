@@ -268,9 +268,9 @@ const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
                       aria-expanded={open1 ? "true" : undefined}
                     >
                       <Avatar sx={{ width: 32, height: 32 }}>
-                        {userData?.picture ? (
+                        {userData?.profilePic ? (
                           <img
-                            src={userData.picture}
+                            src={userData.profilePic}
                             alt="Profile Picture"
                             style={{
                               width: "100%",
