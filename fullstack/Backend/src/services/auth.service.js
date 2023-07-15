@@ -22,9 +22,9 @@ const loginWithGoogle = async (token) => {
   if (!payload.email_verified) {
     throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, "Email not verified");
   }
-  const user = await userService.findUserByEmail(payload.email);
+  const user = await getUserByEmail(payload.email);
   if (!user) {
-    return userService.createUser(payload.name, payload.email, payload.picture);
+    return createUser(payload.name, payload.email, payload.picture);
   } else {
     return user;
   }
@@ -132,7 +132,7 @@ const updateUserById = async (userId, updateBody) => {
 };
 
 const loginWithEmail = async (email, password) => {
-  const user = await userService.findUserByEmail(email);
+  const user = await getUserByEmail(email);
   if (!user || !(await user.isPasswordMatch(password)))
     throw new ApiError(httpStatus.UNAUTHORIZED, "Invalid email or password");
   return user;

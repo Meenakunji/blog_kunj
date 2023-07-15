@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
+const { Schema } = require("mongoose");
 
 const userSchema = mongoose.Schema(
   {
@@ -37,11 +38,61 @@ const userSchema = mongoose.Schema(
     profilePic: {
       type: String,
     },
+    followers: [{ type: Schema.Types.ObjectId, ref: "Users" }],
+    following: [{ type: Schema.Types.ObjectId, ref: "Users" }],
+    followCount: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,
   }
 );
+
+userSchema.statics.followUser = async function (
+  followerUserId,
+  userIdToFollow
+) {
+  // Find the user who is following
+  const follower = await this.findById(followerUserId);
+  if (!follower) {
+    throw new Error("Follower user not found.");
+  }
+
+  // Find the user to be followed
+  const userToFollow = await this.findById(userIdToFollow);
+  if (!userToFollow) {
+    throw new Error("User to follow not found.");
+  }
+
+  // Check if the user is already followed
+  if (follower.following.includes(userIdToFollow)) {
+    throw new Error("User is already followed.");
+  }
+
+  // Update the follower's following list
+  follower.following.push(userIdToFollow);
+  await follower.save();
+
+  // Update the user to be followed's followers list
+  userToFollow.followers.push(followerUserId);
+  await userToFollow.save();
+
+  // Update the follow count for both users
+  follower.followCount++;
+  await follower.save();
+
+  userToFollow.followCount++;
+  await userToFollow.save();
+
+  // You can return any relevant data as per your requirement
+  // For example, you can return the updated follower or userToFollow objects
+  return {
+    follower: follower,
+    userToFollow: userToFollow,
+  };
+};
 
 /**
  * Check if username is taken

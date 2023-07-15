@@ -1,34 +1,23 @@
 const httpStatus = require("http-status");
+const { userService } = require("../services");
 const catchAsync = require("../utils/catchAsync");
-const userService = require("../services/user.service");
-const rTracer = require("cls-rtracer");
 
-const getArtists = catchAsync(async (req, res) => {
-  console.log(`user Controller -> getArtists :: ${rTracer.id()}`);
+const followUser = catchAsync(async (req, res) => {
+  const { userIdToFollow } = req.params;
+  const followerUserId = req.user.sub;
 
-  // try {
-  //   const data = await userService.getArtists({});
-  //   res
-  //     .status(httpStatus.OK)
-  //     .send({ code: httpStatus.OK, message: "success", data: data });
-  // } catch (error) {
-  //   console.log(
-  //     `Exception :: user Controller -> getArtists -> ${
-  //       error.message
-  //     } :: ${rTracer.id()}`
-  //   );
-  //   return {};
-  // }
+  // Call the user service to follow/unfollow the user
+  const result = await userService.followUser(followerUserId, userIdToFollow);
+
+  res.status(httpStatus.OK).json({
+    code: httpStatus.OK,
+    message: result.isFollowing
+      ? "Successfully followed the user."
+      : "Successfully unfollowed the user.",
+    data: result,
+  });
 });
 
-const loginUser = catchAsync(async (req, res) => {
-  const body = req.body;
-  const data = await userService.loginUser({ body });
-  res
-    .status(httpStatus.OK)
-    .send({ code: httpStatus.OK, message: "success", data: data });
-});
 module.exports = {
-  getArtists,
-  loginUser,
+  followUser,
 };

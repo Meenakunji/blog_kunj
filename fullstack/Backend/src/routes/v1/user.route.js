@@ -1,9 +1,10 @@
 const express = require("express");
 const { userController } = require("../../controllers");
+const authMiddleware = require("../../middlewares/authMiddleware");
 const router = express.Router();
 
-router.route("/artist").get(userController.getArtists);
-
-router.route("/login").post(userController.loginUser);
+router
+  .route("/follow/:userIdToFollow")
+  .post(authMiddleware, userController.followUser);
 
 module.exports = router;
