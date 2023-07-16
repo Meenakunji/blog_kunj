@@ -6,7 +6,7 @@ const blogService = require("../services/blog.service");
 const rTracer = require("cls-rtracer");
 const { paginateQuery } = require("../utils/utility");
 const { ObjectId } = require("mongodb");
-const fs = require("fs")
+const fs = require("fs");
 
 const getBlogContent = catchAsync(async (req, res) => {
   console.log(`getBlogContent Controller -> getBlogContent :: ${rTracer.id()}`);
@@ -91,15 +91,15 @@ const uploadFiles = catchAsync(async (req, res) => {
     },
     region: "ap-south-1",
   });
-  console.log(req.file)
-  imagePath = req.file.path 
-  const blob = fs.readFileSync(imagePath)
+  console.log(req.file);
+  imagePath = req.file.path;
+  const blob = fs.readFileSync(imagePath);
 
   const command = new PutObjectCommand({
     Bucket: "jupiter-blog-content-images",
     Key: req.file.originalname,
     Body: blob,
-    ContentType: req.file.mimetype
+    ContentType: req.file.mimetype,
   });
 
   try {
@@ -168,6 +168,25 @@ const getUserBlogList = catchAsync(async (req, res) => {
   }
 });
 
+const deleteBlogContent = catchAsync(async (req, res) => {
+  console.log(
+    `deleteBlogContent Controller -> deleteBlogContent :: ${rTracer.id()}`
+  );
+  try {
+    const data = await blogService.deleteBlogContent(req.params.blogId);
+    res
+      .status(httpStatus.OK)
+      .send({ code: httpStatus.OK, message: "success", data: data });
+  } catch (error) {
+    console.log(
+      `Exception :: CMS deleteBlogContent -> deleteBlogContent -> ${
+        error.message
+      } :: ${rTracer.id()}`
+    );
+    return {};
+  }
+});
+
 module.exports = {
   getBlogContent,
   createBlogContent,
@@ -177,4 +196,5 @@ module.exports = {
   getBlogMarked,
   getBlogMarkedList,
   getUserBlogList,
+  deleteBlogContent,
 };
