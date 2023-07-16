@@ -113,6 +113,24 @@ const BlogDetailComponent = () => {
     setIsReplyPanelOpen(false);
   };
 
+  // blog delete
+  // user blog Mark or not
+  const { mutate: deletBlogContent } = useMutation(
+    (blogId) => fetcher.post(`http://localhost:3003/v1/blog/delete/${blogId}`),
+    {
+      onSuccess: (resData) => {
+        console.log("response delete blog", resData);
+      },
+      onError: (error) => {
+        alert(error?.response?.data?.message);
+      },
+    }
+  );
+
+  const handleBlogDelete = () => {
+    deletBlogContent(particularBlogContent?._id);
+  };
+
   return (
     <>
       <div className="container">
@@ -170,7 +188,7 @@ const BlogDetailComponent = () => {
                   <BackHandIcon />
                   <span>199</span>
                 </Typography>
-                <Typography variant="body1">
+                <Typography variant="body1" onClick={handleOpenReplyPanel}>
                   <ChatBubbleOutlineIcon />
                   <span>199</span>
                 </Typography>
@@ -191,8 +209,19 @@ const BlogDetailComponent = () => {
                   )}
                   {isReading ? "Pause" : "Read Blog"}
                 </Typography>
-                <Typography variant="body1" onClick={handleOpenReplyPanel}>
-                  <ChatBubbleOutlineIcon />
+                <Typography variant="body1">
+                  <img
+                    src="/images/about/share.svg"
+                    alt="share icon"
+                    width={17}
+                  />
+                </Typography>
+                <Typography variant="body1" onClick={() => handleBlogDelete()}>
+                  <img
+                    src="/images/about/more-horizontal.svg"
+                    alt="more"
+                    aria-label="More icon"
+                  />
                 </Typography>
               </Box>
             </Box>

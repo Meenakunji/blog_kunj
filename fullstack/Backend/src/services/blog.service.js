@@ -68,7 +68,6 @@ const createBlogContent = async (body, user) => {
 };
 
 // get all Blog Lists
-
 const getBlogList = async (options) => {
   const pipeline = [
     {
@@ -213,6 +212,21 @@ const getUserBlogList = async (filter) => {
   }
 };
 
+const deleteBlogContent = async (blogId) => {
+  console.log("Print filter", blogId);
+  // Find the blog content by its ID
+  const blogContent = await BlogContent.findById(blogId);
+
+  if (!blogContent) {
+    throw new ApiError(httpStatus.NOT_FOUND, "Blog content not found");
+  }
+
+  // Delete the blog content
+  const deleteBlogContent = await BlogContent.findByIdAndDelete(blogId);
+
+  return deleteBlogContent;
+};
+
 module.exports = {
   getBlogContent,
   createBlogContent,
@@ -221,4 +235,5 @@ module.exports = {
   getBlogMarked,
   getBlogMarkedList,
   getUserBlogList,
+  deleteBlogContent,
 };
