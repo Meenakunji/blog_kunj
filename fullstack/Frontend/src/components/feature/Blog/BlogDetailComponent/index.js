@@ -9,13 +9,18 @@ import { useMutation } from "react-query";
 import { useSelector } from "react-redux";
 import fetcher from "../../../../dataProvider";
 import styles from "../style";
+import BookmarkAddOutlinedIcon from "@mui/icons-material/BookmarkAddOutlined";
+import BlogReplyPanel from "../../../common/comment/CommentSection";
 
 const BlogDetailComponent = () => {
   const { particularBlogContent } = useSelector((state) => state.user);
-
   const [isReading, setIsReading] = useState(false);
   const [speechUtterance, setSpeechUtterance] = useState(null);
   const [userFollowBlog, setUserFollowBlog] = useState(false);
+  const [blogMarked, setBlogMarked] = useState(
+    particularBlogContent?.isMarkedBlog
+  );
+  const [isReplyPanelOpen, setIsReplyPanelOpen] = useState(false);
 
   const handleRead = () => {
     const contentText = particularBlogContent?.description;
@@ -76,6 +81,36 @@ const BlogDetailComponent = () => {
 
   const handleBlogUserFollow = (id) => {
     BlogUserFollow(id);
+  };
+
+  // user blog Mark or not
+  const { mutate: getMarkedBlogContent } = useMutation(
+    (blogId) => fetcher.post(`http://localhost:3003/v1/blog/mark/${blogId}`),
+    {
+      onSuccess: (resData) => {
+        setBlogMarked(resData?.data?.isMarkedBlog);
+      },
+      onError: (error) => {
+        alert(error?.response?.data?.message);
+      },
+    }
+  );
+
+  const handleMarkedBlog = () => {
+    getMarkedBlogContent(particularBlogContent?._id);
+  };
+
+  const handleOpenReplyPanel = () => {
+    setIsReplyPanelOpen(true);
+    // Scroll to the chat reply panel
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: "smooth",
+    });
+  };
+
+  const handleCloseReplyPanel = () => {
+    setIsReplyPanelOpen(false);
   };
 
   return (
@@ -141,8 +176,12 @@ const BlogDetailComponent = () => {
                 </Typography>
               </Box>
               <Box sx={styles.userBlog}>
-                <Typography variant="body1">
-                  <BookmarkBorderIcon />
+                <Typography variant="body1" onClick={() => handleMarkedBlog()}>
+                  {blogMarked ? (
+                    <BookmarkBorderIcon />
+                  ) : (
+                    <BookmarkAddOutlinedIcon />
+                  )}
                 </Typography>
                 <Typography variant="body1" onClick={handleRead}>
                   {isReading ? (
@@ -152,7 +191,7 @@ const BlogDetailComponent = () => {
                   )}
                   {isReading ? "Pause" : "Read Blog"}
                 </Typography>
-                <Typography variant="body1">
+                <Typography variant="body1" onClick={handleOpenReplyPanel}>
                   <ChatBubbleOutlineIcon />
                 </Typography>
               </Box>
@@ -178,6 +217,12 @@ const BlogDetailComponent = () => {
             </p>
           </Box>
         </Box>
+        {isReplyPanelOpen && (
+          <BlogReplyPanel
+            isOpen={isReplyPanelOpen}
+            onClose={handleCloseReplyPanel}
+          />
+        )}
       </div>
     </>
   );
