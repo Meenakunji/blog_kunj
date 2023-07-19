@@ -53,6 +53,8 @@
     "web3modal": "^1.9.12"
   },
   "devDependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^38.1.1",
+    "@ckeditor/ckeditor5-react": "^6.1.0",
     "eslint": "8.42.0",
     "eslint-config-next": "13.4.4"
   }
