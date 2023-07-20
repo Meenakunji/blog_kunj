@@ -91,16 +91,13 @@ export default function Profile() {
             Blog List Tab Content
           </Typography>
           <Divider style={{ backgroundColor: "#fff", height: "2px" }} />
-          <Box
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              flexWrap: "wrap",
-              gap: "20px",
-            }}
-          >
-            <BlogList />
-          </Box>
+          <div className="row">
+            <div className="col-md-10 mx-auto">
+              <div className="row">
+                <BlogList />
+              </div>
+            </div>
+          </div>
         </TabPanel>
       )}
       {router?.query?.tab === "bookmark_blog_list" && (

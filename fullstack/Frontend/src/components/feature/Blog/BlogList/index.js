@@ -108,8 +108,8 @@ export default function BlogContentListComponent({ data }) {
           );
 
           return (
-            <div className="col-md-4 mt-3" key={index}>
-              <div className="card p-3">
+            <div className="col-md-3 mt-4" key={index}>
+              <div className="cardBox">
                 <Box sx={style.mediaCard} key={index}>
                   <Box
                     component="img"

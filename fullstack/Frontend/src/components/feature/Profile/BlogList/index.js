@@ -33,47 +33,48 @@ export const BlogList = () => {
       {userBlogList &&
         userBlogList.map((item, index) => {
           return (
-            <div className="col-md-4 mt-3" key={index}>
-              <div className="card p-3">
+            <div className="col-md-12 mt-4" key={index}>
+              <Box sx={style.cardBox}>
                 <Box sx={style.mediaCard} key={index}>
                   <Box sx={style.chip} style={{ backgroundColor: item?.color }}>
                     {item?.blogTag}
                   </Box>
-
-                  <Box
-                    component="img"
-                    src={item?.image}
-                    style={{
-                      borderRadius: "8px",
-                    }}
-                  />
-                  <Typography variant="h2">{item?.blogTitle}</Typography>
-                  <Box
-                    sx={style.userdetails}
-                    onClick={() => router.push(`/profile?tab=home`)}
-                  >
-                    <Box
-                      component="img"
-                      src={item?.userData?.[0].picture}
-                      style={{
-                        borderRadius: "100px",
-                        width: "30px",
-                        height: "30px",
-                        border: "1px solid #c3c3c3",
-                      }}
-                    />
-                    <Typography variant="p">
-                      By {item?.userData?.[0]?.name} -{" "}
-                      {new Date(item?.creatAt).toLocaleDateString("en-US", {
-                        day: "numeric",
-                        month: "long",
-                        year: "numeric",
-                      })}
-                    </Typography>
-                  </Box>
-                  <Typography variant="p">{item?.description}</Typography>
+                  <div className="row">
+                    <div className="col-md-4">
+                      <Box component="img" src={item?.image} />
+                    </div>
+                    <div className="col-md-8">
+                      <Typography variant="h2">{item?.blogTitle}</Typography>
+                      <Box
+                        sx={style.userdetails}
+                        onClick={() => router.push(`/profile?tab=home`)}
+                      >
+                        <Box
+                          component="img"
+                          src={item?.userData?.[0].picture}
+                          style={{
+                            borderRadius: "100px",
+                            width: "30px",
+                            height: "30px",
+                            border: "1px solid #c3c3c3",
+                          }}
+                        />
+                        <Typography variant="Body1">
+                          By {item?.userData?.[0]?.name} -{" "}
+                          {new Date(item?.creatAt).toLocaleDateString("en-US", {
+                            day: "numeric",
+                            month: "long",
+                            year: "numeric",
+                          })}
+                        </Typography>
+                      </Box>
+                      <Typography variant="body1">
+                        {item?.description}
+                      </Typography>
+                    </div>
+                  </div>
                 </Box>
-              </div>
+              </Box>
             </div>
           );
         })}

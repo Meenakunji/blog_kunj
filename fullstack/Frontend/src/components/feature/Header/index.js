@@ -219,7 +219,7 @@ const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
               open={open}
               handleModalClose={() => handleClose()}
             />
-            <ul className="navbar-nav" style={{ color: "#fff" }}>
+            <ul className="navbar-nav">
               <li
                 className="nav-item"
                 onClick={() => {
