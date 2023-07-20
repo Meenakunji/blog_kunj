@@ -22,6 +22,7 @@ import Web3Modal from "web3modal";
 import eventBus from "../../../../utils/eventBus";
 import { setTheme } from "../../../redux/slices/layout";
 import { setToken } from "../../../redux/slices/user";
+import ToggleThemeBtn from "../../common/Button/toggleButton";
 import { EnhancedSearch } from "../../common/SearchInput";
 import AuthenticationComponent from "../auth";
 import styles from "./style";
@@ -239,6 +240,14 @@ const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
                   style={{ width: "45px" }}
                 />{" "} */}
                 Connect Wallet
+              </li>
+              <li lassName="navbar-nav" style={{ color: "#fff" }}>
+                <Box
+                  sx={{ ...styles.lightDarkDesktop, ...styles.lightDarkMobile }}
+                  onClick={handleThemeSwitch}
+                >
+                  <ToggleThemeBtn theme={theme} />
+                </Box>
               </li>
               {/* {navbarCMSItems.map((item) => (
                 <li className="nav-item" key={item.id}>

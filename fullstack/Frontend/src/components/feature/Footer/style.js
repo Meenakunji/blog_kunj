@@ -1,6 +1,6 @@
 const style = {
   footerSocail: {
-    background: "#2f2f2f",
+    backgroundColor: "custom.footerTop",
     width: "100%",
     padding: "20px 0",
   },
@@ -9,17 +9,17 @@ const style = {
     alignItems: "center",
     justifyContent: "space-between",
     "& p": {
-      color: "#fff",
+      color: "custom.white",
       fontSize: "20px",
       fontWeight: "500",
     },
   },
   footer: {
-    background: "#3c3c3c",
+    backgroundColor: "custom.footer",
     padding: "20px 0",
   },
   footerList: {
-    color: "#fff",
+    color: "custom.white",
     "& h5": {
       fontSize: "20px",
       marginBottom: "10px",
@@ -32,7 +32,7 @@ const style = {
       margin: "0",
       "& li": {
         fontSize: "15px",
-        color: "#fff",
+        color: "custom.white",
         padding: "6px 0",
         display: "flex",
         gap: "10px",
