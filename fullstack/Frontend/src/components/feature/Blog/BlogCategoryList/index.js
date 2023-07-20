@@ -70,8 +70,8 @@ export const BlogCategoryList = ({ blogListData }) => {
               key={index}
               style={{ cursor: "pointer" }}
             >
-              <div
-                className="card p-3"
+              <Box
+                sx={style.cardBox}
                 onClick={() => {
                   handleBlogContentListPage(item);
                 }}
@@ -84,7 +84,7 @@ export const BlogCategoryList = ({ blogListData }) => {
                   <ImageSlider images={item?.image} thumbnails={item?.image} />
                   <Typography variant="h2">{item?.blogTitle}</Typography>
 
-                  <Typography variant="p">
+                  <Typography variant="body1">
                     {item?.description?.split(" ").slice(0, 30).join(" ")}
                     <a
                       href={`/blog/${item?.blogTag}`}
@@ -95,7 +95,7 @@ export const BlogCategoryList = ({ blogListData }) => {
                     </a>
                   </Typography>
                 </Box>
-              </div>
+              </Box>
             </div>
           );
         })}
