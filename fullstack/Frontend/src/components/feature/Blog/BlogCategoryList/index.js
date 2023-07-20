@@ -66,7 +66,7 @@ export const BlogCategoryList = ({ blogListData }) => {
         blogListData?.map((item, index) => {
           return (
             <div
-              className="col-md-4 mt-3"
+              className="col-md-3 mt-4"
               key={index}
               style={{ cursor: "pointer" }}
             >

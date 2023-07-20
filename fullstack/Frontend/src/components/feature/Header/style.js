@@ -49,7 +49,7 @@ const style = {
         fontSize: "15px",
         padding: "10px",
         "& a": {
-          color: "#fff",
+          color: "custom.white",
           textDecoration: "none",
           fontWeight: "600",
         },
@@ -59,8 +59,9 @@ const style = {
       },
     },
     "& .scrolled": {
-      background: "#2f2f2f",
-      transition: "all 0.3s ease",
+      backgroundColor: "custom.PrimaryBgColor",
+      transition: "all 0.3s se4c",
+      boxShadow: "0 1px 6px 0 rgba(32, 33, 36, 0.28)",
     },
   },
   searchBox: {
@@ -77,6 +78,36 @@ const style = {
     fontSize: "14px",
     "& svg": {
       fontSize: "15px",
+    },
+  },
+
+  lightDarkDesktop: {
+    "& button": {
+      backgroundColor: "custom.white",
+      fontSize: "13px",
+      gap: "6px",
+      borderRadius: "100px",
+      color: "custom.ebony",
+      padding: "5px 23px",
+      height: "30px",
+      width: "109px",
+      "& svg": {
+        color: "custom.ebony",
+        fontSize: "18px",
+      },
+      "&:hover": {
+        backgroundColor: "custom.white",
+      },
+    },
+  },
+
+  lightDarkMobile: {
+    "@media(max-width:480px)": {
+      display: "flex",
+      "& img": {
+        width: "20px",
+        height: "20px",
+      },
     },
   },
 };

@@ -8,12 +8,29 @@ const style = {
       fontSize: "15px",
       fontWeight: "700",
       marginTop: "20px",
+      color: "#5f5f5f",
     },
     "& img": {
       width: "100%",
-      height: "400px",
+      height: "200px",
       objectFit: "cover",
     },
+    "& p": {
+      fontSize: "14px",
+      marginTop: "10px",
+      color: "#5f5f5f",
+      letterSpacing: "0.2px",
+      "& a": {
+        textDecoration: "none",
+        color: "#a6a6a6",
+      },
+    },
+  },
+  cardBox: {
+    boxShadow: "0 1px 3px rgba(32,33,36,.28)",
+    padding: "15px",
+    height: "100%",
+    background: "#fff",
   },
   blogTagcss: {
     borderRadius: "5px",
