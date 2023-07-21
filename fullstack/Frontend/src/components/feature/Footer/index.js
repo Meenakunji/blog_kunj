@@ -20,57 +20,51 @@ const FooterComponent = () => {
           <Box sx={style.footerSocailBottom}>
             <p>Get connected with us on social networks:</p>
             <Box sx={style.socailIcon}>
-              <Link href="/">
-                <a
-                  className="me-4 text-reset"
-                  style={{ color: "#fff !important" }}
-                >
-                  <FacebookIcon />
-                </a>
+              <Link
+                href="/"
+                className="me-4 text-reset"
+                style={{ color: "#fff !important" }}
+              >
+                <FacebookIcon />
               </Link>
-              <Link href="https://twitter.com/pankajk66711680">
-                <a
-                  target="_blank"
-                  className="me-4 text-reset"
-                  style={{ color: "#fff !important" }}
-                >
-                  <TwitterIcon />
-                </a>
+              <Link
+                href="https://twitter.com/pankajk66711680"
+                target="_blank"
+                className="me-4 text-reset"
+                style={{ color: "#fff !important" }}
+              >
+                <TwitterIcon />
               </Link>
-              <Link href="https://twitter.com/pankajk66711680">
-                <a
-                  target="_blank"
-                  className="me-4 text-reset"
-                  style={{ color: "#fff !important" }}
-                >
-                  <TwitterIcon />
-                </a>
+              <Link
+                href="https://twitter.com/pankajk66711680"
+                target="_blank"
+                className="me-4 text-reset"
+                style={{ color: "#fff !important" }}
+              >
+                <TwitterIcon />
               </Link>
-              <Link href="/">
-                <a
-                  className="me-4 text-reset"
-                  style={{ color: "#fff !important" }}
-                >
-                  <InstagramIcon />
-                </a>
+              <Link
+                href="/"
+                className="me-4 text-reset"
+                style={{ color: "#fff !important" }}
+              >
+                <InstagramIcon />
               </Link>
-              <Link href="https://www.linkedin.com/in/pankaj-kumar-meena-1b3922176/">
-                <a
-                  target="_blank"
-                  className="me-4 text-reset"
-                  style={{ color: "#fff !important" }}
-                >
-                  <LinkedInIcon />
-                </a>
+              <Link
+                href="https://www.linkedin.com/in/pankaj-kumar-meena-1b3922176/"
+                target="_blank"
+                className="me-4 text-reset"
+                style={{ color: "#fff !important" }}
+              >
+                <LinkedInIcon />
               </Link>
-              <Link href="whatsapp://send?text=8003356924">
-                <a
-                  target="_blank"
-                  className="me-4 text-reset"
-                  style={{ color: "#fff !important" }}
-                >
-                  <WhatsAppIcon />
-                </a>
+              <Link
+                href="whatsapp://send?text=8003356924"
+                target="_blank"
+                className="me-4 text-reset"
+                style={{ color: "#fff !important" }}
+              >
+                <WhatsAppIcon />
               </Link>
             </Box>
           </Box>
