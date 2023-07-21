@@ -1,5 +1,6 @@
 import { Box, ListItem } from "@mui/material";
 import List from "@mui/material/List";
+import Link from "next/link";
 import React from "react";
 import style from "./style";
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -19,44 +20,52 @@ const FooterComponent = () => {
           <Box sx={style.footerSocailBottom}>
             <p>Get connected with us on social networks:</p>
             <Box sx={style.socailIcon}>
-              <a
+              <Link
                 href="/"
                 className="me-4 text-reset"
                 style={{ color: "#fff !important" }}
               >
                 <FacebookIcon />
-              </a>
-              <a
+              </Link>
+              <Link
                 href="https://twitter.com/pankajk66711680"
                 target="_blank"
                 className="me-4 text-reset"
                 style={{ color: "#fff !important" }}
               >
                 <TwitterIcon />
-              </a>
-              <a
+              </Link>
+              <Link
+                href="https://twitter.com/pankajk66711680"
+                target="_blank"
+                className="me-4 text-reset"
+                style={{ color: "#fff !important" }}
+              >
+                <TwitterIcon />
+              </Link>
+              <Link
                 href="/"
                 className="me-4 text-reset"
                 style={{ color: "#fff !important" }}
               >
                 <InstagramIcon />
-              </a>
-              <a
+              </Link>
+              <Link
                 href="https://www.linkedin.com/in/pankaj-kumar-meena-1b3922176/"
                 target="_blank"
                 className="me-4 text-reset"
                 style={{ color: "#fff !important" }}
               >
                 <LinkedInIcon />
-              </a>
-              <a
+              </Link>
+              <Link
                 href="whatsapp://send?text=8003356924"
                 target="_blank"
-                title="Share on whatsapp"
-                style={{ color: "#fff !Important" }}
+                className="me-4 text-reset"
+                style={{ color: "#fff !important" }}
               >
                 <WhatsAppIcon />
-              </a>
+              </Link>
             </Box>
           </Box>
         </div>
