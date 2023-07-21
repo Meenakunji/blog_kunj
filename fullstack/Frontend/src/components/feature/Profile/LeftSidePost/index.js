@@ -64,7 +64,7 @@ const LeftSidePost = () => {
           <Typography variant="h4">RECENT COMMENTS</Typography>
           <Box sx={style.recentPost}>
             <Typography variant="body1">
-              admin: comment, just log in and view the post's...
+              admin: comment, just log in and view the post`&apos;`s...
             </Typography>
             <Typography variant="body1">
               <span>
@@ -75,7 +75,7 @@ const LeftSidePost = () => {
           </Box>
           <Box sx={style.recentPost}>
             <Typography variant="body1">
-              admin: comment, just log in and view the post's...
+              admin: comment, just log in and view the post`&apos;`s...
             </Typography>
             <Typography variant="body1">
               <span>
@@ -86,7 +86,7 @@ const LeftSidePost = () => {
           </Box>
           <Box sx={style.recentPost}>
             <Typography variant="body1">
-              admin: comment, just log in and view the post's...
+              admin: comment, just log in and view the post`&apos;`s...
             </Typography>
             <Typography variant="body1">
               <span>

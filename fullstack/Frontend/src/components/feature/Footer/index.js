@@ -1,5 +1,6 @@
 import { Box, ListItem } from "@mui/material";
 import List from "@mui/material/List";
+import Link from "next/link";
 import React from "react";
 import style from "./style";
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -19,44 +20,58 @@ const FooterComponent = () => {
           <Box sx={style.footerSocailBottom}>
             <p>Get connected with us on social networks:</p>
             <Box sx={style.socailIcon}>
-              <a
-                href="/"
-                className="me-4 text-reset"
-                style={{ color: "#fff !important" }}
-              >
-                <FacebookIcon />
-              </a>
-              <a
-                href="https://twitter.com/pankajk66711680"
-                target="_blank"
-                className="me-4 text-reset"
-                style={{ color: "#fff !important" }}
-              >
-                <TwitterIcon />
-              </a>
-              <a
-                href="/"
-                className="me-4 text-reset"
-                style={{ color: "#fff !important" }}
-              >
-                <InstagramIcon />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/pankaj-kumar-meena-1b3922176/"
-                target="_blank"
-                className="me-4 text-reset"
-                style={{ color: "#fff !important" }}
-              >
-                <LinkedInIcon />
-              </a>
-              <a
-                href="whatsapp://send?text=8003356924"
-                target="_blank"
-                title="Share on whatsapp"
-                style={{ color: "#fff !Important" }}
-              >
-                <WhatsAppIcon />
-              </a>
+              <Link href="/">
+                <a
+                  className="me-4 text-reset"
+                  style={{ color: "#fff !important" }}
+                >
+                  <FacebookIcon />
+                </a>
+              </Link>
+              <Link href="https://twitter.com/pankajk66711680">
+                <a
+                  target="_blank"
+                  className="me-4 text-reset"
+                  style={{ color: "#fff !important" }}
+                >
+                  <TwitterIcon />
+                </a>
+              </Link>
+              <Link href="https://twitter.com/pankajk66711680">
+                <a
+                  target="_blank"
+                  className="me-4 text-reset"
+                  style={{ color: "#fff !important" }}
+                >
+                  <TwitterIcon />
+                </a>
+              </Link>
+              <Link href="/">
+                <a
+                  className="me-4 text-reset"
+                  style={{ color: "#fff !important" }}
+                >
+                  <InstagramIcon />
+                </a>
+              </Link>
+              <Link href="https://www.linkedin.com/in/pankaj-kumar-meena-1b3922176/">
+                <a
+                  target="_blank"
+                  className="me-4 text-reset"
+                  style={{ color: "#fff !important" }}
+                >
+                  <LinkedInIcon />
+                </a>
+              </Link>
+              <Link href="whatsapp://send?text=8003356924">
+                <a
+                  target="_blank"
+                  className="me-4 text-reset"
+                  style={{ color: "#fff !important" }}
+                >
+                  <WhatsAppIcon />
+                </a>
+              </Link>
             </Box>
           </Box>
         </div>

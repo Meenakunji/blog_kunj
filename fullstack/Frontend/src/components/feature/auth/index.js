@@ -82,11 +82,12 @@ const AuthenticationComponent = ({ open, handleModalClose }) => {
                           <p>
                             WELCOME JUPITER BLOG is a platform where you can
                             explore the latest news, articles, and insights
-                            about various topics. Whether you're interested in
-                            technology, lifestyle, travel, or any other subject,
-                            our blog provides valuable content to keep you
-                            informed and engaged. Join our community today and
-                            embark on a journey of knowledge and discovery!
+                            about various topics. Whether you`&apos;`re
+                            interested in technology, lifestyle, travel, or any
+                            other subject, our blog provides valuable content to
+                            keep you informed and engaged. Join our community
+                            today and embark on a journey of knowledge and
+                            discovery!
                           </p>
                         </div>
                       </div>
@@ -114,7 +115,7 @@ const AuthenticationComponent = ({ open, handleModalClose }) => {
                       {isLoginOpen ? (
                         <Box>
                           <p className="text">
-                            Don't have an account?
+                            Don`&apos;`t have an account?
                             <a href="#" onClick={toggleDivs}>
                               Register here
                             </a>
