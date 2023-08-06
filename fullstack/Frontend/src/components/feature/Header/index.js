@@ -192,9 +192,7 @@ const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
   return (
     <Box sx={styles.navbar}>
       <nav
-        className={`navbar navbar-expand-lg fixed-top ${
-          isScrolled ? "scrolled" : ""
-        }`}
+        className={`navbar navbar-expand-lg ${isScrolled ? "scrolled" : ""}`}
       >
         <div className="container-fluid">
           <Box sx={styles.navbarbrand} onClick={() => router.push("/")}>
@@ -229,6 +227,14 @@ const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
               >
                 <EditIcon /> Create Blog
               </li>
+              <li lassName="navbar-nav" style={{ color: "#fff" }}>
+                <Box
+                  sx={{ ...styles.lightDarkDesktop, ...styles.lightDarkMobile }}
+                  onClick={handleThemeSwitch}
+                >
+                  <ToggleThemeBtn theme={theme} />
+                </Box>
+              </li>
               <li
                 onClick={() => {
                   connectMetaMask();
@@ -240,14 +246,6 @@ const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
                   style={{ width: "45px" }}
                 />{" "} */}
                 Connect Wallet
-              </li>
-              <li lassName="navbar-nav" style={{ color: "#fff" }}>
-                <Box
-                  sx={{ ...styles.lightDarkDesktop, ...styles.lightDarkMobile }}
-                  onClick={handleThemeSwitch}
-                >
-                  <ToggleThemeBtn theme={theme} />
-                </Box>
               </li>
               {/* {navbarCMSItems.map((item) => (
                 <li className="nav-item" key={item.id}>

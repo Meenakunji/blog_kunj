@@ -3,7 +3,6 @@ import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 
 const ToggleThemeBtn = ({ theme }) => {
-  console.log("theme", theme);
   return (
     <>
       {!!theme && (

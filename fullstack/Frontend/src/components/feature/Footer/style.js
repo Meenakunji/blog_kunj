@@ -1,48 +1,152 @@
 const style = {
-  footerSocail: {
-    backgroundColor: "custom.footerTop",
-    width: "100%",
-    padding: "20px 0",
-  },
-  footerSocailBottom: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    "& p": {
-      color: "custom.white",
-      fontSize: "20px",
-      fontWeight: "500",
+  newLatter: {
+    background: "#0D2436",
+    padding: "50px 0",
+    borderBottom: "1px solid #fff",
+    "&:last-child": {
+      borderBottom: "none",
     },
   },
-  footer: {
-    backgroundColor: "custom.footer",
-    padding: "20px 0",
+  newLatterSection: {
+    "& h6": {
+      fontSize: "35px",
+      fontWeight: "700",
+      color: "#fff",
+      lineHeight: "35px",
+    },
+    "& p": {
+      color: "#5A7184",
+      fontSize: "16px",
+    },
+    "& form": {
+      display: "flex",
+      gap: "10px",
+      margin: "30px 0",
+      "& input": {
+        width: "100%",
+        background: "#fff",
+        borderRadius: "8px",
+        border: "none",
+        padding: "15px",
+        height: "45px",
+        fontSize: "15px",
+        color: "#5A7184",
+      },
+      "& button": {
+        background: "#1565D8",
+        padding: "10px",
+        borderRadius: "8px",
+        width: "185px",
+        fontSize: "15px",
+        color: "#fff",
+        textTransform: "unset",
+
+        "&:hover": {
+          background: "#1565D8",
+        },
+      },
+    },
+  },
+  bestWeek: {
+    width: "450px",
+    position: "relative",
+    marginLeft: "auto",
+  },
+  bestWeekBox: {
+    position: "relative",
+    zIndex: "2",
+    borderRadius: "16px",
+    overflow: "hidden",
+    background: "#fff",
+    padding: "2px",
+    "& img": {
+      width: "100%",
+    },
+  },
+  bestWeekDetails: {
+    padding: "20px",
+    "& h5": {
+      fontSize: "24px",
+      color: "#183B56",
+      fontWeight: "700",
+    },
+    "& p": {
+      color: "##5A7184",
+      fontSize: "18px",
+    },
+  },
+
+  rightBg: {
+    position: "absolute",
+    right: "-50px",
+    top: "50px",
+  },
+  leftBg: {
+    position: "absolute",
+    left: "-50px",
+    bottom: "50px",
+  },
+  footerDetails: {
+    "& p": {
+      color: "#5A7184",
+      fontSize: "16px",
+      marginTop: "20px",
+    },
   },
   footerList: {
-    color: "custom.white",
-    "& h5": {
-      fontSize: "20px",
+    "& h4": {
+      color: "#5A7184",
+      fontSize: "18px",
+      fontWeight: "700",
       marginBottom: "10px",
-    },
-    "& p": {
-      fontSize: "14px",
     },
     "& ul": {
       padding: "0",
       margin: "0",
       "& li": {
-        fontSize: "15px",
-        color: "custom.white",
+        listStyle: "none",
+        color: "#5A7184",
+        fontSize: "16px",
+        fontWeight: "400",
         padding: "6px 0",
+      },
+    },
+  },
+
+  copyRight: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: "10px",
+    marginTop: "30px",
+    "& p": {
+      color: "#2d5473",
+      fontSize: "14px",
+    },
+  },
+  footerList2: {
+    "& h4": {
+      color: "#5A7184",
+      fontSize: "18px",
+      fontWeight: "700",
+      marginBottom: "10px",
+    },
+    "& ul": {
+      padding: "0",
+      margin: "20px 0px",
+      "& li": {
+        listStyle: "none",
+        color: "#5A7184",
+        fontSize: "16px",
+        fontWeight: "400",
+        marginBottom: "12px",
+        background: "#0c2131",
+        borderRadius: "2px",
+        padding: "8px",
         display: "flex",
-        gap: "10px",
         alignItems: "center",
-        "& svg": {
-          fontSize: "18px",
-        },
-        "&:last-child": {
-          padding: "0px",
-        },
+        gap: "10px",
+        width: "146px",
       },
     },
   },
