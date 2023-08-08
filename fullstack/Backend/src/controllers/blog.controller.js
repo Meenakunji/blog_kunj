@@ -187,6 +187,46 @@ const deleteBlogContent = catchAsync(async (req, res) => {
   }
 });
 
+const getSearchBlogList = catchAsync(async (req, res) => {
+  try {
+    const data = await blogService.getSearchBlogList(req.query.blog);
+
+    if (data.length === 0) {
+      return res.status(httpStatus.NOT_FOUND).send({
+        code: httpStatus.NOT_FOUND,
+        message: "No matching blogs found",
+        data: [],
+      });
+    }
+
+    res.status(httpStatus.OK).send({
+      code: httpStatus.OK,
+      message: "success",
+      data: data,
+    });
+  } catch (error) {
+    console.log(
+      `Exception :: API getSearchBlogList -> getSearchBlogList -> ${
+        error.message
+      } :: ${rTracer.id()}`
+    );
+
+    if (error.message === "No matching blogs found") {
+      return res.status(httpStatus.NOT_FOUND).send({
+        code: httpStatus.NOT_FOUND,
+        message: "No matching blogs found with the given title",
+        data: [],
+      });
+    }
+
+    res.status(httpStatus.INTERNAL_SERVER_ERROR).send({
+      code: httpStatus.INTERNAL_SERVER_ERROR,
+      message: "Internal server error",
+      data: [],
+    });
+  }
+});
+
 module.exports = {
   getBlogContent,
   createBlogContent,
@@ -197,4 +237,5 @@ module.exports = {
   getBlogMarkedList,
   getUserBlogList,
   deleteBlogContent,
+  getSearchBlogList,
 };

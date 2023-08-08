@@ -227,6 +227,21 @@ const deleteBlogContent = async (blogId) => {
   return deleteBlogContent;
 };
 
+const getSearchBlogList = async (blogTitle) => {
+  try {
+    const query = { blogTitle: { $regex: `^${blogTitle}`, $options: "i" } };
+    const result = await BlogContent.find(query).exec();
+
+    if (result.length === 0) {
+      throw new Error("No matching blogs found");
+    }
+    return result;
+  } catch (error) {
+    console.error("Error searching for blogs by title", error);
+    throw error; // Re-throw the error to be caught in the controller
+  }
+};
+
 module.exports = {
   getBlogContent,
   createBlogContent,
@@ -236,4 +251,5 @@ module.exports = {
   getBlogMarkedList,
   getUserBlogList,
   deleteBlogContent,
+  getSearchBlogList,
 };
