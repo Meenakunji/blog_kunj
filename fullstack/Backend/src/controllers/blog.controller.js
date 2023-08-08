@@ -261,6 +261,21 @@ const getRecommendationsBlogList = catchAsync(async (req, res) => {
   }
 });
 
+// get recent post blog list
+const getRecentBlogList = catchAsync(async (req, res) => {
+  try {
+    const data = await blogService.getRecentBlogList(req, res);
+    res
+      .status(httpStatus.OK)
+      .json({ code: httpStatus.OK, message: "success", data: data });
+  } catch (error) {
+    console.log(
+      `Exception :: CMS getRecentBlogList -> getRecentBlogList -> ${error.message}`
+    );
+    res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ message: "error" });
+  }
+});
+
 module.exports = {
   getBlogContent,
   createBlogContent,
@@ -274,4 +289,5 @@ module.exports = {
   getSearchBlogList,
   updateBlogReadcount,
   getRecommendationsBlogList,
+  getRecentBlogList,
 };

@@ -288,7 +288,21 @@ const getRecommendationsBlogList = async (req, res) => {
 
     return recommendedBlogs;
   } catch (error) {
-    res.status(500).json({ message: "Internal server error" });
+    throw error;
+  }
+};
+
+// get recentPost blog
+const getRecentBlogList = async (req, res) => {
+  try {
+    const numRecentBlogs = req.query.num || 5; // Number of recent blogs to return
+    const recentBlogs = await BlogContent.find()
+      .sort({ createdAt: -1 }) // Sort by creation date in descending order
+      .limit(numRecentBlogs);
+
+    return recentBlogs;
+  } catch (error) {
+    throw error;
   }
 };
 
@@ -304,4 +318,5 @@ module.exports = {
   getSearchBlogList,
   updateBlogReadcount,
   getRecommendationsBlogList,
+  getRecentBlogList,
 };

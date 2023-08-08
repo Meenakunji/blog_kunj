@@ -58,4 +58,7 @@ router
 //Blog recommendtion List API
 router.route("/recommendations").get(blogController.getRecommendationsBlogList);
 
+//recently Uploaded Blog list
+router.route("/recent-blogs").get(blogController.getRecentBlogList);
+
 module.exports = router;
