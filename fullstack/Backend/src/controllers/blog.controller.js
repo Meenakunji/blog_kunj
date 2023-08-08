@@ -228,6 +228,7 @@ const getSearchBlogList = catchAsync(async (req, res) => {
   }
 });
 
+// blog read count
 const updateBlogReadcount = catchAsync(async (req, res) => {
   const userId = new ObjectId(req.user);
   try {
@@ -246,6 +247,20 @@ const updateBlogReadcount = catchAsync(async (req, res) => {
   }
 });
 
+const getRecommendationsBlogList = catchAsync(async (req, res) => {
+  try {
+    const data = await blogService.getRecommendationsBlogList(req, res);
+    res
+      .status(httpStatus.OK)
+      .json({ code: httpStatus.OK, message: "success", data: data });
+  } catch (error) {
+    console.log(
+      `Exception :: CMS getRecommendationsBlogList -> getRecommendationsBlogList -> ${error.message}`
+    );
+    res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ message: "error" });
+  }
+});
+
 module.exports = {
   getBlogContent,
   createBlogContent,
@@ -258,4 +273,5 @@ module.exports = {
   deleteBlogContent,
   getSearchBlogList,
   updateBlogReadcount,
+  getRecommendationsBlogList,
 };

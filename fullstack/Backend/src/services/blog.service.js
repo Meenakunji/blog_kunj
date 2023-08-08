@@ -272,6 +272,26 @@ const updateBlogReadcount = async (blogId, userId) => {
     throw error;
   }
 };
+
+const getRecommendationsBlogList = async (req, res) => {
+  try {
+    const numRecommendations = req.query.num || 5;
+    const recommendedBlogIds = await BlogContent.distinct("_id", {
+      blogReadCount: { $gt: 0 },
+    });
+
+    const recommendedBlogs = await BlogContent.find({
+      _id: { $in: recommendedBlogIds },
+    })
+      .sort({ blogReadCount: -1 })
+      .limit(numRecommendations);
+
+    return recommendedBlogs;
+  } catch (error) {
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 module.exports = {
   getBlogContent,
   createBlogContent,
@@ -283,4 +303,5 @@ module.exports = {
   deleteBlogContent,
   getSearchBlogList,
   updateBlogReadcount,
+  getRecommendationsBlogList,
 };

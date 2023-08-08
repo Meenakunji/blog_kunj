@@ -55,4 +55,7 @@ router
     blogController.updateBlogReadcount
   );
 
+//Blog recommendtion List API
+router.route("/recommendations").get(blogController.getRecommendationsBlogList);
+
 module.exports = router;
