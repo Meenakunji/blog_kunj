@@ -1,0 +1,22 @@
+<svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Heart" clip-path="url(#clip0_5_92)">
+<g id="Base" filter="url(#filter0_d_5_92)">
+<rect width="26.0915" height="25.6338" rx="12.8169" fill="#1576D8"/>
+</g>
+<path id="heart" d="M13.4917 17.4151L17.703 13.128C18.9282 11.8814 18.8564 9.81727 17.4897 8.66717C16.2971 7.66515 14.5233 7.84538 13.4286 8.95899L12.9999 9.39456L12.5712 8.95899C11.4786 7.84538 9.70276 7.66515 8.51013 8.66717C7.1434 9.81727 7.07156 11.8814 8.29467 13.128L12.5059 17.4151C12.7779 17.6919 13.2197 17.6919 13.4917 17.4151Z" fill="white"/>
+</g>
+<defs>
+<filter id="filter0_d_5_92" x="-11.4437" y="-9.15493" width="48.9789" height="48.5211" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="2.28873"/>
+<feGaussianBlur stdDeviation="5.72183"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.2 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_5_92"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_5_92" result="shape"/>
+</filter>
+<clipPath id="clip0_5_92">
+<rect width="26" height="25.6338" fill="white"/>
+</clipPath>
+</defs>
+</svg>
