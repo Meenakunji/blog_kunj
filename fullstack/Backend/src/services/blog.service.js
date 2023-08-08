@@ -1,4 +1,4 @@
-const { BlogContent, BlogLists } = require("../models");
+const { BlogContent, BlogLists, VisitedBlog } = require("../models");
 
 const rTracer = require("cls-rtracer");
 const ApiError = require("../utils/ApiError");
@@ -242,6 +242,36 @@ const getSearchBlogList = async (blogTitle) => {
   }
 };
 
+const updateBlogReadcount = async (blogId, userId) => {
+  try {
+    const blog = await BlogContent.findById(blogId);
+
+    if (!blog) {
+      throw new Error("Blog not found");
+    }
+
+    const visitedBlog = await VisitedBlog.findOne({
+      userId: userId,
+      blogId: blogId,
+    });
+
+    if (!visitedBlog) {
+      const newVisitedBlog = new VisitedBlog({
+        userId,
+        blogId,
+      });
+      await newVisitedBlog.save();
+
+      // Increment the readCount and save
+      blog.blogReadCount++;
+      await blog.save();
+    }
+
+    return blog;
+  } catch (error) {
+    throw error;
+  }
+};
 module.exports = {
   getBlogContent,
   createBlogContent,
@@ -252,4 +282,5 @@ module.exports = {
   getUserBlogList,
   deleteBlogContent,
   getSearchBlogList,
+  updateBlogReadcount,
 };

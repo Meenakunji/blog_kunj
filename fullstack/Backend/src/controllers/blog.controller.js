@@ -187,6 +187,7 @@ const deleteBlogContent = catchAsync(async (req, res) => {
   }
 });
 
+// search blog based on titile
 const getSearchBlogList = catchAsync(async (req, res) => {
   try {
     const data = await blogService.getSearchBlogList(req.query.blog);
@@ -227,6 +228,24 @@ const getSearchBlogList = catchAsync(async (req, res) => {
   }
 });
 
+const updateBlogReadcount = catchAsync(async (req, res) => {
+  const userId = new ObjectId(req.user);
+  try {
+    const data = await blogService.updateBlogReadcount(
+      req.params.blogId,
+      userId
+    );
+    res
+      .status(httpStatus.OK)
+      .json({ code: httpStatus.OK, message: "success", data: data });
+  } catch (error) {
+    console.log(
+      `Exception :: CMS updateBlogReadcount -> updateBlogReadcount -> ${error.message}`
+    );
+    res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ message: "error" });
+  }
+});
+
 module.exports = {
   getBlogContent,
   createBlogContent,
@@ -238,4 +257,5 @@ module.exports = {
   getUserBlogList,
   deleteBlogContent,
   getSearchBlogList,
+  updateBlogReadcount,
 };
