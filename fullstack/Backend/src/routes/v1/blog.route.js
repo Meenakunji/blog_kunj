@@ -43,4 +43,22 @@ router.route("/user-blog-list").get(VerifyUser, blogController.getUserBlogList);
 // blog delete
 router.route("/delete/:blogId").post(blogController.deleteBlogContent);
 
+// blog search API list
+router.route("/search").get(blogController.getSearchBlogList);
+
+// blog search API list
+router
+  .route("/read-count/:blogId")
+  .post(
+    VerifyUser,
+    validate(blogValidation.blogMarked),
+    blogController.updateBlogReadcount
+  );
+
+//Blog recommendtion List API
+router.route("/recommendations").get(blogController.getRecommendationsBlogList);
+
+//recently Uploaded Blog list
+router.route("/recent-blogs").get(blogController.getRecentBlogList);
+
 module.exports = router;

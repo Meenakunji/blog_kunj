@@ -1,4 +1,4 @@
-const { BlogContent, BlogLists } = require("../models");
+const { BlogContent, BlogLists, VisitedBlog } = require("../models");
 
 const rTracer = require("cls-rtracer");
 const ApiError = require("../utils/ApiError");
@@ -227,6 +227,85 @@ const deleteBlogContent = async (blogId) => {
   return deleteBlogContent;
 };
 
+const getSearchBlogList = async (blogTitle) => {
+  try {
+    const query = { blogTitle: { $regex: `^${blogTitle}`, $options: "i" } };
+    const result = await BlogContent.find(query).exec();
+
+    if (result.length === 0) {
+      throw new Error("No matching blogs found");
+    }
+    return result;
+  } catch (error) {
+    console.error("Error searching for blogs by title", error);
+    throw error; // Re-throw the error to be caught in the controller
+  }
+};
+
+const updateBlogReadcount = async (blogId, userId) => {
+  try {
+    const blog = await BlogContent.findById(blogId);
+
+    if (!blog) {
+      throw new Error("Blog not found");
+    }
+
+    const visitedBlog = await VisitedBlog.findOne({
+      userId: userId,
+      blogId: blogId,
+    });
+
+    if (!visitedBlog) {
+      const newVisitedBlog = new VisitedBlog({
+        userId,
+        blogId,
+      });
+      await newVisitedBlog.save();
+
+      // Increment the readCount and save
+      blog.blogReadCount++;
+      await blog.save();
+    }
+
+    return blog;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const getRecommendationsBlogList = async (req, res) => {
+  try {
+    const numRecommendations = req.query.num || 5;
+    const recommendedBlogIds = await BlogContent.distinct("_id", {
+      blogReadCount: { $gt: 0 },
+    });
+
+    const recommendedBlogs = await BlogContent.find({
+      _id: { $in: recommendedBlogIds },
+    })
+      .sort({ blogReadCount: -1 })
+      .limit(numRecommendations);
+
+    return recommendedBlogs;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// get recentPost blog
+const getRecentBlogList = async (req, res) => {
+  try {
+    const numRecentBlogs = req.query.num || 5; // Number of recent blogs to return
+    const recentBlogs = await BlogContent.find()
+      .sort({ createdAt: -1 }) // Sort by creation date in descending order
+      .limit(numRecentBlogs);
+
+    return recentBlogs;
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   getBlogContent,
   createBlogContent,
@@ -236,4 +315,8 @@ module.exports = {
   getBlogMarkedList,
   getUserBlogList,
   deleteBlogContent,
+  getSearchBlogList,
+  updateBlogReadcount,
+  getRecommendationsBlogList,
+  getRecentBlogList,
 };

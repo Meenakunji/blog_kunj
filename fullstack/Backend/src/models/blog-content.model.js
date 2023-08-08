@@ -42,6 +42,10 @@ const blogContentSchema = mongoose.Schema(
       enum: ["html", "css", "python", "java", "php", "javascript", "go"],
       default: "javascript",
     },
+    blogReadCount: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,

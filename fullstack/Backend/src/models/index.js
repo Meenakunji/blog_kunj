@@ -5,4 +5,4 @@ module.exports.FaqLists = require("./faq-list.model");
 module.exports.HomeSliderVideos = require("./home-page.model");
 module.exports.DisposableDomain = require("./disposable-domains.model");
 module.exports.Token = require("./token.model.js");
-
+module.exports.VisitedBlog = require("./visitedBlog.modal");

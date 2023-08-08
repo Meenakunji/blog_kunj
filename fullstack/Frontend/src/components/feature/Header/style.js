@@ -41,9 +41,11 @@ const style = {
     },
   },
   navbar: {
-    backgroundColor: "custom.PrimaryBgColor",
     color: "custom.white",
-
+    position: "absolute",
+    top: "0",
+    width: "100%",
+    zIndex: "2",
     "& .navbar-nav": {
       "& li": {
         fontSize: "15px",

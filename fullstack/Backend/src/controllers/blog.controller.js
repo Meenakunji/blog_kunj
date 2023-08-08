@@ -187,6 +187,95 @@ const deleteBlogContent = catchAsync(async (req, res) => {
   }
 });
 
+// search blog based on titile
+const getSearchBlogList = catchAsync(async (req, res) => {
+  try {
+    const data = await blogService.getSearchBlogList(req.query.blog);
+
+    if (data.length === 0) {
+      return res.status(httpStatus.NOT_FOUND).send({
+        code: httpStatus.NOT_FOUND,
+        message: "No matching blogs found",
+        data: [],
+      });
+    }
+
+    res.status(httpStatus.OK).send({
+      code: httpStatus.OK,
+      message: "success",
+      data: data,
+    });
+  } catch (error) {
+    console.log(
+      `Exception :: API getSearchBlogList -> getSearchBlogList -> ${
+        error.message
+      } :: ${rTracer.id()}`
+    );
+
+    if (error.message === "No matching blogs found") {
+      return res.status(httpStatus.NOT_FOUND).send({
+        code: httpStatus.NOT_FOUND,
+        message: "No matching blogs found with the given title",
+        data: [],
+      });
+    }
+
+    res.status(httpStatus.INTERNAL_SERVER_ERROR).send({
+      code: httpStatus.INTERNAL_SERVER_ERROR,
+      message: "Internal server error",
+      data: [],
+    });
+  }
+});
+
+// blog read count
+const updateBlogReadcount = catchAsync(async (req, res) => {
+  const userId = new ObjectId(req.user);
+  try {
+    const data = await blogService.updateBlogReadcount(
+      req.params.blogId,
+      userId
+    );
+    res
+      .status(httpStatus.OK)
+      .json({ code: httpStatus.OK, message: "success", data: data });
+  } catch (error) {
+    console.log(
+      `Exception :: CMS updateBlogReadcount -> updateBlogReadcount -> ${error.message}`
+    );
+    res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ message: "error" });
+  }
+});
+
+const getRecommendationsBlogList = catchAsync(async (req, res) => {
+  try {
+    const data = await blogService.getRecommendationsBlogList(req, res);
+    res
+      .status(httpStatus.OK)
+      .json({ code: httpStatus.OK, message: "success", data: data });
+  } catch (error) {
+    console.log(
+      `Exception :: CMS getRecommendationsBlogList -> getRecommendationsBlogList -> ${error.message}`
+    );
+    res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ message: "error" });
+  }
+});
+
+// get recent post blog list
+const getRecentBlogList = catchAsync(async (req, res) => {
+  try {
+    const data = await blogService.getRecentBlogList(req, res);
+    res
+      .status(httpStatus.OK)
+      .json({ code: httpStatus.OK, message: "success", data: data });
+  } catch (error) {
+    console.log(
+      `Exception :: CMS getRecentBlogList -> getRecentBlogList -> ${error.message}`
+    );
+    res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ message: "error" });
+  }
+});
+
 module.exports = {
   getBlogContent,
   createBlogContent,
@@ -197,4 +286,8 @@ module.exports = {
   getBlogMarkedList,
   getUserBlogList,
   deleteBlogContent,
+  getSearchBlogList,
+  updateBlogReadcount,
+  getRecommendationsBlogList,
+  getRecentBlogList,
 };

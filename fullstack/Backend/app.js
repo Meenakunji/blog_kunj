@@ -9,6 +9,7 @@ const config = require("./src/config/config");
 const routes = require("./src/routes/v1");
 const ApiError = require("./src/utils/ApiError");
 const rTracer = require("cls-rtracer");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use(express.urlencoded({ extended: true }));
 // app.use(xss());
 app.use(mongoSanitize());
 
+app.use(cookieParser());
 /** Ping endpoint */
 app.get("/", (req, res) => {
   res.send("Hello from server!");
