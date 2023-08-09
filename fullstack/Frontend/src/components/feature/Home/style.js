@@ -226,6 +226,7 @@ const style = {
     alignItems: "center",
     justifyContent: "space-between",
     marginBottom: "30px",
+    marginTop: "30px",
     "& h2": {
       fontSize: "40px",
       color: "#183b56",

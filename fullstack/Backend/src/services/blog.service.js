@@ -3,6 +3,7 @@ const { BlogContent, BlogLists, VisitedBlog } = require("../models");
 const rTracer = require("cls-rtracer");
 const ApiError = require("../utils/ApiError");
 const httpStatus = require("http-status");
+const user = require("../models/user.model");
 
 const getBlogContent = async (Params) => {
   const query = {
@@ -280,11 +281,29 @@ const getRecommendationsBlogList = async (req, res) => {
       blogReadCount: { $gt: 0 },
     });
 
-    const recommendedBlogs = await BlogContent.find({
-      _id: { $in: recommendedBlogIds },
-    })
-      .sort({ blogReadCount: -1 })
-      .limit(numRecommendations);
+    const recommendedBlogs = await BlogContent.aggregate([
+      {
+        $match: {
+          _id: { $in: recommendedBlogIds },
+        },
+      },
+      {
+        $lookup: {
+          from: "users",
+          localField: "user",
+          foreignField: "_id",
+          as: "userData",
+        },
+      },
+      {
+        $sort: {
+          blogReadCount: -1,
+        },
+      },
+      {
+        $limit: numRecommendations,
+      },
+    ]);
 
     return recommendedBlogs;
   } catch (error) {
@@ -295,13 +314,53 @@ const getRecommendationsBlogList = async (req, res) => {
 // get recentPost blog
 const getRecentBlogList = async (req, res) => {
   try {
-    const numRecentBlogs = req.query.num || 5; // Number of recent blogs to return
+    const numRecentBlogs = req.query.num || 3; // Number of recent blogs to return
     const recentBlogs = await BlogContent.find()
       .sort({ createdAt: -1 }) // Sort by creation date in descending order
       .limit(numRecentBlogs);
 
     return recentBlogs;
   } catch (error) {
+    throw error;
+  }
+};
+
+const getPopularBloggerBlogList = async (req, res) => {
+  try {
+    const numRecommendations = req.query.num || 30;
+    const Project = [
+      {
+        $sort: {
+          followCount: -1,
+        },
+      },
+      {
+        $lookup: {
+          from: "jupiter_blog_contents",
+          localField: "_id",
+          foreignField: "user",
+          as: "result",
+        },
+      },
+      {
+        $limit: numRecommendations,
+      },
+      {
+        $project: {
+          name: 1,
+          email: 1,
+          profilePic: 1,
+          followCount: 1,
+          result: 1,
+        },
+      },
+    ];
+    const popularBloggers = await user.aggregate(Project);
+
+    // Sending the response
+    return popularBloggers;
+  } catch (error) {
+    // Handling errors
     throw error;
   }
 };
@@ -319,4 +378,5 @@ module.exports = {
   updateBlogReadcount,
   getRecommendationsBlogList,
   getRecentBlogList,
+  getPopularBloggerBlogList,
 };
