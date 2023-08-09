@@ -11,7 +11,7 @@ import React from "react";
 import DoneIcon from "@mui/icons-material/Done";
 import style from "../style";
 
-export const RecommendationBlog = () => {
+export const RecommendationBlog = ({ recommendationBlogList }) => {
   return (
     <section
       style={{

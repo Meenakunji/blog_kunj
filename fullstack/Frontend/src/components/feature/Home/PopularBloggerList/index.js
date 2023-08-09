@@ -10,17 +10,19 @@ import {
 } from "@mui/material";
 import style from "../style";
 
-export const PopularBlog = ({ popularBlogList }) => {
+export const PopularBloggerList = ({ popularBlogger }) => {
+  // console.log("recentBlogList", popularBlogger.slice(0, 3));
+
+  const PopularBloggerData = popularBlogger.slice(0, 3);
   return (
-    <section style={{ paddingTop: "0" }}>
+    <section>
       <Container maxWidth="lg">
         <Box sx={style.popularArticles}>
           <Box sx={style.popularArticlesDetails}>
-            <Typography variant="h2">Popular Blog</Typography>
+            <Typography variant="h2">Popular Blogger</Typography>
             <Typography variant="body1">
               In publishing and graphic design, Lorem ipsum is a placeholder
-              text commonlyand graphic design, Lorem ipsum is a placeholder text
-              commonly
+              text commonlyand graphic design,
             </Typography>
           </Box>
           <Button>
@@ -28,36 +30,43 @@ export const PopularBlog = ({ popularBlogList }) => {
           </Button>
         </Box>
         <Grid container spacing={2}>
-          {popularBlogList?.length > 0 &&
-            popularBlogList?.map((item, index) => {
+          {PopularBloggerData?.length > 0 &&
+            PopularBloggerData?.map((item, index) => {
               return (
-                <Grid item xs={6} md={6} key={index}>
+                <Grid item xs={4} md={4} key={index}>
                   <Box sx={style.popularArticlesList}>
                     <img
-                      src={item?.image}
-                      alt=""
-                      style={{
-                        width: "100%",
-                        height: "370px",
-                        objectFit: "cover",
-                      }}
+                      src={
+                        item?.result?.[0]?.image ||
+                        "https://images.pexels.com/photos/12314825/pexels-photo-12314825.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                      }
+                      alt={item?.result?.[0]?.name}
+                      style={{ width: "100%", height: "500px" }}
                     />
                     <Box sx={style.popularArticlesHeading}>
-                      <Typography variant="h3">{item?.blogTitle}</Typography>
+                      <Typography variant="h4">
+                        {item?.result?.[0]?.blogTitle}
+                      </Typography>
+                      <Typography variant="body1">
+                        {item?.result?.[0]?.description}
+                      </Typography>
                       <Box sx={style.cardBottomSection}>
                         <Box sx={style.profileDetails}>
                           <Box sx={style.profileSection}>
                             <Avatar>
                               <img
-                                src={item?.userData?.[0]?.profilePic}
-                                alt=""
+                                src={
+                                  item?.profilePic ||
+                                  "https://avatars.dicebear.com/api/bottts/64b403d214e4627eb1a4b4eb.svg"
+                                }
+                                alt={item?.name}
                                 style={{ width: "40px" }}
                               />
                             </Avatar>
                           </Box>
                           <Box sx={style.profileName}>
                             <Typography variant="body1" sx={{ color: "#fff" }}>
-                              {item?.userData?.[0]?.name}
+                              {item?.name}
                             </Typography>
                             <Box sx={style.dFlex}>
                               <span>
@@ -74,7 +83,9 @@ export const PopularBlog = ({ popularBlogList }) => {
                           </Box>
                         </Box>
                         <Box sx={style.date} style={{ color: "#798b9b" }}>
-                          {new Date(item?.creatAt).toLocaleDateString("en-US", {
+                          {new Date(
+                            item?.result?.[0]?.createdAt
+                          ).toLocaleDateString("en-US", {
                             day: "numeric",
                             month: "short",
                           })}
