@@ -126,7 +126,12 @@ const Header = () => {
       />
       <AppBar sx={{ background: "transparent", boxShadow: "none" }}>
         <Toolbar>
-          <Typography sx={{ fontSize: "2rem" }}>Shoppee</Typography>
+          <Typography
+            sx={{ fontSize: "2rem" }}
+            onClick={() => router.push("/")}
+          >
+            Shoppee
+          </Typography>
           {isMatch ? (
             <DrawerComp />
           ) : (
