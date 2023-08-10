@@ -73,4 +73,7 @@ router.route("/popular-blogger").get(blogController.getPopularBloggerBlogList);
 //recently Uploaded Blog list
 router.route("/recent-blogs").get(blogController.getRecentBlogList);
 
+// get all Blog Content
+router.route("/blog-contents").get(blogController.getAllBlogList);
+
 module.exports = router;

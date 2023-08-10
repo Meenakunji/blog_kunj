@@ -365,6 +365,25 @@ const getPopularBloggerBlogList = async (req, res) => {
   }
 };
 
+const getAllBlogList = async (req, res) => {
+  try {
+    const Project = [
+      {
+        $lookup: {
+          from: "users",
+          localField: "user",
+          foreignField: "_id",
+          as: "userData",
+        },
+      },
+    ];
+    const data = await BlogContent.aggregate(Project);
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   getBlogContent,
   createBlogContent,
@@ -379,4 +398,5 @@ module.exports = {
   getRecommendationsBlogList,
   getRecentBlogList,
   getPopularBloggerBlogList,
+  getAllBlogList,
 };

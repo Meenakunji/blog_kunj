@@ -293,6 +293,20 @@ const getPopularBloggerBlogList = catchAsync(async (req, res) => {
   }
 });
 
+const getAllBlogList = catchAsync(async (req, res) => {
+  try {
+    const data = await blogService.getAllBlogList();
+    res
+      .status(httpStatus.OK)
+      .json({ code: httpStatus.OK, message: "success", data: data });
+  } catch (error) {
+    console.log(
+      `Exception :: CMS getAllBlogList -> getAllBlogList -> ${error.message}`
+    );
+    res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ message: "error" });
+  }
+});
+
 module.exports = {
   getBlogContent,
   createBlogContent,
@@ -308,4 +322,5 @@ module.exports = {
   getRecommendationsBlogList,
   getRecentBlogList,
   getPopularBloggerBlogList,
+  getAllBlogList,
 };
