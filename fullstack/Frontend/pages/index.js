@@ -12,20 +12,27 @@ export default function Home() {
   const [recommendationBlogList, setRecommendationBlogList] = useState([]);
   const [recentBlogList, setRecentBlogList] = useState([]);
   const [popularBloggerList, setPopularBloggerList] = useState([]);
+  const [allBlogList, setAllBlogList] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [popularData, recentBlogData, popularBloggerListData] =
-          await Promise.all([
-            fetcher.get(`http://localhost:3003/v1/blog/recommendations`),
-            fetcher.get(`http://localhost:3003/v1/blog/recent-blogs`),
-            fetcher.get(`http://localhost:3003/v1/blog/popular-blogger`),
-          ]);
+        const [
+          popularData,
+          recentBlogData,
+          popularBloggerListData,
+          allBlogListData,
+        ] = await Promise.all([
+          fetcher.get(`http://localhost:3003/v1/blog/recommendations`),
+          fetcher.get(`http://localhost:3003/v1/blog/recent-blogs`),
+          fetcher.get(`http://localhost:3003/v1/blog/popular-blogger`),
+          fetcher.get(`http://localhost:3003/v1/blog/blog-contents`),
+        ]);
 
         setRecommendationBlogList(popularData.data);
         setRecentBlogList(recentBlogData.data);
         setPopularBloggerList(popularBloggerListData?.data);
+        setAllBlogList(allBlogListData?.data);
       } catch (error) {
         alert(error?.response?.data?.message);
       }
@@ -40,7 +47,7 @@ export default function Home() {
       <PopularBlog popularBlogList={recommendationBlogList} />
       <PopularBloggerList popularBlogger={popularBloggerList} />
       <CaseStudyList />
-      <AllBlogComponent />
+      <AllBlogComponent allBlogList={allBlogList} />
     </Box>
   );
 }

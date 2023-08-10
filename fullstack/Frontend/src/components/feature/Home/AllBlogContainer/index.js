@@ -11,13 +11,16 @@ import {
 import React from "react";
 import style from "../style";
 
-export const AllBlogComponent = () => {
+export const AllBlogComponent = ({ allBlogList }) => {
+  const firstTwoItems = allBlogList.slice(0, 2);
+  // Store next 3 to 5 items in a separate array
+  const nextThreeToFiveItems = allBlogList.slice(2, 5);
   return (
     <section>
       <Container>
         <Box sx={style.popularArticles}>
           <Box sx={style.popularArticlesDetails}>
-            <Typography variant="h2">All Articles</Typography>
+            <Typography variant="h2">All Blogs</Typography>
             <Typography variant="body1">
               In publishing and graphic design, Lorem ipsum is a placeholder
               text commonlyand graphic design,
@@ -28,227 +31,117 @@ export const AllBlogComponent = () => {
           </Button>
         </Box>
         <Grid container spacing={2}>
-          <Grid item xs={6} md={6}>
-            <Box sx={style.popularArticlesList}>
-              <img
-                src="https://images.pexels.com/photos/12314825/pexels-photo-12314825.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                alt=""
-                style={{ width: "100%", height: "370px", objectFit: "cover" }}
-              />
-              <Box sx={style.popularArticlesHeading}>
-                <Typography variant="h3">
-                  How to prevent and protect your family from Carbon monoxide
-                </Typography>
-                <Box sx={style.cardBottomSection}>
-                  <Box sx={style.profileDetails}>
-                    <Box sx={style.profileSection}>
-                      <Avatar>
-                        <img
-                          src="https://images.pexels.com/users/avatars/48514757/eyup-beyhan-457.jpeg?auto=compress&fit=crop&h=50&w=50&dpr=1"
-                          alt=""
-                        />
-                      </Avatar>
-                    </Box>
-                    <Box sx={style.profileName}>
-                      <Typography variant="body1" sx={{ color: "#fff" }}>
-                        Farhan
-                      </Typography>
-                      <Box sx={style.dFlex}>
-                        <span>
-                          <DoneIcon />
-                        </span>
-                        <Typography variant="body1" sx={{ color: "#798b9b" }}>
-                          {" "}
-                          Verified writer
-                        </Typography>
+          {firstTwoItems?.length > 0 &&
+            firstTwoItems?.map((item, index) => {
+              return (
+                <Grid item xs={6} md={6} key={index}>
+                  <Box sx={style.popularArticlesList}>
+                    <img
+                      src={item?.image}
+                      alt="blog image"
+                      style={{
+                        width: "100%",
+                        height: "370px",
+                        objectFit: "cover",
+                      }}
+                    />
+                    <Box sx={style.popularArticlesHeading}>
+                      <Typography variant="h3">{item?.blogTitle}</Typography>
+                      <Box sx={style.cardBottomSection}>
+                        <Box sx={style.profileDetails}>
+                          <Box sx={style.profileSection}>
+                            <Avatar>
+                              <img
+                                src={item?.userData?.[0].profilePic}
+                                alt="blogger Profileimage"
+                                style={{ width: "40px" }}
+                              />
+                            </Avatar>
+                          </Box>
+                          <Box sx={style.profileName}>
+                            <Typography variant="body1" sx={{ color: "#fff" }}>
+                              {item?.userData?.[0].name}
+                            </Typography>
+                            <Box sx={style.dFlex}>
+                              <span>
+                                <DoneIcon />
+                              </span>
+                              <Typography
+                                variant="body1"
+                                sx={{ color: "#798b9b" }}
+                              >
+                                {" "}
+                                Blogger writer
+                              </Typography>
+                            </Box>
+                          </Box>
+                        </Box>
+                        <Box sx={style.date} style={{ color: "#798b9b" }}>
+                          {new Date(item?.creatAt).toLocaleDateString("en-US", {
+                            day: "numeric",
+                            month: "short",
+                          })}
+                        </Box>
                       </Box>
                     </Box>
                   </Box>
-                  <Box sx={style.date} style={{ color: "#798b9b" }}>
-                    2 May
-                  </Box>
-                </Box>
-              </Box>
-            </Box>
-          </Grid>
-          <Grid item xs={6} md={6}>
-            <Box sx={style.popularArticlesList}>
-              <img
-                src="https://images.pexels.com/photos/13767060/pexels-photo-13767060.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                alt=""
-                style={{ width: "100%", height: "370px", objectFit: "cover" }}
-              />
-              <Box sx={style.popularArticlesHeading}>
-                <Typography variant="h3">
-                  How to prevent and protect your family from Carbon monoxide
-                </Typography>
-                <Box sx={style.cardBottomSection}>
-                  <Box sx={style.profileDetails}>
-                    <Box sx={style.profileSection}>
-                      <Avatar>
-                        <img
-                          src="https://images.pexels.com/users/avatars/48514757/eyup-beyhan-457.jpeg?auto=compress&fit=crop&h=50&w=50&dpr=1"
-                          alt=""
-                        />
-                      </Avatar>
-                    </Box>
-                    <Box sx={style.profileName}>
-                      <Typography variant="body1" sx={{ color: "#fff" }}>
-                        Farhan
-                      </Typography>
-                      <Box sx={style.dFlex}>
-                        <span>
-                          <DoneIcon />
-                        </span>
-                        <Typography variant="body1" sx={{ color: "#798b9b" }}>
-                          {" "}
-                          Verified writer
-                        </Typography>
+                </Grid>
+              );
+            })}
+          {nextThreeToFiveItems?.length > 0 &&
+            nextThreeToFiveItems?.map((item, index) => {
+              return (
+                <Grid item xs={4} md={4} key={index}>
+                  <Box sx={style.popularArticlesList}>
+                    <img
+                      src={item?.image}
+                      alt="blog image"
+                      style={{ width: "100%", height: "500px" }}
+                    />
+                    <Box sx={style.popularArticlesHeading}>
+                      <Typography variant="h4">Protect</Typography>
+                      <Typography variant="body1">{item?.blogTitle}</Typography>
+                      <Box sx={style.cardBottomSection}>
+                        <Box sx={style.profileDetails}>
+                          <Box sx={style.profileSection}>
+                            <Avatar>
+                              <img
+                                src={item?.userData?.[0].profilePic}
+                                alt="blogger Profileimage"
+                                style={{ width: "40px" }}
+                              />
+                            </Avatar>
+                          </Box>
+                          <Box sx={style.profileName}>
+                            <Typography variant="body1" sx={{ color: "#fff" }}>
+                              {item?.userData?.[0].name}
+                            </Typography>
+                            <Box sx={style.dFlex}>
+                              <span>
+                                <DoneIcon />
+                              </span>
+                              <Typography
+                                variant="body1"
+                                sx={{ color: "#798b9b" }}
+                              >
+                                {" "}
+                                Blogger writer
+                              </Typography>
+                            </Box>
+                          </Box>
+                        </Box>
+                        <Box sx={style.date} style={{ color: "#798b9b" }}>
+                          {new Date(item?.creatAt).toLocaleDateString("en-US", {
+                            day: "numeric",
+                            month: "short",
+                          })}
+                        </Box>
                       </Box>
                     </Box>
                   </Box>
-                  <Box sx={style.date} style={{ color: "#798b9b" }}>
-                    2 May
-                  </Box>
-                </Box>
-              </Box>
-            </Box>
-          </Grid>
-          <Grid item xs={4} md={4}>
-            <Box sx={style.popularArticlesList}>
-              <img
-                src="https://images.pexels.com/photos/16883535/pexels-photo-16883535/free-photo-of-woman-in-white-dress-posing-in-building-door.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                alt=""
-                style={{ width: "100%", height: "500px" }}
-              />
-              <Box sx={style.popularArticlesHeading}>
-                <Typography variant="h4">Protect</Typography>
-                <Typography variant="body1">
-                  In publishing and graphic design, Lorem ipsum is a placeholder
-                  text
-                </Typography>
-                <Box sx={style.cardBottomSection}>
-                  <Box sx={style.profileDetails}>
-                    <Box sx={style.profileSection}>
-                      <Avatar>
-                        <img
-                          src="https://images.pexels.com/users/avatars/48514757/eyup-beyhan-457.jpeg?auto=compress&fit=crop&h=50&w=50&dpr=1"
-                          alt=""
-                        />
-                      </Avatar>
-                    </Box>
-                    <Box sx={style.profileName}>
-                      <Typography variant="body1" sx={{ color: "#fff" }}>
-                        Farhan
-                      </Typography>
-                      <Box sx={style.dFlex}>
-                        <span>
-                          <DoneIcon />
-                        </span>
-                        <Typography variant="body1" sx={{ color: "#798b9b" }}>
-                          {" "}
-                          Verified writer
-                        </Typography>
-                      </Box>
-                    </Box>
-                  </Box>
-                  <Box sx={style.date} style={{ color: "#798b9b" }}>
-                    2 May
-                  </Box>
-                </Box>
-              </Box>
-            </Box>
-          </Grid>
-          <Grid item xs={4} md={4}>
-            <Box sx={style.popularArticlesList}>
-              <img
-                src="https://images.pexels.com/photos/17097419/pexels-photo-17097419/free-photo-of-man-in-coat-posing-in-black-and-white.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                alt=""
-                style={{ width: "100%", height: "500px" }}
-              />
-              <Box sx={style.popularArticlesHeading}>
-                <Typography variant="h4">Prevent</Typography>
-                <Typography variant="body1">
-                  In publishing and graphic design, Lorem ipsum is a placeholder
-                  text
-                </Typography>
-                <Box sx={style.cardBottomSection}>
-                  <Box sx={style.profileDetails}>
-                    <Box sx={style.profileSection}>
-                      <Avatar>
-                        <img
-                          src="https://images.pexels.com/users/avatars/48514757/eyup-beyhan-457.jpeg?auto=compress&fit=crop&h=50&w=50&dpr=1"
-                          alt=""
-                        />
-                      </Avatar>
-                    </Box>
-                    <Box sx={style.profileName}>
-                      <Typography variant="body1" sx={{ color: "#fff" }}>
-                        Farhan
-                      </Typography>
-                      <Box sx={style.dFlex}>
-                        <span>
-                          <DoneIcon />
-                        </span>
-                        <Typography variant="body1" sx={{ color: "#798b9b" }}>
-                          {" "}
-                          Verified writer
-                        </Typography>
-                      </Box>
-                    </Box>
-                  </Box>
-                  <Box sx={style.date} style={{ color: "#798b9b" }}>
-                    2 May
-                  </Box>
-                </Box>
-              </Box>
-            </Box>
-          </Grid>
-          <Grid item xs={4} md={4}>
-            <Box sx={style.popularArticlesList}>
-              <img
-                src="https://images.pexels.com/photos/6110294/pexels-photo-6110294.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                alt=""
-                style={{ width: "100%", height: "500px" }}
-              />
-              <Box sx={style.popularArticlesHeading}>
-                <Typography variant="h4">Monoxide</Typography>
-                <Typography variant="body1">
-                  In publishing and graphic design, Lorem ipsum is a placeholder
-                  text
-                </Typography>
-                <Box sx={style.cardBottomSection}>
-                  <Box sx={style.profileDetails}>
-                    <Box sx={style.profileSection}>
-                      <Avatar>
-                        <img
-                          src="https://images.pexels.com/users/avatars/48514757/eyup-beyhan-457.jpeg?auto=compress&fit=crop&h=50&w=50&dpr=1"
-                          alt=""
-                        />
-                      </Avatar>
-                    </Box>
-                    <Box sx={style.profileName}>
-                      <Typography variant="body1" sx={{ color: "#fff" }}>
-                        Farhan
-                      </Typography>
-                      <Box sx={style.dFlex}>
-                        <span>
-                          <DoneIcon />
-                        </span>
-                        <Typography variant="body1" sx={{ color: "#798b9b" }}>
-                          {" "}
-                          Verified writer
-                        </Typography>
-                      </Box>
-                    </Box>
-                  </Box>
-                  <Box sx={style.date} style={{ color: "#798b9b" }}>
-                    2 May
-                  </Box>
-                </Box>
-              </Box>
-            </Box>
-          </Grid>
+                </Grid>
+              );
+            })}
         </Grid>
       </Container>
     </section>
