@@ -8,9 +8,28 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
+import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import {
+  setAllBlogsContainer,
+  setCategory,
+  setPopularBlogger,
+  setPopularBlogs,
+} from "../../../../redux/slices/user";
 import style from "../style";
 
 export const PopularBlog = ({ popularBlogList }) => {
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const handlePopularBlogListing = () => {
+    dispatch(setPopularBlogs(popularBlogList));
+    dispatch(setPopularBlogger([]));
+    dispatch(setAllBlogsContainer([]));
+    dispatch(setCategory("Popular Blog"));
+    router.push(`/bloglisting`);
+  };
+
   return (
     <section style={{ paddingTop: "0" }}>
       <Container maxWidth="lg">
@@ -23,7 +42,7 @@ export const PopularBlog = ({ popularBlogList }) => {
               commonly
             </Typography>
           </Box>
-          <Button>
+          <Button onClick={() => handlePopularBlogListing()}>
             View all <ArrowForwardIcon />
           </Button>
         </Box>

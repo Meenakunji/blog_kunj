@@ -1,11 +1,11 @@
+import { Box } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { AllBlogComponent } from "../src/components/feature/Home/AllBlogContainer";
 import { BlogSearch } from "../src/components/feature/Home/BlogSearch";
 import { CaseStudyList } from "../src/components/feature/Home/CaseStudy";
 import { PopularBlog } from "../src/components/feature/Home/PopularBlog";
 import { PopularBloggerList } from "../src/components/feature/Home/PopularBloggerList";
 import { RecommendationBlog } from "../src/components/feature/Home/RecommendationBlog";
-import { AllBlogComponent } from "../src/components/feature/Home/AllBlogContainer";
-import { Box } from "@mui/material";
 import fetcher from "../src/dataProvider";
 
 export default function Home() {
@@ -37,7 +37,6 @@ export default function Home() {
         alert(error?.response?.data?.message);
       }
     };
-
     fetchData();
   }, []);
   return (
