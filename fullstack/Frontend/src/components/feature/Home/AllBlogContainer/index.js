@@ -8,13 +8,33 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
+import { useRouter } from "next/router";
 import React from "react";
+import { useDispatch } from "react-redux";
+import {
+  setAllBlogsContainer,
+  setCategory,
+  setPopularBlogger,
+  setPopularBlogs,
+} from "../../../../redux/slices/user";
 import style from "../style";
 
 export const AllBlogComponent = ({ allBlogList }) => {
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const handleAllBlogContainerListingPage = () => {
+    dispatch(setAllBlogsContainer(allBlogList));
+    dispatch(setPopularBlogger([]));
+    dispatch(setPopularBlogs([]));
+    dispatch(setCategory("All Blogs"));
+    router.push(`/bloglisting`);
+  };
+
   const firstTwoItems = allBlogList.slice(0, 2);
   // Store next 3 to 5 items in a separate array
   const nextThreeToFiveItems = allBlogList.slice(2, 5);
+
   return (
     <section>
       <Container>
@@ -26,7 +46,7 @@ export const AllBlogComponent = ({ allBlogList }) => {
               text commonlyand graphic design,
             </Typography>
           </Box>
-          <Button>
+          <Button onClick={() => handleAllBlogContainerListingPage()}>
             View all <ArrowForwardIcon />
           </Button>
         </Box>

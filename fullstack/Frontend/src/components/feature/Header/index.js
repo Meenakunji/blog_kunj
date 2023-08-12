@@ -127,7 +127,7 @@ const Header = () => {
       <AppBar sx={{ background: "transparent", boxShadow: "none" }}>
         <Toolbar>
           <Typography
-            sx={{ fontSize: "2rem" }}
+            sx={{ fontSize: "2rem", cursor: "pointer" }}
             onClick={() => router.push("/")}
           >
             Shoppee
@@ -147,7 +147,7 @@ const Header = () => {
             >
               <Tab label="Home" onClick={() => router.push(`/`)} />
               <Tab label="Create Blog" onClick={handleCreateBlog} />
-              <Tab label="Pages" />
+              {/* <Tab label="Pages" /> */}
               <Tab label="Connect Wallet" onClick={connectWallet} />
               <Tab label="Help" />
             </Tabs>

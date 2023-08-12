@@ -8,11 +8,20 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
+import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { setCategory, setPopularBlogger } from "../../../../redux/slices/user";
 import style from "../style";
 
 export const PopularBloggerList = ({ popularBlogger }) => {
-  // console.log("recentBlogList", popularBlogger.slice(0, 3));
+  const dispatch = useDispatch();
+  const router = useRouter();
 
+  const handlePopularBloggerList = () => {
+    dispatch(setPopularBlogger(popularBlogger));
+    dispatch(setCategory("Popular Blogger"));
+    router.push(`/bloglisting`);
+  };
   const PopularBloggerData = popularBlogger.slice(0, 3);
   return (
     <section>
@@ -25,7 +34,7 @@ export const PopularBloggerList = ({ popularBlogger }) => {
               text commonlyand graphic design,
             </Typography>
           </Box>
-          <Button>
+          <Button onClick={() => handlePopularBloggerList()}>
             View all <ArrowForwardIcon />
           </Button>
         </Box>

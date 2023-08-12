@@ -19,6 +19,11 @@ const initialState = {
   creatorID: null,
   blogDetails: null,
   particularBlogContent: null,
+  popularBlogs: [],
+  caseStudyList: [],
+  popularBlogger: [],
+  allBlogsContainer: [],
+  category: null,
 };
 
 const user = createSlice({
@@ -57,6 +62,21 @@ const user = createSlice({
     setParticularBlogContent: (state, action) => {
       state.particularBlogContent = action.payload;
     },
+    setPopularBlogs: (state, action) => {
+      state.popularBlogs = action.payload;
+    },
+    setCategory: (state, action) => {
+      state.category = action.payload;
+    },
+    setCaseStudyList: (state, action) => {
+      state.caseStudyList = action.payload;
+    },
+    setPopularBlogger: (state, action) => {
+      state.popularBlogger = action.payload;
+    },
+    setAllBlogsContainer: (state, action) => {
+      state.allBlogsContainer = action.payload;
+    },
   },
 });
 
@@ -69,6 +89,11 @@ export const {
   setCreatorID,
   setBlogDetails,
   setParticularBlogContent,
+  setPopularBlogs,
+  setCaseStudyList,
+  setPopularBlogger,
+  setAllBlogsContainer,
+  setCategory,
 } = user.actions;
 
 export default user.reducer;

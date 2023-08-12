@@ -95,6 +95,87 @@ const style = {
     maxWidth: "70%",
     margin: "30px auto",
   },
+  listingBlog: {
+    paddingTop: "120px",
+  },
+  listingBlogHeading: {
+    marginBottom: "60px",
+    textAlign: "center",
+    "& h2": {
+      fontSize: "48px",
+      fontWeight: "600",
+      color: "#183B56",
+    },
+  },
+  listingBlogDetails: {
+    "& h3": {
+      fontSize: "31px",
+      color: "#183B56",
+      fontWeight: "600",
+    },
+    "& p": {
+      fontSize: "18px",
+      color: "#5A7184",
+      fontWeight: "400",
+      marginTop: "20px",
+    },
+  },
+  tagListing: {
+    display: "flex",
+    gap: "14px",
+    marginTop: "20px",
+    "& button": {
+      borderRadius: "4px",
+      background: "#E1E1E1",
+      padding: "6px 20px",
+      color: "#000000",
+      fontWeight: "400",
+      fontSize: "12px",
+    },
+  },
+  listDetails: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: "20px",
+  },
+  list: {
+    "& ul": {
+      display: "flex",
+      gap: "25px",
+      "& li": {
+        color: "#000",
+        padding: "0",
+        fontSize: "14px",
+        fontWeight: "400",
+        width: "auto",
+      },
+    },
+  },
+  blogIcon: {
+    "& ul": {
+      display: "flex",
+      gap: "20px",
+      "& li": {
+        width: "auto",
+        padding: "0",
+        fontSize: "17px",
+        color: "#7A7A7A",
+      },
+    },
+  },
+  postCard: {
+    transition: "transform .25s ease,box-shadow .25s ease",
+    "& img": {
+      borderRadius: "15px",
+    },
+    "&:hover": {
+      transform: "translateY(-4px)",
+    },
+  },
+  listingSection: {
+    marginBottom: "30px",
+  },
 };
 
 export default style;
