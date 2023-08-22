@@ -24,8 +24,8 @@ export const BlogSearch = () => {
         <Box sx={style.popularTag}>
           <Typography variant="body1">Popular Tag:</Typography>
           <Button>Design</Button>
-          <Button>User Experience </Button>
-          <Button>User Interfaces</Button>
+          <Button>Travel </Button>
+          <Button>Tech</Button>
         </Box>
       </Box>
     </Box>
