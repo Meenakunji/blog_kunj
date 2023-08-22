@@ -149,12 +149,16 @@ const style = {
       color: "#585858",
     },
   },
-  codeSection: {
-    background: "#333333",
-    border: "1px solid #555555",
-    padding: "25px",
-    maxWidth: "70%",
-    margin: "30px auto",
+  messageSection: {
+    display: "flex",
+    justifyContent: "space-between",
+    "& h1": {
+      fontSize: "20px",
+      textAlign: "left",
+    },
+    "& svg": {
+      cursor: "pointer",
+    },
   },
 };
 
