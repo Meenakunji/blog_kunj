@@ -14,7 +14,6 @@ const style = {
       position: "absolute",
       transform: "translate(-50%, -50%)",
       left: "50%",
-      fontWeight: "bold",
       fontSize: "45px",
       zIndex: "1",
     },

@@ -30,14 +30,12 @@ const style = {
     marginTop: "30px",
     " h1": {
       fontSize: "30px",
-      fontWeight: "600",
       color: "white",
       marginBottom: "20px",
     },
     "& p": {
       fontSize: "13px",
       marginTop: "20px",
-      fontWeight: "400",
       color: "#878787",
     },
     "& img": {

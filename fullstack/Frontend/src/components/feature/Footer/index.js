@@ -188,12 +188,6 @@ const FooterComponent = () => {
             </Grid>
             <Grid xs={6}>
               <Box sx={style.bestWeek}>
-                <Box sx={style.rightBg}>
-                  <img src="/images/home/footerbg.png" />
-                </Box>
-                <Box sx={style.leftBg}>
-                  <img src="/images/home/footerbg.png" />
-                </Box>
                 <Box sx={style.bestWeekBox}>
                   <img src="/images/home/Base.jpg" alt="" />
                   <Box sx={style.bestWeekDetails}>
@@ -213,8 +207,8 @@ const FooterComponent = () => {
       </Box>
       <Box sx={style.newLatter}>
         <Container maxWidth="md">
-          <Grid container>
-            <Grid xs={6}>
+          <Grid container spacing={2}>
+            <Grid item xs={6}>
               <Box sx={style.footerDetails}>
                 <img src="/images/home/Logo.svg" />
                 <Typography variant="body1">
@@ -224,7 +218,7 @@ const FooterComponent = () => {
                 </Typography>
               </Box>
             </Grid>
-            <Grid xs={3}>
+            <Grid item xs={3}>
               <Box sx={style.footerList}>
                 <Typography variant="h4">Important Links</Typography>
                 <ul>
@@ -235,7 +229,7 @@ const FooterComponent = () => {
                 </ul>
               </Box>
             </Grid>
-            <Grid xs={3}>
+            <Grid item xs={3}>
               <Box sx={style.footerList2}>
                 <Typography variant="h4">Follow us at</Typography>
                 <ul>

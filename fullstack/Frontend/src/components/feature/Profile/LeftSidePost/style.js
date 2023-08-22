@@ -12,7 +12,6 @@ const style = {
       color: "#fff",
       fontSize: "15px",
       marginBottom: "20px",
-      fontWeight: "500",
     },
     "& ul": {
       padding: "0",

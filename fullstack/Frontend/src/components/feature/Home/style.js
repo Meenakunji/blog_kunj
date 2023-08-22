@@ -2,11 +2,9 @@ const style = {
   mediaCard: {
     "& h1": {
       fontSize: "30px",
-      fontWeight: 400,
     },
     "& h2": {
       fontSize: "15px",
-      fontWeight: "700",
       marginTop: "20px",
       color: "#5f5f5f",
     },
@@ -39,7 +37,6 @@ const style = {
     margin: "2px 5px 2px",
     "& h1": {
       fontSize: "14px !important",
-      fontWeight: "400",
       textAlign: "center",
       padding: "5px",
     },
@@ -64,7 +61,6 @@ const style = {
     "& h2": {
       fontFamily: "Inter",
       fontSize: "50px",
-      fontWeight: "700",
       color: "#0C091B",
       width: "100%",
       textAlign: "center",
@@ -104,7 +100,6 @@ const style = {
     "& h6": {
       color: "#fff",
       fontSize: "30px",
-      fontWeight: "600",
       textAlign: "center",
       marginBottom: "25px",
     },
@@ -155,7 +150,6 @@ const style = {
     "& p": {
       color: "#fff",
       fontSize: "14px",
-      fontWeight: "600",
     },
     "& button": {
       backgroundColor: "transparent",
@@ -171,16 +165,20 @@ const style = {
   },
   topSectionDetails: {
     padding: "30px",
+    display: "flex",
+    height: "100%",
+    flexDirection: "column",
+    justifyContent: "center",
     "& h1": {
       fontSize: "35px",
       color: "#183b56",
       margin: "15px 0",
-      fontWeight: "600",
     },
     "& p": {
       color: "#798b9b",
       fontSize: "14px",
       letterSpacing: "0.2px",
+
     },
     "& button": {
       color: "#63c49b",
@@ -188,6 +186,7 @@ const style = {
       borderRadius: "100px",
       fontSize: "12px",
       backgroundColor: "#ebf7f2",
+      width: "113px",
     },
   },
   cardBottomSection: {
@@ -216,6 +215,9 @@ const style = {
         color: "#36b37e",
       },
     },
+    "& h5": {
+      fontSize:"14px"
+    }
   },
   date: {
     fontSize: "14px",
@@ -230,7 +232,6 @@ const style = {
     "& h2": {
       fontSize: "40px",
       color: "#183b56",
-      fontWeight: "600",
     },
     "& p": {
       color: "#798b9b",
@@ -243,7 +244,6 @@ const style = {
       padding: "6px 15px",
       borderRadius: "5px",
       fontSize: "12px",
-      fontWeight: "600",
       backgroundColor: "transparent",
       border: "2px solid #1565d8",
       "& svg": {
@@ -272,7 +272,7 @@ const style = {
       opacity: "1",
       background: "#364652",
       background:
-        "linear-gradient(180deg, rgba(0, 0, 0, 0.0018382353) 0%, #163247 100%)",
+        "linear-gradient(rgb(255 255 255 / 0%) 0%, #152532 71.87%)",
     },
   },
   popularArticlesHeading: {
@@ -281,9 +281,11 @@ const style = {
     left: "50%",
     right: "auto",
     transform: "translateX(-50%)",
-    width: "70%",
+    width: "100%",
     margin: "auto",
     zIndex: "2",
+    paddingLeft: "2rem",
+    paddingRight: "2rem",
     "& h3": {
       fontSize: "30px",
       color: "#fff",
@@ -297,8 +299,48 @@ const style = {
       color: "#fff",
       fontSize: "14px",
       letterSpacing: "0.2px",
+      display: "-webkit-box",
+      "-webkit-line-clamp": "2",
+      "-webkit-box-orient": "vertical",
+      overflow: "hidden",
+      textOverflow: "ellipsis",
     },
   },
+  
+  caseStudySlider: {
+    "& .slick-prev": {
+      zIndex: "999",
+      "&::before": {
+        fontSize: "35px",
+        zIndex: "99",
+        opacity: "1",
+        content: "''",
+        width: "50px",
+        height: "45px",
+        background: "url(/images/home/left.svg) center center / contain no-repeat",
+        position: "absolute",
+        left: "0",
+        top: "0",
+      },
+    },
+    "& .slick-next": {
+      zIndex: "999",
+      "&::before": {
+        fontSize: "35px",
+        zIndex: "99",
+        opacity: "1",
+        content: "''",
+        width: "50px",
+        height: "45px",
+        background: "url(/images/home/right.svg) center center / contain no-repeat",
+        position: "absolute",
+        right: "0",
+        top: "0",
+      },
+    },
+  },
+
+
 };
 
 export default style;

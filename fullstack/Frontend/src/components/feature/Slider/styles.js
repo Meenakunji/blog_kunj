@@ -30,7 +30,6 @@ const styles = {
     textAlign: "center",
     color: "white",
     fontSize: "2rem",
-    fontWeight: "bold",
     width: "100%",
     margin: "0",
     padding: "0",
@@ -59,7 +58,6 @@ const styles = {
     textAlign: "center",
     "& h4": {
       fontSize: "55px",
-      fontWeight: "800",
       lineHeight: "49px",
       marginBottom: "20px",
     },

@@ -22,6 +22,36 @@ import styles from "../auth/style";
 import DrawerComp from "./Drawer";
 
 const Header = () => {
+
+  // const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const handleScroll = () => {
+    if (window.scrollY > 10) {
+      setIsScrolled(true);
+    } else {
+      setIsScrolled(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const headerStyle = {
+    ...styles.header,
+    position: isScrolled ? "fixed" : "fixed",
+    background: isScrolled ? "#fff" : "transparent",
+    color: isScrolled ? "#000" : "#fff",
+    transition: isScrolled ? "background-color 0.10s ease" : "",
+    boxShadow: isScrolled ? "0 1px 6px 0 rgba(32, 33, 36, 0.28)" : "none",
+   
+
+  };
+
+
   const [value, setValue] = useState(0); // Default value for the first tab
   const [open, setOpen] = useState(false);
   const router = useRouter();
@@ -118,13 +148,16 @@ const Header = () => {
   }
 
   return (
-    <Box>
+<Box>
       <AuthenticationComponent
         callBackName={"uniqueCommunity"}
         open={open}
         handleModalClose={() => setOpen(false)}
       />
-      <AppBar sx={{ background: "transparent", boxShadow: "none" }}>
+      <AppBar   sx={styles.navbar}
+        onClick={(e) => e.stopPropagation()}
+        style={headerStyle}
+      >
         <Toolbar>
           <Typography
             sx={{ fontSize: "2rem", cursor: "pointer" }}

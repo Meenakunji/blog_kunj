@@ -10,7 +10,6 @@ const style = {
   newLatterSection: {
     "& h6": {
       fontSize: "35px",
-      fontWeight: "700",
       color: "#fff",
       lineHeight: "35px",
     },
@@ -68,11 +67,10 @@ const style = {
     "& h5": {
       fontSize: "24px",
       color: "#183B56",
-      fontWeight: "700",
     },
     "& p": {
-      color: "##5A7184",
-      fontSize: "18px",
+      color: "#5A7184",
+      fontSize: "15px",
     },
   },
 
@@ -97,7 +95,6 @@ const style = {
     "& h4": {
       color: "#5A7184",
       fontSize: "18px",
-      fontWeight: "700",
       marginBottom: "10px",
     },
     "& ul": {
@@ -107,7 +104,6 @@ const style = {
         listStyle: "none",
         color: "#5A7184",
         fontSize: "16px",
-        fontWeight: "400",
         padding: "6px 0",
       },
     },
@@ -128,7 +124,6 @@ const style = {
     "& h4": {
       color: "#5A7184",
       fontSize: "18px",
-      fontWeight: "700",
       marginBottom: "10px",
     },
     "& ul": {
@@ -138,7 +133,6 @@ const style = {
         listStyle: "none",
         color: "#5A7184",
         fontSize: "16px",
-        fontWeight: "400",
         marginBottom: "12px",
         background: "#0c2131",
         borderRadius: "2px",

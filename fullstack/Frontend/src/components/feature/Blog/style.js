@@ -3,7 +3,6 @@ const style = {
     // color: "red",
     "& h5": {
       fontSize: "18px",
-      fontWeight: 400,
     },
   },
   blogContainer: {
@@ -14,7 +13,6 @@ const style = {
     marginTop: "30px",
     "& h1": {
       fontSize: "40px",
-      fontWeight: "700",
       color: "#fff",
       lineHeight: "40px",
     },
@@ -53,13 +51,11 @@ const style = {
     "& h2": {
       fontSize: "24px",
       color: "#fff",
-      fontWeight: "700",
       margin: "30px 0",
     },
     "& p": {
       fontSize: "15px",
       margin: "30px 0",
-      fontWeight: "300",
       color: "#bebebe",
     },
   },
@@ -103,7 +99,6 @@ const style = {
     textAlign: "center",
     "& h2": {
       fontSize: "48px",
-      fontWeight: "600",
       color: "#183B56",
     },
   },
@@ -111,12 +106,10 @@ const style = {
     "& h3": {
       fontSize: "31px",
       color: "#183B56",
-      fontWeight: "600",
     },
     "& p": {
       fontSize: "18px",
       color: "#5A7184",
-      fontWeight: "400",
       marginTop: "20px",
     },
   },
@@ -129,7 +122,6 @@ const style = {
       background: "#E1E1E1",
       padding: "6px 20px",
       color: "#000000",
-      fontWeight: "400",
       fontSize: "12px",
     },
   },
@@ -147,7 +139,7 @@ const style = {
         color: "#000",
         padding: "0",
         fontSize: "14px",
-        fontWeight: "400",
+
         width: "auto",
       },
     },

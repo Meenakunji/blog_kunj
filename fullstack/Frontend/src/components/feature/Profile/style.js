@@ -15,7 +15,6 @@ const style = {
   profileRightSide: {
     "& h4": {
       fontSize: "20px",
-      fontWeight: "600",
       color: "#fff",
     },
     "& p": {

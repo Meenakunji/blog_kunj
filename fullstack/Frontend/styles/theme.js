@@ -86,7 +86,7 @@ let theme = createTheme({
     fontFamily: ["Inter", "sans-serif"].join(","),
     font: {
       montserrat: {
-        fontFamily: ["Montserrat", "sans-serif"].join(", "),
+        fontFamily: ["Poppins", "sans-serif"].join(", "),
       },
       openSans: {
         fontFamily: ["Open Sans", "sans-serif"].join(", "),
