@@ -1,10 +1,9 @@
 const style = {
-  
   commentBg: {
     height: "100%",
     position: "relative",
-        "& img": {
-            width: "100%",
+    "& img": {
+      width: "100%",
     },
     "&:after": {
       content: "''",
@@ -16,7 +15,7 @@ const style = {
       right: "0",
       top: "0",
     },
-    },
+  },
   bannerBg: {
     background: "#fff",
     position: "absolute",
@@ -56,7 +55,7 @@ const style = {
     "& h5": {
       fontSize: "15px",
       fontWeight: "700 !important",
-    }
+    },
   },
   profileImg: {
     "& img": {
@@ -67,7 +66,7 @@ const style = {
   },
   dFlex: {
     display: "flex",
-    alignItems:"center",
+    alignItems: "center",
   },
   commentSectionBg: {
     borderRadius: "0px 20px 20px 20px",
@@ -75,7 +74,6 @@ const style = {
     background: "#FFF",
     boxShadow: "0px 10px 35px 0px rgba(0, 0, 0, 0.03)",
     padding: "40px",
-  
   },
   commentSection: {
     position: "relative",
@@ -85,7 +83,7 @@ const style = {
     "& h1": {
       color: "#183B56",
       fontSize: "70px",
-      textAlign:"center",
+      textAlign: "center",
     },
   },
   commentDetails: {
@@ -98,7 +96,6 @@ const style = {
     display: "flex",
     alignItem: "center",
     justifyContent: "space-between",
-   
   },
   commentChatList: {
     display: "flex",
@@ -107,11 +104,11 @@ const style = {
       marginLeft: "10px",
       color: "#7A7A7A",
       fontSize: "13px",
-    }
+    },
   },
   commentChat: {
     display: "flex",
-    gap:"40px",
+    gap: "40px",
   },
   detailsComment: {
     "& p": {
@@ -119,7 +116,7 @@ const style = {
     },
     "& img": {
       marginTop: "30px",
-    }
+    },
   },
   contentImg: {
     display: "flex",
@@ -127,7 +124,7 @@ const style = {
     gap: "30px",
     "& img": {
       width: "47%",
-    }
+    },
   },
   tagList: {
     marginTop: "30px",
@@ -138,7 +135,7 @@ const style = {
     "& p": {
       color: "#8F8F8F",
       fontSize: "14px",
-    }
+    },
   },
   buttonTag: {
     display: "flex",
@@ -150,10 +147,15 @@ const style = {
       fontSize: "12px",
       backgroundColor: "transparent",
       color: "#585858",
+    },
+  },
+  codeSection: {
+    background: "#333333",
+    border: "1px solid #555555",
+    padding: "25px",
+    maxWidth: "70%",
+    margin: "30px auto",
+  },
+};
 
-    }
-  }
-  };
-  
-  export default style;
-  
+export default style;

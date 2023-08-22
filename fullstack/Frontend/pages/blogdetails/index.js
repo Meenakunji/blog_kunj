@@ -1,5 +1,5 @@
 import React from 'react'
-import CommentBlog from '../../src/components/feature/Comment'
+import CommentBlog from '../../src/components/feature/BlogDetails'
 
 function Comment() {
   return (

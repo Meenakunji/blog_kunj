@@ -106,6 +106,7 @@ const style = {
     "& h3": {
       fontSize: "31px",
       color: "#183B56",
+      cursor: "pointer",
     },
     "& p": {
       fontSize: "18px",
@@ -160,6 +161,7 @@ const style = {
     transition: "transform .25s ease,box-shadow .25s ease",
     "& img": {
       borderRadius: "15px",
+      cursor: "pointer",
     },
     "&:hover": {
       transform: "translateY(-4px)",

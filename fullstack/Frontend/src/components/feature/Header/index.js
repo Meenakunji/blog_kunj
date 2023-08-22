@@ -22,7 +22,6 @@ import styles from "../auth/style";
 import DrawerComp from "./Drawer";
 
 const Header = () => {
-
   // const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const handleScroll = () => {
@@ -47,10 +46,7 @@ const Header = () => {
     color: isScrolled ? "#000" : "#fff",
     transition: isScrolled ? "background-color 0.10s ease" : "",
     boxShadow: isScrolled ? "0 1px 6px 0 rgba(32, 33, 36, 0.28)" : "none",
-   
-
   };
-
 
   const [value, setValue] = useState(0); // Default value for the first tab
   const [open, setOpen] = useState(false);
@@ -148,13 +144,14 @@ const Header = () => {
   }
 
   return (
-<Box>
+    <Box>
       <AuthenticationComponent
         callBackName={"uniqueCommunity"}
         open={open}
         handleModalClose={() => setOpen(false)}
       />
-      <AppBar   sx={styles.navbar}
+      <AppBar
+        sx={styles.navbar}
         onClick={(e) => e.stopPropagation()}
         style={headerStyle}
       >
@@ -163,7 +160,12 @@ const Header = () => {
             sx={{ fontSize: "2rem", cursor: "pointer" }}
             onClick={() => router.push("/")}
           >
-            Shoppee
+            {/* Shoppee */}
+            {theme != "dark" ? (
+              <img src="/images/home/darkmodelogo.svg" alt="dark mode logo" />
+            ) : (
+              <img src="/images/home/bloglogo.svg" alt="light mode logo" />
+            )}
           </Typography>
           {isMatch ? (
             <DrawerComp />
