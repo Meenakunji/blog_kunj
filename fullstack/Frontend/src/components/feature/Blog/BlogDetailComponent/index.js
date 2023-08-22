@@ -149,14 +149,13 @@ const BlogDetailComponent = () => {
             </Box>
             <Box sx={styles.profileImg}>
               <Box sx={styles.profileName}>
-                <Typography variant="body1">
+                <Typography variant="h5">
                   {particularBlogContent?.userData?.[0]?.name}
                 </Typography>
                 <Typography
-                  variant="body1"
+                  variant="h5"
                   style={{
                     color: "#156D12",
-                    fontWeight: "600",
                     cursor: "pointer",
                   }}
                   onClick={() =>
@@ -170,8 +169,8 @@ const BlogDetailComponent = () => {
                 </Typography>
               </Box>
               <Box sx={styles.profileName}>
-                <Typography variant="body1">16 min read</Typography>
-                <Typography variant="body1">
+                <Typography variant="h5">16 min read</Typography>
+                <Typography variant="h5">
                   {new Intl.DateTimeFormat("en", {
                     day: "numeric",
                     month: "long",

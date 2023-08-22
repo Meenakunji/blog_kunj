@@ -36,7 +36,7 @@ export const AllBlogComponent = ({ allBlogList }) => {
   const nextThreeToFiveItems = allBlogList.slice(2, 5);
 
   return (
-    <section>
+    <section style={{paddingBottom: "40px"}}>
       <Container>
         <Box sx={style.popularArticles}>
           <Box sx={style.popularArticlesDetails}>
@@ -79,7 +79,7 @@ export const AllBlogComponent = ({ allBlogList }) => {
                             </Avatar>
                           </Box>
                           <Box sx={style.profileName}>
-                            <Typography variant="body1" sx={{ color: "#fff" }}>
+                            <Typography variant="h5" sx={{ color: "#fff" }}>
                               {item?.userData?.[0].name}
                             </Typography>
                             <Box sx={style.dFlex}>
@@ -133,7 +133,7 @@ export const AllBlogComponent = ({ allBlogList }) => {
                             </Avatar>
                           </Box>
                           <Box sx={style.profileName}>
-                            <Typography variant="body1" sx={{ color: "#fff" }}>
+                            <Typography variant="h5" sx={{ color: "#fff" }}>
                               {item?.userData?.[0].name}
                             </Typography>
                             <Box sx={style.dFlex}>
@@ -141,7 +141,7 @@ export const AllBlogComponent = ({ allBlogList }) => {
                                 <DoneIcon />
                               </span>
                               <Typography
-                                variant="body1"
+                                variant="h5"
                                 sx={{ color: "#798b9b" }}
                               >
                                 {" "}

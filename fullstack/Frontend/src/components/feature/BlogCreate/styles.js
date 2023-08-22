@@ -7,7 +7,6 @@ const style = {
     marginTop: "30px",
     "& h1": {
       fontSize: "25px",
-      fontWeight: "500",
       marginBottom: "25px",
       color: "#4f4f4f",
     },
@@ -62,7 +61,6 @@ const style = {
     gap: "20px",
     "& button": {
       textAlign: "center",
-      fontWeight: "600",
       width: "225px",
       maxWidth: "100%",
       background: "#a881af",

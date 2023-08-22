@@ -74,7 +74,7 @@ export const PopularBloggerList = ({ popularBlogger }) => {
                             </Avatar>
                           </Box>
                           <Box sx={style.profileName}>
-                            <Typography variant="body1" sx={{ color: "#fff" }}>
+                            <Typography variant="h5" sx={{ color: "#fff" }}>
                               {item?.name}
                             </Typography>
                             <Box sx={style.dFlex}>
@@ -82,7 +82,7 @@ export const PopularBloggerList = ({ popularBlogger }) => {
                                 <DoneIcon />
                               </span>
                               <Typography
-                                variant="body1"
+                                variant="h5"
                                 sx={{ color: "#798b9b" }}
                               >
                                 {" "}

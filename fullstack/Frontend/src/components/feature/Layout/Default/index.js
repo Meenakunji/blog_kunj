@@ -8,7 +8,7 @@ const DefaultLayout = ({ children, customStyles = {} }) => {
     <Box sx={{ ...style.wrapper, ...customStyles.wrapper }}>
       <HeaderComponent />
       <Box
-        sx={{ minHeight: "100vh", marginBottom: "20px", paddingTop: "100px" }}
+        sx={{ minHeight: "100vh", marginBottom: "20px",}}
       >
         {children}
       </Box>

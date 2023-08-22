@@ -5,7 +5,7 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import { Provider } from "react-redux";
 import Layout from "../src/components/feature/Layout";
 import store from "../src/redux/store";
-import "../styles/globals.css";
+
 import "bootstrap/dist/css/bootstrap.css";
 import CssBaseline from "@mui/material/CssBaseline";
 import PageThemeProvider from "../styles/PageThemeProvider";
@@ -14,6 +14,7 @@ import Head from "next/head";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
+import "../styles/globals.css";
 // import { SessionProvider } from "next-auth/react";
 
 const persistor = persistStore(store, {}, function () {

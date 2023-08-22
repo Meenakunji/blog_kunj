@@ -53,7 +53,6 @@ const style = {
         "& a": {
           color: "custom.white",
           textDecoration: "none",
-          fontWeight: "600",
         },
       },
       "& svg": {

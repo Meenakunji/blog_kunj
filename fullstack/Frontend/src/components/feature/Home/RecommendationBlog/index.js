@@ -54,7 +54,7 @@ export const RecommendationBlog = ({ recommendationBlogList }) => {
                       </Avatar>
                     </Box>
                     <Box sx={style.profileName}>
-                      <Typography variant="body1">Farhan</Typography>
+                      <Typography variant="h5">Farhan</Typography>
                       <Box sx={style.dFlex}>
                         <span>
                           <DoneIcon />

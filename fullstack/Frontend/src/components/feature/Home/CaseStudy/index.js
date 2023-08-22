@@ -48,6 +48,8 @@ export const CaseStudyList = () => {
             View all <ArrowForwardIcon />
           </Button>
         </Box>
+        
+        <Box sx={style.caseStudySlider}>
         <Slider {...settings}>
           <Card sx={{ borderRadius: "15px" }}>
             <Grid container>
@@ -85,7 +87,7 @@ export const CaseStudyList = () => {
                         </Avatar>
                       </Box>
                       <Box sx={style.profileName}>
-                        <Typography variant="body1">Farhan</Typography>
+                        <Typography variant="h5">Farhan</Typography>
                         <Box sx={style.dFlex}>
                           <span>
                             <DoneIcon />
@@ -109,7 +111,11 @@ export const CaseStudyList = () => {
                 <img
                   src="https://mui.com/static/images/cards/contemplative-reptile.jpg"
                   alt=""
-                  style={{ width: "100%" }}
+                  style={{
+                    width: "100%",
+                    height: "360px",
+                    objectFit: "cover",
+                  }}
                 />
               </Grid>
               <Grid xs={6} md={6}>
@@ -135,7 +141,7 @@ export const CaseStudyList = () => {
                         </Avatar>
                       </Box>
                       <Box sx={style.profileName}>
-                        <Typography variant="body1">Farhan</Typography>
+                        <Typography variant="h5">Farhan</Typography>
                         <Box sx={style.dFlex}>
                           <span>
                             <DoneIcon />
@@ -153,7 +159,8 @@ export const CaseStudyList = () => {
               </Grid>
             </Grid>
           </Card>
-        </Slider>
+          </Slider>
+          </Box>
       </Container>
     </section>
   );

@@ -7,7 +7,8 @@ import { BlogList } from "../../src/components/feature/Profile/BlogList";
 import { BookMarkBlogList } from "../../src/components/feature/Profile/BookmarkBlogList";
 import UserProfile from "../../src/components/feature/Profile/UserProfile";
 import UserBlog from "../../src/components/feature/Profile/UserBlog";
-import { Divider, Typography } from "@mui/material";
+import { Container, Divider, Grid, Typography } from "@mui/material";
+import RightSideProfile from "../../src/components/feature/RightSide";
 
 export default function Profile() {
   const [value, setValue] = React.useState(0);
@@ -47,57 +48,47 @@ export default function Profile() {
   }, [router.query]);
 
   return (
-    <div className="container">
+    <Container maxWidth="lg">
+      <Grid container spacing={2}>
+      <Grid item xs={9.5}>
       <Tabs
         value={value}
         onChange={handleChange}
-        centered
         sx={{
           marginBottom: "20px",
-          bgcolor: "background.paper",
-          boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-        }}
+          borderBottom: "1px solid #C3c3c3",
+          color: "red",
+          ".Mui-selected": {
+            color: `#000`,
+            },
+            }}
+            TabIndicatorProps={{
+              style: {
+                backgroundColor: "#737373"
+              }
+            }}
       >
-        <Tab label="Home" sx={{ marginLeft: "20px" }} />
-        <Tab label="Blog List" sx={{ marginLeft: "20px" }} />
-        <Tab label="Bookmark Blog List" sx={{ marginLeft: "20px" }} />
+        <Tab label="Home" />
+        <Tab label="List" />
+        <Tab label="About" />
       </Tabs>
 
       {router?.query?.tab === "home" && (
         <TabPanel value={value} index={0}>
-          <div className="row">
-            <div className="col-md-9 mx-auto">
-              <Box
-                style={{
-                  borderColor: "#1e1e1e",
-                  backgroundColor: "#282828",
-                  padding: "30px",
-                  overflow: "hidden",
-                }}
-              >
-                <UserProfile />
-                <UserBlog />
-              </Box>
-            </div>
-          </div>
+         <UserProfile />
+                {/* <UserBlog /> */}
         </TabPanel>
       )}
       {router?.query?.tab === "blog_list" && (
         <TabPanel value={value} index={1}>
           <Typography
             variant="h4"
-            style={{ textAlign: "center", marginBottom: "20px" }}
+            style={{ textAlign: "left", marginBottom: "20px" }}
           >
             Blog List Tab Content
           </Typography>
           <Divider style={{ backgroundColor: "#fff", height: "2px" }} />
-          <div className="row">
-            <div className="col-md-10 mx-auto">
-              <div className="row">
                 <BlogList />
-              </div>
-            </div>
-          </div>
         </TabPanel>
       )}
       {router?.query?.tab === "bookmark_blog_list" && (
@@ -120,8 +111,13 @@ export default function Profile() {
             <BookMarkBlogList />
           </Box>
         </TabPanel>
-      )}
-    </div>
+          )}
+        </Grid>
+        <Grid item xs={2.5}>
+      <RightSideProfile />
+        </Grid>
+          </Grid>
+    </Container>
   );
 }
 
