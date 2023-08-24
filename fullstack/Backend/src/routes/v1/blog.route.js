@@ -1,10 +1,10 @@
 const express = require("express");
 const multer = require("multer");
 const upload = multer({ dest: "tmp/csv/" });
-const { blogController } = require("../../controllers");
+const { blogController, commentController } = require("../../controllers");
 const { validate } = require("../../middlewares/validate");
 const { VerifyUser } = require("../../middlewares/api.middleware");
-const { blogValidation } = require("../../validations");
+const { blogValidation, commentValidation } = require("../../validations");
 const router = express.Router();
 
 router.route("/content").get(VerifyUser, blogController.getBlogContent);
@@ -75,5 +75,22 @@ router.route("/recent-blogs").get(blogController.getRecentBlogList);
 
 // get all Blog Content
 router.route("/blog-contents").get(blogController.getAllBlogList);
+
+// Comment APi for a blog
+// 1.) get all blog CommentList
+router
+  .route("/comments/:blogId")
+  .get(
+    validate(commentValidation.getBlogCommentList),
+    commentController.getBlogCommentList
+  );
+
+// 2.) create a Comment
+router
+  .route("/comments/:blogId")
+  .post(
+    validate(commentValidation.createComment),
+    commentController.createBlogComment
+  );
 
 module.exports = router;

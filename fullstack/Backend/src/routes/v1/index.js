@@ -3,7 +3,7 @@ const user = require("./user.route");
 const authRoute = require("./auth.route");
 const blogRoute = require("./blog.route");
 const FaqRoute = require("./faq.route");
-const HomeRoute = require("./home.route")
+const HomeRoute = require("./home.route");
 
 const router = express.Router();
 
