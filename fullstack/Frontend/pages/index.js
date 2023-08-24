@@ -1,5 +1,6 @@
 import { Box } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import SEOComponents from "../src/components/common/SEO";
 import { AllBlogComponent } from "../src/components/feature/Home/AllBlogContainer";
 import { BlogSearch } from "../src/components/feature/Home/BlogSearch";
 import { CaseStudyList } from "../src/components/feature/Home/CaseStudy";
@@ -41,6 +42,12 @@ export default function Home() {
   }, []);
   return (
     <Box>
+      <SEOComponents
+        title={"Blog WebSite Home Page"}
+        description={"this is Jupiter blogger website home page"}
+        canonical="https://www.yourwebsite.com/about"
+        // data={data?.data?.attributes?.seo}
+      />
       <BlogSearch />
       <RecommendationBlog recommendationBlogList={recommendationBlogList} />
       <PopularBlog popularBlogList={recommendationBlogList} />

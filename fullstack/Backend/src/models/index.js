@@ -6,3 +6,4 @@ module.exports.HomeSliderVideos = require("./home-page.model");
 module.exports.DisposableDomain = require("./disposable-domains.model");
 module.exports.Token = require("./token.model.js");
 module.exports.VisitedBlog = require("./visitedBlog.modal");
+module.exports.BlogCommentMessages = require("./blog-comment-message.model")
