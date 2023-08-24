@@ -33,7 +33,43 @@ const getBlogCommentList = catchAsync(async (req, res) => {
   }
 });
 
+const updateBlogCommentMessage = catchAsync(async (req, res) => {
+  try {
+    const commentId = req.params.commentId;
+    const { message, type, replyId } = req.body;
+    const data = await commentBlogService.updateBlogCommentMessage(
+      commentId,
+      message,
+      type,
+      replyId
+    );
+    res
+      .status(httpStatus.OK)
+      .json({ code: httpStatus.OK, message: "success", data: data });
+  } catch (error) {
+    res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ message: "error" });
+  }
+});
+
+const deletBlogCommentMessage = catchAsync(async (req, res) => {
+  try {
+    const commentId = req.params.commentId;
+    const type = req.query.type;
+    const data = await commentBlogService.deletBlogCommentMessage(
+      commentId,
+      type
+    );
+    res
+      .status(httpStatus.OK)
+      .json({ code: httpStatus.OK, message: "success", data: data });
+  } catch (error) {
+    res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ message: "error" });
+  }
+});
+
 module.exports = {
   createBlogComment,
   getBlogCommentList,
+  updateBlogCommentMessage,
+  deletBlogCommentMessage,
 };

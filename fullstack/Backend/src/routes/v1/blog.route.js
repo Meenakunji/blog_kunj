@@ -93,4 +93,20 @@ router
     commentController.createBlogComment
   );
 
+// 3.) Update Comment API
+router
+  .route("/comments/:commentId")
+  .patch(
+    validate(commentValidation.updateBlogCommentMessage),
+    commentController.updateBlogCommentMessage
+  );
+
+// 4.) comment message Delete API
+router
+  .route("/comments/:commentId")
+  .delete(
+    validate(commentValidation.deletBlogCommentMessage),
+    commentController.deletBlogCommentMessage
+  );
+
 module.exports = router;

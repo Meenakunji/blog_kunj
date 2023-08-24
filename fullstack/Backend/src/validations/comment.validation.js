@@ -22,7 +22,29 @@ const getBlogCommentList = {
   }),
 };
 
+const updateBlogCommentMessage = {
+  params: Joi.object().keys({
+    commentId: Joi.required().custom(objectId),
+  }),
+  body: Joi.object().keys({
+    message: Joi.string().required(),
+    type: Joi.string().required(),
+    replyId: Joi.optional().custom(objectId),
+  }),
+};
+
+const deletBlogCommentMessage = {
+  params: Joi.object().keys({
+    commentId: Joi.required().custom(objectId),
+  }),
+  query: Joi.object().keys({
+    type: Joi.string().required(),
+  }),
+};
+
 module.exports = {
   createComment,
   getBlogCommentList,
+  updateBlogCommentMessage,
+  deletBlogCommentMessage,
 };
