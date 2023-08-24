@@ -78,7 +78,82 @@ const getBlogCommentList = async (blogId) => {
   return result;
 };
 
+// updated comment and comment reply messages
+const updateBlogCommentMessage = async (commentId, message, type, replyId) => {
+  try {
+    const filter = { _id: commentId };
+
+    let update;
+
+    if (replyId) {
+      // Update a specific reply message
+      update = { $set: { "replies.$[reply].message": message } };
+    } else if (type === "comment") {
+      // Update parent comment message
+      update = { $set: { message } };
+    } else {
+      throw new Error("Invalid message type");
+    }
+
+    const options = replyId
+      ? { new: true, arrayFilters: [{ "reply._id": replyId }] }
+      : { new: true };
+
+    const updatedComment = await BlogCommentMessages.findOneAndUpdate(
+      filter,
+      update,
+      options
+    );
+
+    if (updatedComment) {
+      return updatedComment;
+    } else {
+      throw new Error("Comment not found");
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
+// delete reply Message or comment message
+const deletBlogCommentMessage = async (commentId, type) => {
+  try {
+    if (type === "comment") {
+      // Delete the entire comment
+      const deletedComment = await BlogCommentMessages.findOneAndDelete({
+        _id: commentId,
+      });
+      if (deletedComment) {
+        return { message: "Comment deleted successfully" };
+      } else {
+        throw new Error("Comment not found");
+      }
+    } else if (type === "reply") {
+      // Delete a specific reply in the replies array
+      const replyId = commentId;
+
+      const updatedComment = await BlogCommentMessages.findOneAndUpdate(
+        { "replies._id": replyId }, // Find comment with matching reply
+        { $pull: { replies: { _id: replyId } } }, // Pull the reply from replies
+        { new: true }
+      );
+      if (updatedComment) {
+        return { message: "Reply deleted successfully" };
+      } else {
+        throw new Error("Comment or reply not found");
+      }
+    } else {
+      throw new Error("Invalid message type");
+    }
+  } catch (error) {
+    console.error("Error deleting comment:", error.message);
+    throw error;
+  }
+};
+
 module.exports = {
   createBlogComment,
   getBlogCommentList,
+  updateBlogCommentMessage,
+  deletBlogCommentMessage,
 };
