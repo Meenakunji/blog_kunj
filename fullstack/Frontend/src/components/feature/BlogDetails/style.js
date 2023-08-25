@@ -160,6 +160,136 @@ const style = {
       cursor: "pointer",
     },
   },
+  // commentChatBox
+
+  commentChatBox: {
+    backgroundColor: "#fff",
+    boxShadow: "rgba(0, 0, 0, 0.12) 0px 2px 8px",
+    padding: "15px",
+    marginTop: "30px",
+    "& textarea": {
+      width: "100%",
+      border: "none",
+      color: "#000",
+      overflow: "hidden",
+      marginTop: "15px",
+      backgroundColor: "#fff",
+      "&:focus": {
+        outline: "none",
+      },
+    },
+  },
+  profileComment: {
+    display: "flex",
+    alignItems: "center",
+    "& img": {
+      borderRadius: "100px",
+    },
+    "& h3": {
+      fontSize: "15px",
+      marginLeft: "20px",
+      fontWeight: "400",
+    },
+  },
+  bottomSection: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
+  LeftBottom: {
+    display: "flex",
+    justifyContent: "space-between",
+    "& button": {
+      fontSize: "16px",
+      fontWeight: "500",
+      color: "#7c7c7c",
+      // padding: "16px 22px",
+      minWidth: "45px",
+      height: "30px",
+      "& svg": {
+        fontSize: "19px",
+      },
+    },
+  },
+  rightBottom: {
+    "& button": {
+      color: "#7c7c7c",
+      fontSize: "12px",
+    },
+  },
+  respond: {
+    background: "rgb(26, 137, 23)",
+    borderRadius: "100px",
+    color: "#fff !important",
+    padding: "5px 15px",
+  },
+  replySection: {
+    display: "flex",
+    marginTop: "30px",
+    justifyContent: "space-between",
+  },
+  replyLeftProfile: {
+    display: "flex",
+    alignItems: "center",
+    "& img": {
+      borderRadius: "100px",
+      width: "40px",
+    },
+  },
+  profileReply: {
+    marginLeft: "15px",
+    "& h5": {
+      fontSize: "16px",
+    },
+    "& p": {
+      fontSize: "13px",
+      marginLeft: "0",
+    },
+  },
+  replyRightProfile: {
+    "& svg": {
+      fontSize: "20px",
+      color: "#888888",
+    },
+  },
+  replySectionComment: {
+    "& p": {
+      fontSize: "15px",
+      marginLeft: "0",
+      color: "#404040",
+      lineHeight: "20px",
+      marginTop: "15px",
+    },
+  },
+  replySectionBottomLeft: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: "20px",
+    "& p": {
+      marginTop: "0 !Important",
+      fontSize: "14px",
+      fontWeight: "700 !important",
+      "& svg": {
+        marginRight: "6px",
+      },
+    },
+  },
+  replyRight: {
+    "& h5": {
+      fontSize: "14px",
+      color: "#727272",
+      cursor: "pointer",
+      "&:hover": {
+        textDecoration: "underline",
+      },
+    },
+  },
+  replySectionBottom: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginTop: "25px",
+  },
 };
 
 export default style;
