@@ -63,6 +63,14 @@ const getBlogCommentList = async (blogId) => {
       },
     },
     {
+      $lookup: {
+        from: "users",
+        localField: "email",
+        foreignField: "email",
+        as: "result",
+      },
+    },
+    {
       $project: {
         userName: 1,
         message: 1,
@@ -72,6 +80,7 @@ const getBlogCommentList = async (blogId) => {
         updatedAt: 1,
         email: 1,
         blogId: 1,
+        result: 1,
       },
     },
   ]);
