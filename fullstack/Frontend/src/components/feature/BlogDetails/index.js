@@ -77,6 +77,7 @@ const CommentBlog = () => {
       }
     };
   }, [isReading, speechUtterance]);
+
   return (
     <>
       <Box sx={style.commentBlog}>
