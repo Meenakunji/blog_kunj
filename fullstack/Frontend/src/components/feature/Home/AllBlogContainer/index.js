@@ -11,9 +11,11 @@ import {
 import { useRouter } from "next/router";
 import React from "react";
 import { useDispatch } from "react-redux";
+import { createSlug } from "../../../../../utils/common";
 import {
   setAllBlogsContainer,
   setCategory,
+  setParticularBlogContent,
   setPopularBlogger,
   setPopularBlogs,
 } from "../../../../redux/slices/user";
@@ -35,8 +37,14 @@ export const AllBlogComponent = ({ allBlogList }) => {
   // Store next 3 to 5 items in a separate array
   const nextThreeToFiveItems = allBlogList.slice(2, 5);
 
+  const handleBlogContentListPage = (item) => {
+    dispatch(setParticularBlogContent(item));
+    const urlSlug = createSlug(item?.userData?.[0]?.name, item?.blogTitle);
+    router.push(`/${urlSlug}`);
+  };
+
   return (
-    <section style={{paddingBottom: "40px"}}>
+    <section style={{ paddingBottom: "40px" }}>
       <Container>
         <Box sx={style.popularArticles}>
           <Box sx={style.popularArticlesDetails}>
@@ -64,8 +72,12 @@ export const AllBlogComponent = ({ allBlogList }) => {
                         height: "370px",
                         objectFit: "cover",
                       }}
+                      onClick={() => handleBlogContentListPage(item)}
                     />
-                    <Box sx={style.popularArticlesHeading}>
+                    <Box
+                      sx={style.popularArticlesHeading}
+                      onClick={() => handleBlogContentListPage(item)}
+                    >
                       <Typography variant="h3">{item?.blogTitle}</Typography>
                       <Box sx={style.cardBottomSection}>
                         <Box sx={style.profileDetails}>
@@ -116,9 +128,17 @@ export const AllBlogComponent = ({ allBlogList }) => {
                     <img
                       src={item?.image}
                       alt="blog image"
-                      style={{ width: "100%", height: "500px" }}
+                      style={{
+                        width: "100%",
+                        height: "500px",
+                        cursor: "pointer",
+                      }}
+                      onClick={() => handleBlogContentListPage(item)}
                     />
-                    <Box sx={style.popularArticlesHeading}>
+                    <Box
+                      sx={style.popularArticlesHeading}
+                      onClick={() => handleBlogContentListPage(item)}
+                    >
                       <Typography variant="h4">Protect</Typography>
                       <Typography variant="body1">{item?.blogTitle}</Typography>
                       <Box sx={style.cardBottomSection}>
