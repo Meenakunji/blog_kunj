@@ -2,14 +2,21 @@ import DoneIcon from "@mui/icons-material/Done";
 import PauseCircleFilledIcon from "@mui/icons-material/PauseCircleFilled";
 import { Box, Button, Container, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { useMutation } from "react-query";
 import { useSelector } from "react-redux";
+import fetcher from "../../../dataProvider";
 import SwipeableTemporaryDrawer from "./blogDetails";
+import BookmarkAddOutlinedIcon from "@mui/icons-material/BookmarkAddOutlined";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
 import style from "./style";
 
 const CommentBlog = () => {
   const { particularBlogContent } = useSelector((state) => state.user);
   const [isReading, setIsReading] = useState(false);
   const [speechUtterance, setSpeechUtterance] = useState(null);
+  const [blogMarked, setBlogMarked] = useState(
+    particularBlogContent?.isMarkedBlog
+  );
 
   const handleRead = () => {
     const contentText = particularBlogContent?.description;
@@ -36,6 +43,23 @@ const CommentBlog = () => {
       }
       setIsReading(!isReading);
     }
+  };
+
+  // user blog Mark or not
+  const { mutate: getMarkedBlogContent } = useMutation(
+    (blogId) => fetcher.post(`http://localhost:3003/v1/blog/mark/${blogId}`),
+    {
+      onSuccess: (resData) => {
+        setBlogMarked(resData?.data?.isMarkedBlog);
+      },
+      onError: (error) => {
+        alert(error?.response?.data?.message);
+      },
+    }
+  );
+
+  const handleMarkedBlog = () => {
+    getMarkedBlogContent(particularBlogContent?._id);
   };
 
   useEffect(() => {
@@ -98,8 +122,16 @@ const CommentBlog = () => {
                       </Box>
                     </Box>
                     <Box sx={style.commentChat} style={{ gap: "15px" }}>
-                      <Box sx={style.commentChatList}>
-                        <img src="/images/home/saveremove.svg" alt="" />
+                      <Box
+                        sx={style.commentChatList}
+                        onClick={() => handleMarkedBlog()}
+                      >
+                        {blogMarked ? (
+                          <BookmarkIcon />
+                        ) : (
+                          <BookmarkAddOutlinedIcon />
+                        )}
+                        {/* <img src="/images/home/saveremove.svg" alt="" /> */}
                       </Box>
                       <Box sx={style.commentChatList} onClick={handleRead}>
                         {isReading ? (
