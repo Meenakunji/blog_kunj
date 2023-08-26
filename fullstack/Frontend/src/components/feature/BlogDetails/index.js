@@ -145,7 +145,9 @@ const CommentBlog = () => {
                       </Box>
                       <Box sx={style.commentChatList}>
                         <SwipeableTemporaryDrawer />
-                        <Typography variant="body1">4.5K</Typography>
+                        <Typography variant="body1">
+                          {particularBlogContent?.result?.length}
+                        </Typography>
                       </Box>
                     </Box>
                     <Box sx={style.commentChat} style={{ gap: "15px" }}>

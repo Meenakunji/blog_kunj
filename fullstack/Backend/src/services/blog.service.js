@@ -377,6 +377,14 @@ const getAllBlogList = async (req, res) => {
     const Project = [
       {
         $lookup: {
+          from: "jupiter_blog_comment_messsages",
+          localField: "_id",
+          foreignField: "blogId",
+          as: "result",
+        },
+      },
+      {
+        $lookup: {
           from: "users",
           localField: "user",
           foreignField: "_id",
