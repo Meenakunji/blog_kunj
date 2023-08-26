@@ -3,6 +3,7 @@ const {
   BlogLists,
   VisitedBlog,
   BlogCommentMessages,
+  LikedBlog,
 } = require("../models");
 
 const rTracer = require("cls-rtracer");
@@ -390,6 +391,45 @@ const getAllBlogList = async (req, res) => {
   }
 };
 
+const blogLikeCount = async (blogId, userId) => {
+  try {
+    const blog = await BlogContent.findById(blogId);
+
+    if (!blog) {
+      throw new Error("Blog not found");
+    }
+
+    const likedBlog = await LikedBlog.findOne({
+      userId: userId,
+      blogId: blogId,
+    });
+
+    if (!likedBlog) {
+      const newLikedBlog = new LikedBlog({
+        userId,
+        blogId,
+      });
+      await newLikedBlog.save();
+
+      // Increment the like count and save
+      blog.blogLike++;
+      await blog.save();
+    } else {
+      // Decrement the like count and remove the like
+      blog.blogLike--;
+      await LikedBlog.findOneAndDelete({
+        userId: userId,
+        blogId: blogId,
+      });
+      await blog.save();
+    }
+
+    return blog;
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   getBlogContent,
   createBlogContent,
@@ -405,4 +445,5 @@ module.exports = {
   getRecentBlogList,
   getPopularBloggerBlogList,
   getAllBlogList,
+  blogLikeCount,
 };
