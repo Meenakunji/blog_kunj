@@ -109,4 +109,19 @@ router
     commentController.deletBlogCommentMessage
   );
 
+// clap or blog like count
+router.route("/like/:blogId").post(
+  (req, res, next) => {
+    const authToken = req.headers.authorization;
+
+    if (authToken) {
+      VerifyUser(req, res, next);
+    } else {
+      next();
+    }
+  },
+  validate(blogValidation.blogMarked),
+  blogController.blogLikeCount
+);
+
 module.exports = router;

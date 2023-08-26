@@ -230,9 +230,6 @@ const getSearchBlogList = catchAsync(async (req, res) => {
 
 // blog read count
 const updateBlogReadcount = catchAsync(async (req, res) => {
-  // let userIdentifier = req.cookies.userIdentifier;
-
-  // console.log("Print useIdenfity ===>>>", userIdentifier);
   const userId = new ObjectId(req.user);
   try {
     const data = await blogService.updateBlogReadcount(
@@ -307,6 +304,20 @@ const getAllBlogList = catchAsync(async (req, res) => {
   }
 });
 
+// bloglike count
+const blogLikeCount = catchAsync(async (req, res) => {
+  const blogId = req.params.blogId;
+  const userId = new ObjectId(req.user);
+  try {
+    const data = await blogService.blogLikeCount(blogId, userId);
+    res
+      .status(httpStatus.OK)
+      .json({ code: httpStatus.OK, message: "success", data: data });
+  } catch (error) {
+    res.status(httpStatus.INTERNAL_SERVER_ERROR).json({ message: "error" });
+  }
+});
+
 module.exports = {
   getBlogContent,
   createBlogContent,
@@ -323,4 +334,5 @@ module.exports = {
   getRecentBlogList,
   getPopularBloggerBlogList,
   getAllBlogList,
+  blogLikeCount,
 };

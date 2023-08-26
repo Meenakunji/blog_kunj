@@ -46,6 +46,10 @@ const blogContentSchema = mongoose.Schema(
       type: Number,
       default: 0,
     },
+    blogLike: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,

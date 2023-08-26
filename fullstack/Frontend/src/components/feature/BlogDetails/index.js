@@ -9,10 +9,14 @@ import SwipeableTemporaryDrawer from "./blogDetails";
 import BookmarkAddOutlinedIcon from "@mui/icons-material/BookmarkAddOutlined";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import style from "./style";
+import { formatCount } from "../../../../utils/common";
 
 const CommentBlog = () => {
   const { particularBlogContent } = useSelector((state) => state.user);
   const [isReading, setIsReading] = useState(false);
+  const [blogLikeCount, setBlogLikeCount] = useState(
+    particularBlogContent?.blogLike || 0
+  );
   const [speechUtterance, setSpeechUtterance] = useState(null);
   const [blogMarked, setBlogMarked] = useState(
     particularBlogContent?.isMarkedBlog
@@ -60,6 +64,23 @@ const CommentBlog = () => {
 
   const handleMarkedBlog = () => {
     getMarkedBlogContent(particularBlogContent?._id);
+  };
+
+  // blog likeor not
+  const { mutate: blogLikeCountAPI } = useMutation(
+    (blogId) => fetcher.post(`http://localhost:3003/v1/blog/like/${blogId}`),
+    {
+      onSuccess: (resData) => {
+        setBlogLikeCount(resData?.data?.blogLike);
+      },
+      onError: (error) => {
+        alert(error?.response?.data?.message);
+      },
+    }
+  );
+
+  const handleBlogLikeCount = () => {
+    blogLikeCountAPI(particularBlogContent?._id);
   };
 
   useEffect(() => {
@@ -113,9 +134,14 @@ const CommentBlog = () => {
                 <Box sx={style.commentDetails}>
                   <Box sx={style.commentList}>
                     <Box sx={style.commentChat}>
-                      <Box sx={style.commentChatList}>
+                      <Box
+                        sx={style.commentChatList}
+                        onClick={() => handleBlogLikeCount()}
+                      >
                         <img src="/images/home/like1.svg" alt="" />
-                        <Typography variant="body1">4.5K</Typography>
+                        <Typography variant="body1">
+                          {formatCount(blogLikeCount)}
+                        </Typography>
                       </Box>
                       <Box sx={style.commentChatList}>
                         <SwipeableTemporaryDrawer />

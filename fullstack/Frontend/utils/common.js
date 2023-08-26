@@ -15,3 +15,12 @@ export const createSlug = (username, title) => {
 
   return `@${username}/${slug}`;
 };
+
+export const formatCount = (count) => {
+  if (count >= 1000000) {
+    return (count / 1000000).toFixed(1) + "M";
+  } else if (count >= 1000) {
+    return (count / 1000).toFixed(1) + "k";
+  }
+  return count.toString();
+};
