@@ -176,7 +176,7 @@ export default function TemporaryDrawer() {
       {commentMsglist?.length > 0 &&
         commentMsglist?.map((item, index) => {
           return (
-            <Box>
+            <Box key={index}>
               <Box sx={style.replySection}>
                 <Box sx={style.replyLeftProfile}>
                   <img src={item?.result?.[0]?.profilePic} />
