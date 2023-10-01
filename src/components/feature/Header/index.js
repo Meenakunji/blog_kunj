@@ -184,7 +184,7 @@ const Header = () => {
               <Tab label="Create Blog" onClick={handleCreateBlog} />
               {/* <Tab label="Pages" /> */}
               <Tab label="Connect Wallet" onClick={connectWallet} />
-              <Tab label="Help" />
+              {/* <Tab label="Help" /> */}
             </Tabs>
           )}
           <Box

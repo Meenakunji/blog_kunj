@@ -149,6 +149,7 @@ import {
   Button,
   Container,
   Grid,
+  Link,
   ListItem,
   Typography,
 } from "@mui/material";
@@ -181,8 +182,10 @@ const FooterComponent = () => {
                   <Button>Get started</Button>
                 </form>
                 <Typography variant="body1">
-                  Get a response tomorrow if you submit by 9pm today. If we
-                  received after 9pm will get a reponse the following day.
+                  Jupiter Blogger: Your go-to blogging website for sharing
+                  ideas, stories, and experiences with a vibrant community of
+                  writers and readers. Unleash your creativity and connect with
+                  like-minded individuals at Jupiter Blogger.
                 </Typography>
               </Box>
             </Grid>
@@ -212,9 +215,12 @@ const FooterComponent = () => {
               <Box sx={style.footerDetails}>
                 <img src="/images/home/Logo.svg" />
                 <Typography variant="body1">
-                  Build a modern and creative website with crealand
+                  Jupiter Blogger: Your go-to blogging website for sharing
+                  ideas,
                   <br />
-                  Build a modern and creative website with crealand
+                  stories, and experiences with a vibrant community of writers
+                  and readers. Unleash your creativity and connect with
+                  like-minded individuals at Jupiter Blogger.
                 </Typography>
               </Box>
             </Grid>
@@ -234,19 +240,48 @@ const FooterComponent = () => {
                 <Typography variant="h4">Follow us at</Typography>
                 <ul>
                   <li>
-                    <LinkedInIcon />
+                    <Link
+                      href="https://www.linkedin.com/in/pankaj-kumar-meena-1b3922176/"
+                      target="_blank"
+                      className="me-4 text-reset"
+                      style={{ color: "#fff !important" }}
+                    >
+                      <LinkedInIcon />
+                    </Link>
                     Linkedin
                   </li>
                   <li>
-                    <FacebookIcon />
+                    <Link
+                      href="https://www.linkedin.com/in/pankaj-kumar-meena-1b3922176/"
+                      target="_blank"
+                      className="me-4 text-reset"
+                      style={{ color: "#fff !important" }}
+                    >
+                      <FacebookIcon />
+                    </Link>
                     Facebook
                   </li>
                   <li>
-                    <TwitterIcon />
+                    <Link
+                      href="https://twitter.com/pankajk66711680"
+                      target="_blank"
+                      className="me-4 text-reset"
+                      style={{ color: "#fff !important" }}
+                    >
+                      {" "}
+                      <TwitterIcon />
+                    </Link>
                     Twitter
                   </li>
                   <li>
-                    <InstagramIcon />
+                    <Link
+                      href="https://www.linkedin.com/in/pankaj-kumar-meena-1b3922176/"
+                      target="_blank"
+                      className="me-4 text-reset"
+                      style={{ color: "#fff !important" }}
+                    >
+                      <InstagramIcon />
+                    </Link>
                     Instagram
                   </li>
                 </ul>

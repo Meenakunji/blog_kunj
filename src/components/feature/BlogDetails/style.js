@@ -33,7 +33,8 @@ const style = {
     gap: "15px",
     "& p": {
       fontSize: "14px",
-      color: "#fff",
+      // color: "#fff",
+      color: "#183B56",
       marginLeft: "10px",
     },
   },
@@ -55,6 +56,7 @@ const style = {
     "& h5": {
       fontSize: "15px",
       fontWeight: "700 !important",
+      color: "#183B56",
     },
   },
   profileImg: {
@@ -67,6 +69,7 @@ const style = {
   dFlex: {
     display: "flex",
     alignItems: "center",
+    color: "#183B56",
   },
   commentSectionBg: {
     borderRadius: "0px 20px 20px 20px",
@@ -113,6 +116,7 @@ const style = {
   detailsComment: {
     "& p": {
       marginTop: "30px",
+      color: "#183B56",
     },
     "& img": {
       marginTop: "30px",
