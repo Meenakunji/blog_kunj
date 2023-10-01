@@ -1,10 +1,16 @@
 import {
   AppBar,
+  Avatar,
   Box,
   Button,
+  IconButton,
+  ListItemIcon,
+  Menu,
+  MenuItem,
   Tab,
   Tabs,
   Toolbar,
+  Tooltip,
   Typography,
   useMediaQuery,
 } from "@mui/material";
@@ -20,9 +26,35 @@ import ToggleThemeBtn from "../../common/Button/toggleButton";
 import AuthenticationComponent from "../auth";
 import styles from "../auth/style";
 import DrawerComp from "./Drawer";
+import logout from "../../../../components/Layout/util/logout";
+import Settings from "@mui/icons-material/Settings";
+import LoginIcon from "@mui/icons-material/Login";
+import Logout from "@mui/icons-material/Logout";
+import { setToken } from "../../../redux/slices/user";
+import { googleLogout } from "@react-oauth/google";
 
 const Header = () => {
   // const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open1 = Boolean(anchorEl);
+  const handleClick1 = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose1 = () => {
+    setAnchorEl(null);
+  };
+
+  const handleLogut = () => {
+    googleLogout();
+    dispatch(
+      setToken({
+        accessToken: null,
+        isLoggedIn: false,
+      })
+    );
+    router.push("/");
+  };
+
   const [isScrolled, setIsScrolled] = useState(false);
   const handleScroll = () => {
     if (window.scrollY > 10) {
@@ -54,7 +86,7 @@ const Header = () => {
   const [walletAddress, setWalletAddress] = useState("");
   const { theme } = useSelector((state) => state.layout);
   const isMatch = useMediaQuery("(max-width:768px)");
-  const { isLoggedIn } = useSelector((state) => state.user);
+  const { isLoggedIn, userData } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const handleThemeSwitch = () => {
@@ -143,6 +175,8 @@ const Header = () => {
     });
   }
 
+  console.log("isLoggedIn", isLoggedIn);
+
   return (
     <Box>
       <AuthenticationComponent
@@ -193,16 +227,105 @@ const Header = () => {
           >
             <ToggleThemeBtn theme={theme} />
           </Box>
-          <Button
-            variant="contained"
-            sx={{ marginLeft: "10px" }}
-            onClick={() => setOpen(true)}
-          >
-            Login
-          </Button>
-          {/* <Button variant="contained" sx={{ marginLeft: "10px" }}>
-            SignUp
-          </Button> */}
+          {isLoggedIn ? (
+            <>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  textAlign: "center",
+                }}
+              >
+                <Tooltip title="Account settings">
+                  <IconButton
+                    onClick={handleClick1}
+                    size="small"
+                    sx={{ ml: 2 }}
+                    aria-controls={open1 ? "account-menu" : undefined}
+                    aria-haspopup="true"
+                    aria-expanded={open1 ? "true" : undefined}
+                  >
+                    <Avatar sx={{ width: 45, height: 45 }}>
+                      {userData?.profilePic ? (
+                        <img
+                          src={userData.profilePic}
+                          alt="Profile Picture"
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "cover",
+                          }}
+                        />
+                      ) : (
+                        "P"
+                      )}
+                    </Avatar>
+                  </IconButton>
+                </Tooltip>
+              </Box>
+              <Menu
+                anchorEl={anchorEl}
+                id="account-menu"
+                open={open1}
+                onClose={handleClose1}
+                onClick={handleClose1}
+                PaperProps={{
+                  elevation: 0,
+                  sx: {
+                    overflow: "visible",
+                    filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                    mt: 1.5,
+                    "& .MuiAvatar-root": {
+                      width: 32,
+                      height: 32,
+                      ml: -0.5,
+                      mr: 1,
+                    },
+                    "&:before": {
+                      content: '""',
+                      display: "block",
+                      position: "absolute",
+                      top: 0,
+                      right: 14,
+                      width: 10,
+                      height: 10,
+                      bgcolor: "background.paper",
+                      transform: "translateY(-50%) rotate(45deg)",
+                      zIndex: 0,
+                    },
+                  },
+                }}
+                transformOrigin={{ horizontal: "right", vertical: "top" }}
+                anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+              >
+                <MenuItem onClick={() => router.push("/profile?tab=home")}>
+                  <Avatar /> Profile
+                </MenuItem>
+
+                <MenuItem onClick={handleClose1}>
+                  <ListItemIcon>
+                    <Settings fontSize="small" />
+                  </ListItemIcon>
+                  Settings
+                </MenuItem>
+                <MenuItem onClick={handleLogut}>
+                  <ListItemIcon>
+                    <Logout fontSize="small" />
+                  </ListItemIcon>
+                  Logout
+                </MenuItem>
+              </Menu>
+            </>
+          ) : (
+            // </Button>
+            <Button
+              variant="contained"
+              sx={{ marginLeft: "10px" }}
+              onClick={() => setOpen(true)}
+            >
+              Login
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
       {walletAddress && <div>{`Connected Wallet: ${walletAddress}`}</div>}
