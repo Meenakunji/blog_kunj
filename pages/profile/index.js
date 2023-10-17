@@ -48,75 +48,75 @@ export default function Profile() {
   }, [router.query]);
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="lg" style={{ marginTop: "90px" }}>
       <Grid container spacing={2}>
-      <Grid item xs={9.5}>
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        sx={{
-          marginBottom: "20px",
-          borderBottom: "1px solid #C3c3c3",
-          color: "red",
-          ".Mui-selected": {
-            color: `#000`,
-            },
+        <Grid item xs={9.5}>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            sx={{
+              marginBottom: "20px",
+              borderBottom: "1px solid #C3c3c3",
+              color: "red",
+              ".Mui-selected": {
+                color: `#16e70d !important`,
+              },
             }}
             TabIndicatorProps={{
               style: {
-                backgroundColor: "#737373"
-              }
+                backgroundColor: "#737373",
+              },
             }}
-      >
-        <Tab label="Home" />
-        <Tab label="List" />
-        <Tab label="About" />
-      </Tabs>
+          >
+            <Tab label="Home" />
+            <Tab label="List" />
+            <Tab label="About" />
+          </Tabs>
 
-      {router?.query?.tab === "home" && (
-        <TabPanel value={value} index={0}>
-         <UserProfile />
-                {/* <UserBlog /> */}
-        </TabPanel>
-      )}
-      {router?.query?.tab === "blog_list" && (
-        <TabPanel value={value} index={1}>
-          <Typography
-            variant="h4"
-            style={{ textAlign: "left", marginBottom: "20px" }}
-          >
-            Blog List Tab Content
-          </Typography>
-          <Divider style={{ backgroundColor: "#fff", height: "2px" }} />
-                <BlogList />
-        </TabPanel>
-      )}
-      {router?.query?.tab === "bookmark_blog_list" && (
-        <TabPanel value={value} index={2}>
-          <Typography
-            variant="h4"
-            style={{ textAlign: "center", marginBottom: "20px" }}
-          >
-            Bookmark Blog List Tab Content
-          </Typography>
-          <Divider style={{ backgroundColor: "#fff", height: "2px" }} />
-          <Box
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              flexWrap: "wrap",
-              gap: "20px",
-            }}
-          >
-            <BookMarkBlogList />
-          </Box>
-        </TabPanel>
+          {router?.query?.tab === "home" && (
+            <TabPanel value={value} index={0}>
+              <UserProfile />
+              {/* <UserBlog /> */}
+            </TabPanel>
+          )}
+          {router?.query?.tab === "blog_list" && (
+            <TabPanel value={value} index={1}>
+              <Typography
+                variant="h4"
+                style={{ textAlign: "left", marginBottom: "20px" }}
+              >
+                Blog List Tab Content
+              </Typography>
+              <Divider style={{ backgroundColor: "#fff", height: "2px" }} />
+              <BlogList />
+            </TabPanel>
+          )}
+          {router?.query?.tab === "bookmark_blog_list" && (
+            <TabPanel value={value} index={2}>
+              <Typography
+                variant="h4"
+                style={{ textAlign: "center", marginBottom: "20px" }}
+              >
+                Bookmark Blog List Tab Content
+              </Typography>
+              <Divider style={{ backgroundColor: "#fff", height: "2px" }} />
+              <Box
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  flexWrap: "wrap",
+                  gap: "10px",
+                }}
+              >
+                <BookMarkBlogList />
+              </Box>
+            </TabPanel>
           )}
         </Grid>
         <Grid item xs={2.5}>
-      <RightSideProfile />
+          <RightSideProfile />
         </Grid>
-          </Grid>
+      </Grid>
     </Container>
   );
 }

@@ -69,7 +69,14 @@ export const BlogList = () => {
                         </Typography>
                       </Box>
                       <Typography variant="body1">
-                        {item?.description}
+                        {item?.description?.split(" ").slice(0, 30).join(" ")}
+                        <a
+                          href={`/blog/${item?.blogTag}`}
+                          onClick={() => router.push(`/blog/${item?.blogTag}`)}
+                          style={{ cursor: "pointer", color: "#d80af1" }}
+                        >
+                          ...Read More
+                        </a>
                       </Typography>
                     </div>
                   </div>

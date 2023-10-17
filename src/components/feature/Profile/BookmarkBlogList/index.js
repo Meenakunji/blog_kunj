@@ -28,7 +28,11 @@ export const BookMarkBlogList = () => {
       {markedblogList &&
         markedblogList.map((item, index) => {
           return (
-            <div className="col-md-4 mt-3" key={index}>
+            <div
+              className="col-md-4 mt-3"
+              key={index}
+              style={{ width: "32.333333%" }}
+            >
               <div className="card p-3">
                 <Box sx={style.mediaCard} key={index}>
                   <Box sx={style.chip} style={{ backgroundColor: item?.color }}>
@@ -66,7 +70,17 @@ export const BookMarkBlogList = () => {
                       })}
                     </Typography>
                   </Box>
-                  <Typography variant="p">{item?.description}</Typography>
+                  <Typography variant="p">
+                    {" "}
+                    {item?.description?.split(" ").slice(0, 15).join(" ")}
+                    <a
+                      href={`/blog/${item?.blogTag}`}
+                      onClick={() => router.push(`/blog/${item?.blogTag}`)}
+                      style={{ cursor: "pointer", color: "#d80af1" }}
+                    >
+                      ...Read More
+                    </a>
+                  </Typography>
                 </Box>
               </div>
             </div>
