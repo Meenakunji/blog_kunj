@@ -32,6 +32,7 @@ import LoginIcon from "@mui/icons-material/Login";
 import Logout from "@mui/icons-material/Logout";
 import { setToken } from "../../../redux/slices/user";
 import { googleLogout } from "@react-oauth/google";
+import NotificationsIcon from "@mui/icons-material/Notifications";
 
 const Header = () => {
   // const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -226,6 +227,9 @@ const Header = () => {
             onClick={handleThemeSwitch}
           >
             <ToggleThemeBtn theme={theme} />
+          </Box>
+          <Box>
+            <NotificationsIcon />
           </Box>
           {isLoggedIn ? (
             <>

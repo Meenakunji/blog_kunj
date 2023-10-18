@@ -42,9 +42,9 @@ function MyApp({ Component, pageProps }) {
           <GoogleOAuthProvider clientId="426734307285-dlk38v03lrrbl6moh2lcja09gmsn9uip.apps.googleusercontent.com">
             <Provider store={store}>
               <PersistGate loading={null} persistor={persistor}>
-                <PageThemeProvider>
+                <PageThemeProvider {...pageProps}>
                   <CssBaseline />
-                  <Layout>
+                  <Layout {...pageProps}>
                     <Component {...pageProps} />
                   </Layout>
                 </PageThemeProvider>

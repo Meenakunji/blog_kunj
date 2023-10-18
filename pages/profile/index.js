@@ -75,12 +75,8 @@ export default function Profile() {
 
           {router?.query?.tab === "home" && (
             <TabPanel value={value} index={0}>
-              <UserProfile />
+              {/* <UserProfile /> */}
               {/* <UserBlog /> */}
-            </TabPanel>
-          )}
-          {router?.query?.tab === "blog_list" && (
-            <TabPanel value={value} index={1}>
               <Typography
                 variant="h4"
                 style={{ textAlign: "left", marginBottom: "20px" }}
@@ -91,8 +87,8 @@ export default function Profile() {
               <BlogList />
             </TabPanel>
           )}
-          {router?.query?.tab === "bookmark_blog_list" && (
-            <TabPanel value={value} index={2}>
+          {router?.query?.tab === "blog_list" && (
+            <TabPanel value={value} index={1}>
               <Typography
                 variant="h4"
                 style={{ textAlign: "center", marginBottom: "20px" }}
@@ -110,6 +106,11 @@ export default function Profile() {
               >
                 <BookMarkBlogList />
               </Box>
+            </TabPanel>
+          )}
+          {router?.query?.tab === "bookmark_blog_list" && (
+            <TabPanel value={value} index={2}>
+              <UserProfile />
             </TabPanel>
           )}
         </Grid>
