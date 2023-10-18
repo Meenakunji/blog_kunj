@@ -27,6 +27,22 @@ const style = {
     alignItems: "self-start",
     justifyContent: "space-between",
   },
+
+  aboutSection: {
+    display: "flex",
+    flexDirection: "column",
+    width: "65%",
+    alignItems: "center",
+    margin: "auto",
+    "& h4": {
+      fontSize: "20px",
+      color: "#fff",
+    },
+    "& p": {
+      fontSize: "12px",
+      color: "#fff",
+    },
+  },
 };
 
 export default style;
