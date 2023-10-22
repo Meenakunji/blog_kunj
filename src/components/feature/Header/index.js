@@ -196,11 +196,12 @@ const Header = () => {
             onClick={() => router.push("/")}
           >
             {/* Shoppee */}
-            {theme != "dark" ? (
+            {/* {theme != "dark" ? (
               <img src="/images/home/darkmodelogo.svg" alt="dark mode logo" />
-            ) : (
-              <img src="/images/home/bloglogo.svg" alt="light mode logo" />
-            )}
+            ) : ( */}
+            {/* // <img src="/images/home/bloglogo.svg" alt="light mode logo" /> */}
+            <Typography component="h1">Sahitya</Typography>
+            {/* )} */}
           </Typography>
           {isMatch ? (
             <DrawerComp />
@@ -219,7 +220,11 @@ const Header = () => {
               <Tab label="Create Blog" onClick={handleCreateBlog} />
               {/* <Tab label="Pages" /> */}
               <Tab label="Connect Wallet" onClick={connectWallet} />
-              {/* <Tab label="Help" /> */}
+              <Tab
+                label="Community"
+                onClick={() => router.push("/community")}
+              />
+              <Tab label="About" onClick={() => router.push("/about")} />
             </Tabs>
           )}
           <Box
