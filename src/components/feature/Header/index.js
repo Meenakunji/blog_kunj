@@ -33,6 +33,7 @@ import Logout from "@mui/icons-material/Logout";
 import { setToken } from "../../../redux/slices/user";
 import { googleLogout } from "@react-oauth/google";
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
 
 const Header = () => {
   // const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -170,13 +171,11 @@ const Header = () => {
 
   if (typeof window !== "undefined") {
     web3Modal = new Web3Modal({
-      network: "mainnet", // optional
+      network: "mainnet",
       cacheProvider: true,
       providerOptions: providerOptions,
     });
   }
-
-  console.log("isLoggedIn", isLoggedIn);
 
   return (
     <Box>
@@ -195,13 +194,18 @@ const Header = () => {
             sx={{ fontSize: "2rem", cursor: "pointer" }}
             onClick={() => router.push("/")}
           >
-            {/* Shoppee */}
-            {/* {theme != "dark" ? (
-              <img src="/images/home/darkmodelogo.svg" alt="dark mode logo" />
-            ) : ( */}
-            {/* // <img src="/images/home/bloglogo.svg" alt="light mode logo" /> */}
-            <Typography component="h1">Sahitya</Typography>
-            {/* )} */}
+            <Box
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                gap: "10px",
+              }}
+            >
+              <MenuBookIcon style={{ width: "50px" }} />
+              <Typography component="h1" style={{ fontSize: "18px" }}>
+                Sahitya
+              </Typography>
+            </Box>
           </Typography>
           {isMatch ? (
             <DrawerComp />
@@ -219,7 +223,7 @@ const Header = () => {
               <Tab label="Home" onClick={() => router.push(`/`)} />
               <Tab label="Create Blog" onClick={handleCreateBlog} />
               {/* <Tab label="Pages" /> */}
-              <Tab label="Connect Wallet" onClick={connectWallet} />
+              {/* <Tab label="Connect Wallet" onClick={connectWallet} /> */}
               <Tab
                 label="Community"
                 onClick={() => router.push("/community")}
