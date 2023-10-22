@@ -164,6 +164,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import HomeWorkIcon from "@mui/icons-material/HomeWork";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
 
 const FooterComponent = () => {
   return (
@@ -213,7 +214,19 @@ const FooterComponent = () => {
           <Grid container spacing={2}>
             <Grid item xs={6}>
               <Box sx={style.footerDetails}>
-                <img src="/images/home/Logo.svg" />
+                <Box
+                  style={{
+                    display: "flex",
+                  }}
+                >
+                  <MenuBookIcon style={{ width: "50px", color: "#fff" }} />
+                  <Typography
+                    component="h1"
+                    style={{ fontSize: "18px", color: "#fff" }}
+                  >
+                    Sahitya
+                  </Typography>
+                </Box>
                 <Typography variant="body1">
                   Jupiter Blogger: Your go-to blogging website for sharing
                   ideas,
