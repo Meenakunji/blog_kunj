@@ -24,6 +24,7 @@ const initialState = {
   popularBlogger: [],
   allBlogsContainer: [],
   category: null,
+  tagListName: null,
 };
 
 const user = createSlice({
@@ -77,6 +78,9 @@ const user = createSlice({
     setAllBlogsContainer: (state, action) => {
       state.allBlogsContainer = action.payload;
     },
+    setTagListName: (state, action) => {
+      state.tagListName = action.payload;
+    },
   },
 });
 
@@ -94,6 +98,7 @@ export const {
   setPopularBlogger,
   setAllBlogsContainer,
   setCategory,
+  setTagListName,
 } = user.actions;
 
 export default user.reducer;
