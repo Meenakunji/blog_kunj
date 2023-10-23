@@ -45,7 +45,7 @@ const ListingBlog = () => {
       <NextSeo
         title="Blog List"
         description={
-          "Welcome to Jupiter Blogger, your gateway to the cosmos. Ignite your curiosity as we delve into the realms of astronomy, planetary science, and space exploration. From captivating articles to mesmerizing visuals, let us take you on an awe-inspiring journey across the vast expanse of space.".substring(
+          "Welcome to Sahitya, your gateway to the cosmos. Ignite your curiosity as we delve into the realms of astronomy, planetary science, and space exploration. From captivating articles to mesmerizing visuals, let us take you on an awe-inspiring journey across the vast expanse of space.".substring(
             0,
             150
           ) + "..."
@@ -53,17 +53,16 @@ const ListingBlog = () => {
         canonical={`https://jupiterblogger.com/`}
         openGraph={{
           url: `https://jupiterblogger.com/`,
-          title:
-            "Jupiter Blogger: Your Gateway to Inspiring Blogging Adventures",
+          title: "Sahitya: Your Gateway to Inspiring Blogging Adventures",
           description:
-            "Welcome to Jupiter Blogger, your gateway to the cosmos. Ignite your curiosity as we delve into the realms of astronomy, planetary science, and space exploration. From captivating articles to mesmerizing visuals, let us take you on an awe-inspiring journey across the vast expanse of space.".substring(
+            "Welcome to Sahitya, your gateway to the cosmos. Ignite your curiosity as we delve into the realms of astronomy, planetary science, and space exploration. From captivating articles to mesmerizing visuals, let us take you on an awe-inspiring journey across the vast expanse of space.".substring(
               0,
               150
             ) + "...",
           images: [
             {
               url: `https://jupiterblogger.com/`,
-              alt: "Jupiter Blogger: Your Gateway to Inspiring Blogging Adventures",
+              alt: "Sahitya: Your Gateway to Inspiring Blogging Adventures",
             },
           ],
           type: "website",
@@ -72,13 +71,12 @@ const ListingBlog = () => {
         additionalMetaTags={[
           {
             property: "twitter.title",
-            content:
-              "Jupiter Blogger: Your Gateway to Inspiring Blogging Adventures",
+            content: "Sahitya: Your Gateway to Inspiring Blogging Adventures",
           },
           {
             property: "twitter.description",
             content:
-              "Welcome to Jupiter Blogger, your gateway to the cosmos. Ignite your curiosity as we delve into the realms of astronomy, planetary science, and space exploration. From captivating articles to mesmerizing visuals, let us take you on an awe-inspiring journey across the vast expanse of space.".substring(
+              "Welcome to Sahitya, your gateway to the cosmos. Ignite your curiosity as we delve into the realms of astronomy, planetary science, and space exploration. From captivating articles to mesmerizing visuals, let us take you on an awe-inspiring journey across the vast expanse of space.".substring(
                 0,
                 150
               ) + "...",
