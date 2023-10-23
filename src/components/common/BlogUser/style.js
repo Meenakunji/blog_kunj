@@ -24,6 +24,11 @@ const styles = {
       fontSize: "inherit",
       cursor: "inherit",
     },
+    "& img": {
+      width: "70px",
+      height: "70px",
+      borderRadius: "40px",
+    },
   },
   userDetails: {
     display: "flex",
