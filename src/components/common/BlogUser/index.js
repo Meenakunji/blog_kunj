@@ -12,7 +12,7 @@ export const UserComponent = () => {
         >
           <Box style={{ position: "relative" }}>
             <img
-              alt="Shaiq khan"
+              alt="Anuj Kumar Pandey"
               class="s cm ch asd ase cn"
               src="https://miro.medium.com/v2/resize:fill:128:128/0*OMW3e7V1Ye0yPan0"
               width="64"
@@ -28,13 +28,15 @@ export const UserComponent = () => {
               rel="noopener follow"
               href="/@shaiq_khan?source=topic_portal_who_to_follow-------------------------------------"
             >
-              Shaiq khan
+              Anuj Kumar Pandey
             </a>
           </Typography>
         </Box>
-        <Typography component="p">13.4K Followers</Typography>
+        <Typography component="p" style={{ fontSize: "13px" }}>
+          13.4K Followers
+        </Typography>
         <Box sx={styles.descriptionConatiner}>
-          <Typography component="p">Flutter Developer</Typography>
+          <Typography component="p">Software Engineer</Typography>
         </Box>
       </Box>
       <Button>Follow</Button>
