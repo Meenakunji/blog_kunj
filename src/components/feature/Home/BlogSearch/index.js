@@ -2,8 +2,14 @@ import { Box, Button, Typography } from "@mui/material";
 import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import style from "../style";
+import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
+import { setTagListName } from "../../../../redux/slices/user";
 
 export const BlogSearch = ({ popularBlogTag }) => {
+  const router = useRouter();
+  const dispatch = useDispatch();
+
   return (
     <Box sx={style.headSection}>
       <img
@@ -24,7 +30,17 @@ export const BlogSearch = ({ popularBlogTag }) => {
         <Box sx={style.popularTag}>
           <Typography variant="body1">Popular Tag:</Typography>
           {popularBlogTag?.map((item, index) => {
-            return <Button key={index}>{item?._id}</Button>;
+            return (
+              <Button
+                key={index}
+                onClick={() => {
+                  router.push(`/tag/${item?._id}`);
+                  dispatch(setTagListName(item?._id));
+                }}
+              >
+                {item?._id}
+              </Button>
+            );
           })}
         </Box>
       </Box>

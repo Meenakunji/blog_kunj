@@ -170,6 +170,55 @@ const style = {
   listingSection: {
     marginBottom: "30px",
   },
+
+  // blogTagList
+  ContainerBlogListComp: {
+    marginTop: "30px",
+    background: "#fff",
+    padding: "20px",
+    color: "#000",
+  },
+  bannerConatiner: {
+    display: "flex",
+    justifyContent: "center",
+  },
+  subConatiner: {
+    width: "100%",
+    minWidth: "0",
+    maxWidth: "1192px",
+    margin: "0px 24px 56px",
+  },
+  bannerContent: {
+    textAlign: "center",
+    display: "block",
+    "& h2": {
+      letterSpacing: "-0.011em",
+      lineHeight: "52px",
+      fontSize: "42px",
+      fontWeight: "500",
+      color: "#000",
+    },
+  },
+  topicCSS: {
+    fontSize: "16px",
+    fontWeight: "400",
+    marginTop: "16px",
+    lineHeight: "24px",
+    marginBottom: "24px",
+    display: "flex",
+    justifyContent: "center",
+  },
+  followBtn: {
+    display: "block",
+    "& button": {
+      borderColor: "#000",
+      background: "green",
+      color: "#fff",
+      textAlign: "center",
+      textDecoration: "none",
+      borderStyle: "solid",
+    },
+  },
 };
 
 export default style;
