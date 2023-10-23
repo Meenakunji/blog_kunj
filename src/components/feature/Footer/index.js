@@ -76,7 +76,7 @@
 //             <div className="row">
 //               <div className="col-md-3">
 //                 <Box sx={style.footerList}>
-//                   <h5>Jupiter Blogger</h5>
+//                   <h5>Sahitya</h5>
 //                   <img
 //                     src={"/images/home/bloggerlogo.png"}
 //                     style={{ width: "110px", contentVisibility: "auto" }}
@@ -85,10 +85,10 @@
 //                     decoding="async"
 //                   />
 //                   <p>
-//                     Jupiter Blogger: Your go-to blogging website for sharing
+//                     Sahitya: Your go-to blogging website for sharing
 //                     ideas, stories, and experiences with a vibrant community of
 //                     writers and readers. Unleash your creativity and connect
-//                     with like-minded individuals at Jupiter Blogger.
+//                     with like-minded individuals at Sahitya.
 //                   </p>
 //                 </Box>
 //               </div>
@@ -183,10 +183,10 @@ const FooterComponent = () => {
                   <Button>Get started</Button>
                 </form>
                 <Typography variant="body1">
-                  Jupiter Blogger: Your go-to blogging website for sharing
-                  ideas, stories, and experiences with a vibrant community of
-                  writers and readers. Unleash your creativity and connect with
-                  like-minded individuals at Jupiter Blogger.
+                  Sahitya: Your go-to blogging website for sharing ideas,
+                  stories, and experiences with a vibrant community of writers
+                  and readers. Unleash your creativity and connect with
+                  like-minded individuals at Sahitya.
                 </Typography>
               </Box>
             </Grid>
@@ -228,12 +228,11 @@ const FooterComponent = () => {
                   </Typography>
                 </Box>
                 <Typography variant="body1">
-                  Jupiter Blogger: Your go-to blogging website for sharing
-                  ideas,
+                  Sahitya: Your go-to blogging website for sharing ideas,
                   <br />
                   stories, and experiences with a vibrant community of writers
                   and readers. Unleash your creativity and connect with
-                  like-minded individuals at Jupiter Blogger.
+                  like-minded individuals at Sahitya.
                 </Typography>
               </Box>
             </Grid>

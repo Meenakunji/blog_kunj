@@ -14,6 +14,7 @@ export default function Home() {
   const [recentBlogList, setRecentBlogList] = useState([]);
   const [popularBloggerList, setPopularBloggerList] = useState([]);
   const [allBlogList, setAllBlogList] = useState([]);
+  const [popularBlogTag, setPopularBlogTag] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,17 +24,20 @@ export default function Home() {
           recentBlogData,
           popularBloggerListData,
           allBlogListData,
+          popularBlogTags,
         ] = await Promise.all([
           fetcher.get(`http://localhost:3003/v1/blog/recommendations`),
           fetcher.get(`http://localhost:3003/v1/blog/recent-blogs`),
           fetcher.get(`http://localhost:3003/v1/blog/popular-blogger`),
           fetcher.get(`http://localhost:3003/v1/blog/blog-contents`),
+          fetcher.get(`http://localhost:3003/v1/blog/popular-tags`),
         ]);
 
         setRecommendationBlogList(popularData.data);
         setRecentBlogList(recentBlogData.data);
         setPopularBloggerList(popularBloggerListData?.data);
         setAllBlogList(allBlogListData?.data);
+        setPopularBlogTag(popularBlogTags);
       } catch (error) {
         alert(error?.response?.data?.message);
       }
@@ -44,11 +48,11 @@ export default function Home() {
     <Box>
       <SEOComponents
         title={"Blog WebSite Home Page"}
-        description={"this is Jupiter blogger website home page"}
+        description={"this is Sahitya website home page"}
         canonical="https://www.yourwebsite.com/about"
         // data={data?.data?.attributes?.seo}
       />
-      <BlogSearch />
+      <BlogSearch popularBlogTag={popularBlogTag?.data} />
       <RecommendationBlog recommendationBlogList={recommendationBlogList} />
       <PopularBlog popularBlogList={recommendationBlogList} />
       <PopularBloggerList popularBlogger={popularBloggerList} />
