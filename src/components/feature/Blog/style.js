@@ -168,7 +168,7 @@ const style = {
     },
   },
   listingSection: {
-    marginBottom: "30px",
+    marginBottom: "50px",
   },
 
   // blogTagList

@@ -116,8 +116,8 @@ const ListingBlog = () => {
                     </Typography>
                     <Box sx={style.tagListing}>
                       <Button>{item?.blogTag}</Button>
-                      <Button>User Experience</Button>
-                      <Button>User Interfaces</Button>
+                      {/* <Button>User Experience</Button> */}
+                      {/* <Button>User Interfaces</Button> */}
                     </Box>
                   </Box>
                 </Grid>
@@ -128,7 +128,11 @@ const ListingBlog = () => {
                       handleBlogContentListPage(item);
                     }}
                   >
-                    <img src={item?.image} style={{ width: "100%" }} alt="" />
+                    <img
+                      src={item?.image}
+                      style={{ width: "330px", height: "330px" }}
+                      alt=""
+                    />
                   </Box>
                 </Grid>
               </Grid>
