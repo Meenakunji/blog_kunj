@@ -178,7 +178,6 @@ const style = {
       color: "#798b9b",
       fontSize: "14px",
       letterSpacing: "0.2px",
-
     },
     "& button": {
       color: "#63c49b",
@@ -216,8 +215,8 @@ const style = {
       },
     },
     "& h5": {
-      fontSize:"14px"
-    }
+      fontSize: "14px",
+    },
   },
   date: {
     fontSize: "14px",
@@ -271,8 +270,7 @@ const style = {
       transition: "all 0.35s ease-in-out",
       opacity: "1",
       background: "#364652",
-      background:
-        "linear-gradient(rgb(255 255 255 / 0%) 0%, #152532 71.87%)",
+      background: "linear-gradient(rgb(255 255 255 / 0%) 0%, #152532 71.87%)",
     },
   },
   popularArticlesHeading: {
@@ -306,7 +304,7 @@ const style = {
       textOverflow: "ellipsis",
     },
   },
-  
+
   caseStudySlider: {
     "& .slick-prev": {
       zIndex: "999",
@@ -317,7 +315,8 @@ const style = {
         content: "''",
         width: "50px",
         height: "45px",
-        background: "url(/images/home/left.svg) center center / contain no-repeat",
+        background:
+          "url(/images/home/left.svg) center center / contain no-repeat",
         position: "absolute",
         left: "0",
         top: "0",
@@ -332,15 +331,39 @@ const style = {
         content: "''",
         width: "50px",
         height: "45px",
-        background: "url(/images/home/right.svg) center center / contain no-repeat",
+        background:
+          "url(/images/home/right.svg) center center / contain no-repeat",
         position: "absolute",
         right: "0",
         top: "0",
       },
     },
   },
+  showListInput: {
+    overflowY: "auto",
+    height: "300px",
+    position: "absolute",
+    width: "100%",
+    top: "100%",
+    zIndex: "9",
+    color: "#000",
+    "& p": {
+      textAlign: "center",
+    },
+    "& ul": {
+      padding: "0",
+      margin: "0",
+      background: "#fff",
 
-
+      "& li": {
+        color: "#000",
+        fontSize: "14px",
+        fontWeight: "300",
+        padding: "9px 15px",
+        borderBottom: "1px solid #c3c3c3",
+      },
+    },
+  },
 };
 
 export default style;
