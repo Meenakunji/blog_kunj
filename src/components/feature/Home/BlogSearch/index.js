@@ -43,12 +43,12 @@ export const BlogSearch = ({ popularBlogTag }) => {
   };
 
   const handleBlogContentListPage = (item) => {
-    console.log("Print result=====>>>>>", item);
     dispatch(setParticularBlogContent(item));
     const urlSlug = createSlug(item?.userData?.[0]?.name, item?.blogTitle);
     router.push(`/${urlSlug}`);
   };
 
+  // handle search debouncing part
   useEffect(() => {
     let timerOut = setTimeout(() => {
       getBlogTtileData(blogTitle);
