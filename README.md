@@ -1,9 +1,5 @@
 
-![Uploading image.png…]()
-
-
-
-
+![BlogWeb](https://github.com/pankaj061999/full_stackrepo_practice/assets/86594998/ea5985bb-6039-43e5-bd2c-58d483436549)
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
