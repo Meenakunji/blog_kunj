@@ -1,5 +1,5 @@
 import { Box, Button, Divider, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import style from "../style";
 import { useRouter } from "next/router";
@@ -21,7 +21,6 @@ export const BlogSearch = ({ popularBlogTag }) => {
 
   const handleSearchBlogTitle = (data) => {
     setBlogTitle(data);
-    getBlogTtileData(data);
 
     if (data) {
       setSearchDropDown(true);
@@ -47,8 +46,16 @@ export const BlogSearch = ({ popularBlogTag }) => {
     console.log("Print result=====>>>>>", item);
     dispatch(setParticularBlogContent(item));
     const urlSlug = createSlug(item?.userData?.[0]?.name, item?.blogTitle);
-    // router.push(`/${urlSlug}`);
+    router.push(`/${urlSlug}`);
   };
+
+  useEffect(() => {
+    let timerOut = setTimeout(() => {
+      getBlogTtileData(blogTitle);
+    }, 800);
+
+    return () => clearTimeout(timerOut);
+  }, [blogTitle, getBlogTtileData]);
 
   return (
     <Box sx={style.headSection}>
