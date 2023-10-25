@@ -119,11 +119,11 @@ const Header = () => {
   };
 
   const handleCreateBlog = () => {
-    if (!isLoggedIn) {
-      eventBus.dispatch("openLoginModal", { function_name: "unique" });
-    } else {
-      router.push(`/new-blog/1`);
-    }
+    // if (!isLoggedIn) {
+    //   eventBus.dispatch("openLoginModal", { function_name: "unique" });
+    // } else {
+    router.push(`/new-blog/1`);
+    // }
   };
 
   useEffect(() => {
@@ -224,10 +224,10 @@ const Header = () => {
               <Tab label="Create Blog" onClick={handleCreateBlog} />
               {/* <Tab label="Pages" /> */}
               {/* <Tab label="Connect Wallet" onClick={connectWallet} /> */}
-              <Tab
+              {/* <Tab
                 label="Community"
                 onClick={() => router.push("/community")}
-              />
+              /> */}
               <Tab label="About" onClick={() => router.push("/about")} />
             </Tabs>
           )}
@@ -236,6 +236,7 @@ const Header = () => {
             onClick={handleThemeSwitch}
           >
             <ToggleThemeBtn theme={theme} />
+            light
           </Box>
           <Box>
             <NotificationsIcon />
