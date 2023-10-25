@@ -1,12 +1,13 @@
 import { Box, Button, Typography } from "@mui/material";
 import React from "react";
 import styles from "./style";
+import Link from "next/link";
 
 export const UserComponent = () => {
   return (
     <Box sx={styles.Container}>
       <Box sx={styles.mainConatiner}>
-        <a
+        <Link
           rel="noopener follow"
           href="/@shaiq_khan?source=topic_portal_who_to_follow-------------------------------------"
         >
@@ -21,15 +22,15 @@ export const UserComponent = () => {
             />
             <Box class="cg ch s asd ase ck u bf cl"></Box>
           </Box>
-        </a>
+        </Link>
         <Box sx={styles.userDetails}>
           <Typography component="h2">
-            <a
+            <Link
               rel="noopener follow"
               href="/@shaiq_khan?source=topic_portal_who_to_follow-------------------------------------"
             >
               Anuj Kumar Pandey
-            </a>
+            </Link>
           </Typography>
         </Box>
         <Typography component="p" style={{ fontSize: "13px" }}>
