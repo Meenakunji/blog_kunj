@@ -10,6 +10,7 @@ import BookmarkAddOutlinedIcon from "@mui/icons-material/BookmarkAddOutlined";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import style from "./style";
 import { formatCount } from "../../../../utils/common";
+import { API_BASE_URL } from "../../../constant/appConstants";
 
 const CommentBlog = () => {
   const { particularBlogContent } = useSelector((state) => state.user);
@@ -51,7 +52,7 @@ const CommentBlog = () => {
 
   // user blog Mark or not
   const { mutate: getMarkedBlogContent } = useMutation(
-    (blogId) => fetcher.post(`http://localhost:3003/v1/blog/mark/${blogId}`),
+    (blogId) => fetcher.post(`${API_BASE_URL}/v1/blog/mark/${blogId}`),
     {
       onSuccess: (resData) => {
         setBlogMarked(resData?.data?.isMarkedBlog);
@@ -68,7 +69,7 @@ const CommentBlog = () => {
 
   // blog likeor not
   const { mutate: blogLikeCountAPI } = useMutation(
-    (blogId) => fetcher.post(`http://localhost:3003/v1/blog/like/${blogId}`),
+    (blogId) => fetcher.post(`${API_BASE_URL}/v1/blog/like/${blogId}`),
     {
       onSuccess: (resData) => {
         setBlogLikeCount(resData?.data?.blogLike);

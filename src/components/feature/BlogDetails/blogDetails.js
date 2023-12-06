@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
+import CloseIcon from "@mui/icons-material/Close";
+import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
+import { Button, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
-import style from "./style";
-import { Button, Typography } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
-import FormatItalicIcon from "@mui/icons-material/FormatItalic";
-import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
-import { useSelector } from "react-redux";
-import fetcher from "../../../dataProvider";
+import React, { useEffect, useState } from "react";
 import { useMutation } from "react-query";
+import { useSelector } from "react-redux";
+import { API_BASE_URL } from "../../../constant/appConstants";
+import fetcher from "../../../dataProvider";
+import style from "./style";
 
 export default function TemporaryDrawer() {
   const [text, setText] = useState("");
@@ -63,7 +63,7 @@ export default function TemporaryDrawer() {
   const { mutate: createBlogComments } = useMutation(
     (commentMsg) =>
       fetcher.post(
-        `http://localhost:3003/v1/blog/comments/${particularBlogContent?._id}`,
+        `${API_BASE_URL}/v1/blog/comments/${particularBlogContent?._id}`,
         commentMsg
       ),
     {
@@ -93,7 +93,7 @@ export default function TemporaryDrawer() {
   const { mutate: getCommentMessageList } = useMutation(
     () =>
       fetcher.get(
-        `http://localhost:3003/v1/blog/comments/${particularBlogContent?._id}`
+        `${API_BASE_URL}/v1/blog/comments/${particularBlogContent?._id}`
       ),
     {
       onSuccess: (resData) => {
@@ -115,7 +115,7 @@ export default function TemporaryDrawer() {
   const { mutate: deleteBlogCommentMsg } = useMutation(
     ({ type, commentId }) =>
       fetcher.delete(
-        `http://localhost:3003/v1/blog/comments/${commentId}?type=${type}`
+        `${API_BASE_URL}/v1/blog/comments/${commentId}?type=${type}`
       ),
     {
       onSuccess: (resData) => {

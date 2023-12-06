@@ -11,6 +11,7 @@ import {
 import fetcher from "../../../../dataProvider";
 import TitleIcon from "@mui/icons-material/Title";
 import { createSlug } from "../../../../../utils/common";
+import { API_BASE_URL } from "../../../../constant/appConstants";
 
 export const BlogSearch = ({ popularBlogTag }) => {
   const router = useRouter();
@@ -33,7 +34,7 @@ export const BlogSearch = ({ popularBlogTag }) => {
   const getBlogTtileData = async (blogTitle) => {
     try {
       const response = await fetcher.get(
-        `http://localhost:3003/v1/blog/searchbytitle?title=${blogTitle}`
+        `${API_BASE_URL}/v1/blog/searchbytitle?title=${blogTitle}`
       );
       const { data } = response;
       setBlogList(data);

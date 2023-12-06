@@ -1,11 +1,11 @@
 import React from "react";
 import { useMutation } from "react-query";
 import fetcher from "../../../dataProvider";
+import { API_BASE_URL } from "../../../constant/appConstants";
 
 const FileUploader = ({ label, name, setValue }) => {
   const { mutate: getBlogImageUploadObj } = useMutation(
-    (formData) =>
-      fetcher.post(`http://localhost:3003/v1/blog/upload-file`, formData),
+    (formData) => fetcher.post(`${API_BASE_URL}/v1/blog/upload-file`, formData),
     {
       onSuccess: (data) => {
         setValue(name, data?.imageUrl);

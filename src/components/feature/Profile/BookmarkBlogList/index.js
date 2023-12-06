@@ -4,13 +4,14 @@ import React, { useEffect, useState } from "react";
 import { useMutation } from "react-query";
 import fetcher from "../../../../dataProvider";
 import style from "../../Home/style";
+import { API_BASE_URL } from "../../../../constant/appConstants";
 
 export const BookMarkBlogList = () => {
   const [markedblogList, setMarkedblogList] = useState([]);
   const router = useRouter();
   // create New ArtistEntery
   const { mutate: getMarkedBlogList } = useMutation(
-    () => fetcher.get(`http://localhost:3003/v1/blog/bookmark-blog-list`),
+    () => fetcher.get(`${API_BASE_URL}/v1/blog/bookmark-blog-list`),
     {
       onSuccess: ({ data }) => {
         setMarkedblogList(data);

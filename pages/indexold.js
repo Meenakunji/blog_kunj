@@ -3,6 +3,7 @@ import SliderHome from "../src/components/feature/Slider";
 import { BlogCategoryList } from "../src/components/feature/Blog/BlogCategoryList";
 import fetch from "node-fetch";
 import fetcher from "../src/dataProvider";
+import { API_BASE_URL } from "../src/constant/appConstants";
 
 export default function Home() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -15,8 +16,8 @@ export default function Home() {
     const fetchData = async () => {
       try {
         const [blogData, sliderVideoData] = await Promise.all([
-          fetcher.get(`http://localhost:3003/v1/blog/list`),
-          fetcher.get(`http://localhost:3003/v1/home/slider-video`),
+          fetcher.get(`${API_BASE_URL}/v1/blog/list`),
+          fetcher.get(`${API_BASE_URL}/v1/home/slider-video`),
         ]);
 
         setBlogList(blogData.data);
@@ -53,7 +54,7 @@ export default function Home() {
 
     try {
       const response = await fetch(
-        `http://localhost:3003/v1/blog/list?page=${currentPage + 1}`
+        `${API_BASE_URL}/v1/blog/list?page=${currentPage + 1}`
       );
       const nextPageData = await response.json();
 

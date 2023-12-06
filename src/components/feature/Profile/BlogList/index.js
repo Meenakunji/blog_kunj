@@ -5,6 +5,7 @@ import { useMutation } from "react-query";
 import { useSelector } from "react-redux";
 import fetcher from "../../../../dataProvider";
 import style from "../../Home/style";
+import { API_BASE_URL } from "../../../../constant/appConstants";
 
 export const BlogList = () => {
   const [userBlogList, setUserBlogList] = useState([]);
@@ -14,7 +15,7 @@ export const BlogList = () => {
   const { mutate: getMarkedBlogList } = useMutation(
     () =>
       fetcher.get(
-        `http://localhost:3003/v1/blog/user-blog-list?userId=${userData?._id}`
+        `${API_BASE_URL}/v1/blog/user-blog-list?userId=${userData?._id}`
       ),
     {
       onSuccess: ({ data }) => {

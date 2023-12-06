@@ -11,6 +11,7 @@ import fetcher from "../../../../dataProvider";
 import styles from "../style";
 import BookmarkAddOutlinedIcon from "@mui/icons-material/BookmarkAddOutlined";
 import BlogReplyPanel from "../../../common/comment/CommentSection";
+import { API_BASE_URL } from "../../../../constant/appConstants";
 
 const BlogDetailComponent = () => {
   const { particularBlogContent } = useSelector((state) => state.user);
@@ -68,7 +69,7 @@ const BlogDetailComponent = () => {
   // marked blog
   const { mutate: BlogUserFollow } = useMutation(
     (BlogUserId) =>
-      fetcher.post(`http://localhost:3003/v1/user/follow/${BlogUserId}`),
+      fetcher.post(`${API_BASE_URL}/v1/user/follow/${BlogUserId}`),
     {
       onSuccess: (resData) => {
         setUserFollowBlog(resData?.data?.isFollowing);
@@ -85,7 +86,7 @@ const BlogDetailComponent = () => {
 
   // user blog Mark or not
   const { mutate: getMarkedBlogContent } = useMutation(
-    (blogId) => fetcher.post(`http://localhost:3003/v1/blog/mark/${blogId}`),
+    (blogId) => fetcher.post(`${API_BASE_URL}/v1/blog/mark/${blogId}`),
     {
       onSuccess: (resData) => {
         setBlogMarked(resData?.data?.isMarkedBlog);
@@ -116,7 +117,7 @@ const BlogDetailComponent = () => {
   // blog delete
   // user blog Mark or not
   const { mutate: deletBlogContent } = useMutation(
-    (blogId) => fetcher.post(`http://localhost:3003/v1/blog/delete/${blogId}`),
+    (blogId) => fetcher.post(`${API_BASE_URL}/v1/blog/delete/${blogId}`),
     {
       onSuccess: (resData) => {
         console.log("response delete blog", resData);

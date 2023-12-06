@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import BlogContentListComponent from "../../src/components/feature/Blog/BlogList";
 import fetcher from "../../src/dataProvider";
 import eventBus from "../../utils/eventBus";
+import { API_BASE_URL } from "../../src/constant/appConstants";
 
 export default function Index() {
   const [blogContentList, setBlogContentList] = useState([]);
@@ -14,7 +15,7 @@ export default function Index() {
   const fetchBlogContent = async (page) => {
     try {
       const response = await fetcher.get(
-        `http://localhost:3003/v1/blog/content?blogTag=${blogDetails?.blogTag}&page=${page}`
+        `${API_BASE_URL}/v1/blog/content?blogTag=${blogDetails?.blogTag}&page=${page}`
       );
       const { data, totalPages } = response;
       setBlogContentList(data);

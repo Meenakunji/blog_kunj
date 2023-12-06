@@ -16,6 +16,7 @@ import python from "highlight.js/lib/languages/python";
 import go from "highlight.js/lib/languages/go";
 import java from "highlight.js/lib/languages/java";
 import FileUploader from "../../common/FileUploader";
+import { API_BASE_URL } from "../../../constant/appConstants";
 
 hljs.registerLanguage("javascript", javascript);
 hljs.registerLanguage("python", python);
@@ -52,7 +53,7 @@ const BlogCreate = () => {
   const { mutate: getCreateBlogContentData } = useMutation(
     (BlogContentDataObj) =>
       fetcher.post(
-        `http://localhost:3003/v1/blog/create-blog-content`,
+        `${API_BASE_URL}/v1/blog/create-blog-content`,
         BlogContentDataObj
       ),
     {

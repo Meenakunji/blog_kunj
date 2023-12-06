@@ -8,6 +8,7 @@ import { PopularBlog } from "../src/components/feature/Home/PopularBlog";
 import { PopularBloggerList } from "../src/components/feature/Home/PopularBloggerList";
 import { RecommendationBlog } from "../src/components/feature/Home/RecommendationBlog";
 import fetcher from "../src/dataProvider";
+import { API_BASE_URL } from "../src/constant/appConstants";
 
 export default function Home() {
   const [recommendationBlogList, setRecommendationBlogList] = useState([]);
@@ -26,11 +27,11 @@ export default function Home() {
           allBlogListData,
           popularBlogTags,
         ] = await Promise.all([
-          fetcher.get(`http://localhost:3003/v1/blog/recommendations`),
-          fetcher.get(`http://localhost:3003/v1/blog/recent-blogs`),
-          fetcher.get(`http://localhost:3003/v1/blog/popular-blogger`),
-          fetcher.get(`http://localhost:3003/v1/blog/blog-contents`),
-          fetcher.get(`http://localhost:3003/v1/blog/popular-tags`),
+          fetcher.get(`${API_BASE_URL}/v1/blog/recommendations`),
+          fetcher.get(`${API_BASE_URL}/v1/blog/recent-blogs`),
+          fetcher.get(`${API_BASE_URL}/v1/blog/popular-blogger`),
+          fetcher.get(`${API_BASE_URL}/v1/blog/blog-contents`),
+          fetcher.get(`${API_BASE_URL}/v1/blog/popular-tags`),
         ]);
 
         setRecommendationBlogList(popularData.data);

@@ -3,13 +3,14 @@ import React, { useEffect, useState } from "react";
 import style from "./style";
 import { useMutation } from "react-query";
 import fetcher from "../../../dataProvider";
+import { API_BASE_URL } from "../../../constant/appConstants";
 
 export const HomeComponet = () => {
   const [homePageBlogContents, setHomePageBlogContents] = useState([]);
 
   // get all cms details based on category
   const { mutate: getAllcategoryDetails } = useMutation(
-    () => fetcher.get(`http://localhost:3003/v1/blog/content`),
+    () => fetcher.get(`${API_BASE_URL}/v1/blog/content`),
     {
       onSuccess: (resData) => {
         setHomePageBlogContents(resData?.data);

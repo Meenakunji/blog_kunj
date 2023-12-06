@@ -1,8 +1,9 @@
 import axios from "axios";
 import logout from "../components/Layout/util/logout";
+import { API_BASE_URL } from "../src/constant/appConstants";
 // import { API_BASE_URL } from "../src/constant/appConstants";
 let Api = axios.create({
-  baseURL: "http://localhost:3003",
+  baseURL: API_BASE_URL,
   "Content-Type": "application/json",
 });
 

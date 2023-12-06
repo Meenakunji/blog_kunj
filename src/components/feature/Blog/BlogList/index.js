@@ -10,6 +10,7 @@ import fetcher from "../../../../dataProvider";
 import { useMutation } from "react-query";
 import { useDispatch } from "react-redux";
 import { setParticularBlogContent } from "../../../../redux/slices/user";
+import { API_BASE_URL } from "../../../../constant/appConstants";
 
 export default function BlogContentListComponent({ data }) {
   const router = useRouter();
@@ -24,7 +25,7 @@ export default function BlogContentListComponent({ data }) {
 
   // marked blog
   const { mutate: getMarkedBlogContent } = useMutation(
-    (blogId) => fetcher.post(`http://localhost:3003/v1/blog/mark/${blogId}`),
+    (blogId) => fetcher.post(`${API_BASE_URL}/v1/blog/mark/${blogId}`),
     {
       onSuccess: (resData) => {
         const marked = resData?.data?.isMarkedBlog;

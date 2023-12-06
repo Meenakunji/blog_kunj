@@ -9,7 +9,7 @@ export const UserComponent = () => {
       <Box sx={styles.mainConatiner}>
         <Link
           rel="noopener follow"
-          href="/@shaiq_khan?source=topic_portal_who_to_follow-------------------------------------"
+          href="/@shaiq_khan?source=topic_portal_who_to_follow"
         >
           <Box style={{ position: "relative" }}>
             <img
@@ -27,7 +27,7 @@ export const UserComponent = () => {
           <Typography component="h2">
             <Link
               rel="noopener follow"
-              href="/@shaiq_khan?source=topic_portal_who_to_follow-------------------------------------"
+              href="/@shaiq_khan?source=topic_portal_who_to_follow"
             >
               Anuj Kumar Pandey
             </Link>

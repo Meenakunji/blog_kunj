@@ -14,7 +14,7 @@ export const rawInstance = axios.create({
 });
 
 export const strapiInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_STRAPI_API_URL,
+  baseURL: process.env.NEXT_PUBLIC_STRAPI_API_BASE_URL,
   headers: {
     "Content-Type": "application/json",
   },

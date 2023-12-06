@@ -7,6 +7,7 @@ import style from "../../../Home/style";
 import { useDispatch, useSelector } from "react-redux";
 import { createSlug } from "../../../../../../utils/common";
 import { setParticularBlogContent } from "../../../../../redux/slices/user";
+import { API_BASE_URL } from "../../../../../constant/appConstants";
 
 export const TagListComponent = () => {
   const [markedblogList, setMarkedblogList] = useState([]);
@@ -16,7 +17,7 @@ export const TagListComponent = () => {
 
   // create New ArtistEntery
   const { mutate: getMarkedBlogList } = useMutation(
-    () => fetcher.get(`http://localhost:3003/v1/blog/blog-contents`),
+    () => fetcher.get(`${API_BASE_URL}/v1/blog/blog-contents`),
     {
       onSuccess: ({ data }) => {
         const result = data?.filter((item) => item?.blogTag === tagListName);

@@ -13,6 +13,7 @@ import useLocalStorage from "../../../../hooks/useLocalStorage";
 import { setToken, setUserData } from "../../../../redux/slices/user";
 import Snackbar from "../../../common/Snackbar";
 import TextField from "../../../common/TextField";
+import { API_BASE_URL } from "../../../../constant/appConstants";
 
 const LoginComponent = ({ handleModalClose }) => {
   const {
@@ -49,7 +50,7 @@ const LoginComponent = ({ handleModalClose }) => {
   // // user Login API
   const { mutate: userEmailLogin } = useMutation(
     (LoginFormObj) =>
-      fetcher.post(`http://localhost:3003/v1/auth/login-email`, LoginFormObj),
+      fetcher.post(`${API_BASE_URL}/v1/auth/login-email`, LoginFormObj),
     {
       onSuccess: (res) => {
         const accessToken = res?.data?.tokens?.access?.token;
