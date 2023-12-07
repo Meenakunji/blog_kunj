@@ -1,0 +1,10 @@
+module.exports.Users = require("./user.model.js");
+module.exports.BlogContent = require("./blog-content.model");
+module.exports.BlogLists = require("./blog-list.model");
+module.exports.FaqLists = require("./faq-list.model");
+module.exports.HomeSliderVideos = require("./home-page.model");
+module.exports.DisposableDomain = require("./disposable-domains.model");
+module.exports.Token = require("./token.model.js");
+module.exports.VisitedBlog = require("./visitedBlog.modal");
+module.exports.LikedBlog = require("./likeBlog.model");
+module.exports.BlogCommentMessages = require("./blog-comment-message.model");

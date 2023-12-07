@@ -22,7 +22,7 @@ export const PopularBloggerList = ({ popularBlogger }) => {
     dispatch(setCategory("Popular Blogger"));
     router.push(`/bloglisting`);
   };
-  const PopularBloggerData = popularBlogger.slice(0, 3);
+  const PopularBloggerData = popularBlogger?.slice(0, 3);
   return (
     <section>
       <Container maxWidth="lg">
