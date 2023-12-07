@@ -33,9 +33,9 @@ export const AllBlogComponent = ({ allBlogList }) => {
     router.push(`/bloglisting`);
   };
 
-  const firstTwoItems = allBlogList.slice(0, 2);
+  const firstTwoItems = allBlogList?.slice(0, 2);
   // Store next 3 to 5 items in a separate array
-  const nextThreeToFiveItems = allBlogList.slice(2, 5);
+  const nextThreeToFiveItems = allBlogList?.slice(2, 5);
 
   const handleBlogContentListPage = (item) => {
     dispatch(setParticularBlogContent(item));

@@ -6,7 +6,6 @@ function SearchPage() {
   const router = useRouter();
   const { query } = router.query;
   const searchTerm = query || "";
-  console.log("Print route value ==>>", router.query.title);
   // Check if the route is exactly /search?title=
   if (!router.query.title) {
     // Redirect to the home page
