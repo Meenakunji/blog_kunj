@@ -16,14 +16,14 @@ import { API_BASE_URL } from "../../../../constant/appConstants";
 export const BlogSearch = ({ popularBlogTag }) => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const [blogTitle, setBlogTitle] = useState(" ");
+  const [blogTitle, setBlogTitle] = useState("");
   const [blogList, setBlogList] = useState([]);
   const [searchDropdown, setSearchDropDown] = useState(false);
 
   const handleSearchBlogTitle = (data) => {
-    setBlogTitle(data);
+    setBlogTitle(data.trim()); // Trim whitespace from the input
 
-    if (data) {
+    if (data.trim()) {
       setSearchDropDown(true);
     } else {
       setSearchDropDown(false);
@@ -31,10 +31,10 @@ export const BlogSearch = ({ popularBlogTag }) => {
   };
 
   // search API
-  const getBlogTtileData = async (blogTitle) => {
+  const getBlogTitleData = async (title) => {
     try {
       const response = await fetcher.get(
-        `${API_BASE_URL}/v1/blog/searchbytitle?title=${blogTitle}`
+        `${API_BASE_URL}/v1/blog/searchbytitle?title=${title}`
       );
       const { data } = response;
       setBlogList(data);
@@ -51,12 +51,18 @@ export const BlogSearch = ({ popularBlogTag }) => {
 
   // handle search debouncing part
   useEffect(() => {
+    if (blogTitle === "") {
+      // If the search term is empty, don't make the API call
+      setBlogList([]);
+      return;
+    }
+
     let timerOut = setTimeout(() => {
-      getBlogTtileData(blogTitle);
+      getBlogTitleData(blogTitle);
     }, 800);
 
     return () => clearTimeout(timerOut);
-  }, [blogTitle, getBlogTtileData]);
+  }, [blogTitle]);
 
   return (
     <Box sx={style.headSection}>
