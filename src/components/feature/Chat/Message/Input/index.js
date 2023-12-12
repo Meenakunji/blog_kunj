@@ -17,42 +17,50 @@ export const MessageInputsection = () => {
         onChange={handleTextChange}
       />
       <Box sx={style.buttonSection}>
-        <Box style={{ display: "flex", gap: "20px" }}>
-          <Image
-            alt="play"
-            src="/images/home/vCall.svg"
-            width={15}
-            height={15}
-          />
-          <Image
-            alt="attchement "
-            src="/images/home/mice.svg"
-            width={15}
-            height={15}
-            style={{ marginLeft: "8px" }}
-          />
-          <Image
-            alt="attchement "
-            src="/images/home/emoji.svg"
-            width={15}
-            height={15}
-            style={{ marginLeft: "8px" }}
-          />
-          <Image
-            alt="attchement "
-            src="/images/home/fileAttachement.svg"
-            width={15}
-            height={15}
-            style={{ marginLeft: "8px" }}
-          />
-
-          <Image
-            alt="file upload "
-            src="/images/home/fileupload.svg"
-            width={15}
-            height={15}
-            style={{ marginLeft: "8px" }}
-          />
+        <Box style={{ display: "flex", gap: "20px", alignItems: "center" }}>
+          <ul>
+            <li>
+              <Image
+                alt="play"
+                src="/images/home/vCall.svg"
+                width={15}
+                height={15}
+              />
+            </li>
+            <li>
+              <Image
+                alt="attchement "
+                src="/images/home/mice.svg"
+                width={15}
+                height={15}
+                style={{ marginLeft: "8px" }}
+              />
+            </li>
+            <li>
+              <Image
+                alt="attchement "
+                src="/images/home/emoji.svg"
+                width={15}
+                height={15}
+              />
+            </li>
+            <li>
+              <Image
+                alt="attchement "
+                src="/images/home/fileAttachement.svg"
+                width={15}
+                height={15}
+              />
+            </li>
+            <li>
+              <Image
+                alt="file upload "
+                src="/images/home/fileupload.svg"
+                width={15}
+                height={15}
+              />
+            </li>
+          </ul>
         </Box>
 
         <Box>
@@ -65,6 +73,7 @@ export const MessageInputsection = () => {
           />
         </Box>
       </Box>
+        
     </Box>
   );
 };

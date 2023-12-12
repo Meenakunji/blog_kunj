@@ -1,7 +1,9 @@
 import DefaultLayout from "./Default";
+import EmptyLayout from "./Empty";
 
 const LayoutTypesMapping = {
   DefaultLayout,
+  EmptyLayout,
 };
 
 const defaultLayoutType = "DefaultLayout";
