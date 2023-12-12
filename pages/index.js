@@ -72,7 +72,7 @@ const Home = () => {
         setAllBlogList(allBlogListData?.data);
         setPopularBlogTag(popularBlogTags);
       } catch (error) {
-        console.error("Error occurred while fetching data:", error);
+        alert(error?.response?.data?.message);
       }
     };
     fetchData();
