@@ -31,11 +31,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <StrictMode>
       <Head>{/* Move other head-related components or metadata here */}</Head>
-      <Script
-        src="https://cdn.ethers.io/lib/ethers-5.0.umd.min.js"
-        strategy="beforeInteractive"
-      />
-      {/* <SessionProvider session={pageProps.session}> */}
+
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <ReactQueryDevtools initialIsOpen={false} />
@@ -53,7 +49,6 @@ function MyApp({ Component, pageProps }) {
           </GoogleOAuthProvider>
         </Hydrate>
       </QueryClientProvider>
-      {/* </SessionProvider> */}
     </StrictMode>
   );
 }

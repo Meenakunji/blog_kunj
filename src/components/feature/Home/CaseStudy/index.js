@@ -14,8 +14,9 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import style from "../style";
+import Image from "next/image";
 
-export const CaseStudyList = () => {
+const CaseStudyList = () => {
   const settings = {
     dots: true,
     infinite: true,
@@ -48,120 +49,124 @@ export const CaseStudyList = () => {
             View all <ArrowForwardIcon />
           </Button>
         </Box>
-        
+
         <Box sx={style.caseStudySlider}>
-        <Slider {...settings}>
-          <Card sx={{ borderRadius: "15px" }}>
-            <Grid container>
-              <Grid xs={6} md={6}>
-                <img
-                  src="https://images.pexels.com/photos/7602068/pexels-photo-7602068.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                  alt=""
-                  style={{
-                    width: "100%",
-                    height: "360px",
-                    objectFit: "cover",
-                  }}
-                />
-              </Grid>
-              <Grid xs={6} md={6}>
-                <Box sx={style.topSectionDetails}>
-                  <Button>FEATURED</Button>
-                  <Typography variant="h1">
-                    Cheap Airline Tickets Great Ways To Save
-                  </Typography>
-                  <Typography variant="body1">
-                    In publishing and graphic design, Lorem ipsum is a
-                    placeholder text commonlyand graphic design, Lorem ipsum is
-                    a placeholder text commonly{" "}
-                  </Typography>
+          <Slider {...settings}>
+            <Card sx={{ borderRadius: "15px" }}>
+              <Grid container>
+                <Grid xs={6} md={6}>
+                  <img
+                    src="/images/home/Taj.jpg"
+                    alt=""
+                    style={{
+                      width: "100%",
+                      height: "360px",
+                      objectFit: "cover",
+                    }}
+                  />
+                </Grid>
+                <Grid xs={6} md={6}>
+                  <Box sx={style.topSectionDetails}>
+                    <Button>FEATURED</Button>
+                    <Typography variant="h1">
+                      Cheap Airline Tickets Great Ways To Save
+                    </Typography>
+                    <Typography variant="body1">
+                      In publishing and graphic design, Lorem ipsum is a
+                      placeholder text commonlyand graphic design, Lorem ipsum
+                      is a placeholder text commonly{" "}
+                    </Typography>
 
-                  <Box sx={style.cardBottomSection}>
-                    <Box sx={style.profileDetails}>
-                      <Box sx={style.profileSection}>
-                        <Avatar>
-                          <img
-                            src="https://images.pexels.com/users/avatars/48514757/eyup-beyhan-457.jpeg?auto=compress&fit=crop&h=50&w=50&dpr=1"
-                            alt=""
-                          />
-                        </Avatar>
-                      </Box>
-                      <Box sx={style.profileName}>
-                        <Typography variant="h5">Farhan</Typography>
-                        <Box sx={style.dFlex}>
-                          <span>
-                            <DoneIcon />
-                          </span>
-                          <Typography variant="body1">
-                            {" "}
-                            Verified writer
-                          </Typography>
+                    <Box sx={style.cardBottomSection}>
+                      <Box sx={style.profileDetails}>
+                        <Box sx={style.profileSection}>
+                          <Avatar>
+                            <Image
+                              src="/images/home/User.jpg"
+                              fill={true}
+                              alt="user pic"
+                            />
+                          </Avatar>
+                        </Box>
+                        <Box sx={style.profileName}>
+                          <Typography variant="h5">Farhan</Typography>
+                          <Box sx={style.dFlex}>
+                            <span>
+                              <DoneIcon />
+                            </span>
+                            <Typography variant="body1">
+                              {" "}
+                              Verified writer
+                            </Typography>
+                          </Box>
                         </Box>
                       </Box>
+                      <Box sx={style.date}>2 May</Box>
                     </Box>
-                    <Box sx={style.date}>2 May</Box>
                   </Box>
-                </Box>
+                </Grid>
               </Grid>
-            </Grid>
-          </Card>
-          <Card sx={{ borderRadius: "15px" }}>
-            <Grid container>
-              <Grid xs={6} md={6}>
-                <img
-                  src="https://mui.com/static/images/cards/contemplative-reptile.jpg"
-                  alt=""
-                  style={{
-                    width: "100%",
-                    height: "360px",
-                    objectFit: "cover",
-                  }}
-                />
-              </Grid>
-              <Grid xs={6} md={6}>
-                <Box sx={style.topSectionDetails}>
-                  <Button>FEATURED</Button>
-                  <Typography variant="h1">
-                    Cheap Airline Tickets Great Ways To Save
-                  </Typography>
-                  <Typography variant="body1">
-                    In publishing and graphic design, Lorem ipsum is a
-                    placeholder text commonlyand graphic design, Lorem ipsum is
-                    a placeholder text commonly{" "}
-                  </Typography>
+            </Card>
+            <Card sx={{ borderRadius: "15px" }}>
+              <Grid container>
+                <Grid xs={6} md={6}>
+                  <img
+                    alt="slider image"
+                    src="/images/home/rocket.jpg"
+                    style={{
+                      width: "100%",
+                      height: "360px",
+                      objectFit: "cover",
+                    }}
+                  />
+                </Grid>
+                <Grid xs={6} md={6}>
+                  <Box sx={style.topSectionDetails}>
+                    <Button>FEATURED</Button>
+                    <Typography variant="h1">
+                      Cheap Airline Tickets Great Ways To Save
+                    </Typography>
+                    <Typography variant="body1">
+                      In publishing and graphic design, Lorem ipsum is a
+                      placeholder text commonlyand graphic design, Lorem ipsum
+                      is a placeholder text commonly{" "}
+                    </Typography>
 
-                  <Box sx={style.cardBottomSection}>
-                    <Box sx={style.profileDetails}>
-                      <Box sx={style.profileSection}>
-                        <Avatar>
-                          <img
-                            src="https://images.pexels.com/users/avatars/48514757/eyup-beyhan-457.jpeg?auto=compress&fit=crop&h=50&w=50&dpr=1"
-                            alt=""
-                          />
-                        </Avatar>
-                      </Box>
-                      <Box sx={style.profileName}>
-                        <Typography variant="h5">Farhan</Typography>
-                        <Box sx={style.dFlex}>
-                          <span>
-                            <DoneIcon />
-                          </span>
-                          <Typography variant="body1">
-                            {" "}
-                            Verified writer
-                          </Typography>
+                    <Box sx={style.cardBottomSection}>
+                      <Box sx={style.profileDetails}>
+                        <Box sx={style.profileSection}>
+                          <Avatar>
+                            <Image
+                              src="/images/home/User.jpg"
+                              fill={true}
+                              alt="user pic"
+                            />
+                          </Avatar>
+                        </Box>
+                        <Box sx={style.profileName}>
+                          <Typography variant="h5">Farhan</Typography>
+                          <Box sx={style.dFlex}>
+                            <span>
+                              <DoneIcon />
+                            </span>
+                            <Typography variant="body1">
+                              {" "}
+                              Verified writer
+                            </Typography>
+                          </Box>
                         </Box>
                       </Box>
+                      <Box sx={style.date}>2 May</Box>
                     </Box>
-                    <Box sx={style.date}>2 May</Box>
                   </Box>
-                </Box>
+                </Grid>
               </Grid>
-            </Grid>
-          </Card>
+            </Card>
           </Slider>
-          </Box>
+        </Box>
       </Container>
     </section>
   );
 };
+
+export default CaseStudyList;

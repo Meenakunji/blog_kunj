@@ -13,7 +13,7 @@ import TitleIcon from "@mui/icons-material/Title";
 import { createSlug } from "../../../../../utils/common";
 import { API_BASE_URL } from "../../../../constant/appConstants";
 
-export const BlogSearch = ({ popularBlogTag }) => {
+const BlogSearch = ({ popularBlogTag }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [blogTitle, setBlogTitle] = useState("");
@@ -66,11 +66,7 @@ export const BlogSearch = ({ popularBlogTag }) => {
 
   return (
     <Box sx={style.headSection}>
-      <img
-        src="https://images.pexels.com/photos/8459515/pexels-photo-8459515.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=500&w=2000"
-        alt=""
-        style={{ width: "100%" }}
-      />
+      <img src="/images/home/commentBg.jpg" alt="" style={{ width: "100%" }} />
       {/* search popular blog based on title */}
       <Box sx={style.ourNewRoom}>
         <Typography variant="h6">Our Newsroom</Typography>
@@ -125,3 +121,5 @@ export const BlogSearch = ({ popularBlogTag }) => {
     </Box>
   );
 };
+
+export default BlogSearch;

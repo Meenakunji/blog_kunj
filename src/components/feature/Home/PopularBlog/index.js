@@ -18,7 +18,7 @@ import {
 } from "../../../../redux/slices/user";
 import style from "../style";
 
-export const PopularBlog = ({ popularBlogList }) => {
+const PopularBlog = ({ popularBlogList }) => {
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -109,3 +109,5 @@ export const PopularBlog = ({ popularBlogList }) => {
     </section>
   );
 };
+
+export default PopularBlog;
