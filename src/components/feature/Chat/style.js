@@ -17,21 +17,24 @@ const style = {
     display: "flex",
     width: "100%",
     justifyContent: "space-between",
-    // gap: "20px",
-    border: "1px solid #d5c8c8",
-    borderRadius: "20px",
+    borderBottom: "1px solid #bcbcbcc3",
+    padding: "10px 0",
     alignItems: "center",
 
     "& h1": {
       fontSize: "14px",
       fontWeight: "500",
       lineHeight: "1.5",
+      marginBottom: "5px",
     },
     "& span": {
       fontSize: "12px",
       fontWeight: "300",
       lineHeight: "1.5",
     },
+  },
+  userList: {
+    borderBottom: "1px solid #c3c3c3",
   },
   chatgroupConatiner: {
     "& button.btnPopup": {
@@ -42,9 +45,13 @@ const style = {
       background: "#10a37f",
       color: "#fff",
       width: "100%",
-      maxWidth: "400px",
-      height: "36px",
+      maxWidth: "100%",
+      height: "40px",
       fontSize: "12px",
+    },
+    "& h2": {
+      fontSize: "25px",
+      marginBottom: "20px",
     },
   },
 };

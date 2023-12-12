@@ -27,7 +27,7 @@ export const RecommendationBlog = ({ recommendationBlogList }) => {
             <Grid xs={6} md={6}>
               <img
                 src="https://images.pexels.com/photos/12314825/pexels-photo-12314825.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                alt=""
+                alt="recommended image"
                 style={{ width: "100%", height: "370px", objectFit: "cover" }}
               />
             </Grid>

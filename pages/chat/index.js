@@ -9,3 +9,11 @@ export default function Chat() {
     </Box>
   );
 }
+
+export async function getStaticProps() {
+  return {
+    props: {
+      asLayout: "EmptyLayout",
+    },
+  };
+}

@@ -1,23 +1,25 @@
-import { Box, Typography } from "@mui/material";
-import React from "react";
-import Image from "next/image";
+import { Box } from "@mui/material";
+import React, { useState } from "react";
 import style from "./style";
-import { HeadSectionMessageDetails } from "./Head";
-import { MessageDetailsSection } from "./MessageDetails";
-import { MessageInputsection } from "./Input";
+
+import PersistentDrawerRight from "./MessageProfile";
 
 export const MessageDetails = () => {
+  const [open, setOpen] = useState(false);
+  const handleDrawerOpen = () => {
+    setOpen(!open);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
   return (
     <Box sx={style.messagedetailsContainer}>
-      <HeadSectionMessageDetails />
-      <Box sx={style.chatSection}>
-        <Box>
-          <MessageDetailsSection />
-        </Box>
-        <Box sx={style.chatInputSection}>
-          <MessageInputsection />
-        </Box>
-      </Box>
+      <PersistentDrawerRight
+        open={open}
+        handleDrawerClose={handleDrawerClose}
+        handleDrawerOpen={handleDrawerOpen}
+      />
     </Box>
   );
 };

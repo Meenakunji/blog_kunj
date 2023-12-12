@@ -7,6 +7,7 @@ const style = {
     display: "flex",
     alignItems: "center",
     gap: "15px",
+    cursor: "pointer",
   },
   userDetail: {
     "& h1": {
@@ -33,10 +34,10 @@ const style = {
     width: 50,
     height: 50,
     borderRadius: "50%",
-    border: "2px solid #000",
-    backgroundColor: "#f0f0f0",
+    border: "2px solid #e7dfdf",
+    // backgroundColor: "#f0f0f0",
     "& img": {
-      borderRadius: "50%", // Ensure the image itself is circular
+      borderRadius: "50%",
     },
   },
   chatSection: {
@@ -57,11 +58,11 @@ const style = {
   },
   useInputSection: {
     backgroundColor: "#fff",
-    border: "1px solid gray",
+    border: "1px solid #ececf1",
     borderRadius: "12px",
     boxShadow: "0 8px 24px hsla(210,8%,62%,.2)",
     boxSizing: "border-box",
-    padding: "24px",
+
     transition: "all .2s ease-in-out",
     "& textarea": {
       backgroundColor: "transparent",
@@ -78,6 +79,7 @@ const style = {
       lineHeight: "20px",
       fontFamily: "inherit",
       fontSize: "inherit",
+      padding: "10px 15px",
       "&:focus": {
         border: "none",
         outline: "none",
@@ -88,6 +90,8 @@ const style = {
     display: "flex",
     justifyContent: "space-between",
     gap: "20px",
+    borderTop: "1px solid#dadada",
+    padding: "10px 15px",
     "& button": {
       backgroundColor: "#ececf1",
       color: "#353740",
@@ -108,6 +112,17 @@ const style = {
       },
       "& img": {
         marginRight: "8px",
+      },
+    },
+    "& ul": {
+      margin: "0",
+      padding: "0",
+      "& li": {
+        display: "inline-block",
+        paddingLeft: "15px",
+        "&:first-child": {
+          paddingLeft: "0",
+        },
       },
     },
   },

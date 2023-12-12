@@ -1,8 +1,8 @@
 import { Box } from "@mui/material";
 import React from "react";
-import style from "./style";
 import { ChatGroup } from "./ChatGroup";
 import { MessageDetails } from "./Message";
+import style from "./style";
 
 export const ChatMainComponet = () => {
   return (

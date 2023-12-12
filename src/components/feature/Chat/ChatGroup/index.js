@@ -7,49 +7,43 @@ import { EnhancedSearch } from "../../../common/SearchInput";
 export const ChatGroup = () => {
   return (
     <Box sx={style.chatgroupConatiner}>
-      <Typography>Messages</Typography>
-      {/* user input and create group button */}
-      <EnhancedSearch />
-      <Button
-        type="button"
-        className="btnPopup"
-        // onClick={() => openDrawerCell()}
-        style={{ marginBottom: "20px" }}
-      >
-        + Start a New Chat
-      </Button>
+      <Box sx={{ padding: "15px" }}>
+        <Typography variant="h2">Messages</Typography>
+        {/* user input and create group button */}
+        <EnhancedSearch />
+        <Button
+          type="button"
+          className="btnPopup"
+          // onClick={() => openDrawerCell()}
+          style={{ margin: "20px 0" }}
+        >
+          + Start a New Chat
+        </Button>
+      </Box>
       <Box
         style={{
           overflow: "scroll",
-          height: "602px",
           overflowX: "hidden",
+          padding: "15px",
+          height: "580px",
         }}
       >
         <UserDetails />
-        <Divider style={{ border: "1px solid #a59b9b", marginTop: "10px" }} />
         <UserDetails />
-        <Divider style={{ border: "1px solid #a59b9b", marginTop: "10px" }} />
         <UserDetails />
-        <Divider
-          style={{ border: "1px solid #a59b9b", marginTop: "10px" }}
-        />{" "}
         <UserDetails />
-        <Divider
-          style={{ border: "1px solid #a59b9b", marginTop: "10px" }}
-        />{" "}
         <UserDetails />
-        <Divider
-          style={{ border: "1px solid #a59b9b", marginTop: "10px" }}
-        />{" "}
         <UserDetails />
-        <Divider style={{ border: "1px solid #a59b9b", marginTop: "10px" }} />
         <UserDetails />
-        <Divider style={{ border: "1px solid #a59b9b", marginTop: "10px" }} />
         <UserDetails />
-        <Divider style={{ border: "1px solid #a59b9b", marginTop: "10px" }} />
         <UserDetails />
-        <Divider style={{ border: "1px solid #a59b9b", marginTop: "10px" }} />
+        <UserDetails />
+        <UserDetails />
+        <UserDetails />
+        <UserDetails />
+        <UserDetails />
       </Box>
+        
     </Box>
   );
 };

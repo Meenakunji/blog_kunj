@@ -1,18 +1,27 @@
 import SearchBar from "material-ui-search-bar";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
-export const EnhancedSearch = (
-  {
-    // setRowsPerPage = null,
-    // setRows = [],
-  }
-) => {
+export const EnhancedSearch = () => {
+  const [searchValue, setSearchValue] = useState("");
+
+  const handleSearch = (searchVal) => {
+    // Handle the search value
+    console.log("Search value:", searchVal);
+    setSearchValue(searchVal);
+  };
+
+  const handleCancelSearch = () => {
+    console.log("Search canceled");
+    setSearchValue("");
+  };
+
   return (
     <SearchBar
-      // value={searched}
-      placeholder={"Blog Search"}
-      // onChange={(searchVal) => requestSearch(searchVal)}
-      // onCancelSearch={() => cancelSearch()}
+      value={searchValue}
+      placeholder={"Search for chats ......"}
+      style={{ borderRadius: "15px" }}
+      onChange={(searchVal) => handleSearch(searchVal)}
+      onCancelSearch={() => handleCancelSearch()}
     />
   );
 };
