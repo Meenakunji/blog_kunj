@@ -21,7 +21,7 @@ import {
 } from "../../../../redux/slices/user";
 import style from "../style";
 
-export const AllBlogComponent = ({ allBlogList }) => {
+const AllBlogComponent = ({ allBlogList }) => {
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -187,3 +187,5 @@ export const AllBlogComponent = ({ allBlogList }) => {
     </section>
   );
 };
+
+export default AllBlogComponent;

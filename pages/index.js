@@ -1,18 +1,53 @@
 import { Box } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import SEOComponents from "../src/components/common/SEO";
-import { AllBlogComponent } from "../src/components/feature/Home/AllBlogContainer";
-import { BlogSearch } from "../src/components/feature/Home/BlogSearch";
-import { CaseStudyList } from "../src/components/feature/Home/CaseStudy";
-import { PopularBlog } from "../src/components/feature/Home/PopularBlog";
-import { PopularBloggerList } from "../src/components/feature/Home/PopularBloggerList";
-import { RecommendationBlog } from "../src/components/feature/Home/RecommendationBlog";
 import fetcher from "../src/dataProvider";
 import { API_BASE_URL } from "../src/constant/appConstants";
+import dynamic from "next/dynamic";
 
-export default function Home() {
+// dynamic routing
+const BlogSearch = dynamic(
+  () => import("../src/components/feature/Home/BlogSearch"),
+  {
+    ssr: false,
+  }
+);
+const RecommendationBlog = dynamic(
+  () => import("../src/components/feature/Home/RecommendationBlog"),
+  {
+    ssr: false,
+  }
+);
+
+const PopularBlog = dynamic(
+  () => import("../src/components/feature/Home/PopularBlog"),
+  {
+    ssr: false,
+  }
+);
+
+const PopularBloggerList = dynamic(
+  () => import("../src/components/feature/Home/PopularBloggerList"),
+  {
+    ssr: false,
+  }
+);
+
+const CaseStudyList = dynamic(
+  () => import("../src/components/feature/Home/CaseStudy"),
+  {
+    ssr: false,
+  }
+);
+
+const AllBlogComponent = dynamic(
+  () => import("../src/components/feature/Home/AllBlogContainer"),
+  {
+    ssr: false,
+  }
+);
+const Home = () => {
   const [recommendationBlogList, setRecommendationBlogList] = useState([]);
-  const [recentBlogList, setRecentBlogList] = useState([]);
   const [popularBloggerList, setPopularBloggerList] = useState([]);
   const [allBlogList, setAllBlogList] = useState([]);
   const [popularBlogTag, setPopularBlogTag] = useState([]);
@@ -22,20 +57,17 @@ export default function Home() {
       try {
         const [
           popularData,
-          recentBlogData,
           popularBloggerListData,
           allBlogListData,
           popularBlogTags,
         ] = await Promise.all([
           fetcher.get(`${API_BASE_URL}/v1/blog/recommendations`),
-          fetcher.get(`${API_BASE_URL}/v1/blog/recent-blogs`),
           fetcher.get(`${API_BASE_URL}/v1/blog/popular-blogger`),
           fetcher.get(`${API_BASE_URL}/v1/blog/blog-contents`),
           fetcher.get(`${API_BASE_URL}/v1/blog/popular-tags`),
         ]);
 
         setRecommendationBlogList(popularData.data);
-        setRecentBlogList(recentBlogData.data);
         setPopularBloggerList(popularBloggerListData?.data);
         setAllBlogList(allBlogListData?.data);
         setPopularBlogTag(popularBlogTags);
@@ -45,6 +77,7 @@ export default function Home() {
     };
     fetchData();
   }, []);
+
   return (
     <Box>
       <SEOComponents
@@ -61,4 +94,6 @@ export default function Home() {
       <AllBlogComponent allBlogList={allBlogList} />
     </Box>
   );
-}
+};
+
+export default Home;

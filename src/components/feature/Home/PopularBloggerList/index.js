@@ -13,7 +13,7 @@ import { useDispatch } from "react-redux";
 import { setCategory, setPopularBlogger } from "../../../../redux/slices/user";
 import style from "../style";
 
-export const PopularBloggerList = ({ popularBlogger }) => {
+const PopularBloggerList = ({ popularBlogger }) => {
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -46,8 +46,7 @@ export const PopularBloggerList = ({ popularBlogger }) => {
                   <Box sx={style.popularArticlesList}>
                     <img
                       src={
-                        item?.result?.[0]?.image ||
-                        "https://images.pexels.com/photos/12314825/pexels-photo-12314825.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                        item?.result?.[0]?.image || "/images/home/rocket.jpg"
                       }
                       alt={item?.result?.[0]?.name}
                       style={{ width: "100%", height: "500px" }}
@@ -110,3 +109,5 @@ export const PopularBloggerList = ({ popularBlogger }) => {
     </section>
   );
 };
+
+export default PopularBloggerList;
