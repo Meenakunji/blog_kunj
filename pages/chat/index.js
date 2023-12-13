@@ -4,7 +4,7 @@ import { ChatMainComponet } from "../../src/components/feature/Chat";
 
 export default function Chat() {
   return (
-    <Box style={{ marginTop: "70px" }}>
+    <Box>
       <ChatMainComponet />
     </Box>
   );

@@ -10,6 +10,8 @@ import style from "./style";
 import { HeadSectionMessageDetails } from "../Head";
 import { MessageInputsection } from "../Input";
 import { MessageDetailsSection } from "../MessageDetails";
+import ProfileDetails from "./ProfileDetails";
+import CloseIcon from "@mui/icons-material/Close";
 
 const drawerWidth = 300;
 
@@ -67,24 +69,25 @@ export default function PersistentDrawerRight({
           sx={{
             width: drawerWidth,
             flexShrink: 0,
+
             "& .MuiDrawer-paper": {
               width: drawerWidth,
-              position: "relative",
+              // position: "relative",
+              background: "#fff",
+              border: "1px solid #c3c3c3c3",
+              borderRadius: "20px",
             },
           }}
           variant="persistent"
           anchor="right"
           open={open}
         >
-          <DrawerHeader>
-            <IconButton onClick={handleDrawerClose}>
-              {theme.direction === "rtl" ? (
-                <ChevronLeftIcon />
-              ) : (
-                <ChevronRightIcon />
-              )}
-            </IconButton>
-          </DrawerHeader>
+          <Box sx={{ padding: "20px" }}>
+            <Box sx={style.closeSideBar} onClick={handleDrawerClose}>
+              <CloseIcon />
+            </Box>
+            <ProfileDetails />
+          </Box>
         </Drawer>
       </Box>
     </>
