@@ -37,9 +37,9 @@ const PopularBlog = ({ popularBlogList }) => {
           <Box sx={style.popularArticlesDetails}>
             <Typography variant="h2">Popular Blog</Typography>
             <Typography variant="body1">
-              In publishing and graphic design, Lorem ipsum is a placeholder
-              text commonlyand graphic design, Lorem ipsum is a placeholder text
-              commonly
+              Welcome to our Popular Blog section! Here, we explore the use of
+              Lorem ipsum in publishing and graphic design. Discover its
+              significance and applications in these industries.
             </Typography>
           </Box>
           <Button onClick={() => handlePopularBlogListing()}>

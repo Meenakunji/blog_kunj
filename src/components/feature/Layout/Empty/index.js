@@ -5,8 +5,8 @@ import style from "../style";
 const EmptyLayout = ({ children, customStyles = {} }) => {
   return (
     <Box sx={{ ...style.wrapper, ...customStyles.wrapper }}>
-      <HeaderComponent />
-      <Box sx={{ minHeight: "100vh", marginBottom: "20px" }}>{children}</Box>
+      {/* <HeaderComponent /> */}
+      <Box>{children}</Box>
     </Box>
   );
 };

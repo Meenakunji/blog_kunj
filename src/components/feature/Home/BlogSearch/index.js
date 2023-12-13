@@ -69,7 +69,7 @@ const BlogSearch = ({ popularBlogTag }) => {
       <img src="/images/home/commentBg.jpg" alt="" style={{ width: "100%" }} />
       {/* search popular blog based on title */}
       <Box sx={style.ourNewRoom}>
-        <Typography variant="h6">Our Newsroom</Typography>
+        <Typography variant="h6">Our BlogRoom</Typography>
         <Box sx={style.inputSection}>
           <input
             type="text"

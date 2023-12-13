@@ -1,17 +1,9 @@
-// /** @type {import('next').NextConfig} */
-// const nextConfig = {
-//   reactStrictMode: true,
-//   swcMinify: true,
-//   i18n: {
-//     locales: ["en", "hi"],
-//     defaultLocale: "hi",
-//   },
-// };
-
-// module.exports = nextConfig;
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  images: {
+    domains: ["i.postimg.cc"],
+  },
 };
 
 module.exports = nextConfig;

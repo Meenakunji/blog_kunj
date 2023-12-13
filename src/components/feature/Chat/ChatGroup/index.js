@@ -25,7 +25,7 @@ export const ChatGroup = () => {
           overflow: "scroll",
           overflowX: "hidden",
           padding: "15px",
-          height: "580px",
+          height: "526px",
         }}
       >
         <UserDetails />

@@ -1,7 +1,20 @@
 const style = {
   commentSection: {
     marginTop: "30px",
-    height: "100%",
+    height: "500px",
+    overflowY: "auto",
+    "&::-webkit-scrollbar": {
+      width: "3px",
+    },
+    "&::-webkit-scrollbar-track": {
+      background: "#f1f1f1",
+      borderRadius: "10px",
+    },
+
+    "&::-webkit-scrollbar-thumb": {
+      background: "#888",
+      borderRadius: "10px",
+    },
   },
   replaySectionBg: {
     backgroundColor: "#e8e8e8",
@@ -25,6 +38,7 @@ const style = {
   },
   replaySectionRight: {
     justifyContent: "right",
+    padding: "0px 10px 0 0px",
   },
   replaySectionBgRight: {
     backgroundColor: "#63c49b",
