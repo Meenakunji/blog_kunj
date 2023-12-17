@@ -58,10 +58,6 @@ export const BlogTagList = () => {
         }}
       >
         <UserComponent />
-        <UserComponent />
-        <UserComponent />
-        <UserComponent />
-        <UserComponent />
       </Box>
     </Box>
   );
