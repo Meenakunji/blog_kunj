@@ -120,9 +120,9 @@ const style = {
     },
     "& pre": {
       marginTop: "30px",
-      color: "#183B56",
-      background: "#11cad4",
-      borderRadius: "10px",
+      // color: "#183B56",
+      // background: "#11cad4",
+      // borderRadius: "10px",
     },
     "& img": {
       marginTop: "30px",
