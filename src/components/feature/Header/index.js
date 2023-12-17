@@ -224,10 +224,7 @@ const Header = () => {
               <Tab label="Create Blog" onClick={handleCreateBlog} />
               {/* <Tab label="Pages" /> */}
               {/* <Tab label="Connect Wallet" onClick={connectWallet} /> */}
-              {/* <Tab
-                label="Community"
-                onClick={() => router.push("/community")}
-              /> */}
+              <Tab label="Community" onClick={() => router.push("/chat")} />
               <Tab label="About" onClick={() => router.push("/about")} />
             </Tabs>
           )}
@@ -236,7 +233,6 @@ const Header = () => {
             onClick={handleThemeSwitch}
           >
             <ToggleThemeBtn theme={theme} />
-            light
           </Box>
           <Box>
             <NotificationsIcon />

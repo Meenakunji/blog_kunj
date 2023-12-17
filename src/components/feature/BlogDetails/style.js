@@ -118,8 +118,16 @@ const style = {
       marginTop: "30px",
       color: "#183B56",
     },
+    "& pre": {
+      marginTop: "30px",
+      color: "#183B56",
+      background: "#11cad4",
+      borderRadius: "10px",
+    },
     "& img": {
       marginTop: "30px",
+      width: "100%",
+      borderRadius: "10px",
     },
   },
   contentImg: {

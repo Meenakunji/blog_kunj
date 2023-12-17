@@ -11,6 +11,13 @@ import BookmarkIcon from "@mui/icons-material/Bookmark";
 import style from "./style";
 import { formatCount } from "../../../../utils/common";
 import { API_BASE_URL } from "../../../constant/appConstants";
+import remarkGfm from "remark-gfm";
+import remark2rehype from "remark-rehype";
+import ReactMarkdown from "react-markdown";
+import rehypeKatex from "rehype-katex";
+import RemarkMathPlugin from "remark-math";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { light as SyntaxHighlighterStyle } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 const CommentBlog = () => {
   const { particularBlogContent } = useSelector((state) => state.user);
@@ -183,18 +190,38 @@ const CommentBlog = () => {
                   </Box>
                 </Box>
                 <Box sx={style.detailsComment}>
-                  <Typography variant="body1">
+                  <ReactMarkdown
+                    remarkPlugins={[RemarkMathPlugin, remarkGfm]}
+                    rehypePlugins={[rehypeKatex, remark2rehype]}
+                    components={{
+                      code({ node, inline, className, children, ...props }) {
+                        const match = /language-(\w+)/.exec(className || "");
+                        return !inline && match ? (
+                          <SyntaxHighlighter
+                            {...props}
+                            style={SyntaxHighlighterStyle}
+                            language={match[1]}
+                            PreTag="div"
+                          >
+                            {String(children).replace(/\n$/, "")}
+                          </SyntaxHighlighter>
+                        ) : (
+                          <code {...props} className={className}>
+                            {children}
+                          </code>
+                        );
+                      },
+                    }}
+                  >
                     {particularBlogContent?.description}
-                  </Typography>
+                  </ReactMarkdown>
 
                   <img
                     src={particularBlogContent?.image}
                     alt="blog image"
                     style={{ width: "100%" }}
                   />
-                  <Typography variant="body1">
-                    {particularBlogContent?.description}
-                  </Typography>
+
                   {particularBlogContent?.codeSnippet && (
                     <Box sx={style.codeSection}>
                       <p>
@@ -204,11 +231,6 @@ const CommentBlog = () => {
                       </p>
                     </Box>
                   )}
-
-                  {/* <Box sx={style.contentImg}>
-                    <img src="/images/home/Base.jpg" alt="" />
-                    <img src="/images/home/Base.jpg" alt="" />
-                  </Box> */}
                 </Box>
               </Box>
               <Box sx={style.tagList}>
