@@ -10,7 +10,12 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
-import { setCategory, setPopularBlogger } from "../../../../redux/slices/user";
+import {
+  setAllBlogsContainer,
+  setCategory,
+  setPopularBlogger,
+  setPopularBlogs,
+} from "../../../../redux/slices/user";
 import style from "../style";
 
 const PopularBloggerList = ({ popularBlogger }) => {
@@ -18,7 +23,9 @@ const PopularBloggerList = ({ popularBlogger }) => {
   const router = useRouter();
 
   const handlePopularBloggerList = () => {
-    dispatch(setPopularBlogger(popularBlogger));
+    dispatch(setPopularBlogs([]));
+    dispatch(setPopularBlogger([]));
+    dispatch(setAllBlogsContainer(popularBlogger?.data));
     dispatch(setCategory("Popular Blogger"));
     router.push(`/bloglisting`);
   };
