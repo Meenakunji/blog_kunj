@@ -1,6 +1,6 @@
-import { Box, Typography } from "@mui/material";
-import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import { Box, Button, Typography } from "@mui/material";
+import { useRouter } from "next/router";
 import { useMutation } from "react-query";
 import fetcher from "../../../../../dataProvider";
 import style from "../../../Home/style";
@@ -8,14 +8,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { createSlug } from "../../../../../../utils/common";
 import { setParticularBlogContent } from "../../../../../redux/slices/user";
 import { API_BASE_URL } from "../../../../../constant/appConstants";
+import remarkGfm from "remark-gfm";
+import remark2rehype from "remark-rehype";
+import ReactMarkdown from "react-markdown";
+import rehypeKatex from "rehype-katex";
+import RemarkMathPlugin from "remark-math";
 
 export const TagListComponent = () => {
   const [markedblogList, setMarkedblogList] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
   const router = useRouter();
   const dispatch = useDispatch();
   const { tagListName } = useSelector((state) => state.user);
 
-  // create New ArtistEntery
   const { mutate: getMarkedBlogList } = useMutation(
     () => fetcher.get(`${API_BASE_URL}/v1/blog/blog-contents`),
     {
@@ -28,6 +34,7 @@ export const TagListComponent = () => {
       },
     }
   );
+
   useEffect(() => {
     getMarkedBlogList();
   }, []);
@@ -75,7 +82,7 @@ export const TagListComponent = () => {
                     />
                     <Typography variant="p">
                       By {item?.userData?.[0]?.name} -{" "}
-                      {new Date(item?.creatAt).toLocaleDateString("en-US", {
+                      {new Date(item?.createdAt).toLocaleDateString("en-US", {
                         day: "numeric",
                         month: "long",
                         year: "numeric",
@@ -83,8 +90,15 @@ export const TagListComponent = () => {
                     </Typography>
                   </Box>
                   <Typography variant="p">
-                    {" "}
-                    {item?.description?.split(" ").slice(0, 15).join(" ")}
+                    <ReactMarkdown
+                      remarkPlugins={[RemarkMathPlugin, remarkGfm]}
+                      rehypePlugins={[rehypeKatex, remark2rehype]}
+                      components={{
+                        img: ({ node, ...props }) => null, // This will remove image rendering
+                      }}
+                    >
+                      {item?.description?.split(" ").slice(0, 15).join(" ")}
+                    </ReactMarkdown>
                     <a
                       onClick={() => handleBlogContentListPage(item)}
                       style={{ cursor: "pointer", color: "#d80af1" }}
