@@ -15,11 +15,19 @@ import {
 import Pagination from "@mui/material/Pagination";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createSlug } from "../../../../../utils/common";
-import { setParticularBlogContent } from "../../../../redux/slices/user";
+import {
+  setAllBlogsContainer,
+  setParticularBlogContent,
+} from "../../../../redux/slices/user";
 import style from "../style"; // Make sure you have the correct import for your styles
+import remarkGfm from "remark-gfm";
+import remark2rehype from "remark-rehype";
+import ReactMarkdown from "react-markdown";
+import rehypeKatex from "rehype-katex";
+import RemarkMathPlugin from "remark-math";
 
 const ListingBlog = () => {
   const router = useRouter();
@@ -103,7 +111,15 @@ const ListingBlog = () => {
                       {item?.blogTitle}
                     </Typography>
                     <Typography variant="body1">
-                      {item?.description?.split(" ").slice(0, 30).join(" ")}
+                      <ReactMarkdown
+                        remarkPlugins={[RemarkMathPlugin, remarkGfm]}
+                        rehypePlugins={[rehypeKatex, remark2rehype]}
+                        components={{
+                          img: ({ node, ...props }) => null, // This will remove image rendering
+                        }}
+                      >
+                        {item?.description?.split(" ").slice(0, 30).join(" ")}
+                      </ReactMarkdown>
                       <a
                         onClick={(event) => {
                           event.stopPropagation(); // Prevent propagation to the outer click handler

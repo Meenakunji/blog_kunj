@@ -51,6 +51,7 @@ const Home = () => {
   const [popularBloggerList, setPopularBloggerList] = useState([]);
   const [allBlogList, setAllBlogList] = useState([]);
   const [popularBlogTag, setPopularBlogTag] = useState([]);
+  const [caseStudyList, setCaseStudyList] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -60,17 +61,20 @@ const Home = () => {
           popularBloggerListData,
           allBlogListData,
           popularBlogTags,
+          caseStudyListData,
         ] = await Promise.all([
           fetcher.get(`${API_BASE_URL}/v1/blog/recommendations`),
           fetcher.get(`${API_BASE_URL}/v1/blog/popular-blogger`),
           fetcher.get(`${API_BASE_URL}/v1/blog/blog-contents`),
           fetcher.get(`${API_BASE_URL}/v1/blog/popular-tags`),
+          fetcher.get(`${API_BASE_URL}/v1/case-study/content-list`),
         ]);
 
         setRecommendationBlogList(popularData.data);
         setPopularBloggerList(popularBloggerListData?.data);
         setAllBlogList(allBlogListData?.data);
         setPopularBlogTag(popularBlogTags);
+        setCaseStudyList(caseStudyListData);
       } catch (error) {
         alert(error?.response?.data?.message);
       }
@@ -90,7 +94,7 @@ const Home = () => {
       <RecommendationBlog recommendationBlogList={recommendationBlogList} />
       <PopularBlog popularBlogList={recommendationBlogList} />
       <PopularBloggerList popularBlogger={popularBloggerList} />
-      <CaseStudyList />
+      <CaseStudyList caseStudyList={caseStudyList} />
       <AllBlogComponent allBlogList={allBlogList} />
     </Box>
   );

@@ -10,7 +10,7 @@ export const BlogTagList = () => {
     <Box sx={style.ContainerBlogListComp}>
       <TagBanner />
       <Divider style={{ border: " 2px #F2F2F2 solid", borderColor: "green" }} />
-      <Typography
+      {/* <Typography
         component="h1"
         style={{
           marginBottom: "60px",
@@ -21,7 +21,7 @@ export const BlogTagList = () => {
         }}
       >
         Recommended Blog
-      </Typography>
+      </Typography> */}
       <Box
         style={{
           display: "flex",

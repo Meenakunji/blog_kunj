@@ -32,28 +32,51 @@ const CommentBlog = () => {
 
   const handleRead = () => {
     const contentText = particularBlogContent?.description;
-
     const speechSynthesis = window.speechSynthesis;
 
-    if (speechSynthesis) {
-      if (isReading) {
-        // If currently reading, pause the audio
-        speechSynthesis.pause();
-      } else {
-        // If not reading, start or resume the audio
-        if (speechSynthesis.paused && speechUtterance) {
-          // Resume from pause
-          speechSynthesis.resume();
-        } else {
-          // Start from the beginning
-          const newSpeechUtterance = new SpeechSynthesisUtterance(contentText);
-          // Set the voice and other speech options here (if needed)
+    const speak = (text, voice) => {
+      const newSpeechUtterance = new SpeechSynthesisUtterance(text);
+      newSpeechUtterance.voice = voice;
+      speechSynthesis.speak(newSpeechUtterance);
+      setSpeechUtterance(newSpeechUtterance);
+      return newSpeechUtterance; // Return the utterance for logging purposes
+    };
 
-          speechSynthesis.speak(newSpeechUtterance);
-          setSpeechUtterance(newSpeechUtterance);
+    if (speechSynthesis) {
+      const voices = speechSynthesis.getVoices();
+      // console.log("Voices:", voices); // Log the voices array
+
+      // Filter out empty voice objects
+      const validVoices = voices.filter((voice) => voice.name.trim() !== "");
+
+      const startReading = () => {
+        if (validVoices.length > 0) {
+          const utterance = speak(contentText, validVoices[0]); // Using the first valid voice
+          // console.log("Print voices", utterance, setIsReading(true));
+          setIsReading(true);
+        } else {
+          console.error("No valid voices found!");
         }
+      };
+
+      // Ensure valid voices are available before speaking
+      if (validVoices.length > 0) {
+        startReading();
+      } else {
+        // Wait for the voices to load
+        speechSynthesis.onvoiceschanged = () => {
+          const updatedVoices = speechSynthesis.getVoices();
+
+          // Filter and update the valid voices array
+          const updatedValidVoices = updatedVoices.filter(
+            (voice) => voice.name.trim() !== ""
+          );
+
+          if (updatedValidVoices.length > 0) {
+            startReading();
+          }
+        };
       }
-      setIsReading(!isReading);
     }
   };
 
