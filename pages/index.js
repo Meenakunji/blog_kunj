@@ -67,7 +67,7 @@ const Home = () => {
           fetcher.get(`${API_BASE_URL}/v1/blog/popular-blogger`),
           fetcher.get(`${API_BASE_URL}/v1/blog/blog-contents`),
           fetcher.get(`${API_BASE_URL}/v1/blog/popular-tags`),
-          fetcher.get(`http://localhost:3003/v1/case-study/content-list`),
+          fetcher.get(`${API_BASE_URL}/v1/case-study/content-list`),
         ]);
 
         setRecommendationBlogList(popularData.data);
