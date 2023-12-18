@@ -216,13 +216,13 @@ const CommentBlog = () => {
                     {particularBlogContent?.description}
                   </ReactMarkdown>
 
-                  <img
+                  {/* <img
                     src={particularBlogContent?.image}
                     alt="blog image"
                     style={{ width: "100%" }}
-                  />
+                  /> */}
 
-                  {particularBlogContent?.codeSnippet && (
+                  {/* {particularBlogContent?.codeSnippet && (
                     <Box sx={style.codeSection}>
                       <p>
                         <pre>
@@ -230,7 +230,7 @@ const CommentBlog = () => {
                         </pre>
                       </p>
                     </Box>
-                  )}
+                  )} */}
                 </Box>
               </Box>
               <Box sx={style.tagList}>
