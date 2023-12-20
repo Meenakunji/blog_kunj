@@ -91,7 +91,6 @@ const PopularBloggerList = ({ popularBlogger }) => {
                                 variant="h5"
                                 sx={{ color: "#798b9b" }}
                               >
-                                {" "}
                                 Blog writer
                               </Typography>
                             </Box>

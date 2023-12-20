@@ -22,6 +22,8 @@ import { light as SyntaxHighlighterStyle } from "react-syntax-highlighter/dist/c
 const CommentBlog = () => {
   const { particularBlogContent } = useSelector((state) => state.user);
   const [isReading, setIsReading] = useState(false);
+  const [readCountUpdated, setReadCountUpdated] = useState(false);
+
   const [blogLikeCount, setBlogLikeCount] = useState(
     particularBlogContent?.blogLike || 0
   );
@@ -30,7 +32,49 @@ const CommentBlog = () => {
     particularBlogContent?.isMarkedBlog
   );
 
+  // Check if the user has already visited this blog post
+  useEffect(() => {
+    const visited = localStorage.getItem(
+      `visited_${particularBlogContent?._id}`
+    );
+    if (visited === "true") {
+      setReadCountUpdated(true);
+    }
+  }, [particularBlogContent]);
+
+  // Update the read count for unique users
+  const { mutate: updateReadCount } = useMutation(
+    (blogReadBody) =>
+      fetcher.post(
+        `http://localhost:3003/v1/blog/read-count/${particularBlogContent?._id}`,
+        blogReadBody
+      ),
+    {
+      onSuccess: () => {
+        // Set the visited flag to true in local storage once the count is updated
+        localStorage.setItem(`visited_${particularBlogContent?._id}`, "true");
+        setReadCountUpdated(true);
+
+        // Increment read count for this blog
+        const visitedBlogs =
+          JSON.parse(localStorage.getItem("visitedBlogs")) || {};
+        visitedBlogs[particularBlogContent?._id] =
+          (visitedBlogs[particularBlogContent?._id] || 0) + 1;
+        localStorage.setItem("visitedBlogs", JSON.stringify(visitedBlogs));
+      },
+      onError: (error) => {
+        alert(error?.response?.data?.message);
+      },
+    }
+  );
+
   const handleRead = () => {
+    // if (!readCountUpdated) {
+    let blogReadBody = {
+      blogId: particularBlogContent?._id,
+    };
+    updateReadCount(blogReadBody);
+    // }
     const contentText = particularBlogContent?.description;
     const speechSynthesis = window.speechSynthesis;
 
