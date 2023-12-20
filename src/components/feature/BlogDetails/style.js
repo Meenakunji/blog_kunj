@@ -114,6 +114,12 @@ const style = {
     gap: "40px",
   },
   detailsComment: {
+    "& h2": {
+      marginTop: "30px",
+      color: "#183B56",
+      fontSize: "24px",
+      fontWeight: "600",
+    },
     "& p": {
       marginTop: "30px",
       color: "#183B56",

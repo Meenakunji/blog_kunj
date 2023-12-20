@@ -17,6 +17,11 @@ import {
   setPopularBlogs,
 } from "../../../../redux/slices/user";
 import style from "../style";
+import remarkGfm from "remark-gfm";
+import remark2rehype from "remark-rehype";
+import ReactMarkdown from "react-markdown";
+import rehypeKatex from "rehype-katex";
+import RemarkMathPlugin from "remark-math";
 
 const PopularBloggerList = ({ popularBlogger }) => {
   const dispatch = useDispatch();
@@ -63,7 +68,18 @@ const PopularBloggerList = ({ popularBlogger }) => {
                         {item?.result?.[0]?.blogTitle}
                       </Typography>
                       <Typography variant="body1">
-                        {item?.result?.[0]?.description}
+                        <ReactMarkdown
+                          remarkPlugins={[RemarkMathPlugin, remarkGfm]}
+                          rehypePlugins={[rehypeKatex, remark2rehype]}
+                          components={{
+                            img: ({ node, ...props }) => null, // This will remove image rendering
+                          }}
+                        >
+                          {item?.result?.[0]?.description
+                            ?.split(" ")
+                            .slice(0, 15)
+                            .join(" ")}
+                        </ReactMarkdown>
                       </Typography>
                       <Box sx={style.cardBottomSection}>
                         <Box sx={style.profileDetails}>
@@ -91,7 +107,7 @@ const PopularBloggerList = ({ popularBlogger }) => {
                                 variant="h5"
                                 sx={{ color: "#798b9b" }}
                               >
-                                Blog writer
+                                Verified writer
                               </Typography>
                             </Box>
                           </Box>
