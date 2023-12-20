@@ -17,6 +17,11 @@ import {
   setPopularBlogs,
 } from "../../../../redux/slices/user";
 import style from "../style";
+import remarkGfm from "remark-gfm";
+import remark2rehype from "remark-rehype";
+import ReactMarkdown from "react-markdown";
+import rehypeKatex from "rehype-katex";
+import RemarkMathPlugin from "remark-math";
 
 const PopularBlog = ({ popularBlogList }) => {
   const dispatch = useDispatch();
@@ -53,7 +58,7 @@ const PopularBlog = ({ popularBlogList }) => {
                 <Grid item xs={6} md={6} key={index}>
                   <Box sx={style.popularArticlesList}>
                     <img
-                      src={item?.image}
+                      src={item?.image || "/images/home/rocket.jpg"}
                       alt=""
                       style={{
                         width: "100%",
@@ -63,6 +68,17 @@ const PopularBlog = ({ popularBlogList }) => {
                     />
                     <Box sx={style.popularArticlesHeading}>
                       <Typography variant="h3">{item?.blogTitle}</Typography>
+                      <Typography variant="body1">
+                        <ReactMarkdown
+                          remarkPlugins={[RemarkMathPlugin, remarkGfm]}
+                          rehypePlugins={[rehypeKatex, remark2rehype]}
+                          components={{
+                            img: ({ node, ...props }) => null, // This will remove image rendering
+                          }}
+                        >
+                          {item?.description?.split(" ").slice(0, 15).join(" ")}
+                        </ReactMarkdown>
+                      </Typography>
                       <Box sx={style.cardBottomSection}>
                         <Box sx={style.profileDetails}>
                           <Box sx={style.profileSection}>
@@ -87,16 +103,19 @@ const PopularBlog = ({ popularBlogList }) => {
                                 sx={{ color: "#798b9b" }}
                               >
                                 {" "}
-                                Blog writer
+                                Verified writer
                               </Typography>
                             </Box>
                           </Box>
                         </Box>
                         <Box sx={style.date} style={{ color: "#798b9b" }}>
-                          {new Date(item?.creatAt).toLocaleDateString("en-US", {
-                            day: "numeric",
-                            month: "short",
-                          })}
+                          {new Date(item?.createdAt).toLocaleDateString(
+                            "en-US",
+                            {
+                              day: "numeric",
+                              month: "short",
+                            }
+                          )}
                         </Box>
                       </Box>
                     </Box>
