@@ -46,7 +46,7 @@ const CommentBlog = () => {
   const { mutate: updateReadCount } = useMutation(
     (blogReadBody) =>
       fetcher.post(
-        `http://localhost:3003/v1/blog/read-count/${particularBlogContent?._id}`,
+        `${API_BASE_URL}/v1/blog/read-count/${particularBlogContent?._id}`,
         blogReadBody
       ),
     {
