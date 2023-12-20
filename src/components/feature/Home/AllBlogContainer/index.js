@@ -20,6 +20,11 @@ import {
   setPopularBlogs,
 } from "../../../../redux/slices/user";
 import style from "../style";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import remark2rehype from "remark-rehype";
+import rehypeKatex from "rehype-katex";
+import RemarkMathPlugin from "remark-math";
 
 const AllBlogComponent = ({ allBlogList }) => {
   const dispatch = useDispatch();
@@ -65,11 +70,11 @@ const AllBlogComponent = ({ allBlogList }) => {
                 <Grid item xs={6} md={6} key={index}>
                   <Box sx={style.popularArticlesList}>
                     <img
-                      src={item?.image}
+                      src={item?.image || "/images/home/rocket.jpg"}
                       alt="blog image"
                       style={{
                         width: "100%",
-                        height: "370px",
+                        height: "360px",
                         objectFit: "cover",
                       }}
                       onClick={() => handleBlogContentListPage(item)}
@@ -79,6 +84,17 @@ const AllBlogComponent = ({ allBlogList }) => {
                       onClick={() => handleBlogContentListPage(item)}
                     >
                       <Typography variant="h3">{item?.blogTitle}</Typography>
+                      <Typography variant="body1">
+                        <ReactMarkdown
+                          remarkPlugins={[RemarkMathPlugin, remarkGfm]}
+                          rehypePlugins={[rehypeKatex, remark2rehype]}
+                          components={{
+                            img: ({ node, ...props }) => null,
+                          }}
+                        >
+                          {item?.description?.split(" ").slice(0, 15).join(" ")}
+                        </ReactMarkdown>
+                      </Typography>
                       <Box sx={style.cardBottomSection}>
                         <Box sx={style.profileDetails}>
                           <Box sx={style.profileSection}>
@@ -103,16 +119,19 @@ const AllBlogComponent = ({ allBlogList }) => {
                                 sx={{ color: "#798b9b" }}
                               >
                                 {" "}
-                                Blogger writer
+                                Verified writer
                               </Typography>
                             </Box>
                           </Box>
                         </Box>
                         <Box sx={style.date} style={{ color: "#798b9b" }}>
-                          {new Date(item?.creatAt).toLocaleDateString("en-US", {
-                            day: "numeric",
-                            month: "short",
-                          })}
+                          {new Date(item?.createdAt).toLocaleDateString(
+                            "en-US",
+                            {
+                              day: "numeric",
+                              month: "short",
+                            }
+                          )}
                         </Box>
                       </Box>
                     </Box>
@@ -126,7 +145,7 @@ const AllBlogComponent = ({ allBlogList }) => {
                 <Grid item xs={4} md={4} key={index}>
                   <Box sx={style.popularArticlesList}>
                     <img
-                      src={item?.image}
+                      src={item?.image || "/images/home/rocket.jpg"}
                       alt="blog image"
                       style={{
                         width: "100%",
@@ -139,8 +158,18 @@ const AllBlogComponent = ({ allBlogList }) => {
                       sx={style.popularArticlesHeading}
                       onClick={() => handleBlogContentListPage(item)}
                     >
-                      <Typography variant="h4">Protect</Typography>
-                      <Typography variant="body1">{item?.blogTitle}</Typography>
+                      <Typography variant="h4">{item?.blogTitle}</Typography>
+                      <Typography variant="body1">
+                        <ReactMarkdown
+                          remarkPlugins={[RemarkMathPlugin, remarkGfm]}
+                          rehypePlugins={[rehypeKatex, remark2rehype]}
+                          components={{
+                            img: ({ node, ...props }) => null, // This will remove image rendering
+                          }}
+                        >
+                          {item?.description?.split(" ").slice(0, 15).join(" ")}
+                        </ReactMarkdown>
+                      </Typography>
                       <Box sx={style.cardBottomSection}>
                         <Box sx={style.profileDetails}>
                           <Box sx={style.profileSection}>
@@ -165,16 +194,19 @@ const AllBlogComponent = ({ allBlogList }) => {
                                 sx={{ color: "#798b9b" }}
                               >
                                 {" "}
-                                Blogger writer
+                                Verified writer
                               </Typography>
                             </Box>
                           </Box>
                         </Box>
                         <Box sx={style.date} style={{ color: "#798b9b" }}>
-                          {new Date(item?.creatAt).toLocaleDateString("en-US", {
-                            day: "numeric",
-                            month: "short",
-                          })}
+                          {new Date(item?.createdAt).toLocaleDateString(
+                            "en-US",
+                            {
+                              day: "numeric",
+                              month: "short",
+                            }
+                          )}
                         </Box>
                       </Box>
                     </Box>

@@ -234,9 +234,9 @@ const Header = () => {
           >
             <ToggleThemeBtn theme={theme} />
           </Box>
-          <Box>
+          {/* <Box>
             <NotificationsIcon />
-          </Box>
+          </Box> */}
           {isLoggedIn ? (
             <>
               <Box

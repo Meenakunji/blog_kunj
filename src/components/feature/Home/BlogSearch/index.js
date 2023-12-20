@@ -39,7 +39,7 @@ const BlogSearch = ({ popularBlogTag }) => {
       const { data } = response;
       setBlogList(data);
     } catch (error) {
-      console.log("Error occurred while fetching data:", error);
+      alert(error?.response?.data?.message);
     }
   };
 
