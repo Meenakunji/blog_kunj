@@ -18,8 +18,10 @@ import Image from "next/image";
 import {
   setAllBlogsContainer,
   setCategory,
+  setParticularBlogContent,
   setPopularBlogger,
   setPopularBlogs,
+  setTagListName,
 } from "../../../../redux/slices/user";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
@@ -28,6 +30,7 @@ import remark2rehype from "remark-rehype";
 import ReactMarkdown from "react-markdown";
 import rehypeKatex from "rehype-katex";
 import RemarkMathPlugin from "remark-math";
+import { createSlug } from "../../../../../utils/common";
 
 const CaseStudyList = ({ caseStudyList }) => {
   const settings = {
@@ -56,6 +59,12 @@ const CaseStudyList = ({ caseStudyList }) => {
     dispatch(setAllBlogsContainer(caseStudyList?.data));
     dispatch(setCategory("Case Study"));
     router.push(`/bloglisting`);
+  };
+
+  const handleBlogContentListPage = (item) => {
+    dispatch(setParticularBlogContent(item));
+    const urlSlug = createSlug(item?.userData?.[0]?.name, item?.blogTitle);
+    router.push(`/${urlSlug}`);
   };
 
   return (
@@ -89,11 +98,19 @@ const CaseStudyList = ({ caseStudyList }) => {
                           height: "360px",
                           objectFit: "cover",
                         }}
+                        onClick={() => handleBlogContentListPage(item)}
                       />
                     </Grid>
                     <Grid xs={6} md={6}>
                       <Box sx={style.topSectionDetails}>
-                        <Button>{item?.blogTag}</Button>
+                        <Button
+                          onClick={() => {
+                            router.push(`/tag/${item?.blogTag}`);
+                            dispatch(setTagListName(item?.blogTag));
+                          }}
+                        >
+                          {item?.blogTag}
+                        </Button>
                         <Typography variant="h1">{item?.blogTitle}</Typography>
                         <Typography variant="body1">
                           <ReactMarkdown
@@ -139,7 +156,7 @@ const CaseStudyList = ({ caseStudyList }) => {
                           </Box>
                           <Box sx={style.date} style={{ color: "#798b9b" }} s>
                             {" "}
-                            {new Date(item?.creatAt).toLocaleDateString(
+                            {new Date(item?.createdAt).toLocaleDateString(
                               "en-US",
                               {
                                 day: "numeric",

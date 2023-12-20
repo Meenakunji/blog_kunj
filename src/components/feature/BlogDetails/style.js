@@ -85,7 +85,7 @@ const style = {
   bannerDetails: {
     "& h1": {
       color: "#183B56",
-      fontSize: "70px",
+      fontSize: "40px",
       textAlign: "center",
     },
   },

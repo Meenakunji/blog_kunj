@@ -14,30 +14,9 @@ import ReactMarkdown from "react-markdown";
 import rehypeKatex from "rehype-katex";
 import RemarkMathPlugin from "remark-math";
 
-export const TagListComponent = () => {
-  const [markedblogList, setMarkedblogList] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10;
+export const TagListComponent = ({ markedblogList }) => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { tagListName } = useSelector((state) => state.user);
-
-  const { mutate: getMarkedBlogList } = useMutation(
-    () => fetcher.get(`${API_BASE_URL}/v1/blog/blog-contents`),
-    {
-      onSuccess: ({ data }) => {
-        const result = data?.filter((item) => item?.blogTag === tagListName);
-        setMarkedblogList(result);
-      },
-      onError: (error) => {
-        alert(error?.response?.data?.message);
-      },
-    }
-  );
-
-  useEffect(() => {
-    getMarkedBlogList();
-  }, []);
 
   const handleBlogContentListPage = (item) => {
     dispatch(setParticularBlogContent(item));
@@ -94,7 +73,7 @@ export const TagListComponent = () => {
                       remarkPlugins={[RemarkMathPlugin, remarkGfm]}
                       rehypePlugins={[rehypeKatex, remark2rehype]}
                       components={{
-                        img: ({ node, ...props }) => null, // This will remove image rendering
+                        img: ({ node, ...props }) => null,
                       }}
                     >
                       {item?.description?.split(" ").slice(0, 15).join(" ")}
