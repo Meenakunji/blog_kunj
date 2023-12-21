@@ -1,7 +1,7 @@
 import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useMutation } from "react-query";
 import { useDispatch } from "react-redux";
 import loginfunc from "../../../../../components/Layout/util/login";
@@ -9,9 +9,12 @@ import fetcher from "../../../../dataProvider";
 import useLocalStorage from "../../../../hooks/useLocalStorage";
 import { setToken, setUserData } from "../../../../redux/slices/user";
 import Snackbar from "../../../common/Snackbar";
+import { GEOLOCATION_URL } from "../../../../constant/appConstants";
 
 export default function GoogleSignInButton({ handleModalClose }) {
   const [, setAccessToken] = useLocalStorage("accessToken", null);
+  const [location, setLocation] = useState("");
+
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -25,8 +28,25 @@ export default function GoogleSignInButton({ handleModalClose }) {
     console.log("Google sign-in failed:", error);
   };
 
+  const { mutate: getUserLocation } = useMutation(
+    () => fetcher.get(GEOLOCATION_URL),
+    {
+      onSuccess: (result) => {
+        setLocation(result);
+      },
+      onError: (error) => {
+        setLocation({});
+      },
+    }
+  );
+
+  useEffect(() => {
+    getUserLocation();
+  }, []);
+
   const { mutate: loginGoogle } = useMutation(
-    (id_token) => fetcher.post(`v1/auth/login-google?id_token=${id_token}`),
+    (id_token) =>
+      fetcher.post(`v1/auth/login-google?id_token=${id_token}`, location),
     {
       onSuccess: (res) => {
         const accessToken = res?.data?.tokens?.access?.token;
@@ -51,7 +71,7 @@ export default function GoogleSignInButton({ handleModalClose }) {
           status: "success",
           message: `${res?.data.user.name} login successfully.`,
         });
-        handleModalClose(); // Close the login modal
+        handleModalClose();
         router.push(`/`);
       },
       onError: (error) => {
