@@ -14,13 +14,13 @@ export const UserComponent = () => {
           <Box style={{ position: "relative" }}>
             <img
               alt="Anuj Kumar Pandey"
-              class="s cm ch asd ase cn"
+              className="s cm ch asd ase cn"
               src="https://miro.medium.com/v2/resize:fill:128:128/0*OMW3e7V1Ye0yPan0"
               width="64"
               height="64"
               loading="lazy"
             />
-            <Box class="cg ch s asd ase ck u bf cl"></Box>
+            <Box className="cg ch s asd ase ck u bf cl"></Box>
           </Box>
         </Link>
         <Box sx={styles.userDetails}>

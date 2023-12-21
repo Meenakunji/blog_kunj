@@ -86,10 +86,7 @@ const PopularBloggerList = ({ popularBlogger }) => {
                           <Box sx={style.profileSection}>
                             <Avatar>
                               <img
-                                src={
-                                  item?.profilePic ||
-                                  "https://avatars.dicebear.com/api/bottts/64b403d214e4627eb1a4b4eb.svg"
-                                }
+                                src={item?.profilePic}
                                 alt={item?.name}
                                 style={{ width: "40px" }}
                               />

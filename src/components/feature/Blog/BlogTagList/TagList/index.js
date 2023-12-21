@@ -1,13 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Box, Button, Typography } from "@mui/material";
+import React from "react";
+import { Box, Typography } from "@mui/material";
 import { useRouter } from "next/router";
-import { useMutation } from "react-query";
-import fetcher from "../../../../../dataProvider";
 import style from "../../../Home/style";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { createSlug } from "../../../../../../utils/common";
 import { setParticularBlogContent } from "../../../../../redux/slices/user";
-import { API_BASE_URL } from "../../../../../constant/appConstants";
 import remarkGfm from "remark-gfm";
 import remark2rehype from "remark-rehype";
 import ReactMarkdown from "react-markdown";

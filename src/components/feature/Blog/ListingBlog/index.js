@@ -130,11 +130,13 @@ const ListingBlog = () => {
                           remarkPlugins={[RemarkMathPlugin, remarkGfm]}
                           rehypePlugins={[rehypeKatex, remark2rehype]}
                           components={{
+                            p: ({ node, ...props }) => <>{props.children}</>,
                             img: ({ node, ...props }) => null,
                           }}
                         >
                           {item?.description?.split(" ").slice(0, 30).join(" ")}
                         </ReactMarkdown>
+
                         <a
                           onClick={(event) => {
                             event.stopPropagation();

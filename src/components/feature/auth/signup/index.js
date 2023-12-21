@@ -100,13 +100,12 @@ const SignupComponent = ({ handleModalClose }) => {
       // append file path and url
       signupFormObj.role = "user";
       userEmailSignup(signupFormObj);
-      console.log("Print form value===>>>", signupFormObj);
     }
   };
 
   return (
-    <div class="form-section">
-      <div class="logo clearfix">
+    <div className="form-section">
+      <div className="logo clearfix">
         <a href="login-20.html">
           <img src="https://i.postimg.cc/3wgSvKbP/bloggerlogo.png" alt="logo" />
         </a>
@@ -114,7 +113,7 @@ const SignupComponent = ({ handleModalClose }) => {
       <h3>Create An Cccount</h3>
 
       <form action="#" method="GET">
-        <div class="form-group form-box">
+        <div className="form-group form-box">
           <TextField
             type="text"
             name={"name"}
@@ -125,7 +124,7 @@ const SignupComponent = ({ handleModalClose }) => {
           />
           <AccountCircleIcon />
         </div>
-        <div class="form-group form-box">
+        <div className="form-group form-box">
           <TextField
             name={"email"}
             placeholder="Email Address"
@@ -136,7 +135,7 @@ const SignupComponent = ({ handleModalClose }) => {
           />
           <EmailIcon />
         </div>
-        <div class="form-group form-box">
+        <div className="form-group form-box">
           <TextField
             name={"password"}
             placeholder="Password"
