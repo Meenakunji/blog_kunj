@@ -68,7 +68,14 @@ const CaseStudyList = ({ caseStudyList }) => {
   };
 
   return (
-    <section>
+    <section
+      style={{
+        position: "relative",
+        top: "100px",
+        zIndex: "5",
+        padding: "0",
+      }}
+    >
       <Container>
         <Box sx={style.popularArticles}>
           <Box sx={style.popularArticlesDetails}>

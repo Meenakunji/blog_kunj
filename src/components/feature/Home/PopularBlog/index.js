@@ -36,7 +36,14 @@ const PopularBlog = ({ popularBlogList }) => {
   };
 
   return (
-    <section style={{ paddingTop: "0" }}>
+    <section
+      style={{
+        position: "relative",
+        top: "100px",
+        zIndex: "5",
+        padding: "0",
+      }}
+    >
       <Container maxWidth="lg">
         <Box sx={style.popularArticles}>
           <Box sx={style.popularArticlesDetails}>
@@ -53,7 +60,7 @@ const PopularBlog = ({ popularBlogList }) => {
         </Box>
         <Grid container spacing={2}>
           {popularBlogList?.length > 0 &&
-            popularBlogList?.map((item, index) => {
+            popularBlogList?.slice(0, 4)?.map((item, index) => {
               return (
                 <Grid item xs={6} md={6} key={index}>
                   <Box sx={style.popularArticlesList}>
@@ -85,7 +92,7 @@ const PopularBlog = ({ popularBlogList }) => {
                             <Avatar>
                               <img
                                 src={item?.userData?.[0]?.profilePic}
-                                alt=""
+                                alt="user profile pic"
                                 style={{ width: "40px" }}
                               />
                             </Avatar>

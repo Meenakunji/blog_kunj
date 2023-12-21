@@ -54,7 +54,7 @@ export const BlogTagList = () => {
           <TagListComponent markedblogList={markedblogList} />
         )}
       </Box>
-      <Typography
+      {/* <Typography
         component="h1"
         style={{
           marginBottom: "60px",
@@ -65,8 +65,8 @@ export const BlogTagList = () => {
         }}
       >
         Who to follow
-      </Typography>
-      <Box
+      </Typography> */}
+      {/* <Box
         style={{
           display: "flex",
           justifyContent: "space-between",
@@ -78,7 +78,7 @@ export const BlogTagList = () => {
         }}
       >
         <UserComponent />
-      </Box>
+      </Box> */}
     </Box>
   );
 };

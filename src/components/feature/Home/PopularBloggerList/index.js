@@ -36,7 +36,14 @@ const PopularBloggerList = ({ popularBlogger }) => {
   };
   const PopularBloggerData = popularBlogger?.slice(0, 3);
   return (
-    <section>
+    <section
+      style={{
+        position: "relative",
+        top: "100px",
+        zIndex: "5",
+        padding: "0",
+      }}
+    >
       <Container maxWidth="lg">
         <Box sx={style.popularArticles}>
           <Box sx={style.popularArticlesDetails}>
@@ -52,7 +59,7 @@ const PopularBloggerList = ({ popularBlogger }) => {
         </Box>
         <Grid container spacing={2}>
           {PopularBloggerData?.length > 0 &&
-            PopularBloggerData?.map((item, index) => {
+            PopularBloggerData?.slice(0, 3)?.map((item, index) => {
               return (
                 <Grid item xs={4} md={4} key={index}>
                   <Box sx={style.popularArticlesList}>
@@ -72,7 +79,7 @@ const PopularBloggerList = ({ popularBlogger }) => {
                           remarkPlugins={[RemarkMathPlugin, remarkGfm]}
                           rehypePlugins={[rehypeKatex, remark2rehype]}
                           components={{
-                            img: ({ node, ...props }) => null, // This will remove image rendering
+                            img: ({ node, ...props }) => null,
                           }}
                         >
                           {item?.result?.[0]?.description
