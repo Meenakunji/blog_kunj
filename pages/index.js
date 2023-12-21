@@ -83,7 +83,7 @@ const Home = () => {
   }, []);
 
   return (
-    <Box>
+    <Box style={{ paddingBottom: "40px" }}>
       <SEOComponents
         title={"Blog WebSite Home Page"}
         description={"this is Sahitya website home page"}

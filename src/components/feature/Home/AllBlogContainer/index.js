@@ -53,8 +53,6 @@ const AllBlogComponent = ({ allBlogList }) => {
       style={{
         position: "relative",
         top: "80px",
-        zIndex: "5",
-        padding: "0",
         paddingBottom: "40px",
       }}
     >
