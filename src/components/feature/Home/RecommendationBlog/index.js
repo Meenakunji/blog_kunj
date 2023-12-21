@@ -25,14 +25,14 @@ const RecommendationBlog = ({ recommendationBlogList }) => {
       <Container maxWidth="lg">
         <Card sx={{ borderRadius: "15px" }}>
           <Grid container alignItems={"center"}>
-            <Grid xs={6} md={6}>
+            <Grid item xs={6} md={6}>
               <img
                 src="/images/home/rocket.jpg"
                 alt="recommended image"
                 style={{ width: "100%", height: "370px", objectFit: "cover" }}
               />
             </Grid>
-            <Grid xs={6} md={6}>
+            <Grid item xs={6} md={6}>
               <Box sx={style.topSectionDetails}>
                 <Button>FEATURED</Button>
                 <Typography variant="h1">

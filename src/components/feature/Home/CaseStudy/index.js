@@ -89,7 +89,7 @@ const CaseStudyList = ({ caseStudyList }) => {
               return (
                 <Card sx={{ borderRadius: "15px" }} key={index}>
                   <Grid container>
-                    <Grid xs={6} md={6}>
+                    <Grid item xs={6} md={6}>
                       <img
                         alt="slider image"
                         src={item?.image || "/images/home/rocket.jpg"}
@@ -101,7 +101,7 @@ const CaseStudyList = ({ caseStudyList }) => {
                         onClick={() => handleBlogContentListPage(item)}
                       />
                     </Grid>
-                    <Grid xs={6} md={6}>
+                    <Grid item xs={6} md={6}>
                       <Box sx={style.topSectionDetails}>
                         <Button
                           onClick={() => {
@@ -154,7 +154,7 @@ const CaseStudyList = ({ caseStudyList }) => {
                               </Box>
                             </Box>
                           </Box>
-                          <Box sx={style.date} style={{ color: "#798b9b" }} s>
+                          <Box sx={{ ...style.date, color: "#798b9b" }}>
                             {" "}
                             {new Date(item?.createdAt).toLocaleDateString(
                               "en-US",
