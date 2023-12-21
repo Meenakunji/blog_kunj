@@ -49,7 +49,15 @@ const AllBlogComponent = ({ allBlogList }) => {
   };
 
   return (
-    <section style={{ paddingBottom: "40px" }}>
+    <section
+      style={{
+        position: "relative",
+        top: "80px",
+        zIndex: "5",
+        padding: "0",
+        paddingBottom: "40px",
+      }}
+    >
       <Container>
         <Box sx={style.popularArticles}>
           <Box sx={style.popularArticlesDetails}>
