@@ -91,7 +91,7 @@ const Home = () => {
         // data={data?.data?.attributes?.seo}
       />
       <BlogSearch popularBlogTag={popularBlogTag?.data} />
-      <RecommendationBlog recommendationBlogList={recommendationBlogList} />
+      <RecommendationBlog recommendationBlogList={allBlogList} />
       <PopularBlog popularBlogList={recommendationBlogList} />
       <PopularBloggerList popularBlogger={popularBloggerList} />
       <CaseStudyList caseStudyList={caseStudyList} />

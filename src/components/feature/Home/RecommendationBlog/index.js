@@ -7,17 +7,49 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import DoneIcon from "@mui/icons-material/Done";
 import style from "../style";
 import Image from "next/image";
+import remarkGfm from "remark-gfm";
+import remark2rehype from "remark-rehype";
+import ReactMarkdown from "react-markdown";
+import rehypeKatex from "rehype-katex";
+import RemarkMathPlugin from "remark-math";
+import { createSlug } from "../../../../../utils/common";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
+import {
+  setParticularBlogContent,
+  setTagListName,
+} from "../../../../redux/slices/user";
 
 const RecommendationBlog = ({ recommendationBlogList }) => {
+  const [randomBlog, setRandomBlog] = useState({});
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  useEffect(() => {
+    // Generate a random index within the range of the array length
+    const randomIndex = Math.floor(
+      Math.random() * recommendationBlogList.length
+    );
+
+    // Set the random blog object based on the random index
+    setRandomBlog(recommendationBlogList[randomIndex]);
+  }, [recommendationBlogList]);
+
+  const handleBlogContentListPage = (item) => {
+    dispatch(setParticularBlogContent(item));
+    const urlSlug = createSlug(item?.userData?.[0]?.name, item?.blogTitle);
+    router.push(`/${urlSlug}`);
+  };
+
   return (
     <section
       style={{
         position: "relative",
-        top: "-80px",
+        top: "80px",
         zIndex: "5",
         padding: "0",
       }}
@@ -27,21 +59,38 @@ const RecommendationBlog = ({ recommendationBlogList }) => {
           <Grid container alignItems={"center"}>
             <Grid item xs={6} md={6}>
               <img
-                src="/images/home/rocket.jpg"
+                src={randomBlog?.image || "/images/home/rocket.jpg"}
                 alt="recommended image"
-                style={{ width: "100%", height: "370px", objectFit: "cover" }}
+                style={{
+                  width: "100%",
+                  height: "370px",
+                  objectFit: "cover",
+                  cursor: "pointer",
+                }}
+                onClick={() => handleBlogContentListPage(randomBlog)}
               />
             </Grid>
             <Grid item xs={6} md={6}>
               <Box sx={style.topSectionDetails}>
-                <Button>FEATURED</Button>
-                <Typography variant="h1">
-                  Cheap Airline Tickets Great Ways To Save
-                </Typography>
+                <Button
+                  onClick={() => {
+                    router.push(`/tag/${randomBlog?.blogTag}`);
+                    dispatch(setTagListName(randomBlog?.blogTag));
+                  }}
+                >
+                  {randomBlog?.blogTag}
+                </Button>
+                <Typography variant="h1">{randomBlog?.blogTitle}</Typography>
                 <Typography variant="body1">
-                  In publishing and graphic design, Lorem ipsum is a placeholder
-                  text commonlyand graphic design, Lorem ipsum is a placeholder
-                  text commonly{" "}
+                  <ReactMarkdown
+                    remarkPlugins={[RemarkMathPlugin, remarkGfm]}
+                    rehypePlugins={[rehypeKatex, remark2rehype]}
+                    components={{
+                      img: ({ node, ...props }) => null, // This will remove image rendering
+                    }}
+                  >
+                    {randomBlog?.description?.split(" ").slice(0, 15).join(" ")}
+                  </ReactMarkdown>
                 </Typography>
 
                 <Box sx={style.cardBottomSection}>
@@ -49,14 +98,19 @@ const RecommendationBlog = ({ recommendationBlogList }) => {
                     <Box sx={style.profileSection}>
                       <Avatar>
                         <Image
-                          src="/images/home/User.jpg"
+                          src={
+                            randomBlog?.userData?.[0]?.profilePic ||
+                            "/images/home/User.jpg"
+                          }
                           fill={true}
                           alt="user pic"
                         />
                       </Avatar>
                     </Box>
                     <Box sx={style.profileName}>
-                      <Typography variant="h5">Farhan</Typography>
+                      <Typography variant="h5">
+                        {randomBlog?.userData?.[0]?.name}
+                      </Typography>
                       <Box sx={style.dFlex}>
                         <span>
                           <DoneIcon />
@@ -68,7 +122,16 @@ const RecommendationBlog = ({ recommendationBlogList }) => {
                       </Box>
                     </Box>
                   </Box>
-                  <Box sx={style.date}>2 May</Box>
+                  <Box sx={style.date}>
+                    {" "}
+                    {new Date(randomBlog?.createdAt).toLocaleDateString(
+                      "en-US",
+                      {
+                        day: "numeric",
+                        month: "short",
+                      }
+                    )}
+                  </Box>
                 </Box>
               </Box>
             </Grid>

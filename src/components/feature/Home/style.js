@@ -186,6 +186,7 @@ const style = {
       fontSize: "12px",
       backgroundColor: "#ebf7f2",
       width: "113px",
+      cursor: "pointer",
     },
   },
   cardBottomSection: {
