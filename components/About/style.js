@@ -10,17 +10,23 @@ const style = {
     height: "600px",
     backgroundRepeat: "no-repeat",
     backgroundColor: "#000",
+    textAlign: "center",
+    marginBottom: "20px",
     backgroundImage:
       'url("https://demo2.joomshaper.com/2021/luxyort/images/demo/about-header-bg.jpg")',
     "& h2": {
-      fontSize: "80px",
-      marginBottom: "20px",
+      fontSize: "100px",
+      background: "-webkit-linear-gradient(#fcfcfc, #5a20af)",
+      WebkitBackgroundClip: "text",
+      WebkitTextFillColor: "transparent",
     },
     "& p": {
-      fontSize: "34px",
-      marginBottom: "20px",
-      lineHeight: "44px",
+      fontSize: "18px",
+      lineHeight: "28px",
       letterSpacing: ".5px",
+      background: "-webkit-linear-gradient(#ab7d7d, #78e204)",
+      WebkitBackgroundClip: "text",
+      WebkitTextFillColor: "transparent",
     },
   },
   section: {
@@ -70,6 +76,9 @@ const style = {
     flexDirection: "row",
     margin: "50px",
     gap: "20%",
+    background: "-webkit-linear-gradient(#397113, #8f4cda)",
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
     "& h1": {
       fontSize: "30px",
       lineHeight: "initial",
@@ -97,8 +106,11 @@ const style = {
       lineHeight: "2",
     },
     "& p": {
-      fontSize: "24px",
+      fontSize: "18px",
       lineHeight: "2",
+      background: "-webkit-linear-gradient(#6feb1b, #917aaa)",
+      WebkitBackgroundClip: "text",
+      WebkitTextFillColor: "transparent",
     },
   },
   categoryPart1: {
@@ -142,13 +154,26 @@ const style = {
     justifyContent: "space-between",
     gap: "30%",
     margin: "72px 100px 50px 150px",
+    alignItem: "center",
     "& img": {
-      borderRadius: "30px",
+      borderRadius: "7%",
     },
   },
   aboutDetailsRight: {
     display: "flex",
     flexDirection: "column",
+
+    "& body1": {
+      fontSize: "18px",
+    },
+    "& h1": {
+      color: "#67e6ba",
+      fontSize: "30px",
+    },
+    "& h2": {
+      color: "#67e6ba",
+      fontSize: "26px",
+    },
   },
   socialMediaIcon: {
     display: "flex",

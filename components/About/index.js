@@ -3,32 +3,38 @@ import React from "react";
 import style from "./style";
 import Image from "next/image";
 import ReactPlayer from "react-player";
-import {
-  blogCategoryDetails,
-  AboutData,
-  CompanyOwners,
-} from "../../utils/common";
-import { useRouter } from "next/router";
+import { AboutData } from "../../utils/common";
 
-export const AboutComponent = () => {
-  const router = useRouter();
+export const AboutComponent = ({ aboutAPIResult }) => {
   return (
     <Box style={{ height: "100%" }}>
       <Box sx={style.mainSection}>
-        <Typography component="h2">About Us</Typography>
-        <Typography component="h3">Accommodation for Everyone</Typography>
+        <Typography variant="h2" component="h2">
+          About Us
+        </Typography>
+        <Typography variant="h4" component="h1">
+          Explore a World of Diverse Categories
+        </Typography>
+        <Typography variant="body1" component="p">
+          Welcome to our blog! We're dedicated to providing a rich and diverse
+          range of content for all enthusiasts of travel, lifestyle, and
+          exploration. Our mission is to curate engaging stories, helpful tips,
+          and valuable insights to inspire your adventures and cater to the
+          diverse interests of our audience.
+        </Typography>
       </Box>
       <Box sx={style.aboutDetails}>
-        <Typography component="h1">
-          Small, Unspoilt and Welcoming a Unique Sanctuary.administrate
-          cross-platform materials rather than optimal supply chains.
+        <Typography variant="body1" component="p">
+          Welcome to our blog, where you'll find an array of engaging categories
+          waiting to be discovered. Whether you're into tech marvels, historical
+          adventures, natural wonders, or spiritual insights, we have something
+          for everyone.
         </Typography>
-        <Typography component="p">
-          {" "}
-          Monotonectally mesh web-enabled total linkage rather than distinctive
-          niches. Professionally administrate cross-platform materials rather
-          than optimal supply chains. Authoritatively pursue holistic
-          opportunities via enabled synergy.
+        <Typography variant="body1" component="p">
+          Dive into the essence of our diverse content—each category curated to
+          provide you with captivating stories, informative insights, and
+          valuable knowledge. Explore and embark on your journey through the
+          various niches and discover a world of fascinating narratives.
         </Typography>
       </Box>
       <Box sx={style.aboutPlay}>
@@ -44,28 +50,28 @@ export const AboutComponent = () => {
       <Box sx={style.categoryPart}>
         <Box>
           <Typography component="h3">
-            Enjoy the heavenly stay at the luxurious cosy retreat that offers
-            whisper-soft linens.
+            Dive into Captivating Blog Categories
           </Typography>
           <Typography component="p">
             {" "}
-            The romantic atmosphere is further enhanced with the ultimate
-            privacy, relaxing comfort.
+            Explore our diverse blog categories – from tech marvels to
+            historical tales, nature's wonders to spiritual insights. Find
+            something for every interest in our curated selection."
           </Typography>
         </Box>
 
         <Box sx={style.blogCategory}>
-          {blogCategoryDetails?.flat(1).map((item, id) => {
+          {aboutAPIResult?.[0]?.BlogCategory?.flat(1).map((item, id) => {
             return (
-              <Box sx={style.categoryPart1} key={id}>
+              <Box sx={style.categoryPart1} key={item?._id}>
                 <Image
                   width={70}
                   height={70}
-                  src={item?.icon}
+                  src={item?.BlogCatImage}
                   alt="Tech blog"
                 />
                 <Box>
-                  <Typography component="h1">{item?.title}</Typography>
+                  <Typography component="h1">{item?.name}</Typography>
                   <Typography component="body1">{item?.subTitle}</Typography>
                 </Box>
               </Box>
@@ -77,10 +83,10 @@ export const AboutComponent = () => {
       <Box sx={style.teamDetails}>
         <Typography component="h1">The Sahitya Team</Typography>
 
-        {CompanyOwners?.map((item, index) => {
+        {aboutAPIResult?.[0]?.companyDesc?.map((item, index) => {
           return (
             <Box sx={style.detils} key={index}>
-              <Image src={item?.image} width={400} height={200} alt="user" />
+              <Image src={item?.image} width={300} height={300} alt="user" />
 
               <Box sx={style.aboutDetailsRight}>
                 <Typography component="h1">{item?.Role} </Typography>
@@ -110,8 +116,6 @@ export const AboutComponent = () => {
         })}
       </Box>
       <Box>
-        {/* <Typography component="h1"> Join Us</Typography> */}
-
         {AboutData?.flat(1).map((item, index) => {
           return (
             <Box sx={style.commentsection} key={index}>
