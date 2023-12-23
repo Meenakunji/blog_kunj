@@ -79,7 +79,7 @@ export const AboutComponent = () => {
 
         {CompanyOwners?.map((item, index) => {
           return (
-            <Box sx={style.detils}>
+            <Box sx={style.detils} key={index}>
               <Image src={item?.image} width={400} height={200} alt="user" />
 
               <Box sx={style.aboutDetailsRight}>
@@ -92,6 +92,7 @@ export const AboutComponent = () => {
                       return (
                         <Box
                           onClick={() => windeow.open(item?.SocialMediaLink)}
+                          key={index}
                         >
                           <Image
                             width={30}
