@@ -4,8 +4,9 @@ import style from "../components/About/style";
 import { AboutComponent } from "../components/About";
 import { API_BASE_URL } from "../src/constant/appConstants";
 
-export default function about() {
-  const [aboutAPIResult, setAboutAPIResult] = useState([]);
+export default function About() {
+  const [aboutAPIResult, setAboutAPIResult] = useState();
+
   useEffect(() => {
     const aboutData = async () => {
       try {
@@ -19,7 +20,7 @@ export default function about() {
       } catch (err) {
         alert(err?.response?.data?.message);
       }
-    };
+    };c
 
     aboutData();
   }, []);
