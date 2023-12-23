@@ -16,8 +16,8 @@ export const AboutComponent = ({ aboutAPIResult }) => {
           Explore a World of Diverse Categories
         </Typography>
         <Typography variant="body1" component="p">
-          Welcome to our blog! We're dedicated to providing a rich and diverse
-          range of content for all enthusiasts of travel, lifestyle, and
+          Welcome to our blog! We$`&apos;`re dedicated to providing a rich and
+          diverse range of content for all enthusiasts of travel, lifestyle, and
           exploration. Our mission is to curate engaging stories, helpful tips,
           and valuable insights to inspire your adventures and cater to the
           diverse interests of our audience.
@@ -25,10 +25,10 @@ export const AboutComponent = ({ aboutAPIResult }) => {
       </Box>
       <Box sx={style.aboutDetails}>
         <Typography variant="body1" component="p">
-          Welcome to our blog, where you'll find an array of engaging categories
-          waiting to be discovered. Whether you're into tech marvels, historical
-          adventures, natural wonders, or spiritual insights, we have something
-          for everyone.
+          Welcome to our blog, where you`&apos;`ll find an array of engaging
+          categories waiting to be discovered. Whether you`&apos;`re into tech
+          marvels, historical adventures, natural wonders, or spiritual
+          insights, we have something for everyone.
         </Typography>
         <Typography variant="body1" component="p">
           Dive into the essence of our diverse content—each category curated to
@@ -55,8 +55,8 @@ export const AboutComponent = ({ aboutAPIResult }) => {
           <Typography component="p">
             {" "}
             Explore our diverse blog categories – from tech marvels to
-            historical tales, nature's wonders to spiritual insights. Find
-            something for every interest in our curated selection."
+            historical tales, nature`&apos;`s wonders to spiritual insights.
+            Find something for every interest in our curated selection.
           </Typography>
         </Box>
 
