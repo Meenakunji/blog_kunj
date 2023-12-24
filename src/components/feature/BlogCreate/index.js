@@ -73,11 +73,18 @@ const BlogCreate = () => {
 
   const handleCreateBlogContentEntry = () => {
     let BlogContentDataObj = getValues();
-    const codeSnippetValue = BlogContentDataObj.codeSnippet;
-    const detectedLanguage = hljs.highlightAuto(codeSnippetValue).language;
+
+    const blogSubTags = BlogContentDataObj.blogSubTag
+      .split(",")
+      .map((tag) => tag.trim());
+    // Update the blogSubTag field in the request body to the array of sub-tags
+    BlogContentDataObj.blogSubTag = blogSubTags;
+
+    // const codeSnippetValue = BlogContentDataObj.codeSnippet;
+    // const detectedLanguage = hljs.highlightAuto(codeSnippetValue).language;
 
     // Add the detected language to the request body
-    BlogContentDataObj.codeLanguage = detectedLanguage;
+    // BlogContentDataObj.codeLanguage = detectedLanguage;
 
     BlogContentDataObj.user = "jupiter";
     getCreateBlogContentData(BlogContentDataObj);
@@ -159,6 +166,17 @@ const BlogCreate = () => {
               </Box>
               <Box sx={style.formRowSection}>
                 <Box sx={style.formgroup}>
+                  <TextField
+                    label="Blog SubTag (Separate by commas)"
+                    name={"blogSubTag"}
+                    placeholder="Blog SubTag"
+                    register={register}
+                    errors={errors}
+                  />
+                </Box>
+              </Box>
+              <Box sx={style.formRowSection}>
+                <Box sx={style.formgroup}>
                   <TextArea
                     label="Blog description"
                     name="description"
@@ -167,7 +185,7 @@ const BlogCreate = () => {
                   />
                 </Box>
               </Box>
-              <Box sx={style.formRowSection}>
+              {/* <Box sx={style.formRowSection}>
                 <Box sx={style.formgroup}>
                   <TextArea
                     label="Code Snippet"
@@ -189,7 +207,7 @@ const BlogCreate = () => {
                     </span>
                   )}
                 </Box>
-              </Box>
+              </Box> */}
               <Box sx={style.buttongroup}>
                 <Button onClick={handleCreateBlogContentEntry}>Save</Button>
               </Box>

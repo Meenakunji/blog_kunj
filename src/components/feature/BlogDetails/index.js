@@ -3,7 +3,7 @@ import PauseCircleFilledIcon from "@mui/icons-material/PauseCircleFilled";
 import { Box, Button, Container, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useMutation } from "react-query";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import fetcher from "../../../dataProvider";
 import SwipeableTemporaryDrawer from "./blogDetails";
 import BookmarkAddOutlinedIcon from "@mui/icons-material/BookmarkAddOutlined";
@@ -18,11 +18,15 @@ import rehypeKatex from "rehype-katex";
 import RemarkMathPlugin from "remark-math";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { light as SyntaxHighlighterStyle } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { useRouter } from "next/router";
+import { setTagListName } from "../../../redux/slices/user";
 
 const CommentBlog = () => {
   const { particularBlogContent } = useSelector((state) => state.user);
   const [isReading, setIsReading] = useState(false);
   const [readCountUpdated, setReadCountUpdated] = useState(false);
+  const router = useRouter();
+  const dispatch = useDispatch();
 
   const [blogLikeCount, setBlogLikeCount] = useState(
     particularBlogContent?.blogLike || 0
@@ -282,22 +286,6 @@ const CommentBlog = () => {
                   >
                     {particularBlogContent?.description}
                   </ReactMarkdown>
-
-                  {/* <img
-                    src={particularBlogContent?.image}
-                    alt="blog image"
-                    style={{ width: "100%" }}
-                  /> */}
-
-                  {/* {particularBlogContent?.codeSnippet && (
-                    <Box sx={style.codeSection}>
-                      <p>
-                        <pre>
-                          <code>{particularBlogContent?.codeSnippet}</code>
-                        </pre>
-                      </p>
-                    </Box>
-                  )} */}
                 </Box>
               </Box>
               <Box sx={style.tagList}>
@@ -315,12 +303,21 @@ const CommentBlog = () => {
                   })}
                 </Typography>
 
+                {/* Sub BlogTag */}
                 <Box sx={style.buttonTag}>
-                  <Button>Design</Button>
-                  <Button>Education</Button>
-                  <Button>Artist</Button>
-                  <Button>Tech</Button>
-                  <Button>Travel</Button>
+                  {particularBlogContent?.blogSubTag?.map((item, index) => {
+                    return (
+                      <Button
+                        key={index}
+                        onClick={() => {
+                          dispatch(setTagListName(item));
+                          router.push(`/tag/${item}`);
+                        }}
+                      >
+                        {item}
+                      </Button>
+                    );
+                  })}
                 </Box>
               </Box>
             </Box>

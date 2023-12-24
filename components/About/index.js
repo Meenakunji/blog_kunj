@@ -115,7 +115,7 @@ export const AboutComponent = ({ aboutAPIResult }) => {
           );
         })}
       </Box>
-      <Box>
+      {/* <Box>
         {AboutData?.flat(1).map((item, index) => {
           return (
             <Box sx={style.commentsection} key={index}>
@@ -132,7 +132,7 @@ export const AboutComponent = ({ aboutAPIResult }) => {
             </Box>
           );
         })}
-      </Box>
+      </Box> */}
     </Box>
   );
 };
