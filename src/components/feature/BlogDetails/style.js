@@ -159,6 +159,7 @@ const style = {
     display: "flex",
     gap: "15px",
     marginTop: "20px",
+    cursor: "pointer",
     "& button": {
       border: "1px solid #585858",
       padding: "6px 20px",

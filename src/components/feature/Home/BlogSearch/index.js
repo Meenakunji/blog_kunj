@@ -21,7 +21,7 @@ const BlogSearch = ({ popularBlogTag }) => {
   const [searchDropdown, setSearchDropDown] = useState(false);
 
   const handleSearchBlogTitle = (data) => {
-    setBlogTitle(data.trim()); // Trim whitespace from the input
+    setBlogTitle(data.trim());
 
     if (data.trim()) {
       setSearchDropDown(true);
@@ -103,19 +103,34 @@ const BlogSearch = ({ popularBlogTag }) => {
         {/* show popular blog tag */}
         <Box sx={style.popularTag}>
           <Typography variant="body1">Popular Tag:</Typography>
-          {popularBlogTag?.map((item, index) => {
-            return (
-              <Button
-                key={index}
-                onClick={() => {
-                  router.push(`/tag/${item?._id}`);
-                  dispatch(setTagListName(item?._id));
-                }}
-              >
-                {item?._id}
-              </Button>
-            );
-          })}
+          {Array.isArray(popularBlogTag) &&
+            popularBlogTag.length > 0 &&
+            popularBlogTag.slice(0, 4).map((item, index) => {
+              return (
+                <Button
+                  key={index}
+                  onClick={() => {
+                    router.push(`/tag/${item?._id}`);
+                    dispatch(setTagListName(item?._id));
+                  }}
+                >
+                  {item?._id}
+                </Button>
+              );
+            })}
+          <a
+            style={{
+              fontSize: "14px",
+              color: "#26f7c7",
+              cursor: "pointer",
+              textDecoration: "underline !important",
+            }}
+            onClick={() => {
+              router.push(`explore-topics/tag`);
+            }}
+          >
+            Show More
+          </a>
         </Box>
       </Box>
     </Box>
