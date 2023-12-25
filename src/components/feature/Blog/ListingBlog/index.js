@@ -156,8 +156,20 @@ const ListingBlog = () => {
                         >
                           {item?.blogTag}
                         </Button>
-                        {/* <Button>User Experience</Button> */}
-                        {/* <Button>User Interfaces</Button> */}
+
+                        {item?.blogSubTag?.map((item, index) => {
+                          return (
+                            <Button
+                              key={index}
+                              onClick={() => {
+                                router.push(`/tag/${item}`);
+                                dispatch(setTagListName(item));
+                              }}
+                            >
+                             {item}
+                            </Button>
+                          );
+                        })}
                       </Box>
                     </Box>
                   </Grid>

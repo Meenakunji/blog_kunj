@@ -118,6 +118,7 @@ const style = {
     display: "flex",
     gap: "14px",
     marginTop: "20px",
+    flexWrap: "wrap",
     "& button": {
       borderRadius: "4px",
       background: "#E1E1E1",
