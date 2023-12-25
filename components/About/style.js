@@ -61,9 +61,9 @@ const style = {
   },
   aboutPlay: {
     display: "flex",
-    width: "800px",
+    width: "890px",
     height: "560px",
-    marginLeft: "15%",
+    marginLeft: "21%",
     borderRadius: "10px",
     marginTop: "30px",
     flexDirection: "column",
