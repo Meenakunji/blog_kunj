@@ -220,7 +220,7 @@ const Header = () => {
                 style: { background: "white" },
               }}
             >
-              <Tab label="Home" onClick={() => router.push(`/`)} />
+              {/* <Tab label="Home" onClick={() => router.push(`/`)} /> */}
               <Tab label="Create Blog" onClick={handleCreateBlog} />
               {/* <Tab label="Pages" /> */}
               {/* <Tab label="Connect Wallet" onClick={connectWallet} /> */}

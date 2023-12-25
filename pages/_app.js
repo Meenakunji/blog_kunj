@@ -30,7 +30,7 @@ const queryClient = new QueryClient({
 function MyApp({ Component, pageProps }) {
   return (
     <StrictMode>
-      <Head>{/* Move other head-related components or metadata here */}</Head>
+      <Head>Jupiter Blog Website</Head>
 
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
