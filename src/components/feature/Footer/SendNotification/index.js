@@ -1,6 +1,7 @@
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import style from "../style";
+import { API_BASE_URL } from "../../../../constant/appConstants";
 
 export const FooterSendNotification = () => {
   const [email, setEmail] = useState("");
@@ -11,16 +12,13 @@ export const FooterSendNotification = () => {
         email: email,
       };
 
-      const response = await fetch(
-        "http://localhost:3003/v1/auth/notify-users",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(requestBody),
-        }
-      );
+      const response = await fetch(`${API_BASE_URL}/v1/auth/notify-users`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestBody),
+      });
 
       if (response.ok) {
         const data = await response.json();
