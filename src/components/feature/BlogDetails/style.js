@@ -124,6 +124,10 @@ const style = {
       marginTop: "30px",
       color: "#183B56",
     },
+    "& ul": {
+      marginTop: "30px",
+      color: "#183B56",
+    },
     "& pre": {
       marginTop: "30px",
       // color: "#183B56",
