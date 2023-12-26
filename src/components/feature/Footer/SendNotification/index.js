@@ -23,6 +23,7 @@ export const FooterSendNotification = () => {
       if (response.ok) {
         const data = await response.json();
         console.log("Received data:", data);
+        setEmail("");
         // Handle the data received from the API
       } else {
         throw new Error("Failed to send notification");
