@@ -36,7 +36,7 @@ export const BlogTagList = () => {
 
   return (
     <Box sx={style.ContainerBlogListComp}>
-      <TagBanner />
+      <TagBanner markedblogList={markedblogList} />
       <Divider style={{ border: "2px #F2F2F2 solid", borderColor: "green" }} />
       <Box
         style={{

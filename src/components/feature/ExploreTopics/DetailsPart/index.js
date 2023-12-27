@@ -1,10 +1,9 @@
-import { Box, Link, List, ListItem, Typography } from "@mui/material";
-import React, { useState } from "react";
-import { Stack } from "@mui/material";
-import style from "../HeadPart/style";
+import { Box, Link, Typography } from "@mui/material";
 import { useRouter } from "next/router";
-import { setTagListName } from "../../../../redux/slices/user";
+import React from "react";
 import { useDispatch } from "react-redux";
+import { setTagListName } from "../../../../redux/slices/user";
+import style from "../HeadPart/style";
 
 export const ExploreTopicsDetailsComponent = ({ allTagList }) => {
   const router = useRouter();
@@ -27,20 +26,20 @@ export const ExploreTopicsDetailsComponent = ({ allTagList }) => {
               >
                 {item?.blogTag}
               </Typography>
-              {item?.subTags?.map((subTagArray, subIndex) => (
-                <ul key={subIndex} style={{ listStyleType: "none" }}>
-                  {subTagArray.map((subItem, nestedIndex) => (
-                    <li key={nestedIndex}>
+              {item?.subTags?.map((subTagArray, subIndex) => {
+                return (
+                  <ul key={subIndex} style={{ listStyleType: "none" }}>
+                    <li>
                       <Link
-                        href={`/tag/${subItem}`}
-                        onClick={() => handleRedirectionTag(subItem)}
+                        href={`/tag/${subTagArray}`}
+                        onClick={() => handleRedirectionTag(subTagArray)}
                       >
-                        {subItem}
+                        {subTagArray}
                       </Link>
                     </li>
-                  ))}
-                </ul>
-              ))}
+                  </ul>
+                );
+              })}
             </Box>
           );
         })}

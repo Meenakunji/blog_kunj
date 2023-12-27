@@ -2,9 +2,18 @@ import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import style from "../style";
 import { API_BASE_URL } from "../../../../constant/appConstants";
+import SnackBar from "../../../Common/SnackBar";
 
 export const FooterSendNotification = () => {
   const [email, setEmail] = useState("");
+  const [snackbar, setSnackbar] = useState({
+    show: false,
+    status: "",
+    message: "",
+  });
+  const toggleSnackbar = (value) => {
+    setSnackbar(value);
+  };
 
   const sendNotification = async (email) => {
     try {
@@ -24,12 +33,22 @@ export const FooterSendNotification = () => {
         const data = await response.json();
         console.log("Received data:", data);
         setEmail("");
+        setSnackbar({
+          show: true,
+          status: "success",
+          message: "Your subscription is successful. Thank you!",
+        });
         // Handle the data received from the API
       } else {
         throw new Error("Failed to send notification");
       }
     } catch (error) {
       console.error("Error sending notification:", error.message);
+      setSnackbar({
+        show: true,
+        status: "warning",
+        message: `${error?.response?.data?.message}`,
+      });
       // Handle errors here, like showing an error message
     }
   };
@@ -93,6 +112,9 @@ export const FooterSendNotification = () => {
           </Grid>
         </Grid>
       </Container>
+      {snackbar.show ? (
+        <SnackBar {...snackbar} onClose={toggleSnackbar} />
+      ) : null}
     </Box>
   );
 };
