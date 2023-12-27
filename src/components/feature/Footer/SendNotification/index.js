@@ -2,7 +2,7 @@ import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import style from "../style";
 import { API_BASE_URL } from "../../../../constant/appConstants";
-import SnackBar from "../../../Common/SnackBar";
+// import SnackBar from "../../../common/SnackBar";
 
 export const FooterSendNotification = () => {
   const [email, setEmail] = useState("");
@@ -109,9 +109,9 @@ export const FooterSendNotification = () => {
           </Grid>
         </Grid>
       </Container>
-      {snackbar.show ? (
+      {/* {snackbar.show ? (
         <SnackBar {...snackbar} onClose={toggleSnackbar} />
-      ) : null}
+      ) : null} */}
     </Box>
   );
 };
