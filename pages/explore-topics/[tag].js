@@ -1,8 +1,8 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import LoaderComponent from "../../src/components/common/Loader";
 import { ExploreTopicsDetailsComponent } from "../../src/components/feature/ExploreTopics/DetailsPart";
 import ExploreTopicsHeadComponent from "../../src/components/feature/ExploreTopics/HeadPart";
-import LoaderComponent from "../../src/components/common/Loader";
 import { API_BASE_URL } from "../../src/constant/appConstants";
 
 export default function ExploreTopics() {

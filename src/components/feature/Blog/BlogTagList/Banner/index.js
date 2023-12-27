@@ -1,9 +1,9 @@
 import { Box, Button, Typography } from "@mui/material";
 import React from "react";
-import style from "../../style";
 import { useSelector } from "react-redux";
+import style from "../../style";
 
-export const TagBanner = () => {
+export const TagBanner = ({ markedblogList }) => {
   const { tagListName } = useSelector((state) => state.user);
   return (
     <Box>
@@ -12,8 +12,8 @@ export const TagBanner = () => {
           <Box sx={style.bannerContent}>
             <Typography component="h2">{tagListName}</Typography>
             <Box sx={style.topicCSS}>
-              Topic<Box className="ru s">·</Box>13.4K Followers
-              <Box className="ru s">·</Box>75K Stories
+              Topic<Box className="ru s">: </Box> {markedblogList?.length}{" "}
+              Followers : -<Box className="ru s">·</Box>75K Stories
             </Box>
             <Box sx={style.followBtn}>
               <Button>Follow</Button>
