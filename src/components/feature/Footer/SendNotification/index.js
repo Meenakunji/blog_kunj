@@ -31,7 +31,6 @@ export const FooterSendNotification = () => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log("Received data:", data);
         setEmail("");
         setSnackbar({
           show: true,
@@ -43,7 +42,6 @@ export const FooterSendNotification = () => {
         throw new Error("Failed to send notification");
       }
     } catch (error) {
-      console.error("Error sending notification:", error.message);
       setSnackbar({
         show: true,
         status: "warning",
@@ -60,7 +58,6 @@ export const FooterSendNotification = () => {
       await sendNotification(email);
     } catch (error) {
       console.error("Error:", error.message);
-      // Handle errors here, like showing an error message
     }
   };
 
