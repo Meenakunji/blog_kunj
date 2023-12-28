@@ -69,21 +69,21 @@ const style = {
 
     "& .slick-slide": {
       width: "180px !important",
+      marginRight: "20px !important",
+      marginLeft: "15px !important",
     },
     "& .slick-slider .slick-prev:before, & .slick-slider button.slick-prev": {
       content: "''",
       width: "18px",
       height: "32px",
-      background: "center/contain no-repeat url(/images/home/banner-prev.svg)",
-      left: "-60px",
       zIndex: "1",
+      left: "60px",
     },
     "& .slick-slider .slick-next:before, & .slick-slider button.slick-next": {
       content: "''",
       width: "18px",
       height: "32px",
-      background: "center/contain no-repeat url(/images/home/banner-next.svg)",
-      right: "-60px",
+      // right: "-60px",
       zIndex: "1",
     },
     "& .slick-slider .slick-dots li button:before": {
@@ -100,6 +100,16 @@ const style = {
   blogSliderTagcss: {
     width: "180px !important",
     whiteSpace: "nowrap",
+    "& button": {
+      border: "1px solid gray",
+      padding: "10px 15px 10px 15px",
+      padding: "8px 16px",
+      borderRadius: "100px",
+      whiteSpace: "nowrap",
+      fontSize: "14px",
+      fontWeight: "700",
+      lineHeight: "1.9",
+    },
   },
 };
 
