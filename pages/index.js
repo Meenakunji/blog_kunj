@@ -4,6 +4,7 @@ import SEOComponents from "../src/components/common/SEO";
 import fetcher from "../src/dataProvider";
 import { API_BASE_URL } from "../src/constant/appConstants";
 import dynamic from "next/dynamic";
+import Head from "next/head";
 
 // dynamic routing
 const BlogSearch = dynamic(
@@ -83,20 +84,58 @@ const Home = () => {
   }, []);
 
   return (
-    <Box style={{ paddingBottom: "40px" }}>
-      <SEOComponents
-        title={"Blog WebSite Home Page"}
-        description={"this is Sahitya website home page"}
-        canonical="https://www.yourwebsite.com/about"
-        // data={data?.data?.attributes?.seo}
-      />
-      <BlogSearch popularBlogTag={popularBlogTag?.data} />
-      <RecommendationBlog recommendationBlogList={allBlogList} />
-      <PopularBlog popularBlogList={recommendationBlogList} />
-      <PopularBloggerList popularBlogger={popularBloggerList} />
-      <CaseStudyList caseStudyList={caseStudyList} />
-      <AllBlogComponent allBlogList={allBlogList} />
-    </Box>
+    <>
+      <Head>
+        <meta
+          name="description"
+          content="Discover engaging and insightful user-generated content on Sahitya - Your Go-to Blog Platform!"
+        />
+        <meta name="name" content="Sahitya - User Blog Platform" />
+        <meta
+          name="image"
+          content="https://d2q23p4t0ij9e0.cloudfront.net/small_referal_1ee3ed7a49.png"
+        />
+        <meta
+          property="og:url"
+          content="https://timely-profiterole-25e8c9.netlify.app/"
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Sahitya - User Blog Platform" />
+        <meta
+          property="og:description"
+          content="Discover engaging and insightful user-generated content on Sahitya - Your Go-to Blog Platform!"
+        />
+        <meta
+          property="og:image"
+          content="https://d2q23p4t0ij9e0.cloudfront.net/small_referal_1ee3ed7a49.png"
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Sahitya - User Blog Platform" />
+        <meta
+          name="twitter:description"
+          content="Discover engaging and insightful user-generated content on Sahitya - Your Go-to Blog Platform!"
+        />
+        <meta
+          name="twitter:image"
+          content="https://d2q23p4t0ij9e0.cloudfront.net/small_referal_1ee3ed7a49.png"
+        />
+      </Head>
+
+      <Box style={{ paddingBottom: "40px" }}>
+        <SEOComponents
+          title={"Blog WebSite Home Page"}
+          description={"this is Sahitya website home page"}
+          canonical="https://timely-profiterole-25e8c9.netlify.app/"
+          // data={data?.data?.attributes?.seo}
+        />
+        <BlogSearch popularBlogTag={popularBlogTag?.data} />
+        <RecommendationBlog recommendationBlogList={allBlogList} />
+        <PopularBlog popularBlogList={recommendationBlogList} />
+        <PopularBloggerList popularBlogger={popularBloggerList} />
+        <CaseStudyList caseStudyList={caseStudyList} />
+        <AllBlogComponent allBlogList={allBlogList} />
+      </Box>
+    </>
   );
 };
 
