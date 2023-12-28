@@ -1,17 +1,14 @@
-import { Box, Button, Divider, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import SearchIcon from "@mui/icons-material/Search";
-import style from "../style";
+import { Box, Typography } from "@mui/material";
 import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import {
-  setParticularBlogContent,
-  setTagListName,
-} from "../../../../redux/slices/user";
-import fetcher from "../../../../dataProvider";
-import TitleIcon from "@mui/icons-material/Title";
 import { createSlug } from "../../../../../utils/common";
 import { API_BASE_URL } from "../../../../constant/appConstants";
+import fetcher from "../../../../dataProvider";
+import { setParticularBlogContent } from "../../../../redux/slices/user";
+import style from "../style";
+import { BlogPopularTagComponent } from "./BlogPopularTag";
+import { SearchComponent } from "./SearchComponent";
 
 const BlogSearch = ({ popularBlogTag }) => {
   const router = useRouter();
@@ -70,68 +67,16 @@ const BlogSearch = ({ popularBlogTag }) => {
       {/* search popular blog based on title */}
       <Box sx={style.ourNewRoom}>
         <Typography variant="h6">Our BlogRoom</Typography>
-        <Box sx={style.inputSection}>
-          <input
-            type="text"
-            placeholder="Search blog"
-            onChange={(e) => handleSearchBlogTitle(e?.target?.value)}
-          />
-          {/* search popular blog dropdown */}
-          {searchDropdown && blogList?.length > 0 && (
-            <Box sx={style.showListInput}>
-              <ul>
-                <Typography component="p">Topics</Typography>
-                <Divider style={{ border: "1px solid #000" }} />
-                {blogList?.map((item, index) => {
-                  return (
-                    <li
-                      key={index}
-                      onClick={() => handleBlogContentListPage(item)}
-                    >
-                      <TitleIcon /> {item?.blogTitle}
-                    </li>
-                  );
-                })}
-              </ul>
-            </Box>
-          )}
-          <Button>Search</Button>
-          <Box sx={style.SearchIcon}>
-            <SearchIcon />
-          </Box>
-        </Box>
+
+        <SearchComponent
+          searchDropdown={searchDropdown}
+          blogList={blogList}
+          handleSearchBlogTitle={handleSearchBlogTitle}
+          handleBlogContentListPage={handleBlogContentListPage}
+        />
         {/* show popular blog tag */}
-        <Box sx={style.popularTag}>
-          <Typography variant="body1">Popular Tag:</Typography>
-          {Array.isArray(popularBlogTag) &&
-            popularBlogTag.length > 0 &&
-            popularBlogTag.slice(0, 4).map((item, index) => {
-              return (
-                <Button
-                  key={index}
-                  onClick={() => {
-                    router.push(`/tag/${item?._id}`);
-                    dispatch(setTagListName(item?._id));
-                  }}
-                >
-                  {item?._id}
-                </Button>
-              );
-            })}
-          <a
-            style={{
-              fontSize: "14px",
-              color: "#26f7c7",
-              cursor: "pointer",
-              textDecoration: "underline !important",
-            }}
-            onClick={() => {
-              router.push(`explore-topics/tag`);
-            }}
-          >
-            Show More
-          </a>
-        </Box>
+
+        <BlogPopularTagComponent popularBlogTag={popularBlogTag} />
       </Box>
     </Box>
   );
