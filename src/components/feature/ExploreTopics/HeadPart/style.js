@@ -59,6 +59,48 @@ const style = {
       fontSize: "18px",
     },
   },
+  sliderCSS: {
+    position: "relative",
+    display: "block",
+    maxWidth: "1248px",
+    padding: "25px 0 25px 15px",
+    left: "10%",
+    marginBottom: "100px",
+
+    "& .slick-slide": {
+      width: "180px !important",
+    },
+    "& .slick-slider .slick-prev:before, & .slick-slider button.slick-prev": {
+      content: "''",
+      width: "18px",
+      height: "32px",
+      background: "center/contain no-repeat url(/images/home/banner-prev.svg)",
+      left: "-60px",
+      zIndex: "1",
+    },
+    "& .slick-slider .slick-next:before, & .slick-slider button.slick-next": {
+      content: "''",
+      width: "18px",
+      height: "32px",
+      background: "center/contain no-repeat url(/images/home/banner-next.svg)",
+      right: "-60px",
+      zIndex: "1",
+    },
+    "& .slick-slider .slick-dots li button:before": {
+      fontSize: "12px",
+      color: "#fff",
+      opacity: "1",
+    },
+    "& .slick-slider .slick-dots li.slick-active button:before": {
+      fontSize: "14px",
+      color: "#e91e63",
+      opacity: "1",
+    },
+  },
+  blogSliderTagcss: {
+    width: "180px !important",
+    whiteSpace: "nowrap",
+  },
 };
 
 export default style;
