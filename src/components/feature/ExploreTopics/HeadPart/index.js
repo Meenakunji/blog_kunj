@@ -8,6 +8,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { setTagListName } from "../../../../redux/slices/user";
+import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
 
 const customButtonStyle = {
   backgroundColor: "lightgray",
@@ -28,6 +31,8 @@ const customButtonRightStyle = {
 
 const ExploreTopicsHeadComponent = ({ allTagList }) => {
   const [value, setValue] = useState("");
+  const router = useRouter();
+  const dispatch = useDispatch();
 
   const settings = {
     dots: false,
@@ -85,14 +90,20 @@ const ExploreTopicsHeadComponent = ({ allTagList }) => {
     console.log("Search canceled");
   };
 
+  const handleRedirectionTag = (tag) => {
+    dispatch(setTagListName(tag));
+    router.push(`/tag/${tag}`);
+  };
+
   return (
     <Box sx={style.container}>
       <Box sx={style.sliderCSS}>
         <Slider {...settings}>
           {allTagList?.flat(1).map((item, index) => (
             <Box key={index} sx={style.blogSliderTagcss}>
-              <AlternateEmailIcon />
-              <Typography component="body1">{item?.blogTag}</Typography>
+              <Button onClick={() => handleRedirectionTag(item?.blogTag)}>
+                {item?.blogTag}
+              </Button>
             </Box>
           ))}
         </Slider>
