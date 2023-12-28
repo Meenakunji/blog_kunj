@@ -285,6 +285,7 @@ const style = {
     zIndex: "2",
     paddingLeft: "2rem",
     paddingRight: "2rem",
+    cursor: "pointer",
     "& h3": {
       fontSize: "30px",
       color: "#fff",

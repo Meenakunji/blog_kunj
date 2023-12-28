@@ -22,7 +22,7 @@ export const TeamDetailsComponent = ({ aboutAPIResult }) => {
                   item?.socialMedia?.map((item, index) => {
                     return (
                       <Box
-                        onClick={() => windeow.open(item?.SocialMediaLink)}
+                        onClick={() => window.open(item?.SocialMediaLink)}
                         key={index}
                       >
                         <Image
