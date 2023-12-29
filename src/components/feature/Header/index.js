@@ -1,3 +1,6 @@
+import Logout from "@mui/icons-material/Logout";
+import MenuBookIcon from "@mui/icons-material/MenuBook";
+import Settings from "@mui/icons-material/Settings";
 import {
   AppBar,
   Avatar,
@@ -14,29 +17,20 @@ import {
   Typography,
   useMediaQuery,
 } from "@mui/material";
-import WalletConnectProvider from "@walletconnect/web3-provider";
+import { googleLogout } from "@react-oauth/google";
 import cookie from "js-cookie";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Web3Modal from "web3modal";
 import eventBus from "../../../../utils/eventBus";
 import { setTheme } from "../../../redux/slices/layout";
+import { setToken } from "../../../redux/slices/user";
 import ToggleThemeBtn from "../../common/Button/toggleButton";
 import AuthenticationComponent from "../auth";
 import styles from "../auth/style";
 import DrawerComp from "./Drawer";
-import logout from "../../../../components/Layout/util/logout";
-import Settings from "@mui/icons-material/Settings";
-import LoginIcon from "@mui/icons-material/Login";
-import Logout from "@mui/icons-material/Logout";
-import { setToken } from "../../../redux/slices/user";
-import { googleLogout } from "@react-oauth/google";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import MenuBookIcon from "@mui/icons-material/MenuBook";
 
 const Header = () => {
-  // const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open1 = Boolean(anchorEl);
   const handleClick1 = (event) => {
@@ -82,7 +76,7 @@ const Header = () => {
     boxShadow: isScrolled ? "0 1px 6px 0 rgba(32, 33, 36, 0.28)" : "none",
   };
 
-  const [value, setValue] = useState(0); // Default value for the first tab
+  const [value, setValue] = useState(0);
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const [walletAddress, setWalletAddress] = useState("");
@@ -101,23 +95,6 @@ const Header = () => {
     setValue(newValue);
   };
 
-  const connectWallet = async () => {
-    if (!isLoggedIn) {
-      eventBus.dispatch("openLoginModal", { function_name: "unique" });
-    } else {
-      try {
-        const provider = await web3Modal.connect();
-        const web3 = new Web3(provider);
-        const accounts = await web3.eth.getAccounts();
-        const selectedAddress = accounts[0];
-        setWalletAddress(selectedAddress);
-        web3Modal.clearCachedProvider();
-      } catch (error) {
-        console.error("Error connecting to wallet:", error);
-      }
-    }
-  };
-
   const handleCreateBlog = () => {
     // if (!isLoggedIn) {
     //   eventBus.dispatch("openLoginModal", { function_name: "unique" });
@@ -128,12 +105,6 @@ const Header = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      web3Modal = new Web3Modal({
-        network: "mainnet", // optional
-        cacheProvider: true,
-        providerOptions: providerOptions,
-      });
-
       eventBus.on("openLoginModal", (cb) => {
         if (!open) {
           setOpen(true);
@@ -157,25 +128,6 @@ const Header = () => {
       eventBus.remove("openLoginModal");
     };
   }, [open]);
-
-  const providerOptions = {
-    walletconnect: {
-      package: WalletConnectProvider,
-      options: {
-        infuraId: "aec8651d16b0461a844ba5a6cc70e08c",
-      },
-    },
-  };
-
-  let web3Modal;
-
-  if (typeof window !== "undefined") {
-    web3Modal = new Web3Modal({
-      network: "mainnet",
-      cacheProvider: true,
-      providerOptions: providerOptions,
-    });
-  }
 
   return (
     <Box>
@@ -220,10 +172,7 @@ const Header = () => {
                 style: { background: "white" },
               }}
             >
-              {/* <Tab label="Home" onClick={() => router.push(`/`)} /> */}
               <Tab label="Create Blog" onClick={handleCreateBlog} />
-              {/* <Tab label="Pages" /> */}
-              {/* <Tab label="Connect Wallet" onClick={connectWallet} /> */}
               <Tab label="Community" onClick={() => router.push("/chat")} />
               <Tab label="About" onClick={() => router.push("/about")} />
             </Tabs>
@@ -234,9 +183,7 @@ const Header = () => {
           >
             <ToggleThemeBtn theme={theme} />
           </Box>
-          {/* <Box>
-            <NotificationsIcon />
-          </Box> */}
+
           {isLoggedIn ? (
             <>
               <Box
@@ -327,7 +274,6 @@ const Header = () => {
               </Menu>
             </>
           ) : (
-            // </Button>
             <Button
               variant="contained"
               sx={{ marginLeft: "10px" }}

@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { createSlug } from "../../../../../utils/common";
 import { API_BASE_URL } from "../../../../constant/appConstants";
@@ -17,18 +17,12 @@ const BlogSearch = ({ popularBlogTag }) => {
   const [blogList, setBlogList] = useState([]);
   const [searchDropdown, setSearchDropDown] = useState(false);
 
-  const handleSearchBlogTitle = (data) => {
+  const handleSearchBlogTitle = useCallback((data) => {
     setBlogTitle(data.trim());
+    setSearchDropDown(data.trim() !== "");
+  }, []);
 
-    if (data.trim()) {
-      setSearchDropDown(true);
-    } else {
-      setSearchDropDown(false);
-    }
-  };
-
-  // search API
-  const getBlogTitleData = async (title) => {
+  const getBlogTitleData = useCallback(async (title) => {
     try {
       const response = await fetcher.get(
         `${API_BASE_URL}/v1/blog/searchbytitle?title=${title}`
@@ -38,18 +32,19 @@ const BlogSearch = ({ popularBlogTag }) => {
     } catch (error) {
       alert(error?.response?.data?.message);
     }
-  };
+  }, []);
 
-  const handleBlogContentListPage = (item) => {
-    dispatch(setParticularBlogContent(item));
-    const urlSlug = createSlug(item?.userData?.[0]?.name, item?.blogTitle);
-    router.push(`/${urlSlug}`);
-  };
+  const handleBlogContentListPage = useCallback(
+    (item) => {
+      dispatch(setParticularBlogContent(item));
+      const urlSlug = createSlug(item?.userData?.[0]?.name, item?.blogTitle);
+      router.push(`/${urlSlug}`);
+    },
+    [dispatch, router]
+  );
 
-  // handle search debouncing part
   useEffect(() => {
     if (blogTitle === "") {
-      // If the search term is empty, don't make the API call
       setBlogList([]);
       return;
     }
@@ -59,7 +54,7 @@ const BlogSearch = ({ popularBlogTag }) => {
     }, 800);
 
     return () => clearTimeout(timerOut);
-  }, [blogTitle]);
+  }, [blogTitle, getBlogTitleData]);
 
   return (
     <Box sx={style.headSection}>
@@ -68,7 +63,6 @@ const BlogSearch = ({ popularBlogTag }) => {
         alt="comment icon"
         style={{ width: "100%" }}
       />
-      {/* search popular blog based on title */}
       <Box sx={style.ourNewRoom}>
         <Typography variant="h6">Our BlogRoom</Typography>
 
@@ -78,7 +72,6 @@ const BlogSearch = ({ popularBlogTag }) => {
           handleSearchBlogTitle={handleSearchBlogTitle}
           handleBlogContentListPage={handleBlogContentListPage}
         />
-        {/* show popular blog tag */}
 
         <BlogPopularTagComponent popularBlogTag={popularBlogTag} />
       </Box>

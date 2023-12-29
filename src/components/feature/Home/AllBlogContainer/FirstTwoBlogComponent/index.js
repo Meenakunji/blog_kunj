@@ -16,11 +16,15 @@ export const FirstTwoBlogComponent = ({
     <>
       {firstTwoItems?.length > 0 &&
         firstTwoItems?.map((item, index) => {
+          const { blogTitle, description, createdAt, userData, image } = item;
+          const profilePic = userData?.[0]?.profilePic;
+          const userName = userData?.[0]?.name;
+
           return (
             <Grid item xs={6} md={6} key={index}>
               <Box sx={style.popularArticlesList}>
                 <img
-                  src={item?.image || "/images/home/rocket.jpg"}
+                  src={image || "/images/home/rocket.jpg"}
                   alt="blog image"
                   style={{
                     width: "100%",
@@ -34,7 +38,7 @@ export const FirstTwoBlogComponent = ({
                   sx={style.popularArticlesHeading}
                   onClick={() => handleBlogContentListPage(item)}
                 >
-                  <Typography variant="h3">{item?.blogTitle}</Typography>
+                  <Typography variant="h3">{blogTitle}</Typography>
                   <Typography variant="body1">
                     <ReactMarkdown
                       remarkPlugins={[RemarkMathPlugin, remarkGfm]}
@@ -43,7 +47,7 @@ export const FirstTwoBlogComponent = ({
                         img: ({ node, ...props }) => null,
                       }}
                     >
-                      {item?.description?.split(" ").slice(0, 15).join(" ")}
+                      {description?.split(" ").slice(0, 15).join(" ")}
                     </ReactMarkdown>
                   </Typography>
                   <Box sx={style.cardBottomSection}>
@@ -51,7 +55,7 @@ export const FirstTwoBlogComponent = ({
                       <Box sx={style.profileSection}>
                         <Avatar>
                           <img
-                            src={item?.userData?.[0].profilePic}
+                            src={profilePic}
                             alt="blogger Profileimage"
                             style={{ width: "40px" }}
                           />
@@ -59,7 +63,7 @@ export const FirstTwoBlogComponent = ({
                       </Box>
                       <Box sx={style.profileName}>
                         <Typography variant="h5" sx={{ color: "#fff" }}>
-                          {item?.userData?.[0].name}
+                          {userName}
                         </Typography>
                         <Box sx={style.dFlex}>
                           <span>
@@ -73,7 +77,7 @@ export const FirstTwoBlogComponent = ({
                       </Box>
                     </Box>
                     <Box sx={style.date} style={{ color: "#798b9b" }}>
-                      {new Date(item?.createdAt).toLocaleDateString("en-US", {
+                      {new Date(createdAt).toLocaleDateString("en-US", {
                         day: "numeric",
                         month: "short",
                       })}

@@ -7,7 +7,7 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import DoneIcon from "@mui/icons-material/Done";
 import style from "../style";
 import Image from "next/image";
@@ -25,25 +25,38 @@ import {
 } from "../../../../redux/slices/user";
 
 const RecommendationBlog = ({ recommendationBlogList }) => {
-  const [randomBlog, setRandomBlog] = useState({});
+  const [randomBlogIndex, setRandomBlogIndex] = useState(0);
   const dispatch = useDispatch();
   const router = useRouter();
 
+  const randomBlog = useMemo(
+    () => recommendationBlogList[randomBlogIndex] || {},
+    [randomBlogIndex, recommendationBlogList]
+  );
+
   useEffect(() => {
-    // Generate a random index within the range of the array length
     const randomIndex = Math.floor(
       Math.random() * recommendationBlogList.length
     );
-
-    // Set the random blog object based on the random index
-    setRandomBlog(recommendationBlogList[randomIndex]);
+    setRandomBlogIndex(randomIndex);
   }, [recommendationBlogList]);
 
-  const handleBlogContentListPage = (item) => {
-    dispatch(setParticularBlogContent(item));
-    const urlSlug = createSlug(item?.userData?.[0]?.name, item?.blogTitle);
-    router.push(`/${urlSlug}`);
-  };
+  const handleBlogContentListPage = useCallback(
+    (item) => {
+      dispatch(setParticularBlogContent(item));
+      const urlSlug = createSlug(item?.userData?.[0]?.name, item?.blogTitle);
+      router.push(`/${urlSlug}`);
+    },
+    [dispatch, router]
+  );
+
+  const handleTagClick = useCallback(
+    (tag) => {
+      router.push(`/tag/${tag}`);
+      dispatch(setTagListName(tag));
+    },
+    [dispatch, router]
+  );
 
   return (
     <section
@@ -72,12 +85,7 @@ const RecommendationBlog = ({ recommendationBlogList }) => {
             </Grid>
             <Grid item xs={6} md={6}>
               <Box sx={style.topSectionDetails}>
-                <Button
-                  onClick={() => {
-                    router.push(`/tag/${randomBlog?.blogTag}`);
-                    dispatch(setTagListName(randomBlog?.blogTag));
-                  }}
-                >
+                <Button onClick={() => handleTagClick(randomBlog?.blogTag)}>
                   {randomBlog?.blogTag}
                 </Button>
                 <Typography variant="h1">{randomBlog?.blogTitle}</Typography>

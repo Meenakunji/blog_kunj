@@ -1,8 +1,14 @@
 import SearchIcon from "@mui/icons-material/Search";
 import TitleIcon from "@mui/icons-material/Title";
 import { Box, Button, Divider, Typography } from "@mui/material";
-import React from "react";
+import React, { useMemo } from "react";
 import style from "../../style";
+
+const MemoizedListItem = React.memo(({ item, handleBlogContentListPage }) => (
+  <li onClick={() => handleBlogContentListPage(item)}>
+    <TitleIcon /> {item?.blogTitle}
+  </li>
+));
 
 export const SearchComponent = ({
   searchDropdown,
@@ -10,6 +16,24 @@ export const SearchComponent = ({
   handleSearchBlogTitle,
   handleBlogContentListPage,
 }) => {
+  const renderBlogList = useMemo(() => {
+    return (
+      <Box sx={style.showListInput}>
+        <ul>
+          <Typography component="p">Topics</Typography>
+          <Divider style={style.divider} />
+          {blogList?.map((item, index) => (
+            <MemoizedListItem
+              key={index}
+              item={item}
+              handleBlogContentListPage={handleBlogContentListPage}
+            />
+          ))}
+        </ul>
+      </Box>
+    );
+  }, [blogList, handleBlogContentListPage]);
+
   return (
     <Box sx={style.inputSection}>
       <input
@@ -18,21 +42,7 @@ export const SearchComponent = ({
         onChange={(e) => handleSearchBlogTitle(e?.target?.value)}
       />
       {/* search popular blog dropdown */}
-      {searchDropdown && blogList?.length > 0 && (
-        <Box sx={style.showListInput}>
-          <ul>
-            <Typography component="p">Topics</Typography>
-            <Divider style={{ border: "1px solid #000" }} />
-            {blogList?.map((item, index) => {
-              return (
-                <li key={index} onClick={() => handleBlogContentListPage(item)}>
-                  <TitleIcon /> {item?.blogTitle}
-                </li>
-              );
-            })}
-          </ul>
-        </Box>
-      )}
+      {searchDropdown && blogList?.length > 0 && renderBlogList}
       <Button>Search</Button>
       <Box sx={style.SearchIcon}>
         <SearchIcon />
