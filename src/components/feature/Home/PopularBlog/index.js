@@ -9,7 +9,13 @@ import {
   Typography,
 } from "@mui/material";
 import { useRouter } from "next/router";
+import React, { useCallback, useMemo } from "react";
+import ReactMarkdown from "react-markdown";
 import { useDispatch } from "react-redux";
+import rehypeKatex from "rehype-katex";
+import remarkGfm from "remark-gfm";
+import RemarkMathPlugin from "remark-math";
+import remark2rehype from "remark-rehype";
 import {
   setAllBlogsContainer,
   setCategory,
@@ -17,23 +23,23 @@ import {
   setPopularBlogs,
 } from "../../../../redux/slices/user";
 import style from "../style";
-import remarkGfm from "remark-gfm";
-import remark2rehype from "remark-rehype";
-import ReactMarkdown from "react-markdown";
-import rehypeKatex from "rehype-katex";
-import RemarkMathPlugin from "remark-math";
 
 const PopularBlog = ({ popularBlogList }) => {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const handlePopularBlogListing = () => {
+  const handlePopularBlogListing = useCallback(() => {
     dispatch(setPopularBlogs(popularBlogList));
     dispatch(setPopularBlogger([]));
     dispatch(setAllBlogsContainer([]));
     dispatch(setCategory("Popular Blog"));
     router.push(`/bloglisting`);
-  };
+  }, [dispatch, popularBlogList, router]);
+
+  const randomBlog = useMemo(
+    () => popularBlogList?.[0] || {},
+    [popularBlogList]
+  );
 
   return (
     <section
@@ -54,7 +60,7 @@ const PopularBlog = ({ popularBlogList }) => {
               significance and applications in these industries.
             </Typography>
           </Box>
-          <Button onClick={() => handlePopularBlogListing()}>
+          <Button onClick={handlePopularBlogListing}>
             View all <ArrowForwardIcon />
           </Button>
         </Box>
@@ -80,7 +86,7 @@ const PopularBlog = ({ popularBlogList }) => {
                           remarkPlugins={[RemarkMathPlugin, remarkGfm]}
                           rehypePlugins={[rehypeKatex, remark2rehype]}
                           components={{
-                            img: ({ node, ...props }) => null, // This will remove image rendering
+                            img: ({ node, ...props }) => null,
                           }}
                         >
                           {item?.description?.split(" ").slice(0, 15).join(" ")}

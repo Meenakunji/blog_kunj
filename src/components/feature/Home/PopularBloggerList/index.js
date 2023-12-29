@@ -9,7 +9,13 @@ import {
   Typography,
 } from "@mui/material";
 import { useRouter } from "next/router";
+import React, { useCallback, useMemo } from "react";
+import ReactMarkdown from "react-markdown";
 import { useDispatch } from "react-redux";
+import rehypeKatex from "rehype-katex";
+import remarkGfm from "remark-gfm";
+import RemarkMathPlugin from "remark-math";
+import remark2rehype from "remark-rehype";
 import {
   setAllBlogsContainer,
   setCategory,
@@ -17,24 +23,24 @@ import {
   setPopularBlogs,
 } from "../../../../redux/slices/user";
 import style from "../style";
-import remarkGfm from "remark-gfm";
-import remark2rehype from "remark-rehype";
-import ReactMarkdown from "react-markdown";
-import rehypeKatex from "rehype-katex";
-import RemarkMathPlugin from "remark-math";
 
 const PopularBloggerList = ({ popularBlogger }) => {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const handlePopularBloggerList = () => {
+  const handlePopularBloggerList = useCallback(() => {
     dispatch(setPopularBlogs([]));
     dispatch(setPopularBlogger([]));
     dispatch(setAllBlogsContainer(popularBlogger?.data));
     dispatch(setCategory("Popular Blogger"));
     router.push(`/bloglisting`);
-  };
-  const PopularBloggerData = popularBlogger?.slice(0, 3);
+  }, [dispatch, popularBlogger, router]);
+
+  const PopularBloggerData = useMemo(
+    () => popularBlogger?.slice(0, 3),
+    [popularBlogger]
+  );
+
   return (
     <section
       style={{
@@ -53,7 +59,7 @@ const PopularBloggerList = ({ popularBlogger }) => {
               text commonlyand graphic design,
             </Typography>
           </Box>
-          <Button onClick={() => handlePopularBloggerList()}>
+          <Button onClick={handlePopularBloggerList}>
             View all <ArrowForwardIcon />
           </Button>
         </Box>

@@ -1,42 +1,38 @@
-import React from "react";
-import style from "../../style";
+import React, { useCallback } from "react";
 import { Box, Button, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { setTagListName } from "../../../../../redux/slices/user";
+import style from "../../style";
 
 export const BlogPopularTagComponent = ({ popularBlogTag }) => {
   const router = useRouter();
   const dispatch = useDispatch();
 
+  const handleTagClick = useCallback(
+    (tagId) => {
+      router.push(`/tag/${tagId}`);
+      dispatch(setTagListName(tagId));
+    },
+    [router, dispatch]
+  );
+
   return (
     <Box sx={style.popularTag}>
       <Typography variant="body1">Popular Tag:</Typography>
-      {Array.isArray(popularBlogTag) &&
-        popularBlogTag.length > 0 &&
-        popularBlogTag.slice(0, 4).map((item, index) => {
-          return (
-            <Button
-              key={index}
-              onClick={() => {
-                router.push(`/tag/${item?._id}`);
-                dispatch(setTagListName(item?._id));
-              }}
-            >
-              {item?._id}
-            </Button>
-          );
-        })}
+      {popularBlogTag?.slice(0, 4).map((item, index) => (
+        <Button key={index} onClick={() => handleTagClick(item?._id)}>
+          {item?._id}
+        </Button>
+      ))}
       <a
         style={{
           fontSize: "14px",
           color: "#26f7c7",
           cursor: "pointer",
-          textDecoration: "underline !important",
+          textDecoration: "underline",
         }}
-        onClick={() => {
-          router.push(`explore-topics/tag`);
-        }}
+        onClick={() => router.push(`explore-topics/tag`)}
       >
         Show More
       </a>

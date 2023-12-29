@@ -244,19 +244,8 @@ const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
                 }}
                 style={{ cursor: "pointer" }}
               >
-                {/* <img
-                  src="/images/home/metamask.jpeg"
-                  style={{ width: "45px" }}
-                />{" "} */}
                 Connect Wallet
               </li>
-              {/* {navbarCMSItems.map((item) => (
-                <li className="nav-item" key={item.id}>
-                  <a href="#" onClick={() => handleNavbarTitleRedirect(item)}>
-                    {item.label}
-                  </a>
-                </li>
-              ))} */}
             </ul>
             {/* user Profile section */}
             {isLoggedIn ? (
@@ -289,7 +278,7 @@ const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
                             }}
                           />
                         ) : (
-                          "P" // Display a fallback initial if no picture is available
+                          "P"
                         )}
                       </Avatar>
                     </IconButton>

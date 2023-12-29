@@ -24,11 +24,7 @@ const DrawerComp = () => {
       Path: "/new-blog/1",
       id: 2,
     },
-    // {
-    //   tabName: "Pages",
-    //   Path: "/",
-    //   id: 3,
-    // },
+
     {
       tabName: "Connect Wallet",
       Path: "/",
