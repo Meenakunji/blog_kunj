@@ -128,7 +128,10 @@ const AuthenticationComponent = ({ open, handleModalClose }) => {
                             </button>
 
                             <button>
-                              <img src="/images/home/email.svg" alt="" />
+                              <img
+                                src="/images/home/email.svg"
+                                alt="email icon"
+                              />
                               Email
                             </button>
                           </div>

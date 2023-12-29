@@ -182,11 +182,14 @@ const CommentBlog = () => {
     <>
       <Box sx={style.commentBlog}>
         <Box sx={style.commentBg}>
-          <img src="/images/home/commentBg.jpg" />
+          <img src="/images/home/commentBg.jpg" alt="comment icon" />
           <Container maxWidth="md">
             <Box sx={style.bannerBg}>
               <Box sx={style.profileImg}>
-                <img src={particularBlogContent?.userData?.[0]?.profilePic} />
+                <img
+                  src={particularBlogContent?.userData?.[0]?.profilePic}
+                  alt="user Profile"
+                />
               </Box>
               <Box sx={style.profileName}>
                 <Typography variant="h5">
@@ -217,7 +220,7 @@ const CommentBlog = () => {
                         sx={style.commentChatList}
                         onClick={() => handleBlogLikeCount()}
                       >
-                        <img src="/images/home/like1.svg" alt="" />
+                        <img src="/images/home/like1.svg" alt="like icon" />
                         <Typography variant="body1">
                           {formatCount(blogLikeCount)}
                         </Typography>
@@ -252,10 +255,13 @@ const CommentBlog = () => {
                         )}
                       </Box>
                       <Box sx={style.commentChatList}>
-                        <img src="/images/home/share.svg" alt="" />
+                        <img src="/images/home/share.svg" alt="share icon" />
                       </Box>
                       <Box sx={style.commentChatList}>
-                        <img src="/images/home/dot.svg" alt="" />
+                        <img
+                          src="/images/home/dot.svg"
+                          alt="more detail icon"
+                        />
                       </Box>
                     </Box>
                   </Box>

@@ -143,7 +143,11 @@ export default function TemporaryDrawer() {
       </Box>
       <Box sx={style.commentChatBox}>
         <Box sx={style.profileComment}>
-          <img src={userData?.profilePic} style={{ width: "40px" }} />
+          <img
+            src={userData?.profilePic}
+            style={{ width: "40px" }}
+            alt="user Profile"
+          />
           <Typography variant="h3"> {userData?.name}</Typography>
         </Box>
         {/* {isContentVisible && ( */}
@@ -179,7 +183,7 @@ export default function TemporaryDrawer() {
             <Box key={index}>
               <Box sx={style.replySection}>
                 <Box sx={style.replyLeftProfile}>
-                  <img src={item?.result?.[0]?.profilePic} />
+                  <img src={item?.result?.[0]?.profilePic} alt="user Profile" />
                   <Box sx={style.profileReply}>
                     <Typography variant="h5">{item?.userName}</Typography>
                     <Typography variant="body1">
@@ -252,7 +256,7 @@ export default function TemporaryDrawer() {
       {["right"].map((anchor) => (
         <React.Fragment key={anchor}>
           <span onClick={toggleDrawer(anchor, true)}>
-            <img src="/images/home/saveremove.svg" alt="" />
+            <img src="/images/home/saveremove.svg" alt="save and remove icon" />
           </span>
           <Drawer
             anchor={anchor}

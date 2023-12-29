@@ -63,7 +63,11 @@ const BlogSearch = ({ popularBlogTag }) => {
 
   return (
     <Box sx={style.headSection}>
-      <img src="/images/home/commentBg.jpg" alt="" style={{ width: "100%" }} />
+      <img
+        src="/images/home/commentBg.jpg"
+        alt="comment icon"
+        style={{ width: "100%" }}
+      />
       {/* search popular blog based on title */}
       <Box sx={style.ourNewRoom}>
         <Typography variant="h6">Our BlogRoom</Typography>

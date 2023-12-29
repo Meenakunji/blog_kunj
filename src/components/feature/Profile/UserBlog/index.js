@@ -33,7 +33,10 @@ const UserBlog = () => {
         <Box sx={{ display: "flex" }}>
           <Box sx={style.postUser}>
             <Typography variant="h1">Heading Post</Typography>
-            <img src="https://cdn.pixabay.com/photo/2018/05/18/15/30/web-design-3411373_1280.jpg" />
+            <img
+              src="https://cdn.pixabay.com/photo/2018/05/18/15/30/web-design-3411373_1280.jpg"
+              alt="user image"
+            />
             <Typography variant="body1">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut

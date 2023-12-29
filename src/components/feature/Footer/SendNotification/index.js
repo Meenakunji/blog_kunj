@@ -94,7 +94,7 @@ export const FooterSendNotification = () => {
           <Grid xs={6}>
             <Box sx={style.bestWeek}>
               <Box sx={style.bestWeekBox}>
-                <img src="/images/home/Base.jpg" alt="" />
+                <img src="/images/home/Base.jpg" alt="footer icon" />
                 <Box sx={style.bestWeekDetails}>
                   <Typography variant="h5">
                     The best aticles every week

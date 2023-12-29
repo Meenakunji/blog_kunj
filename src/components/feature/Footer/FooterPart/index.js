@@ -114,7 +114,7 @@ export const FooterPartComponent = () => {
         </Grid>
         <Box sx={style.copyRight}>
           <span>
-            <img src="/images/home/Heart.svg" alt="" />
+            <img src="/images/home/Heart.svg" alt="like icon" />
           </span>
           <Typography>Copyright © 2023. Crafted with love.</Typography>
         </Box>
