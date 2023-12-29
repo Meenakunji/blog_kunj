@@ -8,7 +8,10 @@ const ProfileDetails = () => {
   return (
     <>
       <Box sx={style.profileImg}>
-        <img src="https://media.istockphoto.com/id/1567416340/photo/excited-indian-man-celebrating-by-seeing-mobile-phone-while-sitting-on-sofa-at-home-concept.jpg?s=1024x1024&w=is&k=20&c=PukP0UYraSN2BFL36B3TlNBuD1i63-soOh2pHRuLM0g=" />
+        <img
+          src="https://media.istockphoto.com/id/1567416340/photo/excited-indian-man-celebrating-by-seeing-mobile-phone-while-sitting-on-sofa-at-home-concept.jpg?s=1024x1024&w=is&k=20&c=PukP0UYraSN2BFL36B3TlNBuD1i63-soOh2pHRuLM0g="
+          alt="profile image"
+        />
         <Typography variant="h3">Farhan UI Designer</Typography>
         <Typography variant="body1">Arshad</Typography>
       </Box>
@@ -61,19 +64,31 @@ const ProfileDetails = () => {
         <Box sx={style.gallerySection}>
           <Box sx={style.galleryList}>
             {" "}
-            <img src="https://media.istockphoto.com/id/1567416340/photo/excited-indian-man-celebrating-by-seeing-mobile-phone-while-sitting-on-sofa-at-home-concept.jpg?s=1024x1024&w=is&k=20&c=PukP0UYraSN2BFL36B3TlNBuD1i63-soOh2pHRuLM0g=" />
+            <img
+              src="https://media.istockphoto.com/id/1567416340/photo/excited-indian-man-celebrating-by-seeing-mobile-phone-while-sitting-on-sofa-at-home-concept.jpg?s=1024x1024&w=is&k=20&c=PukP0UYraSN2BFL36B3TlNBuD1i63-soOh2pHRuLM0g="
+              alt="user image"
+            />
           </Box>
           <Box sx={style.galleryList}>
             {" "}
-            <img src="https://media.istockphoto.com/id/1567416340/photo/excited-indian-man-celebrating-by-seeing-mobile-phone-while-sitting-on-sofa-at-home-concept.jpg?s=1024x1024&w=is&k=20&c=PukP0UYraSN2BFL36B3TlNBuD1i63-soOh2pHRuLM0g=" />
+            <img
+              src="https://media.istockphoto.com/id/1567416340/photo/excited-indian-man-celebrating-by-seeing-mobile-phone-while-sitting-on-sofa-at-home-concept.jpg?s=1024x1024&w=is&k=20&c=PukP0UYraSN2BFL36B3TlNBuD1i63-soOh2pHRuLM0g="
+              alt="user image"
+            />
           </Box>
           <Box sx={style.galleryList}>
             {" "}
-            <img src="https://media.istockphoto.com/id/1567416340/photo/excited-indian-man-celebrating-by-seeing-mobile-phone-while-sitting-on-sofa-at-home-concept.jpg?s=1024x1024&w=is&k=20&c=PukP0UYraSN2BFL36B3TlNBuD1i63-soOh2pHRuLM0g=" />
+            <img
+              src="https://media.istockphoto.com/id/1567416340/photo/excited-indian-man-celebrating-by-seeing-mobile-phone-while-sitting-on-sofa-at-home-concept.jpg?s=1024x1024&w=is&k=20&c=PukP0UYraSN2BFL36B3TlNBuD1i63-soOh2pHRuLM0g="
+              alt="user image"
+            />
           </Box>
           <Box sx={style.galleryList}>
             {" "}
-            <img src="https://media.istockphoto.com/id/1567416340/photo/excited-indian-man-celebrating-by-seeing-mobile-phone-while-sitting-on-sofa-at-home-concept.jpg?s=1024x1024&w=is&k=20&c=PukP0UYraSN2BFL36B3TlNBuD1i63-soOh2pHRuLM0g=" />
+            <img
+              src="https://media.istockphoto.com/id/1567416340/photo/excited-indian-man-celebrating-by-seeing-mobile-phone-while-sitting-on-sofa-at-home-concept.jpg?s=1024x1024&w=is&k=20&c=PukP0UYraSN2BFL36B3TlNBuD1i63-soOh2pHRuLM0g="
+              alt="user image"
+            />
           </Box>
         </Box>
       </Box>

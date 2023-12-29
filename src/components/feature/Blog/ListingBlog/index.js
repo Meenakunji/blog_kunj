@@ -166,7 +166,7 @@ const ListingBlog = () => {
                                 dispatch(setTagListName(item));
                               }}
                             >
-                             {item}
+                              {item}
                             </Button>
                           );
                         })}
@@ -183,7 +183,7 @@ const ListingBlog = () => {
                       <img
                         src={item?.image}
                         style={{ width: "330px", height: "330px" }}
-                        alt=""
+                        alt="blog image"
                       />
                     </Box>
                   </Grid>

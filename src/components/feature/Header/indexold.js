@@ -196,7 +196,10 @@ const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
       >
         <div className="container-fluid">
           <Box sx={styles.navbarbrand} onClick={() => router.push("/")}>
-            <img src="https://i.postimg.cc/3wgSvKbP/bloggerlogo.png" />
+            <img
+              src="https://i.postimg.cc/3wgSvKbP/bloggerlogo.png"
+              alt="mobile view icon"
+            />
           </Box>
           <div
             className="collapse navbar-collapse justify-content-end"
