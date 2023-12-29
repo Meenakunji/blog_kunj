@@ -10,7 +10,7 @@ const MemoizedListItem = React.memo(({ item, handleBlogContentListPage }) => (
   </li>
 ));
 
-export const SearchComponent = ({
+const SearchComponent = ({
   searchDropdown,
   blogList,
   handleSearchBlogTitle,
@@ -50,3 +50,7 @@ export const SearchComponent = ({
     </Box>
   );
 };
+
+SearchComponent.displayName = "SearchComponent";
+
+export { SearchComponent };
