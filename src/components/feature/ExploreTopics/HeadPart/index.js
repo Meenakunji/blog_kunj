@@ -1,16 +1,15 @@
-import { Box, Button, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import Slider from "react-slick";
-import SearchBar from "material-ui-search-bar";
-import style from "./style";
-import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import { setTagListName } from "../../../../redux/slices/user";
+import { Box, Button, Typography } from "@mui/material";
+import SearchBar from "material-ui-search-bar";
 import { useRouter } from "next/router";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
+import { setTagListName } from "../../../../redux/slices/user";
+import style from "./style";
 
 const customButtonStyle = {
   backgroundColor: "lightgray",
