@@ -182,7 +182,11 @@ const CommentBlog = () => {
     <>
       <Box sx={style.commentBlog}>
         <Box sx={style.commentBg}>
-          <img src="/images/home/commentBg.jpg" alt="comment icon" />
+          <img
+            src="https://i.postimg.cc/h41XhrFF/comment-Bg.webp"
+            alt="background Image"
+            loading="lazy"
+          />
           <Container maxWidth="md">
             <Box sx={style.bannerBg}>
               <Box sx={style.profileImg}>

@@ -59,8 +59,9 @@ const BlogSearch = ({ popularBlogTag }) => {
   return (
     <Box sx={style.headSection}>
       <img
-        src="/images/home/commentBg.jpg"
-        alt="comment icon"
+        src="https://i.postimg.cc/h41XhrFF/comment-Bg.webp"
+        alt="Baxkground image"
+        loading="lazy"
         style={{ width: "100%" }}
       />
       <Box sx={style.ourNewRoom}>
