@@ -179,6 +179,18 @@ const style = {
     padding: "20px",
     color: "#000",
   },
+  divderCss: {
+    border: "2px #F2F2F2 solid",
+    borderColor: "green",
+  },
+  tagListContainer: {
+    display: "flex",
+    justifyContent: "space-between",
+    flexWrap: "wrap",
+    gap: "10px",
+    marginLeft: "10%",
+    marginRight: "10%",
+  },
   bannerConatiner: {
     display: "flex",
     justifyContent: "center",

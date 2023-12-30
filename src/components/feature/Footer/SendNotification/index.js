@@ -65,7 +65,7 @@ export const FooterSendNotification = () => {
     <Box sx={style.newLatter}>
       <Container maxWidth="lg">
         <Grid container>
-          <Grid xs={6}>
+          <Grid item xs={6}>
             <Box sx={style.newLatterSection}>
               <Typography variant="h6">
                 Get our stories delivered From us
@@ -91,7 +91,7 @@ export const FooterSendNotification = () => {
               </Typography>
             </Box>
           </Grid>
-          <Grid xs={6}>
+          <Grid item xs={6}>
             <Box sx={style.bestWeek}>
               <Box sx={style.bestWeekBox}>
                 <img src="/images/home/Base.jpg" alt="footer icon" />
