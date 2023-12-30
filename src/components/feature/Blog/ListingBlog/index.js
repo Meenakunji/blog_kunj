@@ -16,20 +16,19 @@ import Pagination from "@mui/material/Pagination";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import ReactMarkdown from "react-markdown";
 import { useDispatch, useSelector } from "react-redux";
+import rehypeKatex from "rehype-katex";
+import remarkGfm from "remark-gfm";
+import RemarkMathPlugin from "remark-math";
+import remark2rehype from "remark-rehype";
 import { createSlug } from "../../../../../utils/common";
 import {
-  setAllBlogsContainer,
   setParticularBlogContent,
   setTagListName,
 } from "../../../../redux/slices/user";
-import style from "../style";
-import remarkGfm from "remark-gfm";
-import remark2rehype from "remark-rehype";
-import ReactMarkdown from "react-markdown";
-import rehypeKatex from "rehype-katex";
-import RemarkMathPlugin from "remark-math";
 import LoaderComponent from "../../../common/Loader";
+import style from "../style";
 
 const ListingBlog = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -59,30 +58,24 @@ const ListingBlog = () => {
   return (
     <Box sx={style.listingBlog}>
       <NextSeo
-        title="Blog List"
+        title="All Blog List"
         description={
-          "Welcome to Sahitya, your gateway to the cosmos. Ignite your curiosity as we delve into the realms of astronomy, planetary science, and space exploration. From captivating articles to mesmerizing visuals, let us take you on an awe-inspiring journey across the vast expanse of space.".substring(
-            0,
-            150
-          ) + "..."
+          "Discover engaging and insightful user-generated content on Sahitya - Your Go-to Blog Platform!"
         }
-        canonical={`https://jupiterblogger.com/`}
+        canonical={`https://timely-profiterole-25e8c9.netlify.app/bloglisting`}
         openGraph={{
-          url: `https://jupiterblogger.com/`,
+          url: `https://timely-profiterole-25e8c9.netlify.app/bloglisting`,
           title: "Sahitya: Your Gateway to Inspiring Blogging Adventures",
           description:
-            "Welcome to Sahitya, your gateway to the cosmos. Ignite your curiosity as we delve into the realms of astronomy, planetary science, and space exploration. From captivating articles to mesmerizing visuals, let us take you on an awe-inspiring journey across the vast expanse of space.".substring(
-              0,
-              150
-            ) + "...",
+            "Discover engaging and insightful user-generated content on Sahitya - Your Go-to Blog Platform!",
           images: [
             {
-              url: `https://jupiterblogger.com/`,
+              url: `https://timely-profiterole-25e8c9.netlify.app/bloglisting`,
               alt: "Sahitya: Your Gateway to Inspiring Blogging Adventures",
             },
           ],
           type: "website",
-          siteName: "jupiterblogger.com/",
+          siteName: "https://timely-profiterole-25e8c9.netlify.app/",
         }}
         additionalMetaTags={[
           {
@@ -92,12 +85,13 @@ const ListingBlog = () => {
           {
             property: "twitter.description",
             content:
-              "Welcome to Sahitya, your gateway to the cosmos. Ignite your curiosity as we delve into the realms of astronomy, planetary science, and space exploration. From captivating articles to mesmerizing visuals, let us take you on an awe-inspiring journey across the vast expanse of space.".substring(
-                0,
-                150
-              ) + "...",
+              "Discover engaging and insightful user-generated content on Sahitya - Your Go-to Blog Platform!",
           },
-          { property: "twitter.image", content: "https://jupiterblogger.com/" },
+          {
+            property: "twitter.image",
+            content:
+              "https://timely-profiterole-25e8c9.netlify.app/bloglisting",
+          },
         ]}
       />
       <Box sx={style.listingBlogHeading}>

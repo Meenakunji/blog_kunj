@@ -1,17 +1,16 @@
-import { Box, Divider, Typography } from "@mui/material";
-import React, { useState, useEffect } from "react";
-import { TagBanner } from "./Banner";
-import style from "../style";
-import { TagListComponent } from "./TagList";
-import { UserComponent } from "../../../common/BlogUser";
-import LoaderComponent from "../../../common/Loader";
-import fetcher from "../../../../dataProvider";
+import { Box, Divider } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import { useMutation } from "react-query";
-import { API_BASE_URL } from "../../../../constant/appConstants";
 import { useSelector } from "react-redux";
+import { API_BASE_URL } from "../../../../constant/appConstants";
+import fetcher from "../../../../dataProvider";
+import LoaderComponent from "../../../common/Loader";
+import style from "../style";
+import { TagBanner } from "./Banner";
+import { TagListComponent } from "./TagList";
 
-export const BlogTagList = () => {
-  const [isLoading, setIsLoading] = useState(true); // Initially set to true for loading
+const BlogTagList = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [markedblogList, setMarkedblogList] = useState([]);
   const { tagListName } = useSelector((state) => state.user);
 
@@ -37,17 +36,8 @@ export const BlogTagList = () => {
   return (
     <Box sx={style.ContainerBlogListComp}>
       <TagBanner markedblogList={markedblogList} />
-      <Divider style={{ border: "2px #F2F2F2 solid", borderColor: "green" }} />
-      <Box
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          flexWrap: "wrap",
-          gap: "10px",
-          marginLeft: "10%",
-          marginRight: "10%",
-        }}
-      >
+      <Divider sx={style.divderCss} />
+      <Box sx={style.tagListContainer}>
         {isLoading ? (
           <LoaderComponent />
         ) : (
@@ -82,3 +72,5 @@ export const BlogTagList = () => {
     </Box>
   );
 };
+
+export default BlogTagList;

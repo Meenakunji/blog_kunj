@@ -36,6 +36,8 @@ const BlogCreate = () => {
   });
 
   const [imageUploadUrl, setImageUploadUrl] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const [snackbar, setSnackbar] = useState({
     show: false,
     status: "",
@@ -64,30 +66,30 @@ const BlogCreate = () => {
           message: "Blog New Entry created successfully.",
         });
         router.push(`/`);
+        setIsSubmitting(false);
       },
       onError: (error) => {
         alert(error?.response?.data?.message);
+        setIsSubmitting(false);
       },
     }
   );
 
   const handleCreateBlogContentEntry = () => {
-    let BlogContentDataObj = getValues();
+    if (!isSubmitting) {
+      // Only proceed if not currently submitting
+      setIsSubmitting(true);
 
-    const blogSubTags = BlogContentDataObj.blogSubTag
-      .split(",")
-      .map((tag) => tag.trim());
-    // Update the blogSubTag field in the request body to the array of sub-tags
-    BlogContentDataObj.blogSubTag = blogSubTags;
+      let BlogContentDataObj = getValues();
+      const blogSubTags = BlogContentDataObj.blogSubTag
+        .split(",")
+        .map((tag) => tag.trim());
+      // Update the blogSubTag field in the request body to the array of sub-tags
+      BlogContentDataObj.blogSubTag = blogSubTags;
 
-    // const codeSnippetValue = BlogContentDataObj.codeSnippet;
-    // const detectedLanguage = hljs.highlightAuto(codeSnippetValue).language;
-
-    // Add the detected language to the request body
-    // BlogContentDataObj.codeLanguage = detectedLanguage;
-
-    BlogContentDataObj.user = "jupiter";
-    getCreateBlogContentData(BlogContentDataObj);
+      BlogContentDataObj.user = "jupiter";
+      getCreateBlogContentData(BlogContentDataObj);
+    }
   };
 
   return (
@@ -209,7 +211,12 @@ const BlogCreate = () => {
                 </Box>
               </Box> */}
               <Box sx={style.buttongroup}>
-                <Button onClick={handleCreateBlogContentEntry}>Save</Button>
+                <Button
+                  onClick={handleCreateBlogContentEntry}
+                  disabled={isSubmitting}
+                >
+                  Save
+                </Button>
               </Box>
             </form>
           </Box>

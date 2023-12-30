@@ -1,9 +1,16 @@
 import { Box } from "@mui/material";
-import React from "react";
-import { BlogTagList } from "../../src/components/feature/Blog/BlogTagList";
 import { NextSeo } from "next-seo";
+import dynamic from "next/dynamic";
+import React from "react";
 
-export default function BlogTagsPage({ slug }) {
+const BlogTagList = dynamic(
+  () => import("../../src/components/feature/Blog/BlogTagList"),
+  {
+    ssr: false,
+  }
+);
+
+const BlogTagsPage = ({ slug }) => {
   return (
     <>
       <NextSeo
@@ -53,7 +60,9 @@ export default function BlogTagsPage({ slug }) {
       </Box>
     </>
   );
-}
+};
+
+export default BlogTagsPage;
 
 export async function getServerSideProps(ctx) {
   try {

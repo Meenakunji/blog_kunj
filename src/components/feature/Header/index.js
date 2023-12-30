@@ -165,7 +165,7 @@ const Header = () => {
             <Tabs
               sx={{ marginLeft: "auto" }}
               indicatorColor="primary"
-              textColor="#fff"
+              textColor="primary"
               value={value}
               onChange={handleTabChange}
               TabIndicatorProps={{
