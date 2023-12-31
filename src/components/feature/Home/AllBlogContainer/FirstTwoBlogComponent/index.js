@@ -22,7 +22,10 @@ export const FirstTwoBlogComponent = ({
 
           return (
             <Grid item xs={12} sm={6} key={index}>
-              <Box sx={style.popularArticlesList}>
+              <Box
+                sx={style.popularArticlesList}
+                onClick={() => handleBlogContentListPage(item)}
+              >
                 <img
                   src={image || "/images/home/rocket.jpg"}
                   alt="blog image"
@@ -30,16 +33,14 @@ export const FirstTwoBlogComponent = ({
                     width: "100%",
                     height: "360px",
                     objectFit: "cover",
-                    cursor: "pointer",
                   }}
-                  onClick={() => handleBlogContentListPage(item)}
                 />
                 <Box
                   sx={style.popularArticlesHeading}
                   onClick={() => handleBlogContentListPage(item)}
                 >
                   <Typography variant="h3">{blogTitle}</Typography>
-                  <Typography variant="body1">
+                  <Box sx={style.detailsComment}>
                     <ReactMarkdown
                       remarkPlugins={[RemarkMathPlugin, remarkGfm]}
                       rehypePlugins={[rehypeKatex, remark2rehype]}
@@ -49,7 +50,7 @@ export const FirstTwoBlogComponent = ({
                     >
                       {description?.split(" ").slice(0, 15).join(" ")}
                     </ReactMarkdown>
-                  </Typography>
+                  </Box>
                   <Box sx={style.cardBottomSection}>
                     <Box sx={style.profileDetails}>
                       <Box sx={style.profileSection}>

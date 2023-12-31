@@ -19,10 +19,12 @@ import remark2rehype from "remark-rehype";
 import {
   setAllBlogsContainer,
   setCategory,
+  setParticularBlogContent,
   setPopularBlogger,
   setPopularBlogs,
 } from "../../../../redux/slices/user";
 import style from "../style";
+import { createSlug } from "../../../../../utils/common";
 
 const PopularBloggerList = ({ popularBlogger }) => {
   const dispatch = useDispatch();
@@ -35,6 +37,15 @@ const PopularBloggerList = ({ popularBlogger }) => {
     dispatch(setCategory("Popular Blogger"));
     router.push(`/bloglisting`);
   }, [dispatch, popularBlogger, router]);
+
+  const handleBlogContentListPage = useCallback(
+    (item) => {
+      dispatch(setParticularBlogContent(item));
+      const urlSlug = createSlug(item?.userData?.[0]?.name, item?.blogTitle);
+      router.push(`/${urlSlug}`);
+    },
+    [dispatch, router]
+  );
 
   const PopularBloggerData = useMemo(
     () => popularBlogger?.slice(0, 3),
@@ -76,11 +87,14 @@ const PopularBloggerList = ({ popularBlogger }) => {
                       alt={item?.result?.[0]?.name}
                       style={{ width: "100%", height: "500px" }}
                     />
-                    <Box sx={style.popularArticlesHeading}>
+                    <Box
+                      sx={style.popularArticlesHeading}
+                      onClick={() => handleBlogContentListPage(item)}
+                    >
                       <Typography variant="h4">
                         {item?.result?.[0]?.blogTitle}
                       </Typography>
-                      <Typography variant="body1">
+                      <Box sx={style.detailsComment}>
                         <ReactMarkdown
                           remarkPlugins={[RemarkMathPlugin, remarkGfm]}
                           rehypePlugins={[rehypeKatex, remark2rehype]}
@@ -93,7 +107,7 @@ const PopularBloggerList = ({ popularBlogger }) => {
                             .slice(0, 15)
                             .join(" ")}
                         </ReactMarkdown>
-                      </Typography>
+                      </Box>
                       <Box sx={style.cardBottomSection}>
                         <Box sx={style.profileDetails}>
                           <Box sx={style.profileSection}>

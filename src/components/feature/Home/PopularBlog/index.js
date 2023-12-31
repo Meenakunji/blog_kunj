@@ -19,10 +19,12 @@ import remark2rehype from "remark-rehype";
 import {
   setAllBlogsContainer,
   setCategory,
+  setParticularBlogContent,
   setPopularBlogger,
   setPopularBlogs,
 } from "../../../../redux/slices/user";
 import style from "../style";
+import { createSlug } from "../../../../../utils/common";
 
 const PopularBlog = ({ popularBlogList }) => {
   const dispatch = useDispatch();
@@ -35,6 +37,15 @@ const PopularBlog = ({ popularBlogList }) => {
     dispatch(setCategory("Popular Blog"));
     router.push(`/bloglisting`);
   }, [dispatch, popularBlogList, router]);
+
+  const handleBlogContentListPage = useCallback(
+    (item) => {
+      dispatch(setParticularBlogContent(item));
+      const urlSlug = createSlug(item?.userData?.[0]?.name, item?.blogTitle);
+      router.push(`/${urlSlug}`);
+    },
+    [dispatch, router]
+  );
 
   const randomBlog = useMemo(
     () => popularBlogList?.[0] || {},
@@ -68,7 +79,13 @@ const PopularBlog = ({ popularBlogList }) => {
           {popularBlogList?.length > 0 &&
             popularBlogList?.slice(0, 4)?.map((item, index) => {
               return (
-                <Grid item xs={12} sm={6} key={index}>
+                <Grid
+                  item
+                  xs={12}
+                  sm={6}
+                  key={index}
+                  onClick={() => handleBlogContentListPage(item)}
+                >
                   <Box sx={style.popularArticlesList}>
                     <img
                       src={item?.image || "/images/home/rocket.jpg"}
@@ -81,7 +98,7 @@ const PopularBlog = ({ popularBlogList }) => {
                     />
                     <Box sx={style.popularArticlesHeading}>
                       <Typography variant="h3">{item?.blogTitle}</Typography>
-                      <Typography variant="body1">
+                      <Box sx={style.detailsComment}>
                         <ReactMarkdown
                           remarkPlugins={[RemarkMathPlugin, remarkGfm]}
                           rehypePlugins={[rehypeKatex, remark2rehype]}
@@ -91,7 +108,7 @@ const PopularBlog = ({ popularBlogList }) => {
                         >
                           {item?.description?.split(" ").slice(0, 15).join(" ")}
                         </ReactMarkdown>
-                      </Typography>
+                      </Box>
                       <Box sx={style.cardBottomSection}>
                         <Box sx={style.profileDetails}>
                           <Box sx={style.profileSection}>

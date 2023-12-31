@@ -18,23 +18,21 @@ export const NextThreeBlogComponent = ({
         nextThreeToFiveItems?.map((item, index) => {
           return (
             <Grid item xs={12} sm={4} key={index}>
-              <Box sx={style.popularArticlesList}>
+              <Box
+                sx={style.popularArticlesList}
+                onClick={() => handleBlogContentListPage(item)}
+              >
                 <img
                   src={item?.image || "/images/home/rocket.jpg"}
                   alt="blog image"
                   style={{
                     width: "100%",
                     height: "500px",
-                    cursor: "pointer",
                   }}
-                  onClick={() => handleBlogContentListPage(item)}
                 />
-                <Box
-                  sx={style.popularArticlesHeading}
-                  onClick={() => handleBlogContentListPage(item)}
-                >
+                <Box sx={style.popularArticlesHeading}>
                   <Typography variant="h4">{item?.blogTitle}</Typography>
-                  <Typography variant="body1">
+                  <Box sx={style.detailsComment}>
                     <ReactMarkdown
                       remarkPlugins={[RemarkMathPlugin, remarkGfm]}
                       rehypePlugins={[rehypeKatex, remark2rehype]}
@@ -44,7 +42,7 @@ export const NextThreeBlogComponent = ({
                     >
                       {item?.description?.split(" ").slice(0, 15).join(" ")}
                     </ReactMarkdown>
-                  </Typography>
+                  </Box>
                   <Box sx={style.cardBottomSection}>
                     <Box sx={style.profileDetails}>
                       <Box sx={style.profileSection}>

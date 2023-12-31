@@ -59,28 +59,19 @@ const RecommendationBlog = ({ recommendationBlogList }) => {
   );
 
   return (
-    <section
-      style={{
-        position: "relative",
-        top: "80px",
-        zIndex: "5",
-        padding: "0",
-      }}
-    >
+    <section style={style.RecommendationBlogCSS}>
       <Container maxWidth="lg">
-        <Card sx={{ borderRadius: "15px" }}>
+        <Card
+          sx={{ borderRadius: "15px" }}
+          onClick={() => handleBlogContentListPage(randomBlog)}
+          style={{ cursor: "pointer" }}
+        >
           <Grid container alignItems={"center"}>
             <Grid item xs={12} md={6}>
               <img
                 src={randomBlog?.image || "/images/home/rocket.jpg"}
                 alt="recommended image"
-                style={{
-                  width: "100%",
-                  height: "370px",
-                  objectFit: "cover",
-                  cursor: "pointer",
-                }}
-                onClick={() => handleBlogContentListPage(randomBlog)}
+                style={style.RecommendationBlogImgCSS}
               />
             </Grid>
             <Grid item xs={12} md={6}>
@@ -89,7 +80,7 @@ const RecommendationBlog = ({ recommendationBlogList }) => {
                   {randomBlog?.blogTag}
                 </Button>
                 <Typography variant="h1">{randomBlog?.blogTitle}</Typography>
-                <Typography variant="body1">
+                <Box sx={style.detailsComment} style={{ color: "#000" }}>
                   <ReactMarkdown
                     remarkPlugins={[RemarkMathPlugin, remarkGfm]}
                     rehypePlugins={[rehypeKatex, remark2rehype]}
@@ -99,7 +90,7 @@ const RecommendationBlog = ({ recommendationBlogList }) => {
                   >
                     {randomBlog?.description?.split(" ").slice(0, 15).join(" ")}
                   </ReactMarkdown>
-                </Typography>
+                </Box>
 
                 <Box sx={style.cardBottomSection}>
                   <Box sx={style.profileDetails}>

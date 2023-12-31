@@ -12,8 +12,7 @@ export const TagBanner = ({ markedblogList }) => {
           <Box sx={style.bannerContent}>
             <Typography component="h2">{tagListName}</Typography>
             <Box sx={style.topicCSS}>
-              Topic<Box className="ru s">: </Box> {markedblogList?.length}{" "}
-              Followers : -<Box className="ru s">·</Box>75K Stories
+              Topic : {markedblogList?.length} Followers : 75K Stories
             </Box>
             <Box sx={style.followBtn}>
               <Button>Follow</Button>

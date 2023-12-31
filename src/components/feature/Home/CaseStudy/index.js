@@ -74,6 +74,7 @@ const CaseStudyList = ({ caseStudyList }) => {
         top: "100px",
         zIndex: "5",
         padding: "0",
+        marginBottom: "50px",
       }}
     >
       <Container>
@@ -103,6 +104,7 @@ const CaseStudyList = ({ caseStudyList }) => {
                         width: "100%",
                         height: "360px",
                         objectFit: "cover",
+                        cursor: "pointer",
                       }}
                       onClick={() => handleBlogContentListPage(item)}
                     />
@@ -117,18 +119,26 @@ const CaseStudyList = ({ caseStudyList }) => {
                       >
                         {item?.blogTag}
                       </Button>
-                      <Typography variant="h1">{item?.blogTitle}</Typography>
-                      <Typography variant="body1">
-                        <ReactMarkdown
-                          remarkPlugins={[RemarkMathPlugin, remarkGfm]}
-                          rehypePlugins={[rehypeKatex, remark2rehype]}
-                          components={{
-                            img: ({ node, ...props }) => null,
-                          }}
-                        >
-                          {item?.description?.split(" ").slice(0, 15).join(" ")}
-                        </ReactMarkdown>
-                      </Typography>
+                      <Box
+                        onClick={() => handleBlogContentListPage(item)}
+                        style={{ cursor: "pointer" }}
+                      >
+                        <Typography variant="h1">{item?.blogTitle}</Typography>
+                        <Box sx={style.detailsComment}>
+                          <ReactMarkdown
+                            remarkPlugins={[RemarkMathPlugin, remarkGfm]}
+                            rehypePlugins={[rehypeKatex, remark2rehype]}
+                            components={{
+                              img: ({ node, ...props }) => null,
+                            }}
+                          >
+                            {item?.description
+                              ?.split(" ")
+                              .slice(0, 15)
+                              .join(" ")}
+                          </ReactMarkdown>
+                        </Box>
+                      </Box>
 
                       <Box sx={style.cardBottomSection}>
                         <Box sx={style.profileDetails}>
