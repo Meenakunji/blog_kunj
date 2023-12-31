@@ -26,17 +26,9 @@ export const TagListComponent = ({ markedblogList }) => {
       {markedblogList &&
         markedblogList.map((item, index) => {
           return (
-            <div
-              className="col-md-4 mt-3"
-              key={index}
-              style={{ width: "32.333333%" }}
-            >
-              <div className="card p-3">
+            <Box key={index} sx={style.tagListBlogBox}>
+              <Box className="card p-3">
                 <Box sx={style.mediaCard} key={index}>
-                  <Box sx={style.chip} style={{ backgroundColor: item?.color }}>
-                    {item?.blogTag}
-                  </Box>
-
                   <Box
                     component="img"
                     src={item?.image}
@@ -65,7 +57,7 @@ export const TagListComponent = ({ markedblogList }) => {
                       })}
                     </Typography>
                   </Box>
-                  <Typography variant="p">
+                  <Box sx={style.detailsComment}>
                     <ReactMarkdown
                       remarkPlugins={[RemarkMathPlugin, remarkGfm]}
                       rehypePlugins={[rehypeKatex, remark2rehype]}
@@ -81,10 +73,10 @@ export const TagListComponent = ({ markedblogList }) => {
                     >
                       ...Read More
                     </a>
-                  </Typography>
+                  </Box>
                 </Box>
-              </div>
-            </div>
+              </Box>
+            </Box>
           );
         })}
     </>
