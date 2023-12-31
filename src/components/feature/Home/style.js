@@ -6,7 +6,7 @@ const style = {
     "& h2": {
       fontSize: "15px",
       marginTop: "20px",
-      color: "#5f5f5f",
+      color: "#000",
     },
     "& img": {
       width: "100%",
@@ -21,6 +21,15 @@ const style = {
       "& a": {
         textDecoration: "none",
         color: "#a6a6a6",
+      },
+    },
+  },
+  tagListBlogBox: {
+    width: "32.333333%",
+    "@media(max-width:480px)": {
+      width: "100%",
+      "& h6": {
+        fontSize: "25px",
       },
     },
   },
@@ -54,6 +63,26 @@ const style = {
     margin: "10px 0",
     display: "flex",
     gap: "10px",
+  },
+  detailsComment: {
+    "& h2": {
+      color: "#5f5f5f",
+      fontSize: "24px",
+      fontWeight: "600",
+    },
+    "& p": {
+      color: "#5f5f5f",
+      "@media(max-width:480px)": {
+        fontSize: "14px",
+        marginTop: "15px",
+      },
+    },
+    "& ul": {
+      color: "#5f5f5f",
+    },
+    "& pre": {
+      marginTop: "30px",
+    },
   },
   howit__workSection: {
     position: "relative",
