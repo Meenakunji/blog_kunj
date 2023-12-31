@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StrictMode } from "react";
 import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
@@ -15,6 +15,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 import "../styles/globals.css";
+import TagManager from "react-gtm-module";
 // import { SessionProvider } from "next-auth/react";
 
 const persistor = persistStore(store, {}, function () {
@@ -28,6 +29,19 @@ const queryClient = new QueryClient({
 });
 
 function MyApp({ Component, pageProps }) {
+  useEffect(() => {
+    const tagManagerArgs = {
+      gtmId: "G-3JRNN23QX6",
+    };
+    console.log("Print consonskle ===>>", tagManagerArgs);
+
+    try {
+      TagManager.initialize(tagManagerArgs);
+    } catch (error) {
+      console.error("Error initializing TagManager:", error);
+    }
+  }, []);
+
   return (
     <StrictMode>
       <Head>Jupiter Blog Website</Head>

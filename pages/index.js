@@ -1,10 +1,11 @@
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import SEOComponents from "../src/components/common/SEO";
 import fetcher from "../src/dataProvider";
 import { API_BASE_URL } from "../src/constant/appConstants";
 import dynamic from "next/dynamic";
 import Head from "next/head";
+import TagManager from "react-gtm-module";
 
 // dynamic routing
 const BlogSearch = dynamic(

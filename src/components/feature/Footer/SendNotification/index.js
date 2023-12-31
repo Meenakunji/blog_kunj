@@ -65,7 +65,7 @@ export const FooterSendNotification = () => {
     <Box sx={style.newLatter}>
       <Container maxWidth="lg">
         <Grid container>
-          <Grid item xs={6}>
+          <Grid xs={12} sm={6}>
             <Box sx={style.newLatterSection}>
               <Typography variant="h6">
                 Get our stories delivered From us

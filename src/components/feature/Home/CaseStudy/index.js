@@ -95,7 +95,7 @@ const CaseStudyList = ({ caseStudyList }) => {
             {caseStudyList?.data?.slice(0, 3).map((item, index) => (
               <Card sx={{ borderRadius: "15px" }} key={index}>
                 <Grid container>
-                  <Grid item xs={6} md={6}>
+                  <Grid item xs={12} sm={6}>
                     <img
                       alt="slider image"
                       src={item?.image || "/images/home/rocket.jpg"}
@@ -107,7 +107,7 @@ const CaseStudyList = ({ caseStudyList }) => {
                       onClick={() => handleBlogContentListPage(item)}
                     />
                   </Grid>
-                  <Grid item xs={6} md={6}>
+                  <Grid item xs={12} sm={6}>
                     <Box sx={style.topSectionDetails}>
                       <Button
                         onClick={() => {

@@ -6,16 +6,26 @@ const style = {
     "&:last-child": {
       borderBottom: "none",
     },
+    "@media(max-width:480px)": {
+      padding: "25px 0",
+    },
   },
   newLatterSection: {
     "& h6": {
       fontSize: "35px",
       color: "#fff",
       lineHeight: "35px",
+      "@media(max-width:480px)": {
+        fontSize: "20px",
+        lineHeight: "22px",
+      },
     },
     "& p": {
       color: "#5A7184",
       fontSize: "16px",
+      "@media(max-width:480px)": {
+        fontSize: "13px",
+      },
     },
     "& form": {
       display: "flex",
@@ -43,6 +53,9 @@ const style = {
         "&:hover": {
           background: "#1565D8",
         },
+      },
+      "@media(max-width:480px)": {
+        margin: "15px 0",
       },
     },
   },
@@ -89,6 +102,9 @@ const style = {
       color: "#5A7184",
       fontSize: "16px",
       marginTop: "20px",
+      "@media(max-width:480px)": {
+        fontSize: "12px",
+      },
     },
   },
   footerList: {

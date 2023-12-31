@@ -87,6 +87,10 @@ const style = {
       color: "#183B56",
       fontSize: "40px",
       textAlign: "center",
+      "@media(max-width:480px)": {
+        fontSize: "22px",
+        textAlign: "left",
+      },
     },
   },
   commentDetails: {
@@ -123,6 +127,10 @@ const style = {
     "& p": {
       marginTop: "30px",
       color: "#183B56",
+      "@media(max-width:480px)": {
+        fontSize: "14px",
+        marginTop: "15px",
+      },
     },
     "& ul": {
       marginTop: "30px",
@@ -138,6 +146,9 @@ const style = {
       marginTop: "30px",
       width: "100%",
       borderRadius: "10px",
+      "@media(max-width:480px)": {
+        marginTop: "0px",
+      },
     },
   },
   contentImg: {

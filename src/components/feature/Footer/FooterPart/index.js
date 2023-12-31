@@ -24,7 +24,7 @@ export const FooterPartComponent = () => {
     <Box sx={style.newLatter}>
       <Container maxWidth="md">
         <Grid container spacing={2}>
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={6}>
             <Box sx={style.footerDetails}>
               <Box
                 style={{
@@ -48,7 +48,7 @@ export const FooterPartComponent = () => {
               </Typography>
             </Box>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={6} sm={3}>
             <Box sx={style.footerList}>
               <Typography variant="h4">Important Links</Typography>
               <ul>
@@ -59,7 +59,7 @@ export const FooterPartComponent = () => {
               </ul>
             </Box>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={6} sm={3}>
             <Box sx={style.footerList2}>
               <Typography variant="h4">Follow us at</Typography>
               <ul>

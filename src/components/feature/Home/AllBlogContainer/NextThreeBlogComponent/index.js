@@ -17,7 +17,7 @@ export const NextThreeBlogComponent = ({
       {nextThreeToFiveItems?.length > 0 &&
         nextThreeToFiveItems?.map((item, index) => {
           return (
-            <Grid item xs={4} md={4} key={index}>
+            <Grid item xs={12} sm={4} key={index}>
               <Box sx={style.popularArticlesList}>
                 <img
                   src={item?.image || "/images/home/rocket.jpg"}

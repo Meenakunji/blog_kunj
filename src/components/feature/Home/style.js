@@ -71,10 +71,11 @@ const style = {
     position: "relative",
     overflow: "hidden",
     "& img": {
-      borderRadius: "0 0 50% 50%/0 0 30% 30%",
-      transform: "scaleX(1.1)",
       height: "500px",
-      objectFit: "fill",
+      objectFit: "cover",
+      "@media(max-width:480px)": {
+        height: "380px",
+      },
     },
     "&:after": {
       position: "absolute",
@@ -86,8 +87,6 @@ const style = {
       content: "''",
       opacity: ".5",
       background: "#000",
-      borderRadius: "0 0 50% 50%/0 0 30% 30%",
-      transform: "scaleX(1.1)",
     },
   },
   ourNewRoom: {
@@ -102,6 +101,13 @@ const style = {
       fontSize: "30px",
       textAlign: "center",
       marginBottom: "25px",
+    },
+    "@media(max-width:480px)": {
+      width: "100%",
+      padding: "20px",
+      "& h6": {
+        fontSize: "25px",
+      },
     },
   },
   inputSection: {
@@ -188,6 +194,12 @@ const style = {
       width: "113px",
       cursor: "pointer",
     },
+    "@media(max-width:480px)": {
+      "& h1": {
+        fontSize: "20px",
+      },
+      padding: "20px",
+    },
   },
   cardBottomSection: {
     display: "flex",
@@ -232,12 +244,18 @@ const style = {
     "& h2": {
       fontSize: "40px",
       color: "#183b56",
+      "@media(max-width:480px)": {
+        fontSize: "25px",
+      },
     },
     "& p": {
       color: "#798b9b",
       fontSize: "14px",
       letterSpacing: "0.2px",
       marginTop: "10px",
+      "@media(max-width:480px)": {
+        fontSize: "12px",
+      },
     },
     "& button": {
       color: "#1565d8",
@@ -250,10 +268,17 @@ const style = {
         fontSize: "14px",
         marginLeft: "5px",
       },
+      "@media(max-width:480px)": {
+        padding: "6px 10px",
+        fontSize: "11px",
+      },
     },
   },
   popularArticlesDetails: {
     width: "50%",
+    "@media(max-width:480px)": {
+      width: "70%",
+    },
   },
   popularArticlesList: {
     position: "relative",
@@ -289,11 +314,18 @@ const style = {
     "& h3": {
       fontSize: "30px",
       color: "#fff",
+      "@media(max-width:480px)": {
+        fontSize: "20px",
+        marginBottom: "10px",
+      },
     },
     "& h4": {
       fontSize: "25px",
       color: "#fff",
       marginBottom: "10px",
+      "@media(max-width:480px)": {
+        fontSize: "20px",
+      },
     },
     "& p": {
       color: "#fff",
