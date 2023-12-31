@@ -6,7 +6,11 @@ export const calculateReadingTime = (text, averageReadingSpeed = 100) => {
 };
 
 export const createSlug = (username, title) => {
-  const lowercaseTitle = title.toLowerCase();
+  if (typeof title !== "string" || !title) {
+    // Handle cases where title is not a string or empty
+    return ""; // Or handle it based on your requirements
+  }
+  const lowercaseTitle = title?.toLowerCase();
   const slug = lowercaseTitle
     .replace(/\s+/g, "-") // Replace spaces with hyphens
     .replace(/[^a-z0-9-]/g, "") // Remove special characters except hyphens

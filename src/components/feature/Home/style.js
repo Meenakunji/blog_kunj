@@ -65,6 +65,7 @@ const style = {
     gap: "10px",
   },
   detailsComment: {
+    cursor: "pointer",
     "& h2": {
       color: "#5f5f5f",
       fontSize: "24px",
@@ -313,6 +314,7 @@ const style = {
     position: "relative",
     borderRadius: "15px",
     overflow: "hidden",
+    cursor: "pointer",
     "&:after": {
       content: "''",
       width: "100%",
@@ -426,6 +428,18 @@ const style = {
         borderBottom: "1px solid #c3c3c3",
       },
     },
+  },
+  RecommendationBlogCSS: {
+    position: "relative",
+    top: "80px",
+    zIndex: "5",
+    padding: "0",
+    marginBottom: "50px",
+  },
+  RecommendationBlogImgCSS: {
+    width: "100%",
+    height: "370px",
+    objectFit: "fill",
   },
 };
 

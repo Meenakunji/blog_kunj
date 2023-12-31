@@ -57,7 +57,10 @@ export const TagListComponent = ({ markedblogList }) => {
                       })}
                     </Typography>
                   </Box>
-                  <Box sx={style.detailsComment}>
+                  <Box
+                    sx={style.detailsComment}
+                    onClick={() => handleBlogContentListPage(item)}
+                  >
                     <ReactMarkdown
                       remarkPlugins={[RemarkMathPlugin, remarkGfm]}
                       rehypePlugins={[rehypeKatex, remark2rehype]}
@@ -67,10 +70,7 @@ export const TagListComponent = ({ markedblogList }) => {
                     >
                       {item?.description?.split(" ").slice(0, 15).join(" ")}
                     </ReactMarkdown>
-                    <a
-                      onClick={() => handleBlogContentListPage(item)}
-                      style={{ cursor: "pointer", color: "#d80af1" }}
-                    >
+                    <a style={{ cursor: "pointer", color: "#d80af1" }}>
                       ...Read More
                     </a>
                   </Box>
