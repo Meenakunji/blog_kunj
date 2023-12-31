@@ -68,7 +68,7 @@ const PopularBlog = ({ popularBlogList }) => {
           {popularBlogList?.length > 0 &&
             popularBlogList?.slice(0, 4)?.map((item, index) => {
               return (
-                <Grid item xs={6} md={6} key={index}>
+                <Grid item xs={12} sm={6} key={index}>
                   <Box sx={style.popularArticlesList}>
                     <img
                       src={item?.image || "/images/home/rocket.jpg"}

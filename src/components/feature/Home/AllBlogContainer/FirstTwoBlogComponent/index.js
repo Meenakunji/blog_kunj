@@ -21,7 +21,7 @@ export const FirstTwoBlogComponent = ({
           const userName = userData?.[0]?.name;
 
           return (
-            <Grid item xs={6} md={6} key={index}>
+            <Grid item xs={12} sm={6} key={index}>
               <Box sx={style.popularArticlesList}>
                 <img
                   src={image || "/images/home/rocket.jpg"}

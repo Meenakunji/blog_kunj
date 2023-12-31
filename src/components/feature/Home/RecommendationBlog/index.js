@@ -70,7 +70,7 @@ const RecommendationBlog = ({ recommendationBlogList }) => {
       <Container maxWidth="lg">
         <Card sx={{ borderRadius: "15px" }}>
           <Grid container alignItems={"center"}>
-            <Grid item xs={6} md={6}>
+            <Grid item xs={12} md={6}>
               <img
                 src={randomBlog?.image || "/images/home/rocket.jpg"}
                 alt="recommended image"
@@ -83,7 +83,7 @@ const RecommendationBlog = ({ recommendationBlogList }) => {
                 onClick={() => handleBlogContentListPage(randomBlog)}
               />
             </Grid>
-            <Grid item xs={6} md={6}>
+            <Grid item xs={12} md={6}>
               <Box sx={style.topSectionDetails}>
                 <Button onClick={() => handleTagClick(randomBlog?.blogTag)}>
                   {randomBlog?.blogTag}

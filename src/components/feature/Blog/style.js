@@ -97,9 +97,16 @@ const style = {
   listingBlogHeading: {
     marginBottom: "60px",
     textAlign: "center",
+
     "& h2": {
       fontSize: "48px",
       color: "#183B56",
+      "@media(max-width:480px)": {
+        fontSize: "25px",
+      },
+    },
+    "@media(max-width:480px)": {
+      marginBottom: "30px",
     },
   },
   listingBlogDetails: {
@@ -107,11 +114,17 @@ const style = {
       fontSize: "31px",
       color: "#183B56",
       cursor: "pointer",
+      "@media(max-width:480px)": {
+        fontSize: "20px",
+      },
     },
     "& p": {
       fontSize: "18px",
       color: "#5A7184",
       marginTop: "20px",
+      "@media(max-width:480px)": {
+        fontSize: "14px",
+      },
     },
   },
   tagListing: {
@@ -132,6 +145,9 @@ const style = {
     justifyContent: "space-between",
     alignItems: "center",
     marginTop: "20px",
+    "@media(max-width:480px)": {
+      marginTop: "10px",
+    },
   },
   list: {
     "& ul": {
@@ -141,8 +157,13 @@ const style = {
         color: "#000",
         padding: "0",
         fontSize: "14px",
-
         width: "auto",
+      },
+      "@media(max-width:480px)": {
+        gap: "10px",
+        "& li": {
+          fontSize: "10px",
+        },
       },
     },
   },
@@ -156,6 +177,14 @@ const style = {
         fontSize: "17px",
         color: "#7A7A7A",
       },
+      "@media(max-width:480px)": {
+        gap: "10px",
+        "& li": {
+          "& svg": {
+            fontSize: "18px",
+          },
+        },
+      },
     },
   },
   postCard: {
@@ -163,6 +192,9 @@ const style = {
     "& img": {
       borderRadius: "15px",
       cursor: "pointer",
+      "@media(max-width:480px)": {
+        width: "100% !important",
+      },
     },
     "&:hover": {
       transform: "translateY(-4px)",
@@ -170,6 +202,9 @@ const style = {
   },
   listingSection: {
     marginBottom: "50px",
+    "@media(max-width:480px)": {
+      marginBottom: "25px",
+    },
   },
 
   // blogTagList
@@ -178,18 +213,6 @@ const style = {
     background: "#fff",
     padding: "20px",
     color: "#000",
-  },
-  divderCss: {
-    border: "2px #F2F2F2 solid",
-    borderColor: "green",
-  },
-  tagListContainer: {
-    display: "flex",
-    justifyContent: "space-between",
-    flexWrap: "wrap",
-    gap: "10px",
-    marginLeft: "10%",
-    marginRight: "10%",
   },
   bannerConatiner: {
     display: "flex",
@@ -231,6 +254,18 @@ const style = {
       textDecoration: "none",
       borderStyle: "solid",
     },
+  },
+  divderCss: {
+    border: "2px #F2F2F2 solid",
+    borderColor: "green",
+  },
+  tagListContainer: {
+    display: "flex",
+    justifyContent: "space-between",
+    flexWrap: "wrap",
+    gap: "10px",
+    marginLeft: "10%",
+    marginRight: "10%",
   },
 };
 
