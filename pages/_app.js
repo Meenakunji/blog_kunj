@@ -1,21 +1,19 @@
-import React, { useEffect } from "react";
-import { StrictMode } from "react";
+import React, { StrictMode, useEffect } from "react";
 import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { Provider } from "react-redux";
 import Layout from "../src/components/feature/Layout";
 import store from "../src/redux/store";
 
-import "bootstrap/dist/css/bootstrap.css";
 import CssBaseline from "@mui/material/CssBaseline";
-import PageThemeProvider from "../styles/PageThemeProvider";
-import Script from "next/script";
-import Head from "next/head";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import { PersistGate } from "redux-persist/integration/react";
-import { persistStore } from "redux-persist";
-import "../styles/globals.css";
+import "bootstrap/dist/css/bootstrap.css";
+import Head from "next/head";
 import TagManager from "react-gtm-module";
+import { persistStore } from "redux-persist";
+import { PersistGate } from "redux-persist/integration/react";
+import PageThemeProvider from "../styles/PageThemeProvider";
+import "../styles/globals.css";
 // import { SessionProvider } from "next-auth/react";
 
 const persistor = persistStore(store, {}, function () {
@@ -29,6 +27,7 @@ const queryClient = new QueryClient({
 });
 
 function MyApp({ Component, pageProps }) {
+  // use for Tracking Gtm tracking
   useEffect(() => {
     const tagManagerArgs = {
       gtmId: "G-3JRNN23QX6",
@@ -44,7 +43,7 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <StrictMode>
-      <Head>Jupiter Blog Website</Head>
+      <Head>Sahitya Blog Website</Head>
 
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>

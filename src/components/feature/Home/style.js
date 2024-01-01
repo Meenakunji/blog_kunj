@@ -193,6 +193,13 @@ const style = {
       padding: "5px 15px",
       color: "#fff",
       fontSize: "12px",
+      "@media(max-width:480px)": {
+        padding: "3px 10px",
+      },
+    },
+
+    "@media(max-width:480px)": {
+      flexWrap: "no-wrap",
     },
   },
 

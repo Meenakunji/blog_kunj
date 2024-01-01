@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Typography, useMediaQuery } from "@mui/material";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { setTagListName } from "../../../../../redux/slices/user";
@@ -8,6 +8,7 @@ import style from "../../style";
 export const BlogPopularTagComponent = ({ popularBlogTag }) => {
   const router = useRouter();
   const dispatch = useDispatch();
+  const isMobile = useMediaQuery("(max-width:768px)");
 
   const handleTagClick = useCallback(
     (tagId) => {
@@ -20,11 +21,18 @@ export const BlogPopularTagComponent = ({ popularBlogTag }) => {
   return (
     <Box sx={style.popularTag}>
       <Typography variant="body1">Popular Tag:</Typography>
-      {popularBlogTag?.slice(0, 4).map((item, index) => (
-        <Button key={index} onClick={() => handleTagClick(item?._id)}>
-          {item?._id}
-        </Button>
-      ))}
+      {isMobile
+        ? popularBlogTag?.slice(0, 2).map((item, index) => (
+            <Button key={index} onClick={() => handleTagClick(item?._id)}>
+              {item?._id}
+            </Button>
+          ))
+        : popularBlogTag?.slice(0, 4).map((item, index) => (
+            <Button key={index} onClick={() => handleTagClick(item?._id)}>
+              {item?._id}
+            </Button>
+          ))}
+
       <a
         style={{
           fontSize: "14px",
