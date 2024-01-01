@@ -1,10 +1,12 @@
-import { Box, Button, Container, Grid, Typography } from "@mui/material";
+import { Box, Button, Container, Grid, Typography, useMediaQuery } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import style from "../style";
 import { API_BASE_URL } from "../../../../constant/appConstants";
 // import SnackBar from "../../../common/SnackBar";
 
 export const FooterSendNotification = () => {
+  const isMobile = useMediaQuery("(max-width:480px)");
+
   const [email, setEmail] = useState("");
   const [snackbar, setSnackbar] = useState({
     show: false,
@@ -84,24 +86,20 @@ export const FooterSendNotification = () => {
                 <Button onClick={handleSubscibeEmail}>Get started</Button>
               </form>
               <Typography variant="body1">
-                Sahitya: Your go-to blogging website for sharing ideas, stories,
-                and experiences with a vibrant community of writers and readers.
-                Unleash your creativity and connect with like-minded individuals
-                at Sahitya.
+                Sahitya: Your go-to blogging website for sharing ideas, stories, and experiences
+                with a vibrant community of writers and readers. Unleash your creativity and connect
+                with like-minded individuals at Sahitya.
               </Typography>
             </Box>
           </Grid>
           <Grid item xs={6}>
-            <Box sx={style.bestWeek}>
+            <Box sx={style.bestWeek} style={isMobile ? { width: "380px" } : { width: "450px" }}>
               <Box sx={style.bestWeekBox}>
                 <img src="/images/home/Base.jpg" alt="footer icon" />
                 <Box sx={style.bestWeekDetails}>
-                  <Typography variant="h5">
-                    The best aticles every week
-                  </Typography>
+                  <Typography variant="h5">The best aticles every week</Typography>
                   <Typography variant="body1">
-                    Our insurance plans offers are priced the same everywhere
-                    else.
+                    Our insurance plans offers are priced the same everywhere else.
                   </Typography>
                 </Box>
               </Box>

@@ -10,7 +10,7 @@ import { useMutation } from "react-query";
 import { useDispatch } from "react-redux";
 import fetcher from "../../../../dataProvider";
 import useLocalStorage from "../../../../hooks/useLocalStorage";
-import { setToken } from "../../../../redux/slices/user";
+import { setToken, setUserData } from "../../../../redux/slices/user";
 import Snackbar from "../../../common/Snackbar";
 import TextField from "../../../common/TextField/index";
 import { API_BASE_URL } from "../../../../constant/appConstants";
@@ -21,6 +21,7 @@ const SignupComponent = ({ handleModalClose }) => {
     formState: { errors, isValid },
     trigger,
     getValues,
+    reset,
   } = useForm({
     criteriaMode: "all",
     mode: "all",
@@ -49,8 +50,7 @@ const SignupComponent = ({ handleModalClose }) => {
 
   // user signup API
   const { mutate: userEmailSignup } = useMutation(
-    (signupFormObj) =>
-      fetcher.post(`${API_BASE_URL}/v1/auth/user-signup`, signupFormObj),
+    (signupFormObj) => fetcher.post(`${API_BASE_URL}/v1/auth/user-signup`, signupFormObj),
     {
       onSuccess: (res) => {
         const accessToken = res?.data?.tokens?.access?.token;
@@ -85,20 +85,42 @@ const SignupComponent = ({ handleModalClose }) => {
           status: "error",
           message: `login failed.`,
         });
+        reset({
+          name: "",
+          email: "",
+          password: "",
+          role: "",
+        });
         console.log("Error:", error);
       },
     }
   );
 
-  const handleSubmitSingup = () => {
+  const handleSubmitSignup = () => {
     if (!isValid) {
       trigger();
-      alert("Please fill all required filed");
-      return false;
+      alert("Please fill all required fields");
+      return;
     } else {
       let signupFormObj = getValues();
       // append file path and url
       signupFormObj.role = "user";
+      console.log("Signup Object ==>>", signupFormObj);
+      const { email, password, role, name } = signupFormObj;
+
+      if (
+        !email ||
+        !password ||
+        !role ||
+        !name ||
+        email.trim() === "" ||
+        password.trim() === "" ||
+        role.trim() === "" ||
+        name.trim() === ""
+      ) {
+        alert("Please enter all required fields");
+        return;
+      }
       userEmailSignup(signupFormObj);
     }
   };
@@ -179,7 +201,7 @@ const SignupComponent = ({ handleModalClose }) => {
           style={{
             background: "hsl(161deg 87.73% 42.73%)",
           }}
-          onClick={() => handleSubmitSingup()}
+          onClick={() => handleSubmitSignup()}
         >
           Sign Up
         </button>
