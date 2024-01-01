@@ -8,12 +8,12 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { useDispatch } from "react-redux";
 import loginfunc from "../../../../../components/Layout/util/login";
+import { API_BASE_URL } from "../../../../constant/appConstants";
 import fetcher from "../../../../dataProvider";
 import useLocalStorage from "../../../../hooks/useLocalStorage";
 import { setToken, setUserData } from "../../../../redux/slices/user";
 import Snackbar from "../../../common/Snackbar";
 import TextField from "../../../common/TextField";
-import { API_BASE_URL } from "../../../../constant/appConstants";
 
 const LoginComponent = ({ handleModalClose }) => {
   const {
@@ -47,10 +47,9 @@ const LoginComponent = ({ handleModalClose }) => {
     setAgree(!agree);
   };
 
-  // // user Login API
+  // user Login API
   const { mutate: userEmailLogin } = useMutation(
-    (LoginFormObj) =>
-      fetcher.post(`${API_BASE_URL}/v1/auth/login-email`, LoginFormObj),
+    (LoginFormObj) => fetcher.post(`${API_BASE_URL}/v1/auth/login-email`, LoginFormObj),
     {
       onSuccess: (res) => {
         const accessToken = res?.data?.tokens?.access?.token;
@@ -85,7 +84,7 @@ const LoginComponent = ({ handleModalClose }) => {
           status: "error",
           message: `login failed.`,
         });
-        console.log("Error:", error);
+        alert(error);
       },
     }
   );
@@ -93,30 +92,33 @@ const LoginComponent = ({ handleModalClose }) => {
   const handleLoginSubmit = () => {
     if (!isValid) {
       trigger();
-      alert("Please fill all required filed");
-      return false;
-    } else {
-      let loginFormObj = getValues();
-      console.log("loginFormObj", loginFormObj);
-      userEmailLogin(loginFormObj);
+      alert("Please fill all required fields");
+      return;
     }
+
+    const loginFormObj = getValues();
+    const { email, password } = loginFormObj;
+
+    if (!email || !password) {
+      alert("Please enter both email and password");
+      return;
+    }
+
+    userEmailLogin(loginFormObj);
   };
 
   return (
     <>
-      <div className="form-section">
-        <div className="logo clearfix">
+      <Box className="form-section">
+        <Box className="logo clearfix">
           <a href="login-2.html">
-            <img
-              src="https://i.postimg.cc/3wgSvKbP/bloggerlogo.png"
-              alt="logo"
-            />
+            <img src="https://i.postimg.cc/3wgSvKbP/bloggerlogo.png" alt="logo" />
           </a>
-        </div>
+        </Box>
         <h3>Sign Into Your Account</h3>
 
         <form action="#" method="GET">
-          <div className="form-group form-box">
+          <Box className="form-group form-box">
             <TextField
               name={"email"}
               placeholder="Email Address"
@@ -126,8 +128,8 @@ const LoginComponent = ({ handleModalClose }) => {
               errors={errors}
             />
             <MailIcon />
-          </div>
-          <div className="form-group form-box">
+          </Box>
+          <Box className="form-group form-box">
             <TextField
               name={"password"}
               placeholder="Password"
@@ -145,11 +147,10 @@ const LoginComponent = ({ handleModalClose }) => {
                 <LockIcon />
               </Box>
             )}
-            {/* <KeyIcon /> */}
-          </div>
+          </Box>
         </form>
-        <div className="checkbox form-group form-box">
-          <div className="form-check checkbox-theme">
+        <Box className="checkbox form-group form-box">
+          <Box className="form-check checkbox-theme">
             <input
               className="form-check-input"
               type="checkbox"
@@ -161,9 +162,9 @@ const LoginComponent = ({ handleModalClose }) => {
             <label className="form-check-label" htmlFor="rememberMe">
               I agree to the <a href="#">terms of service</a>
             </label>
-          </div>
-        </div>
-        <div className="form-group mb-0">
+          </Box>
+        </Box>
+        <Box className="form-group mb-0">
           <button
             type="submit"
             className="btn-md btn-theme w-100"
@@ -174,11 +175,9 @@ const LoginComponent = ({ handleModalClose }) => {
           >
             Login
           </button>
-        </div>
-        {snackbar.show ? (
-          <Snackbar {...snackbar} onClose={setSnackbar} />
-        ) : null}
-      </div>
+        </Box>
+        {snackbar.show ? <Snackbar {...snackbar} onClose={setSnackbar} /> : null}
+      </Box>
     </>
   );
 };
