@@ -136,16 +136,9 @@ const Header = () => {
         open={open}
         handleModalClose={() => setOpen(false)}
       />
-      <AppBar
-        sx={styles.navbar}
-        onClick={(e) => e.stopPropagation()}
-        style={headerStyle}
-      >
+      <AppBar sx={styles.navbar} onClick={(e) => e.stopPropagation()} style={headerStyle}>
         <Toolbar>
-          <Typography
-            sx={{ fontSize: "2rem", cursor: "pointer" }}
-            onClick={() => router.push("/")}
-          >
+          <Typography sx={{ fontSize: "2rem", cursor: "pointer" }} onClick={() => router.push("/")}>
             <Box
               style={{
                 display: "flex",
@@ -274,11 +267,7 @@ const Header = () => {
               </Menu>
             </>
           ) : (
-            <Button
-              variant="contained"
-              sx={{ marginLeft: "10px" }}
-              onClick={() => setOpen(true)}
-            >
+            <Button variant="contained" sx={{ marginLeft: "10px" }} onClick={() => setOpen(true)}>
               Login
             </Button>
           )}
