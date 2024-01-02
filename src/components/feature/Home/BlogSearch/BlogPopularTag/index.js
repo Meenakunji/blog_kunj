@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { setTagListName } from "../../../../../redux/slices/user";
 import style from "../../style";
+import Link from "next/link";
 
 export const BlogPopularTagComponent = ({ popularBlogTag }) => {
   const router = useRouter();
@@ -33,7 +34,7 @@ export const BlogPopularTagComponent = ({ popularBlogTag }) => {
             </Button>
           ))}
 
-      <a
+      <Link
         href="/explore-topics/tag"
         style={{
           fontSize: "14px",
@@ -41,9 +42,10 @@ export const BlogPopularTagComponent = ({ popularBlogTag }) => {
           cursor: "pointer",
           textDecoration: "underline",
         }}
+        passHref
       >
         Show More
-      </a>
+      </Link>
     </Box>
   );
 };
