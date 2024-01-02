@@ -177,7 +177,7 @@ const CommentBlog = () => {
           <Box sx={style.imageContainer}>
             <Image
               src="https://i.postimg.cc/h41XhrFF/comment-Bg.webp"
-              alt="Your Image"
+              alt="Banner image"
               layout="fill"
               objectFit="fill"
             />
