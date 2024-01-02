@@ -16,6 +16,14 @@ const style = {
       top: "0",
     },
   },
+
+  imageContainer: {
+    width: "100%",
+    height: "500px",
+    "@media(max-width:480px)": {
+      height: "300px",
+    },
+  },
   bannerBg: {
     background: "#fff",
     position: "absolute",

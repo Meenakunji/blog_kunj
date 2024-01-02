@@ -20,6 +20,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { light as SyntaxHighlighterStyle } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { useRouter } from "next/router";
 import { setTagListName } from "../../../redux/slices/user";
+import Image from "next/image";
 
 const CommentBlog = () => {
   const { particularBlogContent } = useSelector((state) => state.user);
@@ -28,19 +29,13 @@ const CommentBlog = () => {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const [blogLikeCount, setBlogLikeCount] = useState(
-    particularBlogContent?.blogLike || 0
-  );
+  const [blogLikeCount, setBlogLikeCount] = useState(particularBlogContent?.blogLike || 0);
   const [speechUtterance, setSpeechUtterance] = useState(null);
-  const [blogMarked, setBlogMarked] = useState(
-    particularBlogContent?.isMarkedBlog
-  );
+  const [blogMarked, setBlogMarked] = useState(particularBlogContent?.isMarkedBlog);
 
   // Check if the user has already visited this blog post
   useEffect(() => {
-    const visited = localStorage.getItem(
-      `visited_${particularBlogContent?._id}`
-    );
+    const visited = localStorage.getItem(`visited_${particularBlogContent?._id}`);
     if (visited === "true") {
       setReadCountUpdated(true);
     }
@@ -60,8 +55,7 @@ const CommentBlog = () => {
         setReadCountUpdated(true);
 
         // Increment read count for this blog
-        const visitedBlogs =
-          JSON.parse(localStorage.getItem("visitedBlogs")) || {};
+        const visitedBlogs = JSON.parse(localStorage.getItem("visitedBlogs")) || {};
         visitedBlogs[particularBlogContent?._id] =
           (visitedBlogs[particularBlogContent?._id] || 0) + 1;
         localStorage.setItem("visitedBlogs", JSON.stringify(visitedBlogs));
@@ -116,9 +110,7 @@ const CommentBlog = () => {
           const updatedVoices = speechSynthesis.getVoices();
 
           // Filter and update the valid voices array
-          const updatedValidVoices = updatedVoices.filter(
-            (voice) => voice.name.trim() !== ""
-          );
+          const updatedValidVoices = updatedVoices.filter((voice) => voice.name.trim() !== "");
 
           if (updatedValidVoices.length > 0) {
             startReading();
@@ -182,23 +174,22 @@ const CommentBlog = () => {
     <>
       <Box sx={style.commentBlog}>
         <Box sx={style.commentBg}>
-          <img
-            src="https://i.postimg.cc/h41XhrFF/comment-Bg.webp"
-            alt="background Image"
-            loading="lazy"
-          />
+          <Box sx={style.imageContainer}>
+            <Image
+              src="https://i.postimg.cc/h41XhrFF/comment-Bg.webp"
+              alt="Your Image"
+              layout="fill"
+              objectFit="fill"
+            />
+          </Box>
+
           <Container maxWidth="md">
             <Box sx={style.bannerBg}>
               <Box sx={style.profileImg}>
-                <img
-                  src={particularBlogContent?.userData?.[0]?.profilePic}
-                  alt="user Profile"
-                />
+                <img src={particularBlogContent?.userData?.[0]?.profilePic} alt="user Profile" />
               </Box>
               <Box sx={style.profileName}>
-                <Typography variant="h5">
-                  {particularBlogContent?.userData?.[0]?.name}
-                </Typography>
+                <Typography variant="h5">{particularBlogContent?.userData?.[0]?.name}</Typography>
                 <Box sx={style.dFlex}>
                   <span>
                     <DoneIcon />
@@ -214,20 +205,13 @@ const CommentBlog = () => {
           <Container maxWidth="md">
             <Box sx={style.commentSectionBg}>
               <Box sx={style.bannerDetails}>
-                <Typography variant="h1">
-                  {particularBlogContent?.blogTitle}
-                </Typography>
+                <Typography variant="h1">{particularBlogContent?.blogTitle}</Typography>
                 <Box sx={style.commentDetails}>
                   <Box sx={style.commentList}>
                     <Box sx={style.commentChat}>
-                      <Box
-                        sx={style.commentChatList}
-                        onClick={() => handleBlogLikeCount()}
-                      >
+                      <Box sx={style.commentChatList} onClick={() => handleBlogLikeCount()}>
                         <img src="/images/home/like1.svg" alt="like icon" />
-                        <Typography variant="body1">
-                          {formatCount(blogLikeCount)}
-                        </Typography>
+                        <Typography variant="body1">{formatCount(blogLikeCount)}</Typography>
                       </Box>
                       <Box sx={style.commentChatList}>
                         <SwipeableTemporaryDrawer />
@@ -237,35 +221,22 @@ const CommentBlog = () => {
                       </Box>
                     </Box>
                     <Box sx={style.commentChat} style={{ gap: "15px" }}>
-                      <Box
-                        sx={style.commentChatList}
-                        onClick={() => handleMarkedBlog()}
-                      >
-                        {blogMarked ? (
-                          <BookmarkIcon />
-                        ) : (
-                          <BookmarkAddOutlinedIcon />
-                        )}
+                      <Box sx={style.commentChatList} onClick={() => handleMarkedBlog()}>
+                        {blogMarked ? <BookmarkIcon /> : <BookmarkAddOutlinedIcon />}
                         {/* <img src="/images/home/saveremove.svg" alt="" /> */}
                       </Box>
                       <Box sx={style.commentChatList} onClick={handleRead}>
                         {isReading ? (
                           <PauseCircleFilledIcon />
                         ) : (
-                          <img
-                            src="/images/home/playcircle.svg"
-                            alt="read blog player"
-                          />
+                          <img src="/images/home/playcircle.svg" alt="read blog player" />
                         )}
                       </Box>
                       <Box sx={style.commentChatList}>
                         <img src="/images/home/share.svg" alt="share icon" />
                       </Box>
                       <Box sx={style.commentChatList}>
-                        <img
-                          src="/images/home/dot.svg"
-                          alt="more detail icon"
-                        />
+                        <img src="/images/home/dot.svg" alt="more detail icon" />
                       </Box>
                     </Box>
                   </Box>
@@ -299,14 +270,9 @@ const CommentBlog = () => {
                 </Box>
               </Box>
               <Box sx={style.tagList}>
-                <Typography variant="h4">
-                  {" "}
-                  {particularBlogContent?.userData?.[0]?.name}
-                </Typography>
+                <Typography variant="h4"> {particularBlogContent?.userData?.[0]?.name}</Typography>
                 <Typography variant="body1">
-                  {new Date(
-                    particularBlogContent?.createdAt
-                  ).toLocaleDateString("en-GB", {
+                  {new Date(particularBlogContent?.createdAt).toLocaleDateString("en-GB", {
                     day: "2-digit",
                     month: "long",
                     year: "numeric",
