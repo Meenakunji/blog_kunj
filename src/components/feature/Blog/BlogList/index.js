@@ -33,9 +33,7 @@ export default function BlogContentListComponent({ data }) {
           if (marked) {
             return [...prevMarkedBlogContent, resData.data];
           } else {
-            return prevMarkedBlogContent.filter(
-              (blog) => blog._id !== resData.data._id
-            );
+            return prevMarkedBlogContent.filter((blog) => blog._id !== resData.data._id);
           }
         });
       },
@@ -102,9 +100,7 @@ export default function BlogContentListComponent({ data }) {
       {data &&
         data.map((item, index) => {
           const readingTime = calculateReadingTime(item?.description, 2);
-          const isMarked = markedBlogContent.some(
-            (blog) => blog._id === item._id
-          );
+          const isMarked = markedBlogContent.some((blog) => blog._id === item._id);
 
           return (
             <div className="col-md-3 mt-4" key={index}>
@@ -122,10 +118,7 @@ export default function BlogContentListComponent({ data }) {
                     }}
                   />
                   <Typography variant="h2">{item?.blogTitle}</Typography>
-                  <Box
-                    sx={style.userdetails}
-                    onClick={() => router.push(`/profile?tab=home`)}
-                  >
+                  <Box sx={style.userdetails} onClick={() => router.push(`/profile?tab=home`)}>
                     <Box
                       component="img"
                       src={item?.userData?.[0]?.profilePic}
@@ -160,8 +153,7 @@ export default function BlogContentListComponent({ data }) {
                   <Box
                     style={{
                       fontSize: "13px",
-                      fontFamily:
-                        "sohne, Helvetica Neue, Helvetica, Arial, sans-serif",
+                      fontFamily: "sohne, Helvetica Neue, Helvetica, Arial, sans-serif",
                       display: "flex",
                       justifyContent: "space-between",
                     }}
@@ -175,15 +167,8 @@ export default function BlogContentListComponent({ data }) {
                         {readingTime} min read
                       </a>
                     </Typography>
-                    <Box
-                      onClick={() => handleMarkedBlog(item)}
-                      style={{ cursor: "pointer" }}
-                    >
-                      {isMarked ? (
-                        <BookmarkOutlinedIcon />
-                      ) : (
-                        <BookmarkAddOutlinedIcon />
-                      )}
+                    <Box onClick={() => handleMarkedBlog(item)} style={{ cursor: "pointer" }}>
+                      {isMarked ? <BookmarkOutlinedIcon /> : <BookmarkAddOutlinedIcon />}
                     </Box>
                   </Box>
                 </Box>

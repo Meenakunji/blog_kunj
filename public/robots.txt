@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://timely-profiterole-25e8c9.netlify.app/sitemap.xml
