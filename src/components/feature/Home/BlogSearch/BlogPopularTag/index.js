@@ -34,13 +34,13 @@ export const BlogPopularTagComponent = ({ popularBlogTag }) => {
           ))}
 
       <a
+        href="/explore-topics/tag"
         style={{
           fontSize: "14px",
           color: "#26f7c7",
           cursor: "pointer",
           textDecoration: "underline",
         }}
-        onClick={() => router.push(`explore-topics/tag`)}
       >
         Show More
       </a>
