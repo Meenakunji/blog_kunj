@@ -387,8 +387,7 @@ const style = {
         content: "''",
         width: "50px",
         height: "45px",
-        background:
-          "url(/images/home/left.svg) center center / contain no-repeat",
+        background: "url(/images/home/left.svg) center center / contain no-repeat",
         position: "absolute",
         left: "0",
         top: "0",
@@ -403,8 +402,7 @@ const style = {
         content: "''",
         width: "50px",
         height: "45px",
-        background:
-          "url(/images/home/right.svg) center center / contain no-repeat",
+        background: "url(/images/home/right.svg) center center / contain no-repeat",
         position: "absolute",
         right: "0",
         top: "0",

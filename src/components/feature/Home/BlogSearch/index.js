@@ -24,9 +24,7 @@ const BlogSearch = ({ popularBlogTag }) => {
 
   const getBlogTitleData = useCallback(async (title) => {
     try {
-      const response = await fetcher.get(
-        `${API_BASE_URL}/v1/blog/searchbytitle?title=${title}`
-      );
+      const response = await fetcher.get(`${API_BASE_URL}/v1/blog/searchbytitle?title=${title}`);
       const { data } = response;
       setBlogList(data);
     } catch (error) {
