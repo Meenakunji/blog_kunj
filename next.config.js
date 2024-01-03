@@ -8,12 +8,20 @@ const nextConfig = {
       "demo2.joomshaper.com",
       "s3.ap-south-1.amazonaws.com",
     ],
-    // remotePatterns: [
-    //   {
-    //     protocol: "https",
-    //     hostname: "s3.ap-south-1.amazonaws.com",
-    //   },
-    // ],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "s3.ap-south-1.amazonaws.com",
+        port: "",
+        pathname: "/jupiter-blog-content-images/**",
+      },
+      {
+        protocol: "https",
+        hostname: "i.postimg.cc",
+        port: "",
+        pathname: "/h41XhrFF/**",
+      },
+    ],
   },
 };
 
