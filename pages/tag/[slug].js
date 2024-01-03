@@ -3,12 +3,9 @@ import { NextSeo } from "next-seo";
 import dynamic from "next/dynamic";
 import React from "react";
 
-const BlogTagList = dynamic(
-  () => import("../../src/components/feature/Blog/BlogTagList"),
-  {
-    ssr: false,
-  }
-);
+const BlogTagList = dynamic(() => import("../../src/components/feature/Blog/BlogTagList"), {
+  ssr: false,
+});
 
 const BlogTagsPage = ({ slug }) => {
   return (
