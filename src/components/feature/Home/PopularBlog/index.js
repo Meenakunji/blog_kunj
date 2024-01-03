@@ -1,13 +1,6 @@
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import DoneIcon from "@mui/icons-material/Done";
-import {
-  Avatar,
-  Box,
-  Button,
-  Container,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { Avatar, Box, Button, Container, Grid, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useCallback, useMemo } from "react";
 import ReactMarkdown from "react-markdown";
@@ -47,10 +40,7 @@ const PopularBlog = ({ popularBlogList }) => {
     [dispatch, router]
   );
 
-  const randomBlog = useMemo(
-    () => popularBlogList?.[0] || {},
-    [popularBlogList]
-  );
+  const randomBlog = useMemo(() => popularBlogList?.[0] || {}, [popularBlogList]);
 
   return (
     <section
@@ -66,9 +56,9 @@ const PopularBlog = ({ popularBlogList }) => {
           <Box sx={style.popularArticlesDetails}>
             <Typography variant="h2">Popular Blog</Typography>
             <Typography variant="body1">
-              Welcome to our Popular Blog section! Here, we explore the use of
-              Lorem ipsum in publishing and graphic design. Discover its
-              significance and applications in these industries.
+              Welcome to our Popular Blog section! Here, we explore the use of Lorem ipsum in
+              publishing and graphic design. Discover its significance and applications in these
+              industries.
             </Typography>
           </Box>
           <Button onClick={handlePopularBlogListing}>
@@ -128,10 +118,7 @@ const PopularBlog = ({ popularBlogList }) => {
                               <span>
                                 <DoneIcon />
                               </span>
-                              <Typography
-                                variant="h5"
-                                sx={{ color: "#798b9b" }}
-                              >
+                              <Typography variant="h5" sx={{ color: "#798b9b" }}>
                                 {" "}
                                 Verified writer
                               </Typography>
@@ -139,13 +126,10 @@ const PopularBlog = ({ popularBlogList }) => {
                           </Box>
                         </Box>
                         <Box sx={style.date} style={{ color: "#798b9b" }}>
-                          {new Date(item?.createdAt).toLocaleDateString(
-                            "en-US",
-                            {
-                              day: "numeric",
-                              month: "short",
-                            }
-                          )}
+                          {new Date(item?.createdAt).toLocaleDateString("en-US", {
+                            day: "numeric",
+                            month: "short",
+                          })}
                         </Box>
                       </Box>
                     </Box>

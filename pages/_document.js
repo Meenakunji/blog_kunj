@@ -1,4 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
+import Script from "next/script";
 
 class MyDocument extends Document {
   render() {
@@ -10,6 +11,7 @@ class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
+          <Script async src="https://platform.twitter.com/widgets.js" strategy="lazyOnload" />
         </body>
       </Html>
     );

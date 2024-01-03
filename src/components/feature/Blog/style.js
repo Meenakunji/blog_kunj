@@ -248,11 +248,15 @@ const style = {
     display: "block",
     "& button": {
       borderColor: "#000",
-      background: "green",
+      // background: "green",
       color: "#fff",
       textAlign: "center",
       textDecoration: "none",
       borderStyle: "solid",
+      background: "linear-gradient(120deg, darkmagenta, crimson, orange)",
+      backgroundSize: "200% 100%",
+      backgroundPosition: "100% 0",
+      transition: "background-position .5s",
     },
   },
   divderCss: {

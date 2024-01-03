@@ -443,8 +443,7 @@ const style = {
   },
   RecommendationBlogImgCSS: {
     width: "100%",
-    height: "370px",
-    objectFit: "fill",
+    objectFit: "cover",
   },
 };
 

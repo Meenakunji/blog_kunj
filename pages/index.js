@@ -1,19 +1,15 @@
-import { Box, Button } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import SEOComponents from "../src/components/common/SEO";
-import fetcher from "../src/dataProvider";
-import { API_BASE_URL } from "../src/constant/appConstants";
+import { Box } from "@mui/material";
 import dynamic from "next/dynamic";
 import Head from "next/head";
-import TagManager from "react-gtm-module";
+import React, { useEffect, useState } from "react";
+import SEOComponents from "../src/components/common/SEO";
+import { API_BASE_URL } from "../src/constant/appConstants";
+import fetcher from "../src/dataProvider";
 
 // dynamic routing
-const BlogSearch = dynamic(
-  () => import("../src/components/feature/Home/BlogSearch"),
-  {
-    ssr: false,
-  }
-);
+const BlogSearch = dynamic(() => import("../src/components/feature/Home/BlogSearch"), {
+  ssr: false,
+});
 const RecommendationBlog = dynamic(
   () => import("../src/components/feature/Home/RecommendationBlog"),
   {
@@ -21,12 +17,9 @@ const RecommendationBlog = dynamic(
   }
 );
 
-const PopularBlog = dynamic(
-  () => import("../src/components/feature/Home/PopularBlog"),
-  {
-    ssr: false,
-  }
-);
+const PopularBlog = dynamic(() => import("../src/components/feature/Home/PopularBlog"), {
+  ssr: false,
+});
 
 const PopularBloggerList = dynamic(
   () => import("../src/components/feature/Home/PopularBloggerList"),
@@ -35,19 +28,13 @@ const PopularBloggerList = dynamic(
   }
 );
 
-const CaseStudyList = dynamic(
-  () => import("../src/components/feature/Home/CaseStudy"),
-  {
-    ssr: false,
-  }
-);
+const CaseStudyList = dynamic(() => import("../src/components/feature/Home/CaseStudy"), {
+  ssr: false,
+});
 
-const AllBlogComponent = dynamic(
-  () => import("../src/components/feature/Home/AllBlogContainer"),
-  {
-    ssr: false,
-  }
-);
+const AllBlogComponent = dynamic(() => import("../src/components/feature/Home/AllBlogContainer"), {
+  ssr: false,
+});
 const Home = () => {
   const [recommendationBlogList, setRecommendationBlogList] = useState([]);
   const [popularBloggerList, setPopularBloggerList] = useState([]);
@@ -96,10 +83,7 @@ const Home = () => {
           name="image"
           content="https://d2q23p4t0ij9e0.cloudfront.net/small_referal_1ee3ed7a49.png"
         />
-        <meta
-          property="og:url"
-          content="https://timely-profiterole-25e8c9.netlify.app/"
-        />
+        <meta property="og:url" content="https://timely-profiterole-25e8c9.netlify.app/" />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Sahitya - User Blog Platform" />
         <meta
