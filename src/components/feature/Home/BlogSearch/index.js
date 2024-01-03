@@ -68,7 +68,6 @@ const BlogSearch = ({ popularBlogTag }) => {
         alt="Baxkground image"
         width={1200}
         height={370}
-        loading="lazy"
         style={{
           width: "100%",
           height: "auto",

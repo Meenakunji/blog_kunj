@@ -28,18 +28,18 @@ const queryClient = new QueryClient({
 
 function MyApp({ Component, pageProps }) {
   // use for Tracking Gtm tracking
-  useEffect(() => {
-    const tagManagerArgs = {
-      gtmId: "G-3JRNN23QX6",
-    };
-    console.log("Print consonskle ===>>", tagManagerArgs);
+  // useEffect(() => {
+  //   const tagManagerArgs = {
+  //     gtmId: "G-3JRNN23QX6",
+  //   };
+  //   console.log("Print consonskle ===>>", tagManagerArgs);
 
-    try {
-      TagManager.initialize(tagManagerArgs);
-    } catch (error) {
-      console.error("Error initializing TagManager:", error);
-    }
-  }, []);
+  //   try {
+  //     TagManager.initialize(tagManagerArgs);
+  //   } catch (error) {
+  //     console.error("Error initializing TagManager:", error);
+  //   }
+  // }, []);
 
   return (
     <StrictMode>
