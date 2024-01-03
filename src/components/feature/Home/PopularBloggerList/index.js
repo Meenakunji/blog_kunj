@@ -1,13 +1,6 @@
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import DoneIcon from "@mui/icons-material/Done";
-import {
-  Avatar,
-  Box,
-  Button,
-  Container,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { Avatar, Box, Button, Container, Grid, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useCallback, useMemo } from "react";
 import ReactMarkdown from "react-markdown";
@@ -25,6 +18,7 @@ import {
 } from "../../../../redux/slices/user";
 import style from "../style";
 import { createSlug } from "../../../../../utils/common";
+import Image from "next/image";
 
 const PopularBloggerList = ({ popularBlogger }) => {
   const dispatch = useDispatch();
@@ -47,10 +41,7 @@ const PopularBloggerList = ({ popularBlogger }) => {
     [dispatch, router]
   );
 
-  const PopularBloggerData = useMemo(
-    () => popularBlogger?.slice(0, 3),
-    [popularBlogger]
-  );
+  const PopularBloggerData = useMemo(() => popularBlogger?.slice(0, 3), [popularBlogger]);
 
   return (
     <section
@@ -66,8 +57,8 @@ const PopularBloggerList = ({ popularBlogger }) => {
           <Box sx={style.popularArticlesDetails}>
             <Typography variant="h2">Popular Blogger</Typography>
             <Typography variant="body1">
-              In publishing and graphic design, Lorem ipsum is a placeholder
-              text commonlyand graphic design,
+              In publishing and graphic design, Lorem ipsum is a placeholder text commonlyand
+              graphic design,
             </Typography>
           </Box>
           <Button onClick={handlePopularBloggerList}>
@@ -80,20 +71,29 @@ const PopularBloggerList = ({ popularBlogger }) => {
               return (
                 <Grid item xs={12} sm={4} key={index}>
                   <Box sx={style.popularArticlesList}>
-                    <img
-                      src={
-                        item?.result?.[0]?.image || "/images/home/rocket.jpg"
-                      }
+                    {/* <img
+                      src={item?.result?.[0]?.image || "/images/home/rocket.jpg"}
                       alt={item?.result?.[0]?.name}
                       style={{ width: "100%", height: "500px" }}
+                    /> */}
+
+                    <Image
+                      alt={item?.result?.[0]?.name}
+                      src={item?.result?.[0]?.image || "/images/home/rocket.jpg"}
+                      width={500}
+                      height={370}
+                      style={{
+                        width: "100%",
+                        height: "500px",
+                        objectFit: "fill",
+                      }}
+                      priority
                     />
                     <Box
                       sx={style.popularArticlesHeading}
                       onClick={() => handleBlogContentListPage(item)}
                     >
-                      <Typography variant="h4">
-                        {item?.result?.[0]?.blogTitle}
-                      </Typography>
+                      <Typography variant="h4">{item?.result?.[0]?.blogTitle}</Typography>
                       <Box sx={style.detailsComment}>
                         <ReactMarkdown
                           remarkPlugins={[RemarkMathPlugin, remarkGfm]}
@@ -102,10 +102,7 @@ const PopularBloggerList = ({ popularBlogger }) => {
                             img: ({ node, ...props }) => null,
                           }}
                         >
-                          {item?.result?.[0]?.description
-                            ?.split(" ")
-                            .slice(0, 15)
-                            .join(" ")}
+                          {item?.result?.[0]?.description?.split(" ").slice(0, 15).join(" ")}
                         </ReactMarkdown>
                       </Box>
                       <Box sx={style.cardBottomSection}>
@@ -127,19 +124,14 @@ const PopularBloggerList = ({ popularBlogger }) => {
                               <span>
                                 <DoneIcon />
                               </span>
-                              <Typography
-                                variant="h5"
-                                sx={{ color: "#798b9b" }}
-                              >
+                              <Typography variant="h5" sx={{ color: "#798b9b" }}>
                                 Verified writer
                               </Typography>
                             </Box>
                           </Box>
                         </Box>
                         <Box sx={style.date} style={{ color: "#798b9b" }}>
-                          {new Date(
-                            item?.result?.[0]?.createdAt
-                          ).toLocaleDateString("en-US", {
+                          {new Date(item?.result?.[0]?.createdAt).toLocaleDateString("en-US", {
                             day: "numeric",
                             month: "short",
                           })}

@@ -1,14 +1,6 @@
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import DoneIcon from "@mui/icons-material/Done";
-import {
-  Avatar,
-  Box,
-  Button,
-  Card,
-  Container,
-  Grid,
-  Typography,
-} from "@mui/material";
+import { Avatar, Box, Button, Card, Container, Grid, Typography } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
@@ -82,8 +74,8 @@ const CaseStudyList = ({ caseStudyList }) => {
           <Box sx={style.popularArticlesDetails}>
             <Typography variant="h2">Case Study</Typography>
             <Typography variant="body1">
-              In publishing and graphic design, Lorem ipsum is a placeholder
-              text commonlyand graphic design,
+              In publishing and graphic design, Lorem ipsum is a placeholder text commonlyand
+              graphic design,
             </Typography>
           </Box>
           <Button onClick={handlePopularBlogListing}>
@@ -97,7 +89,7 @@ const CaseStudyList = ({ caseStudyList }) => {
               <Card sx={{ borderRadius: "15px" }} key={index}>
                 <Grid container>
                   <Grid item xs={12} sm={6}>
-                    <img
+                    {/* <img
                       alt="slider image"
                       src={item?.image || "/images/home/rocket.jpg"}
                       style={{
@@ -107,6 +99,21 @@ const CaseStudyList = ({ caseStudyList }) => {
                         cursor: "pointer",
                       }}
                       onClick={() => handleBlogContentListPage(item)}
+                    /> */}
+
+                    <Image
+                      alt="slider image"
+                      src={item?.image || "/images/home/rocket.jpg"}
+                      width={500}
+                      height={370}
+                      style={{
+                        width: "100%",
+                        height: "360px",
+                        objectFit: "fill",
+                        cursor: "pointer",
+                      }}
+                      onClick={() => handleBlogContentListPage(item)}
+                      priority
                     />
                   </Grid>
                   <Grid item xs={12} sm={6}>
@@ -132,10 +139,7 @@ const CaseStudyList = ({ caseStudyList }) => {
                               img: ({ node, ...props }) => null,
                             }}
                           >
-                            {item?.description
-                              ?.split(" ")
-                              .slice(0, 15)
-                              .join(" ")}
+                            {item?.description?.split(" ").slice(0, 15).join(" ")}
                           </ReactMarkdown>
                         </Box>
                       </Box>
@@ -152,27 +156,20 @@ const CaseStudyList = ({ caseStudyList }) => {
                             </Avatar>
                           </Box>
                           <Box sx={style.profileName}>
-                            <Typography variant="h5">
-                              {item?.userData?.[0]?.name}
-                            </Typography>
+                            <Typography variant="h5">{item?.userData?.[0]?.name}</Typography>
                             <Box sx={style.dFlex}>
                               <span>
                                 <DoneIcon />
                               </span>
-                              <Typography variant="body1">
-                                Verified writer
-                              </Typography>
+                              <Typography variant="body1">Verified writer</Typography>
                             </Box>
                           </Box>
                         </Box>
                         <Box sx={{ ...style.date, color: "#798b9b" }}>
-                          {new Date(item?.createdAt).toLocaleDateString(
-                            "en-US",
-                            {
-                              day: "numeric",
-                              month: "short",
-                            }
-                          )}
+                          {new Date(item?.createdAt).toLocaleDateString("en-US", {
+                            day: "numeric",
+                            month: "short",
+                          })}
                         </Box>
                       </Box>
                     </Box>

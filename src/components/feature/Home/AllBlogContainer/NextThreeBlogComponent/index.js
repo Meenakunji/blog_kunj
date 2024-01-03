@@ -1,6 +1,7 @@
 import React from "react";
 import { Avatar, Box, Grid, Typography } from "@mui/material";
 import style from "../../style";
+import Image from "next/image";
 
 export const NextThreeBlogComponent = ({
   nextThreeToFiveItems,
@@ -18,17 +19,27 @@ export const NextThreeBlogComponent = ({
         nextThreeToFiveItems?.map((item, index) => {
           return (
             <Grid item xs={12} sm={4} key={index}>
-              <Box
-                sx={style.popularArticlesList}
-                onClick={() => handleBlogContentListPage(item)}
-              >
-                <img
+              <Box sx={style.popularArticlesList} onClick={() => handleBlogContentListPage(item)}>
+                {/* <img
                   src={item?.image || "/images/home/rocket.jpg"}
                   alt="blog image"
                   style={{
                     width: "100%",
                     height: "500px",
                   }}
+                /> */}
+
+                <Image
+                  alt="blog image"
+                  src={item?.image || "/images/home/rocket.jpg"}
+                  width={500}
+                  height={500}
+                  style={{
+                    width: "100%",
+                    height: "500px",
+                    objectFit: "fill",
+                  }}
+                  priority
                 />
                 <Box sx={style.popularArticlesHeading}>
                   <Typography variant="h4">{item?.blogTitle}</Typography>

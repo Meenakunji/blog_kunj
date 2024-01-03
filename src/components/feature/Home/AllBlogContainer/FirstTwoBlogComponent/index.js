@@ -1,6 +1,7 @@
 import { Avatar, Box, Grid, Typography } from "@mui/material";
 import React from "react";
 import style from "../../style";
+import Image from "next/image";
 
 export const FirstTwoBlogComponent = ({
   handleBlogContentListPage,
@@ -22,11 +23,8 @@ export const FirstTwoBlogComponent = ({
 
           return (
             <Grid item xs={12} sm={6} key={index}>
-              <Box
-                sx={style.popularArticlesList}
-                onClick={() => handleBlogContentListPage(item)}
-              >
-                <img
+              <Box sx={style.popularArticlesList} onClick={() => handleBlogContentListPage(item)}>
+                {/* <img
                   src={image || "/images/home/rocket.jpg"}
                   alt="blog image"
                   style={{
@@ -34,7 +32,20 @@ export const FirstTwoBlogComponent = ({
                     height: "360px",
                     objectFit: "cover",
                   }}
+                /> */}
+                <Image
+                  alt="blog image"
+                  src={image || "/images/home/rocket.jpg"}
+                  width={500}
+                  height={370}
+                  style={{
+                    width: "100%",
+                    height: "360px",
+                    objectFit: "fill",
+                  }}
+                  priority
                 />
+
                 <Box
                   sx={style.popularArticlesHeading}
                   onClick={() => handleBlogContentListPage(item)}

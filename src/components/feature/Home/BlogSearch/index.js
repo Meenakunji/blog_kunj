@@ -9,6 +9,7 @@ import { setParticularBlogContent } from "../../../../redux/slices/user";
 import style from "../style";
 import { BlogPopularTagComponent } from "./BlogPopularTag";
 import { SearchComponent } from "./SearchComponent";
+import Image from "next/image";
 
 const BlogSearch = ({ popularBlogTag }) => {
   const router = useRouter();
@@ -56,11 +57,24 @@ const BlogSearch = ({ popularBlogTag }) => {
 
   return (
     <Box sx={style.headSection}>
-      <img
+      {/* <img
         src="https://i.postimg.cc/h41XhrFF/comment-Bg.webp"
         alt="Baxkground image"
         loading="lazy"
         style={{ width: "100%" }}
+      /> */}
+      <Image
+        src="https://i.postimg.cc/h41XhrFF/comment-Bg.webp"
+        alt="Baxkground image"
+        width={1200}
+        height={370}
+        loading="lazy"
+        style={{
+          width: "100%",
+          height: "auto",
+          objectFit: "fill",
+        }}
+        priority
       />
       <Box sx={style.ourNewRoom}>
         <Typography variant="h6">Our BlogRoom</Typography>
