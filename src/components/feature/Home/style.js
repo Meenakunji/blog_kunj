@@ -66,6 +66,7 @@ const style = {
   },
   detailsComment: {
     cursor: "pointer",
+
     "& h2": {
       color: "#5f5f5f",
       fontSize: "24px",
@@ -73,16 +74,23 @@ const style = {
     },
     "& p": {
       color: "#5f5f5f",
-      "@media(max-width:480px)": {
-        fontSize: "14px",
-        marginTop: "15px",
-      },
     },
     "& ul": {
       color: "#5f5f5f",
     },
+    "& ol": {},
     "& pre": {
       marginTop: "30px",
+    },
+    "@media(max-width:767px)": {
+      display: "none",
+      "& p": {
+        fontSize: "14px",
+        marginTop: "15px",
+      },
+      "& h2": {
+        fontSize: "16px",
+      },
     },
   },
   howit__workSection: {
@@ -103,8 +111,10 @@ const style = {
     "& img": {
       height: "500px",
       objectFit: "cover",
-      "@media(max-width:480px)": {
+      "@media(max-width:767px)": {
         height: "380px",
+        overflow: "unset",
+        display: "none",
       },
     },
     "&:after": {
@@ -117,6 +127,12 @@ const style = {
       content: "''",
       opacity: ".5",
       background: "#000",
+      "@media(max-width:767px)": {
+        display: "none",
+      },
+    },
+    "@media(max-width:767px)": {
+      overflow: "unset",
     },
   },
   ourNewRoom: {
@@ -131,46 +147,54 @@ const style = {
       fontSize: "30px",
       textAlign: "center",
       marginBottom: "25px",
+      "@media(max-width:767px)": {
+        marginBottom: "15px",
+        fontSize: "20px",
+        fontWeight: "500",
+      },
     },
-    "@media(max-width:480px)": {
+    "@media(max-width:767px)": {
       width: "100%",
       padding: "20px",
-      "& h6": {
-        fontSize: "25px",
-      },
+      position: "relative",
+      transform: "unset",
+      top: "50px",
+      left: "0",
     },
   },
   inputSection: {
     position: "relative",
     "& input": {
       width: "100%",
-      borderRadius: "5px",
-      height: "40px",
-      padding: "10px 30px",
+      borderRadius: "100px",
+      height: "50px",
+      padding: "7px 35px",
       color: "#c3c3c3",
       border: "0",
-      fontSize: "14px",
+      fontSize: "16px",
       position: "relative",
+      "@media(max-width:767px)": {
+        height: "39px",
+        fontSize: "15px",
+      },
     },
     "& button": {
-      position: "absolute",
+      position: "absolute !Important",
       top: "50%",
       right: "5px",
       background: "#1565d8",
-      padding: "4px",
-      width: "75px",
-      fontSize: "12px",
+      padding: "8px !important",
+      width: "116px  !important",
+      fontSize: "16px",
       color: "#fff",
       transform: "translateY(-50%)",
-      "&:hover": {
-        background: "#034db7",
-      },
+      height: "41px",
     },
   },
   SearchIcon: {
     position: "absolute",
     top: "50%",
-    left: "5px",
+    left: "10px",
 
     color: "#c5c1c1",
     transform: "translateY(-50%)",
@@ -190,6 +214,7 @@ const style = {
     "& button": {
       backgroundColor: "transparent",
       border: "1px solid #fff",
+      borderRadius: "100px",
       padding: "5px 15px",
       color: "#fff",
       fontSize: "12px",
@@ -231,11 +256,14 @@ const style = {
       width: "113px",
       cursor: "pointer",
     },
-    "@media(max-width:480px)": {
+    "@media(max-width:767px)": {
       "& h1": {
         fontSize: "20px",
       },
-      padding: "20px",
+      "& p": {
+        display: "none",
+      },
+      padding: "15px",
     },
   },
   cardBottomSection: {
@@ -243,6 +271,9 @@ const style = {
     justifyContent: "space-between",
     alignItems: "center",
     marginTop: "23px",
+    "@media(max-width:767px)": {
+      marginTop: "5px",
+    },
   },
   profileDetails: {
     display: "flex",
@@ -271,7 +302,23 @@ const style = {
   date: {
     fontSize: "14px",
   },
+  buttonGroup: {
+    position: "relative",
 
+    "&:after": {
+      content: "''",
+      filter: "blur(5px)",
+      position: "absolute",
+      top: "5px",
+      left: "5px",
+      right: "5px",
+      bottom: "5px",
+      background: "inherit" /* Inherit the gradient from the parent */,
+      borderRadius: "10px",
+      zIndex: "-1",
+      background: "linear-gradient(to right, #47bbfd, #fd6860)",
+    },
+  },
   popularArticles: {
     display: "flex",
     alignItems: "center",
@@ -280,40 +327,32 @@ const style = {
     marginTop: "30px",
     "& h2": {
       fontSize: "40px",
-      color: "#183b56",
-      "@media(max-width:480px)": {
-        fontSize: "25px",
+      color: "#fff",
+      "@media(max-width:767px)": {
+        fontSize: "23px",
       },
     },
     "& p": {
-      color: "#798b9b",
+      color: "#fff",
       fontSize: "14px",
       letterSpacing: "0.2px",
       marginTop: "10px",
-      "@media(max-width:480px)": {
+      "@media(max-width:767px)": {
         fontSize: "12px",
-      },
-    },
-    "& button": {
-      color: "#1565d8",
-      padding: "6px 15px",
-      borderRadius: "5px",
-      fontSize: "12px",
-      backgroundColor: "transparent",
-      border: "2px solid #1565d8",
-      "& svg": {
-        fontSize: "14px",
-        marginLeft: "5px",
-      },
-      "@media(max-width:480px)": {
-        padding: "6px 10px",
-        fontSize: "11px",
+        display: "-webkit-box",
+        "-webkit-line-clamp": "2",
+        "-webkit-box-orient": "vertical",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
       },
     },
   },
   popularArticlesDetails: {
     width: "50%",
     "@media(max-width:480px)": {
+      width: "70%",
+    },
+    "@media(max-width:767px)": {
       width: "70%",
     },
   },
@@ -352,9 +391,9 @@ const style = {
     "& h3": {
       fontSize: "30px",
       color: "#fff",
-      "@media(max-width:480px)": {
+      "@media(max-width:767px)": {
         fontSize: "20px",
-        marginBottom: "10px",
+        marginBottom: "15px",
       },
     },
     "& h4": {
@@ -391,6 +430,9 @@ const style = {
         position: "absolute",
         left: "0",
         top: "0",
+        "@media(max-width:767px)": {
+          display: "none",
+        },
       },
     },
     "& .slick-next": {
@@ -406,6 +448,9 @@ const style = {
         position: "absolute",
         right: "0",
         top: "0",
+        "@media(max-width:767px)": {
+          display: "none",
+        },
       },
     },
   },
@@ -443,7 +488,8 @@ const style = {
   },
   RecommendationBlogImgCSS: {
     width: "100%",
-    objectFit: "cover",
+    height: "370px",
+    objectFit: "fill",
   },
 };
 

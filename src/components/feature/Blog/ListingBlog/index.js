@@ -93,7 +93,11 @@ const ListingBlog = () => {
             ?.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
             .map((item, index) => (
               <Box sx={style.listingSection} key={index}>
-                <Grid container spacing={3}>
+                <Grid
+                  container
+                  spacing={3}
+                  sx={{ flexDirection: { xs: "column-reverse", md: "row" } }}
+                >
                   <Grid item xs={12} md={7}>
                     <Box sx={style.listingBlogDetails}>
                       <Typography
@@ -120,7 +124,7 @@ const ListingBlog = () => {
                             event.stopPropagation();
                             handleBlogContentListPage(item);
                           }}
-                          style={{ cursor: "pointer", color: "green" }}
+                          style={{ cursor: "pointer", color: "green", display: "block" }}
                         >
                           ...Read More
                         </a>

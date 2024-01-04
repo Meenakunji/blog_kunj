@@ -89,18 +89,6 @@ const CaseStudyList = ({ caseStudyList }) => {
               <Card sx={{ borderRadius: "15px" }} key={index}>
                 <Grid container>
                   <Grid item xs={12} sm={6}>
-                    {/* <img
-                      alt="slider image"
-                      src={item?.image || "/images/home/rocket.jpg"}
-                      style={{
-                        width: "100%",
-                        height: "360px",
-                        objectFit: "cover",
-                        cursor: "pointer",
-                      }}
-                      onClick={() => handleBlogContentListPage(item)}
-                    /> */}
-
                     <Image
                       alt="slider image"
                       src={item?.image || "/images/home/rocket.jpg"}
@@ -109,7 +97,7 @@ const CaseStudyList = ({ caseStudyList }) => {
                       style={{
                         width: "100%",
                         height: "360px",
-                        objectFit: "fill",
+                        objectFit: "cover",
                         cursor: "pointer",
                       }}
                       onClick={() => handleBlogContentListPage(item)}

@@ -158,7 +158,7 @@ const Header = () => {
             <Tabs
               sx={{ marginLeft: "auto" }}
               indicatorColor="primary"
-              textColor="primary"
+              textColor="#fff"
               value={value}
               onChange={handleTabChange}
               TabIndicatorProps={{
@@ -171,7 +171,7 @@ const Header = () => {
             </Tabs>
           )}
           <Box
-            sx={{ ...styles.lightDarkDesktop, ...styles.lightDarkMobile }}
+            // sx={{ ...styles.lightDarkDesktop, ...styles.lightDarkMobile }}
             onClick={handleThemeSwitch}
           >
             <ToggleThemeBtn theme={theme} />
