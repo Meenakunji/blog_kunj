@@ -3,15 +3,7 @@ import {
   MoreHorizOutlined as MoreHorizOutlinedIcon,
   RemoveCircleOutlineOutlined as RemoveCircleOutlineOutlinedIcon,
 } from "@mui/icons-material";
-import {
-  Box,
-  Button,
-  Container,
-  Grid,
-  List,
-  ListItem,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Container, Grid, List, ListItem, Typography } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
@@ -23,21 +15,17 @@ import remarkGfm from "remark-gfm";
 import RemarkMathPlugin from "remark-math";
 import remark2rehype from "remark-rehype";
 import { createSlug } from "../../../../../utils/common";
-import {
-  setParticularBlogContent,
-  setTagListName,
-} from "../../../../redux/slices/user";
+import { setParticularBlogContent, setTagListName } from "../../../../redux/slices/user";
 import LoaderComponent from "../../../common/Loader";
 import style from "../style";
+import Image from "next/image";
 
 const ListingBlog = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const router = useRouter();
   const dispatch = useDispatch();
-  const { category, allBlogsContainer, popularBlogs } = useSelector(
-    (state) => state.user
-  );
+  const { category, allBlogsContainer, popularBlogs } = useSelector((state) => state.user);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8;
 
@@ -89,8 +77,7 @@ const ListingBlog = () => {
           },
           {
             property: "twitter.image",
-            content:
-              "https://timely-profiterole-25e8c9.netlify.app/bloglisting",
+            content: "https://timely-profiterole-25e8c9.netlify.app/bloglisting",
           },
         ]}
       />
@@ -103,10 +90,7 @@ const ListingBlog = () => {
       ) : (
         <Container maxWidth="md">
           {allBlogsContainer
-            ?.slice(
-              (currentPage - 1) * itemsPerPage,
-              currentPage * itemsPerPage
-            )
+            ?.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
             .map((item, index) => (
               <Box sx={style.listingSection} key={index}>
                 <Grid container spacing={3}>
@@ -174,11 +158,7 @@ const ListingBlog = () => {
                         handleBlogContentListPage(item);
                       }}
                     >
-                      <img
-                        src={item?.image}
-                        style={{ width: "330px", height: "330px" }}
-                        alt="blog image"
-                      />
+                      <Image src={item?.image} width={330} height={330} alt="blog image" />
                     </Box>
                   </Grid>
                 </Grid>
@@ -187,16 +167,12 @@ const ListingBlog = () => {
                     <List>
                       <ListItem>
                         {Math.floor(
-                          (new Date() - new Date(item?.createdAt)) /
-                            (1000 * 60 * 60 * 24)
+                          (new Date() - new Date(item?.createdAt)) / (1000 * 60 * 60 * 24)
                         )}{" "}
                         days ago
                       </ListItem>
                       <ListItem>
-                        {Math.ceil(
-                          item?.description?.split(/\s+/).length / 200
-                        )}{" "}
-                        mins to read
+                        {Math.ceil(item?.description?.split(/\s+/).length / 200)} mins to read
                       </ListItem>
                       <ListItem>Based on your interest</ListItem>
                     </List>

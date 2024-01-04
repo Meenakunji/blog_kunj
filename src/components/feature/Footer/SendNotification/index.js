@@ -1,8 +1,10 @@
 import { Box, Button, Container, Grid, Typography, useMediaQuery } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import style from "../style";
 import { API_BASE_URL } from "../../../../constant/appConstants";
+import FooterSendNoticaictionImage from "../../../../../public/images/home/Base.jpg";
 // import SnackBar from "../../../common/SnackBar";
+import Image from "next/image";
 
 export const FooterSendNotification = () => {
   const isMobile = useMediaQuery("(max-width:480px)");
@@ -95,7 +97,18 @@ export const FooterSendNotification = () => {
           <Grid item xs={6}>
             <Box sx={style.bestWeek} style={isMobile ? { width: "380px" } : { width: "450px" }}>
               <Box sx={style.bestWeekBox}>
-                <img src="/images/home/Base.jpg" alt="footer icon" />
+                <Image
+                  src={FooterSendNoticaictionImage}
+                  alt="footer icon"
+                  sizes="100vw"
+                  style={{
+                    width: "100%",
+                    height: "auto",
+                    objectFit: "cover",
+                  }}
+                  priority
+                />
+
                 <Box sx={style.bestWeekDetails}>
                   <Typography variant="h5">The best aticles every week</Typography>
                   <Typography variant="body1">

@@ -38,11 +38,7 @@ const BlogTagList = () => {
       <TagBanner markedblogList={markedblogList} />
       <Divider sx={style.divderCss} />
       <Box sx={style.tagListContainer}>
-        {isLoading ? (
-          <LoaderComponent />
-        ) : (
-          <TagListComponent markedblogList={markedblogList} />
-        )}
+        {isLoading ? <LoaderComponent /> : <TagListComponent markedblogList={markedblogList} />}
       </Box>
       {/* <Typography
         component="h1"
