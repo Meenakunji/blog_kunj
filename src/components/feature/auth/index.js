@@ -5,6 +5,8 @@ import SignupComponent from "./signup";
 import LoginComponent from "./login";
 import CloseIcon from "@mui/icons-material/Close";
 import GoogleSignInButton from "./googlelogin/index";
+import EmailImage from "../../../../public/images/home/email.svg";
+import Image from "next/image";
 
 const AuthenticationComponent = ({ open, handleModalClose }) => {
   const [isOpen, setOpen] = useState(false);
@@ -131,7 +133,14 @@ const AuthenticationComponent = ({ open, handleModalClose }) => {
                             </button>
 
                             <button>
-                              <img src="/images/home/email.svg" alt="email icon" />
+                              <Image
+                                src={EmailImage}
+                                alt="email icon"
+                                style={{
+                                  width: "20px",
+                                }}
+                                priority
+                              />
                               Email
                             </button>
                           </div>

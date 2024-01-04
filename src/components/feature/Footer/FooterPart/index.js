@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  Container,
-  Grid,
-  Link,
-  ListItem,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Container, Grid, Link, ListItem, Typography } from "@mui/material";
 import React from "react";
 import style from "../style";
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -18,6 +10,8 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import HomeWorkIcon from "@mui/icons-material/HomeWork";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
+import Image from "next/image";
+import HeartImage from "../../../../../public/images/home/Heart.svg";
 
 export const FooterPartComponent = () => {
   return (
@@ -32,19 +26,15 @@ export const FooterPartComponent = () => {
                 }}
               >
                 <MenuBookIcon style={{ width: "50px", color: "#fff" }} />
-                <Typography
-                  component="h1"
-                  style={{ fontSize: "18px", color: "#fff" }}
-                >
+                <Typography component="h1" style={{ fontSize: "18px", color: "#fff" }}>
                   Sahitya
                 </Typography>
               </Box>
               <Typography variant="body1">
                 Sahitya: Your go-to blogging website for sharing ideas,
                 <br />
-                stories, and experiences with a vibrant community of writers and
-                readers. Unleash your creativity and connect with like-minded
-                individuals at Sahitya.
+                stories, and experiences with a vibrant community of writers and readers. Unleash
+                your creativity and connect with like-minded individuals at Sahitya.
               </Typography>
             </Box>
           </Grid>
@@ -55,7 +45,6 @@ export const FooterPartComponent = () => {
                 <li>About</li>
                 <li>Terms</li>
                 <li>Privacy Policy</li>
-                <li>Careers</li>
               </ul>
             </Box>
           </Grid>
@@ -114,7 +103,16 @@ export const FooterPartComponent = () => {
         </Grid>
         <Box sx={style.copyRight}>
           <span>
-            <img src="/images/home/Heart.svg" alt="like icon" />
+            <Image
+              src={HeartImage}
+              alt="like icon"
+              style={{
+                width: "100%",
+                height: "auto",
+                objectFit: "cover",
+              }}
+              priority
+            />
           </span>
           <Typography>Copyright © 2023. Crafted with love.</Typography>
         </Box>

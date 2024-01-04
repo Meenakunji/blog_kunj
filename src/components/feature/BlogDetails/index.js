@@ -21,6 +21,10 @@ import { light as SyntaxHighlighterStyle } from "react-syntax-highlighter/dist/c
 import { useRouter } from "next/router";
 import { setTagListName } from "../../../redux/slices/user";
 import Image from "next/image";
+import LikeImage from "../../../../public/images/home/like1.svg";
+import UserBlogShareImage from "../../../../public/images/home/share.svg";
+import UserBlogReadIcon from "../../../../public/images/home/playcircle.svg";
+import MoreDetailsIcon from "../../../../public/images/home/dot.svg";
 
 const CommentBlog = () => {
   const { particularBlogContent } = useSelector((state) => state.user);
@@ -177,16 +181,35 @@ const CommentBlog = () => {
           <Box sx={style.imageContainer}>
             <Image
               src="https://i.postimg.cc/h41XhrFF/comment-Bg.webp"
-              alt="Banner image"
-              layout="fill"
-              objectFit="fill"
+              alt="Baxkground image"
+              width={1200}
+              height={450}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "fill",
+              }}
+              priority
             />
           </Box>
 
           <Container maxWidth="md">
             <Box sx={style.bannerBg}>
               <Box sx={style.profileImg}>
-                <img src={particularBlogContent?.userData?.[0]?.profilePic} alt="user Profile" />
+                <Image
+                  src={particularBlogContent?.userData?.[0]?.profilePic}
+                  alt="user Profile"
+                  width={40}
+                  height={40}
+                  style={{
+                    borderRadius: "100px",
+                    width: "40px",
+                    height: "40px",
+                    border: "1px solid #c3c3c3",
+                    objectFit: "cover",
+                  }}
+                  priority
+                />
               </Box>
               <Box sx={style.profileName}>
                 <Typography variant="h5">{particularBlogContent?.userData?.[0]?.name}</Typography>
@@ -210,7 +233,16 @@ const CommentBlog = () => {
                   <Box sx={style.commentList}>
                     <Box sx={style.commentChat}>
                       <Box sx={style.commentChatList} onClick={() => handleBlogLikeCount()}>
-                        <img src="/images/home/like1.svg" alt="like icon" />
+                        <Image
+                          src={LikeImage}
+                          alt="like icon"
+                          style={{
+                            width: "100%",
+                            height: "auto",
+                            objectFit: "cover",
+                          }}
+                          priority
+                        />
                         <Typography variant="body1">{formatCount(blogLikeCount)}</Typography>
                       </Box>
                       <Box sx={style.commentChatList}>
@@ -229,14 +261,41 @@ const CommentBlog = () => {
                         {isReading ? (
                           <PauseCircleFilledIcon />
                         ) : (
-                          <img src="/images/home/playcircle.svg" alt="read blog player" />
+                          <Image
+                            src={UserBlogReadIcon}
+                            alt="read blog player"
+                            style={{
+                              width: "100%",
+                              height: "auto",
+                              objectFit: "cover",
+                            }}
+                            priority
+                          />
                         )}
                       </Box>
                       <Box sx={style.commentChatList}>
-                        <img src="/images/home/share.svg" alt="share icon" />
+                        <Image
+                          src={UserBlogShareImage}
+                          alt="share icon"
+                          style={{
+                            width: "100%",
+                            height: "auto",
+                            objectFit: "cover",
+                          }}
+                          priority
+                        />
                       </Box>
                       <Box sx={style.commentChatList}>
-                        <img src="/images/home/dot.svg" alt="more detail icon" />
+                        <Image
+                          src={MoreDetailsIcon}
+                          alt="more detail icon"
+                          style={{
+                            width: "100%",
+                            height: "auto",
+                            objectFit: "cover",
+                          }}
+                          priority
+                        />
                       </Box>
                     </Box>
                   </Box>
