@@ -61,7 +61,6 @@ export const FooterPartComponent = () => {
                   >
                     <LinkedInIcon />
                   </Link>
-                  Linkedin
                 </li>
                 <li>
                   <Link
@@ -72,7 +71,6 @@ export const FooterPartComponent = () => {
                   >
                     <FacebookIcon />
                   </Link>
-                  Facebook
                 </li>
                 <li>
                   <Link
@@ -84,7 +82,6 @@ export const FooterPartComponent = () => {
                     {" "}
                     <TwitterIcon />
                   </Link>
-                  Twitter
                 </li>
                 <li>
                   <Link
@@ -95,7 +92,6 @@ export const FooterPartComponent = () => {
                   >
                     <InstagramIcon />
                   </Link>
-                  Instagram
                 </li>
               </ul>
             </Box>

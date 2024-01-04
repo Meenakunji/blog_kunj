@@ -15,16 +15,17 @@ const style = {
       fontSize: "35px",
       color: "#fff",
       lineHeight: "35px",
-      "@media(max-width:480px)": {
+      "@media(max-width:767px)": {
         fontSize: "20px",
         lineHeight: "22px",
       },
     },
     "& p": {
-      color: "#5A7184",
+      color: "var(--white)",
       fontSize: "16px",
-      "@media(max-width:480px)": {
+      "@media(max-width:767px)": {
         fontSize: "13px",
+        marginBottom: "10px !important",
       },
     },
     "& form": {
@@ -33,7 +34,7 @@ const style = {
       margin: "30px 0",
       "& input": {
         width: "100%",
-        background: "#fff",
+        background: "var(--white)",
         borderRadius: "8px",
         border: "none",
         padding: "15px",
@@ -47,7 +48,7 @@ const style = {
         borderRadius: "8px",
         width: "185px",
         fontSize: "15px",
-        color: "#fff",
+        color: "var(--white)",
         textTransform: "unset",
 
         "&:hover": {
@@ -63,13 +64,16 @@ const style = {
     width: "450px",
     position: "relative",
     marginLeft: "auto",
+    "@media(max-width:767px)": {
+      width: "100%",
+    },
   },
   bestWeekBox: {
     position: "relative",
     zIndex: "2",
     borderRadius: "16px",
     overflow: "hidden",
-    background: "#fff",
+    background: "var(--white)",
     padding: "2px",
     "& img": {
       width: "100%",
@@ -84,6 +88,15 @@ const style = {
     "& p": {
       color: "#5A7184",
       fontSize: "15px",
+    },
+    "@media(max-width:767px)": {
+      padding: "15px",
+      "& h5": {
+        fontSize: "20px",
+      },
+      "& p": {
+        fontSize: "14px",
+      },
     },
   },
 
@@ -145,18 +158,12 @@ const style = {
     "& ul": {
       padding: "0",
       margin: "20px 0px",
+      display: "flex",
+      justifyContent: "space-between",
       "& li": {
         listStyle: "none",
         color: "#5A7184",
         fontSize: "16px",
-        marginBottom: "12px",
-        background: "#0c2131",
-        borderRadius: "2px",
-        padding: "8px",
-        display: "flex",
-        alignItems: "center",
-        gap: "10px",
-        width: "146px",
       },
     },
   },

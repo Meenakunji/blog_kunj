@@ -13,7 +13,7 @@ const style = {
     marginTop: "30px",
     "& h1": {
       fontSize: "40px",
-      color: "#fff",
+      color: "var(--white)",
       lineHeight: "40px",
     },
   },
@@ -35,7 +35,7 @@ const style = {
     gap: "15px",
     "& p": {
       fontSize: "14px",
-      color: "#fff",
+      color: "var(--white)",
       marginLeft: "10px",
     },
   },
@@ -50,7 +50,7 @@ const style = {
   blogContent: {
     "& h2": {
       fontSize: "24px",
-      color: "#fff",
+      color: "var(--white)",
       margin: "30px 0",
     },
     "& p": {
@@ -100,7 +100,7 @@ const style = {
 
     "& h2": {
       fontSize: "48px",
-      color: "#183B56",
+      color: "#fff",
       "@media(max-width:480px)": {
         fontSize: "25px",
       },
@@ -111,19 +111,19 @@ const style = {
   },
   listingBlogDetails: {
     "& h3": {
-      fontSize: "31px",
-      color: "#183B56",
+      fontSize: "25px",
+      color: "#fff",
       cursor: "pointer",
       "@media(max-width:480px)": {
         fontSize: "20px",
       },
     },
     "& p": {
-      fontSize: "18px",
-      color: "#5A7184",
-      marginTop: "20px",
+      fontSize: "15px",
+      color: "#e8e8e8",
+      marginTop: "15px",
       "@media(max-width:480px)": {
-        fontSize: "14px",
+        fontSize: "12px",
       },
     },
   },
@@ -154,9 +154,9 @@ const style = {
       display: "flex",
       gap: "25px",
       "& li": {
-        color: "#000",
+        color: "#fff",
         padding: "0",
-        fontSize: "14px",
+        fontSize: "15px",
         width: "auto",
       },
       "@media(max-width:480px)": {
@@ -201,7 +201,7 @@ const style = {
     },
   },
   listingSection: {
-    marginBottom: "50px",
+    marginBottom: "40px",
     "@media(max-width:480px)": {
       marginBottom: "25px",
     },
@@ -210,7 +210,7 @@ const style = {
   // blogTagList
   ContainerBlogListComp: {
     marginTop: "30px",
-    background: "#fff",
+    background: "var(--white)",
     padding: "20px",
     color: "#000",
   },
@@ -248,15 +248,11 @@ const style = {
     display: "block",
     "& button": {
       borderColor: "#000",
-      // background: "green",
-      color: "#fff",
+      background: "green",
+      color: "var(--white)",
       textAlign: "center",
       textDecoration: "none",
       borderStyle: "solid",
-      background: "linear-gradient(120deg, darkmagenta, crimson, orange)",
-      backgroundSize: "200% 100%",
-      backgroundPosition: "100% 0",
-      transition: "background-position .5s",
     },
   },
   divderCss: {

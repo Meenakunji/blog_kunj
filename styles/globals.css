@@ -4,13 +4,17 @@
 
 
 
-
+:root {
+  --blue: #1e90ff;
+  --white: #ffffff;
+}
 
 body {
   /* padding-top: 80px; */
   margin: 0;
   /* background-color: #fff !important; */
   font-family: 'Hanken Grotesk', sans-serif !important;
+  background-color: #111827 !important;
 }
 
 a {

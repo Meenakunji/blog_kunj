@@ -55,11 +55,6 @@ const RecommendationBlog = ({ recommendationBlogList }) => {
         >
           <Grid container alignItems={"center"}>
             <Grid item xs={12} md={6}>
-              {/* <img
-                src={randomBlog?.image || "/images/home/rocket.jpg"}
-                alt="recommended image"
-                style={style.RecommendationBlogImgCSS}
-              /> */}
               <Image
                 alt="recommended image"
                 src={randomBlog?.image || "/images/home/rocket.jpg"}
@@ -84,7 +79,7 @@ const RecommendationBlog = ({ recommendationBlogList }) => {
                     remarkPlugins={[RemarkMathPlugin, remarkGfm]}
                     rehypePlugins={[rehypeKatex, remark2rehype]}
                     components={{
-                      img: ({ node, ...props }) => null, // This will remove image rendering
+                      img: ({ node, ...props }) => null,
                     }}
                   >
                     {randomBlog?.description?.split(" ").slice(0, 15).join(" ")}

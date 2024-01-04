@@ -85,7 +85,7 @@ export const FooterSendNotification = () => {
                     setEmail(e?.target?.value);
                   }}
                 />
-                <Button onClick={handleSubscibeEmail}>Get started</Button>
+                <Button onClick={handleSubscibeEmail}>Subscribe</Button>
               </form>
               <Typography variant="body1">
                 Sahitya: Your go-to blogging website for sharing ideas, stories, and experiences
@@ -94,8 +94,8 @@ export const FooterSendNotification = () => {
               </Typography>
             </Box>
           </Grid>
-          <Grid item xs={6}>
-            <Box sx={style.bestWeek} style={isMobile ? { width: "380px" } : { width: "450px" }}>
+          <Grid item xs={12} sm={6}>
+            <Box sx={style.bestWeek}>
               <Box sx={style.bestWeekBox}>
                 <Image
                   src={FooterSendNoticaictionImage}
