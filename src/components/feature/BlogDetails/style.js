@@ -115,6 +115,7 @@ const style = {
   commentChatList: {
     display: "flex",
     alignItems: "center",
+    cursor: "pointer",
     "& p": {
       marginLeft: "10px",
       color: "#7A7A7A",
@@ -331,6 +332,12 @@ const style = {
     alignItems: "center",
     justifyContent: "space-between",
     marginTop: "25px",
+  },
+
+  videoStyle: {
+    display: "flex",
+    justifyContent: "center",
+    marginTop: "30px",
   },
 };
 
