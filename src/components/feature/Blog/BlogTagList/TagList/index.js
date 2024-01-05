@@ -42,6 +42,7 @@ export const TagListComponent = ({ markedblogList }) => {
                       objectFit: "cover",
                     }}
                     priority
+                    onClick={() => handleBlogContentListPage(item)}
                   />
                   <Typography variant="h2">{item?.blogTitle}</Typography>
                   <Box sx={style.userdetails}>

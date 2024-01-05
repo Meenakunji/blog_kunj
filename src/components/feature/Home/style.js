@@ -26,6 +26,7 @@ const style = {
   },
   tagListBlogBox: {
     width: "32.333333%",
+    cursor: "pointer",
     "@media(max-width:480px)": {
       width: "100%",
       "& h6": {
@@ -66,7 +67,6 @@ const style = {
   },
   detailsComment: {
     cursor: "pointer",
-
     "& h2": {
       color: "#5f5f5f",
       fontSize: "24px",
