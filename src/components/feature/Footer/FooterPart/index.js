@@ -1,17 +1,13 @@
-import { Box, Button, Container, Grid, Link, ListItem, Typography } from "@mui/material";
-import React from "react";
-import style from "../style";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import EmailIcon from "@mui/icons-material/Email";
-import PhoneIcon from "@mui/icons-material/Phone";
-import WhatsAppIcon from "@mui/icons-material/WhatsApp";
-import HomeWorkIcon from "@mui/icons-material/HomeWork";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
+import { Box, Container, Grid, Link, Typography } from "@mui/material";
 import Image from "next/image";
+import React from "react";
+import TwitterImage from "../../../../../public/images/about/NewTwitterx.svg";
 import HeartImage from "../../../../../public/images/home/Heart.svg";
+import style from "../style";
 
 export const FooterPartComponent = () => {
   return (
@@ -80,7 +76,16 @@ export const FooterPartComponent = () => {
                     style={{ color: "#fff !important" }}
                   >
                     {" "}
-                    <TwitterIcon />
+                    <Image
+                      src={TwitterImage}
+                      alt="like icon"
+                      style={{
+                        width: "24px",
+                        height: "auto",
+                        objectFit: "cover",
+                      }}
+                      priority
+                    />
                   </Link>
                 </li>
                 <li>

@@ -25,6 +25,7 @@ import LikeImage from "../../../../public/images/home/like1.svg";
 import UserBlogShareImage from "../../../../public/images/home/share.svg";
 import UserBlogReadIcon from "../../../../public/images/home/playcircle.svg";
 import MoreDetailsIcon from "../../../../public/images/home/dot.svg";
+import MetaProperties from "./Meta";
 
 const CommentBlog = () => {
   const { particularBlogContent } = useSelector((state) => state.user);
@@ -240,6 +241,7 @@ const CommentBlog = () => {
                             width: "100%",
                             height: "auto",
                             objectFit: "cover",
+                            cursor: "pointer",
                           }}
                           priority
                         />
@@ -255,7 +257,6 @@ const CommentBlog = () => {
                     <Box sx={style.commentChat} style={{ gap: "15px" }}>
                       <Box sx={style.commentChatList} onClick={() => handleMarkedBlog()}>
                         {blogMarked ? <BookmarkIcon /> : <BookmarkAddOutlinedIcon />}
-                        {/* <img src="/images/home/saveremove.svg" alt="" /> */}
                       </Box>
                       <Box sx={style.commentChatList} onClick={handleRead}>
                         {isReading ? (
@@ -268,6 +269,7 @@ const CommentBlog = () => {
                               width: "100%",
                               height: "auto",
                               objectFit: "cover",
+                              cursor: "pointer",
                             }}
                             priority
                           />
@@ -281,6 +283,7 @@ const CommentBlog = () => {
                             width: "100%",
                             height: "auto",
                             objectFit: "cover",
+                            cursor: "pointer",
                           }}
                           priority
                         />
@@ -293,6 +296,7 @@ const CommentBlog = () => {
                             width: "100%",
                             height: "auto",
                             objectFit: "cover",
+                            cursor: "pointer",
                           }}
                           priority
                         />
@@ -327,6 +331,9 @@ const CommentBlog = () => {
                     {particularBlogContent?.description}
                   </ReactMarkdown>
                 </Box>
+              </Box>
+              <Box sx={style.videoStyle}>
+                <MetaProperties meta={particularBlogContent?.description} />
               </Box>
               <Box sx={style.tagList}>
                 <Typography variant="h4"> {particularBlogContent?.userData?.[0]?.name}</Typography>
