@@ -40,31 +40,6 @@ const BlogTagList = () => {
       <Box sx={style.tagListContainer}>
         {isLoading ? <LoaderComponent /> : <TagListComponent markedblogList={markedblogList} />}
       </Box>
-      {/* <Typography
-        component="h1"
-        style={{
-          marginBottom: "60px",
-          marginTop: "40px",
-          fontSize: "30px",
-          fontWeight: "600",
-          textAlign: "center",
-        }}
-      >
-        Who to follow
-      </Typography> */}
-      {/* <Box
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          flexWrap: "wrap",
-          gap: "10px",
-          marginTop: "60px",
-          marginLeft: "10%",
-          marginRight: "10%",
-        }}
-      >
-        <UserComponent />
-      </Box> */}
     </Box>
   );
 };

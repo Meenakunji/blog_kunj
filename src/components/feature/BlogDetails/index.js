@@ -98,8 +98,7 @@ const CommentBlog = () => {
 
       const startReading = () => {
         if (validVoices.length > 0) {
-          const utterance = speak(contentText, validVoices[0]); // Using the first valid voice
-          // console.log("Print voices", utterance, setIsReading(true));
+          const utterance = speak(contentText, validVoices[0]);
           setIsReading(true);
         } else {
           console.error("No valid voices found!");
@@ -333,7 +332,10 @@ const CommentBlog = () => {
                 </Box>
               </Box>
               <Box sx={style.videoStyle}>
-                <MetaProperties meta={particularBlogContent?.description} />
+                {particularBlogContent?.description &&
+                  particularBlogContent?.description.match(
+                    /(https?:\/\/)?(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/
+                  )?.length >= 5 && <MetaProperties meta={particularBlogContent?.description} />}
               </Box>
               <Box sx={style.tagList}>
                 <Typography variant="h4"> {particularBlogContent?.userData?.[0]?.name}</Typography>
