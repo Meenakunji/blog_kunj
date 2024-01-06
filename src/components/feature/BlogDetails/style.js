@@ -35,6 +35,7 @@ const style = {
     display: "flex",
     alignItems: "center",
     gap: "15px",
+    cursor: "pointer",
   },
   profileName: {
     display: "flex",
@@ -181,6 +182,7 @@ const style = {
   },
   buttonTag: {
     display: "flex",
+    flexWrap: "wrap",
     gap: "15px",
     marginTop: "20px",
     cursor: "pointer",
@@ -190,6 +192,9 @@ const style = {
       fontSize: "12px",
       backgroundColor: "transparent",
       color: "#585858",
+      "@media(max-width:480px)": {
+        padding: "3px 6px",
+      },
     },
   },
   messageSection: {

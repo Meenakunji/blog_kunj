@@ -12,6 +12,7 @@ import { createSlug } from "../../../../../utils/common";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { setParticularBlogContent, setTagListName } from "../../../../redux/slices/user";
+import UpdateImage from "../../../common/Image";
 
 const RecommendationBlog = ({ recommendationBlogList }) => {
   const [randomBlogIndex, setRandomBlogIndex] = useState(0);
@@ -55,16 +56,10 @@ const RecommendationBlog = ({ recommendationBlogList }) => {
         >
           <Grid container alignItems={"center"}>
             <Grid item xs={12} md={6}>
-              <Image
+              <UpdateImage
                 alt="recommended image"
                 src={randomBlog?.image || "/images/home/rocket.jpg"}
-                width={500}
-                height={370}
-                style={{
-                  width: "100%",
-                  height: "370px",
-                  objectFit: "fill",
-                }}
+                customStyles={style.recommendedImageCss}
                 priority
               />
             </Grid>

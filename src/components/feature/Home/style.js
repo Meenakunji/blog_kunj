@@ -495,6 +495,16 @@ const style = {
     height: "370px",
     objectFit: "fill",
   },
+
+  recommendedImageCss: {
+    width: "100%",
+    height: "370px",
+    objectFit: "fill",
+    "@media(max-width:480px)": {
+      height: "200px",
+      objectFit: "cover",
+    },
+  },
 };
 
 export default style;

@@ -194,7 +194,7 @@ const CommentBlog = () => {
           </Box>
 
           <Container maxWidth="md">
-            <Box sx={style.bannerBg}>
+            <Box sx={style.bannerBg} onClick={() => router.push(`/profile?tab=home`)}>
               <Box sx={style.profileImg}>
                 <Image
                   src={particularBlogContent?.userData?.[0]?.profilePic}
@@ -331,6 +331,7 @@ const CommentBlog = () => {
                   </ReactMarkdown>
                 </Box>
               </Box>
+              {/* check if youtube video link have then this component reneder */}
               <Box sx={style.videoStyle}>
                 {particularBlogContent?.description &&
                   particularBlogContent?.description.match(
