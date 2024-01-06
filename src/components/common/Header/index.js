@@ -19,16 +19,16 @@ import {
 } from "@mui/material";
 import { googleLogout } from "@react-oauth/google";
 import cookie from "js-cookie";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import eventBus from "../../../../utils/eventBus";
 import { setTheme } from "../../../redux/slices/layout";
 import { setToken } from "../../../redux/slices/user";
-import ToggleThemeBtn from "../../common/Button/toggleButton";
-import AuthenticationComponent from "../auth";
-import styles from "../auth/style";
-import DrawerComp from "./Drawer";
+import AuthenticationComponent from "../../feature/auth";
+import styles from "../../feature/auth/style";
+import ToggleThemeBtn from "../Button/toggleButton";
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -81,7 +81,7 @@ const Header = () => {
   const router = useRouter();
   const [walletAddress, setWalletAddress] = useState("");
   const { theme } = useSelector((state) => state.layout);
-  const isMatch = useMediaQuery("(max-width:768px)");
+  const isMobile = useMediaQuery("(max-width:768px)");
   const { isLoggedIn, userData } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
@@ -99,7 +99,7 @@ const Header = () => {
     // if (!isLoggedIn) {
     //   eventBus.dispatch("openLoginModal", { function_name: "unique" });
     // } else {
-    router.push(`/new-blog/1`);
+    router.push(`/new-blog/create-blog`);
     // }
   };
 
@@ -152,8 +152,21 @@ const Header = () => {
               </Typography>
             </Box>
           </Typography>
-          {isMatch ? (
-            <DrawerComp />
+          {isMobile ? (
+            <Box style={{ margin: "0px 0px 0px auto" }}>
+              <Image
+                src={"https://i.postimg.cc/wxZbMG3F/blog-Create.png"}
+                alt="Create Blog icon"
+                width={40}
+                height={40}
+                priority
+                style={{
+                  marginLeft: "auto",
+                  cursor: "pointer",
+                }}
+                onClick={() => handleCreateBlog()}
+              />
+            </Box>
           ) : (
             <Tabs
               sx={{ marginLeft: "auto" }}

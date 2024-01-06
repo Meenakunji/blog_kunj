@@ -1,5 +1,6 @@
 const style = {
   mediaCard: {
+    cursor: "pointer",
     "& h1": {
       fontSize: "30px",
     },
@@ -503,6 +504,12 @@ const style = {
     "@media(max-width:480px)": {
       height: "200px",
       objectFit: "cover",
+    },
+  },
+  bookMarkedBlogList: {
+    width: "32.333333%",
+    "@media(max-width:760px)": {
+      width: "100%",
     },
   },
 };

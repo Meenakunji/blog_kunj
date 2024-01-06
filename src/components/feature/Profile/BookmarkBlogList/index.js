@@ -1,14 +1,24 @@
 import { Box, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import ReactMarkdown from "react-markdown";
 import { useMutation } from "react-query";
-import fetcher from "../../../../dataProvider";
-import style from "../../Home/style";
+import { useDispatch } from "react-redux";
+import rehypeKatex from "rehype-katex";
+import remarkGfm from "remark-gfm";
+import RemarkMathPlugin from "remark-math";
+import remark2rehype from "remark-rehype";
+import { createSlug } from "../../../../../utils/common";
 import { API_BASE_URL } from "../../../../constant/appConstants";
+import fetcher from "../../../../dataProvider";
+import { setParticularBlogContent } from "../../../../redux/slices/user";
+import style from "../../Home/style";
 
 export const BookMarkBlogList = () => {
   const [markedblogList, setMarkedblogList] = useState([]);
   const router = useRouter();
+  const dispatch = useDispatch();
+
   // create New ArtistEntery
   const { mutate: getMarkedBlogList } = useMutation(
     () => fetcher.get(`${API_BASE_URL}/v1/blog/bookmark-blog-list`),
@@ -24,22 +34,25 @@ export const BookMarkBlogList = () => {
   useEffect(() => {
     getMarkedBlogList();
   }, []);
+
+  const handleBlogContentListPage = (item) => {
+    dispatch(setParticularBlogContent(item));
+    const urlSlug = createSlug(item?.userData?.[0]?.name, item?.blogTitle);
+    router.push(`/${urlSlug}`);
+  };
+
   return (
     <>
       {markedblogList &&
         markedblogList.map((item, index) => {
           return (
-            <div
-              className="col-md-4 mt-3"
-              key={index}
-              style={{ width: "32.333333%" }}
-            >
+            <Box className="col-md-4 mt-3" key={index} sx={style.bookMarkedBlogList}>
               <div className="card p-3">
-                <Box sx={style.mediaCard} key={index}>
-                  <Box sx={style.chip} style={{ backgroundColor: item?.color }}>
-                    {item?.blogTag}
-                  </Box>
-
+                <Box
+                  sx={style.mediaCard}
+                  key={index}
+                  onClick={() => handleBlogContentListPage(item)}
+                >
                   <Box
                     component="img"
                     src={item?.image}
@@ -48,13 +61,10 @@ export const BookMarkBlogList = () => {
                     }}
                   />
                   <Typography variant="h2">{item?.blogTitle}</Typography>
-                  <Box
-                    sx={style.userdetails}
-                    onClick={() => router.push(`/profile?tab=home`)}
-                  >
+                  <Box sx={style.userdetails} onClick={() => router.push(`/profile?tab=home`)}>
                     <Box
                       component="img"
-                      src={item?.userData?.[0].picture}
+                      src={item?.userData?.[0].profilePic}
                       style={{
                         borderRadius: "100px",
                         width: "30px",
@@ -64,27 +74,29 @@ export const BookMarkBlogList = () => {
                     />
                     <Typography variant="p">
                       By {item?.userData?.[0]?.name} -{" "}
-                      {new Date(item?.creatAt).toLocaleDateString("en-US", {
+                      {new Date(item?.createdAt).toLocaleDateString("en-US", {
                         day: "numeric",
                         month: "long",
                         year: "numeric",
                       })}
                     </Typography>
                   </Box>
-                  <Typography variant="p">
-                    {" "}
-                    {item?.description?.split(" ").slice(0, 15).join(" ")}
-                    <a
-                      href={`/blog/${item?.blogTag}`}
-                      onClick={() => router.push(`/blog/${item?.blogTag}`)}
-                      style={{ cursor: "pointer", color: "#d80af1" }}
+
+                  <Box sx={style.detailsComment} onClick={() => handleBlogContentListPage(item)}>
+                    <ReactMarkdown
+                      remarkPlugins={[RemarkMathPlugin, remarkGfm]}
+                      rehypePlugins={[rehypeKatex, remark2rehype]}
+                      components={{
+                        img: ({ node, ...props }) => null,
+                      }}
                     >
-                      ...Read More
-                    </a>
-                  </Typography>
+                      {item?.description?.split(" ").slice(0, 35).join(" ")}
+                    </ReactMarkdown>
+                    <a style={{ cursor: "pointer", color: "#d80af1" }}>...Read More</a>
+                  </Box>
                 </Box>
               </div>
-            </div>
+            </Box>
           );
         })}
     </>

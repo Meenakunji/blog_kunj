@@ -1,13 +1,18 @@
 import { Box, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import ReactMarkdown from "react-markdown";
 import { useMutation } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
-import fetcher from "../../../../dataProvider";
-import style from "../../Home/style";
-import { API_BASE_URL } from "../../../../constant/appConstants";
-import { setParticularBlogContent } from "../../../../redux/slices/user";
+import rehypeKatex from "rehype-katex";
+import remarkGfm from "remark-gfm";
+import RemarkMathPlugin from "remark-math";
+import remark2rehype from "remark-rehype";
 import { createSlug } from "../../../../../utils/common";
+import { API_BASE_URL } from "../../../../constant/appConstants";
+import fetcher from "../../../../dataProvider";
+import { setParticularBlogContent } from "../../../../redux/slices/user";
+import style from "../../Home/style";
 
 export const BlogList = () => {
   const [userBlogList, setUserBlogList] = useState([]);
@@ -79,15 +84,19 @@ export const BlogList = () => {
                         })}
                       </Typography>
                     </Box>
-                    <Typography variant="body1">
-                      {item?.description?.split(" ").slice(0, 30).join(" ")}
-                      <a
-                        href={`/blog/${item?.blogTag}`}
-                        style={{ cursor: "pointer", color: "#d80af1" }}
+
+                    <Box sx={style.detailsComment} onClick={() => handleBlogContentListPage(item)}>
+                      <ReactMarkdown
+                        remarkPlugins={[RemarkMathPlugin, remarkGfm]}
+                        rehypePlugins={[rehypeKatex, remark2rehype]}
+                        components={{
+                          img: ({ node, ...props }) => null,
+                        }}
                       >
-                        ...Read More
-                      </a>
-                    </Typography>
+                        {item?.description?.split(" ").slice(0, 35).join(" ")}
+                      </ReactMarkdown>
+                      <a style={{ cursor: "pointer", color: "#d80af1" }}>...Read More</a>
+                    </Box>
                   </div>
                 </div>
               </Box>
