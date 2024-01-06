@@ -79,19 +79,26 @@ export default function Profile() {
               {/* <UserBlog /> */}
               <Typography
                 variant="h4"
-                style={{ textAlign: "left", marginBottom: "20px" }}
+                style={{ textAlign: "left", marginBottom: "20px", color: "#fff", fontSize: "14px" }}
               >
                 Blog List Tab Content
               </Typography>
               <Divider style={{ backgroundColor: "#fff", height: "2px" }} />
-              <BlogList />
+              <Box>
+                <BlogList />
+              </Box>
             </TabPanel>
           )}
           {router?.query?.tab === "blog_list" && (
             <TabPanel value={value} index={1}>
               <Typography
                 variant="h4"
-                style={{ textAlign: "center", marginBottom: "20px" }}
+                style={{
+                  textAlign: "center",
+                  marginBottom: "20px",
+                  color: "#fff",
+                  fontSize: "14px",
+                }}
               >
                 Bookmark Blog List Tab Content
               </Typography>
@@ -102,6 +109,7 @@ export default function Profile() {
                   justifyContent: "space-between",
                   flexWrap: "wrap",
                   gap: "10px",
+                  flexDirection: "column",
                 }}
               >
                 <BookMarkBlogList />

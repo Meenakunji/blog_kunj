@@ -24,7 +24,7 @@ import { setTheme } from "../../../redux/slices/layout";
 import { setToken } from "../../../redux/slices/user";
 import ToggleThemeBtn from "../../common/Button/toggleButton";
 import { EnhancedSearch } from "../../common/SearchInput";
-import AuthenticationComponent from "../auth";
+import AuthenticationComponent from "../../feature/auth";
 import styles from "./style";
 
 const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
@@ -191,20 +191,12 @@ const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
 
   return (
     <Box sx={styles.navbar}>
-      <nav
-        className={`navbar navbar-expand-lg ${isScrolled ? "scrolled" : ""}`}
-      >
+      <nav className={`navbar navbar-expand-lg ${isScrolled ? "scrolled" : ""}`}>
         <div className="container-fluid">
           <Box sx={styles.navbarbrand} onClick={() => router.push("/")}>
-            <img
-              src="https://i.postimg.cc/3wgSvKbP/bloggerlogo.png"
-              alt="mobile view icon"
-            />
+            <img src="https://i.postimg.cc/3wgSvKbP/bloggerlogo.png" alt="mobile view icon" />
           </Box>
-          <div
-            className="collapse navbar-collapse justify-content-end"
-            id="navbarSupportedContent"
-          >
+          <div className="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <div className="mx-auto my-2">
               <EnhancedSearch
                 // rows={rows}
@@ -338,11 +330,7 @@ const HeaderComponent = ({ toggleTheme, selectedTheme }) => {
                 </Menu>
               </>
             ) : (
-              <button
-                className="btn btn-light allBtn"
-                type="button"
-                onClick={() => setOpen(true)}
-              >
+              <button className="btn btn-light allBtn" type="button" onClick={() => setOpen(true)}>
                 <LoginIcon /> Login
               </button>
             )}

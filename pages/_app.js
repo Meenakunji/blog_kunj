@@ -2,7 +2,7 @@ import React, { StrictMode, useEffect } from "react";
 import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { Provider } from "react-redux";
-import Layout from "../src/components/feature/Layout";
+import Layout from "../src/components/common/Layout";
 import store from "../src/redux/store";
 
 import CssBaseline from "@mui/material/CssBaseline";
