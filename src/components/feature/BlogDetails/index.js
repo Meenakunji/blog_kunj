@@ -28,7 +28,7 @@ import MoreDetailsIcon from "../../../../public/images/home/dot.svg";
 import MetaProperties from "./Meta";
 
 const CommentBlog = () => {
-  const { particularBlogContent } = useSelector((state) => state.user);
+  const { particularBlogContent, userData } = useSelector((state) => state.user);
   const [isReading, setIsReading] = useState(false);
   const [readCountUpdated, setReadCountUpdated] = useState(false);
   const router = useRouter();
@@ -36,7 +36,7 @@ const CommentBlog = () => {
 
   const [blogLikeCount, setBlogLikeCount] = useState(particularBlogContent?.blogLike || 0);
   const [speechUtterance, setSpeechUtterance] = useState(null);
-  const [blogMarked, setBlogMarked] = useState(particularBlogContent?.isMarkedBlog);
+  const [blogMarked, setBlogMarked] = useState("");
 
   // Check if the user has already visited this blog post
   useEffect(() => {
@@ -126,10 +126,11 @@ const CommentBlog = () => {
 
   // user blog Mark or not
   const { mutate: getMarkedBlogContent } = useMutation(
-    (blogId) => fetcher.post(`${API_BASE_URL}/v1/blog/mark/${blogId}`),
+    (BookMarkedObj) => fetcher.post(`${API_BASE_URL}/v1/blog/bookmark`, BookMarkedObj),
     {
       onSuccess: (resData) => {
-        setBlogMarked(resData?.data?.isMarkedBlog);
+        getMarkedBlogStatus();
+        setBlogMarked(resData?.data?.isBookmarked);
       },
       onError: (error) => {
         alert(error?.response?.data?.message);
@@ -138,8 +139,32 @@ const CommentBlog = () => {
   );
 
   const handleMarkedBlog = () => {
-    getMarkedBlogContent(particularBlogContent?._id);
+    let BookMarkedObj = {
+      userId: userData?._id,
+      blogId: particularBlogContent?._id,
+    };
+    getMarkedBlogContent(BookMarkedObj);
   };
+
+  // user blog Mark or not
+  const { mutate: getMarkedBlogStatus } = useMutation(
+    () =>
+      fetcher.get(
+        `${API_BASE_URL}/v1/blog/bookmark/${userData?._id}/${particularBlogContent?._id}`
+      ),
+    {
+      onSuccess: (resData) => {
+        setBlogMarked(resData?.data?.isBookmarked);
+      },
+      onError: (error) => {
+        alert(error?.response?.data?.message);
+      },
+    }
+  );
+
+  useEffect(() => {
+    getMarkedBlogStatus();
+  }, []);
 
   // blog likeor not
   const { mutate: blogLikeCountAPI } = useMutation(
