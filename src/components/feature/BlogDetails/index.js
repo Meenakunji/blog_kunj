@@ -26,9 +26,10 @@ import UserBlogShareImage from "../../../../public/images/home/share.svg";
 import UserBlogReadIcon from "../../../../public/images/home/playcircle.svg";
 import MoreDetailsIcon from "../../../../public/images/home/dot.svg";
 import MetaProperties from "./Meta";
+import CodeCopyBtn from "../../common/codeCopyBtn";
 
 const CommentBlog = () => {
-  const { particularBlogContent, userData } = useSelector((state) => state.user);
+  const { particularBlogContent, userData, isLoggedIn } = useSelector((state) => state.user);
   const [isReading, setIsReading] = useState(false);
   const [readCountUpdated, setReadCountUpdated] = useState(false);
   const router = useRouter();
@@ -163,8 +164,10 @@ const CommentBlog = () => {
   );
 
   useEffect(() => {
-    getMarkedBlogStatus();
-  }, []);
+    if (isLoggedIn) {
+      getMarkedBlogStatus();
+    }
+  }, [isLoggedIn]);
 
   // blog likeor not
   const { mutate: blogLikeCountAPI } = useMutation(
@@ -198,6 +201,14 @@ const CommentBlog = () => {
       }
     };
   }, [isReading, speechUtterance]);
+
+  // pre code
+  const Pre = ({ children }) => (
+    <pre style={{ position: "relative" }}>
+      <CodeCopyBtn>{children}</CodeCopyBtn>
+      {children}
+    </pre>
+  );
 
   return (
     <>
@@ -333,6 +344,7 @@ const CommentBlog = () => {
                     remarkPlugins={[RemarkMathPlugin, remarkGfm]}
                     rehypePlugins={[rehypeKatex, remark2rehype]}
                     components={{
+                      pre: Pre,
                       code({ node, inline, className, children, ...props }) {
                         const match = /language-(\w+)/.exec(className || "");
                         return !inline && match ? (

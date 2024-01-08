@@ -12,8 +12,9 @@ export const TagBanner = ({ markedblogList }) => {
   const [open, setOpen] = useState(false);
   const [followStatus, setFollowStatus] = useState(false);
 
-
-  {/* follow & Unfollow  BlogTag Based on UserID*/}
+  {
+    /* follow & Unfollow  BlogTag Based on UserID*/
+  }
   const { mutate: followBlogTag } = useMutation(
     (followBlogTagObj) => fetcher.post(`${API_BASE_URL}/v1/blog/follow-tag`, followBlogTagObj),
     {
@@ -38,7 +39,9 @@ export const TagBanner = ({ markedblogList }) => {
     }
   };
 
-  {/* get BlogTag Following Status Based on UserID*/}
+  {
+    /* get BlogTag Following Status Based on UserID*/
+  }
   const { mutate: fetchFollowStatus } = useMutation(
     () =>
       fetcher.get(
@@ -58,7 +61,7 @@ export const TagBanner = ({ markedblogList }) => {
     if (isLoggedIn) {
       fetchFollowStatus();
     }
-  }, [isLoggedIn, userData.userId, tagListName]);
+  }, [isLoggedIn, userData?._id, tagListName]);
 
   return (
     <Box>
