@@ -1,39 +1,23 @@
-import DoneIcon from "@mui/icons-material/Done";
-import PauseCircleFilledIcon from "@mui/icons-material/PauseCircleFilled";
-import { Box, Button, Container, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useMutation } from "react-query";
-import { useDispatch, useSelector } from "react-redux";
-import fetcher from "../../../dataProvider";
-import SwipeableTemporaryDrawer from "./blogDetails";
-import BookmarkAddOutlinedIcon from "@mui/icons-material/BookmarkAddOutlined";
-import BookmarkIcon from "@mui/icons-material/Bookmark";
-import style from "./style";
-import { formatCount } from "../../../../utils/common";
+import { useSelector } from "react-redux";
 import { API_BASE_URL } from "../../../constant/appConstants";
-import remarkGfm from "remark-gfm";
-import remark2rehype from "remark-rehype";
-import ReactMarkdown from "react-markdown";
-import rehypeKatex from "rehype-katex";
-import RemarkMathPlugin from "remark-math";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { light as SyntaxHighlighterStyle } from "react-syntax-highlighter/dist/cjs/styles/prism";
-import { useRouter } from "next/router";
-import { setTagListName } from "../../../redux/slices/user";
-import Image from "next/image";
-import LikeImage from "../../../../public/images/home/like1.svg";
-import UserBlogShareImage from "../../../../public/images/home/share.svg";
-import UserBlogReadIcon from "../../../../public/images/home/playcircle.svg";
-import MoreDetailsIcon from "../../../../public/images/home/dot.svg";
-import MetaProperties from "./Meta";
+import fetcher from "../../../dataProvider";
+import { MarkDownReactCode } from "../../common/MarkDownCode";
 import CodeCopyBtn from "../../common/codeCopyBtn";
+import AuthenticationComponent from "../auth";
+import MetaProperties from "./Meta";
+import { BlogActionBtn } from "./action";
+import { BlogDetailsPageBanner } from "./banner";
+import { BlogDetailsFooterSection } from "./footerSection";
+import style from "./style";
 
 const CommentBlog = () => {
   const { particularBlogContent, userData, isLoggedIn } = useSelector((state) => state.user);
   const [isReading, setIsReading] = useState(false);
   const [readCountUpdated, setReadCountUpdated] = useState(false);
-  const router = useRouter();
-  const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
 
   const [blogLikeCount, setBlogLikeCount] = useState(particularBlogContent?.blogLike || 0);
   const [speechUtterance, setSpeechUtterance] = useState(null);
@@ -144,7 +128,11 @@ const CommentBlog = () => {
       userId: userData?._id,
       blogId: particularBlogContent?._id,
     };
-    getMarkedBlogContent(BookMarkedObj);
+    if (!isLoggedIn) {
+      setOpen(true);
+    } else {
+      getMarkedBlogContent(BookMarkedObj);
+    }
   };
 
   // user blog Mark or not
@@ -183,7 +171,11 @@ const CommentBlog = () => {
   );
 
   const handleBlogLikeCount = () => {
-    blogLikeCountAPI(particularBlogContent?._id);
+    if (!isLoggedIn) {
+      setOpen(true);
+    } else {
+      blogLikeCountAPI(particularBlogContent?._id);
+    }
   };
 
   useEffect(() => {
@@ -213,160 +205,27 @@ const CommentBlog = () => {
   return (
     <>
       <Box sx={style.commentBlog}>
-        <Box sx={style.commentBg}>
-          <Box sx={style.imageContainer}>
-            <Image
-              src="https://i.postimg.cc/h41XhrFF/comment-Bg.webp"
-              alt="Baxkground image"
-              width={1200}
-              height={450}
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "fill",
-              }}
-              priority
-            />
-          </Box>
-
-          <Container maxWidth="md">
-            <Box sx={style.bannerBg} onClick={() => router.push(`/profile?tab=home`)}>
-              <Box sx={style.profileImg}>
-                <Image
-                  src={particularBlogContent?.userData?.[0]?.profilePic}
-                  alt="user Profile"
-                  width={40}
-                  height={40}
-                  style={{
-                    borderRadius: "100px",
-                    width: "40px",
-                    height: "40px",
-                    border: "1px solid #c3c3c3",
-                    objectFit: "cover",
-                  }}
-                  priority
-                />
-              </Box>
-              <Box sx={style.profileName}>
-                <Typography variant="h5">{particularBlogContent?.userData?.[0]?.name}</Typography>
-                <Box sx={style.dFlex}>
-                  <span>
-                    <DoneIcon />
-                  </span>
-                  <Typography variant="body1"> Verified Blogger</Typography>
-                </Box>
-              </Box>
-            </Box>
-          </Container>
-        </Box>
+        {/* Blog Details Page Banner Section*/}
+        <BlogDetailsPageBanner particularBlogContent={particularBlogContent} />
 
         <Box sx={style.commentSection}>
           <Container maxWidth="md">
             <Box sx={style.commentSectionBg}>
               <Box sx={style.bannerDetails}>
                 <Typography variant="h1">{particularBlogContent?.blogTitle}</Typography>
-                <Box sx={style.commentDetails}>
-                  <Box sx={style.commentList}>
-                    <Box sx={style.commentChat}>
-                      <Box sx={style.commentChatList} onClick={() => handleBlogLikeCount()}>
-                        <Image
-                          src={LikeImage}
-                          alt="like icon"
-                          style={{
-                            width: "100%",
-                            height: "auto",
-                            objectFit: "cover",
-                            cursor: "pointer",
-                          }}
-                          priority
-                        />
-                        <Typography variant="body1">{formatCount(blogLikeCount)}</Typography>
-                      </Box>
-                      <Box sx={style.commentChatList}>
-                        <SwipeableTemporaryDrawer />
-                        <Typography variant="body1">
-                          {particularBlogContent?.result?.length}
-                        </Typography>
-                      </Box>
-                    </Box>
-                    <Box sx={style.commentChat} style={{ gap: "15px" }}>
-                      <Box sx={style.commentChatList} onClick={() => handleMarkedBlog()}>
-                        {blogMarked ? <BookmarkIcon /> : <BookmarkAddOutlinedIcon />}
-                      </Box>
-                      <Box sx={style.commentChatList} onClick={handleRead}>
-                        {isReading ? (
-                          <PauseCircleFilledIcon />
-                        ) : (
-                          <Image
-                            src={UserBlogReadIcon}
-                            alt="read blog player"
-                            style={{
-                              width: "100%",
-                              height: "auto",
-                              objectFit: "cover",
-                              cursor: "pointer",
-                            }}
-                            priority
-                          />
-                        )}
-                      </Box>
-                      <Box sx={style.commentChatList}>
-                        <Image
-                          src={UserBlogShareImage}
-                          alt="share icon"
-                          style={{
-                            width: "100%",
-                            height: "auto",
-                            objectFit: "cover",
-                            cursor: "pointer",
-                          }}
-                          priority
-                        />
-                      </Box>
-                      <Box sx={style.commentChatList}>
-                        <Image
-                          src={MoreDetailsIcon}
-                          alt="more detail icon"
-                          style={{
-                            width: "100%",
-                            height: "auto",
-                            objectFit: "cover",
-                            cursor: "pointer",
-                          }}
-                          priority
-                        />
-                      </Box>
-                    </Box>
-                  </Box>
-                </Box>
-                <Box sx={style.detailsComment}>
-                  <ReactMarkdown
-                    remarkPlugins={[RemarkMathPlugin, remarkGfm]}
-                    rehypePlugins={[rehypeKatex, remark2rehype]}
-                    components={{
-                      pre: Pre,
-                      code({ node, inline, className, children, ...props }) {
-                        const match = /language-(\w+)/.exec(className || "");
-                        return !inline && match ? (
-                          <SyntaxHighlighter
-                            {...props}
-                            style={SyntaxHighlighterStyle}
-                            language={match[1]}
-                            PreTag="div"
-                          >
-                            {String(children).replace(/\n$/, "")}
-                          </SyntaxHighlighter>
-                        ) : (
-                          <code {...props} className={className}>
-                            {children}
-                          </code>
-                        );
-                      },
-                    }}
-                  >
-                    {particularBlogContent?.description}
-                  </ReactMarkdown>
-                </Box>
+
+                {/* Blog Details Page Action Btn*/}
+                <BlogActionBtn
+                  particularBlogContent={particularBlogContent}
+                  handleBlogLikeCount={handleBlogLikeCount}
+                  handleMarkedBlog={handleMarkedBlog}
+                  blogMarked={blogMarked}
+                  blogLikeCount={blogLikeCount}
+                  handleRead={handleRead}
+                  isReading={isReading}
+                />
+
+                <MarkDownReactCode description={particularBlogContent?.description} />
               </Box>
               {/* check if youtube video link have then this component reneder */}
               <Box sx={style.videoStyle}>
@@ -375,36 +234,17 @@ const CommentBlog = () => {
                     /(https?:\/\/)?(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/
                   )?.length >= 5 && <MetaProperties meta={particularBlogContent?.description} />}
               </Box>
-              <Box sx={style.tagList}>
-                <Typography variant="h4"> {particularBlogContent?.userData?.[0]?.name}</Typography>
-                <Typography variant="body1">
-                  {new Date(particularBlogContent?.createdAt).toLocaleDateString("en-GB", {
-                    day: "2-digit",
-                    month: "long",
-                    year: "numeric",
-                  })}
-                </Typography>
 
-                {/* Sub BlogTag */}
-                <Box sx={style.buttonTag}>
-                  {particularBlogContent?.blogSubTag?.map((item, index) => {
-                    return (
-                      <Button
-                        key={index}
-                        onClick={() => {
-                          dispatch(setTagListName(item));
-                          router.push(`/tag/${item}`);
-                        }}
-                      >
-                        {item}
-                      </Button>
-                    );
-                  })}
-                </Box>
-              </Box>
+              {/* Blog Details Page SubTag Section */}
+              <BlogDetailsFooterSection particularBlogContent={particularBlogContent} />
             </Box>
           </Container>
         </Box>
+        <AuthenticationComponent
+          callBackName={"uniqueCommunity"}
+          open={open}
+          handleModalClose={() => setOpen(false)}
+        />
       </Box>
     </>
   );

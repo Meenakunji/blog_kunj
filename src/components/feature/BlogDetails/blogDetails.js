@@ -3,19 +3,21 @@ import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import { Button, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { useMutation } from "react-query";
 import { useSelector } from "react-redux";
 import { API_BASE_URL } from "../../../constant/appConstants";
 import fetcher from "../../../dataProvider";
+import AuthenticationComponent from "../auth";
 import style from "./style";
-import Image from "next/image";
 
 export default function TemporaryDrawer() {
   const [text, setText] = useState("");
   const [textareaHeight, setTextareaHeight] = useState("auto");
   const [commentMsglist, setCommentMsgList] = useState([]);
-  const { particularBlogContent, userData } = useSelector((state) => state.user);
+  const { particularBlogContent, userData, isLoggedIn } = useSelector((state) => state.user);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     // Function to adjust the textarea height based on its content
@@ -79,7 +81,11 @@ export default function TemporaryDrawer() {
       createdAt: new Date().toISOString(),
       type: "comment",
     };
-    createBlogComments(requestBodyCommentMsg);
+    if (!isLoggedIn) {
+      setOpen(true);
+    } else {
+      createBlogComments(requestBodyCommentMsg);
+    }
   };
 
   // get comment messageList
@@ -118,6 +124,8 @@ export default function TemporaryDrawer() {
   const handleBlogCommentDelete = (data) => {
     deleteBlogCommentMsg({ type: data?.type, commentId: data?._id });
   };
+
+  console.log("commentMsglist", commentMsglist, commentMsglist?.length);
 
   const list = (anchor) => (
     <Box
@@ -234,6 +242,7 @@ export default function TemporaryDrawer() {
           <span onClick={toggleDrawer(anchor, true)}>
             <img src="/images/home/saveremove.svg" alt="save and remove icon" />
           </span>
+          <Typography variant="body1">{commentMsglist?.length}</Typography>
           <Drawer
             anchor={anchor}
             open={state[anchor]}
@@ -252,6 +261,11 @@ export default function TemporaryDrawer() {
           </Drawer>
         </React.Fragment>
       ))}
+      <AuthenticationComponent
+        callBackName={"uniqueCommunity"}
+        open={open}
+        handleModalClose={() => setOpen(false)}
+      />
     </Box>
   );
 }
