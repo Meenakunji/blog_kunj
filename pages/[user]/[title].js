@@ -3,22 +3,21 @@ import BlogDetailComponent from "../../src/components/feature/Blog/BlogDetailCom
 import CommentBlog from "../../src/components/feature/BlogDetails";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 
 export default function UserNamePage() {
   const router = useRouter();
   const { user, title } = router.query;
+  const { particularBlogContent } = useSelector((state) => state.user);
 
   const pageTitle = user && title ? `${user} - ${title}` : "Loading...";
 
   const ogTitle = typeof pageTitle === "string" ? pageTitle : "";
-
   return (
     <>
       <NextSeo
         title={title}
-        description={
-          "Discover engaging and insightful user-generated content on Sahitya - Your Go-to Blog Platform!"
-        }
+        description={particularBlogContent?.description?.substring(0, 150) + "..."}
         canonical={`https://timely-profiterole-25e8c9.netlify.app/${encodeURIComponent(
           user
         )}/${encodeURIComponent(title)}`}
@@ -26,15 +25,11 @@ export default function UserNamePage() {
           url: `https://timely-profiterole-25e8c9.netlify.app/${encodeURIComponent(
             user
           )}/${encodeURIComponent(title)}`,
-          // title: { pageTitle },
-          title: title,
-          description:
-            "Discover engaging and insightful user-generated content on Sahitya - Your Go-to Blog Platform!",
+          title: particularBlogContent?.blogTitle,
+          description: particularBlogContent?.description?.substring(0, 150) + "...",
           images: [
             {
-              url: `https://timely-profiterole-25e8c9.netlify.app/${encodeURIComponent(
-                user
-              )}/${encodeURIComponent(title)}`,
+              url: `${particularBlogContent?.image}`,
               alt: { title },
             },
           ],
@@ -44,22 +39,19 @@ export default function UserNamePage() {
         additionalMetaTags={[
           {
             property: "twitter.title",
-            content: "Sahitya - User Blog Platform",
+            content: particularBlogContent?.blogTitle,
           },
           {
             property: "twitter.description",
-            content:
-              "Discover engaging and insightful user-generated content on Sahitya - Your Go-to Blog Platform!",
+            content: particularBlogContent?.description?.substring(0, 150) + "...",
           },
           {
             property: "twitter.image",
-            content:
-              "Discover engaging and insightful user-generated content on Sahitya - Your Go-to Blog Platform!",
+            content: particularBlogContent?.image,
           },
           {
             name: "keywords",
-            content:
-              "Discover engaging and insightful user-generated content on Sahitya - Your Go-to Blog Platform!",
+            content: particularBlogContent?.description?.substring(0, 150) + "...",
           },
         ]}
       />

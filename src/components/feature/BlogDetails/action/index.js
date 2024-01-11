@@ -3,7 +3,7 @@ import BookmarkAddOutlinedIcon from "@mui/icons-material/BookmarkAddOutlined";
 import PauseCircleFilledIcon from "@mui/icons-material/PauseCircleFilled";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import MoreDetailsIcon from "../../../../../public/images/home/dot.svg";
 import LikeImage from "../../../../../public/images/home/like1.svg";
 import UserBlogReadIcon from "../../../../../public/images/home/playcircle.svg";
@@ -11,6 +11,8 @@ import UserBlogShareImage from "../../../../../public/images/home/share.svg";
 import { formatCount } from "../../../../../utils/common";
 import SwipeableTemporaryDrawer from "../blogDetails";
 import style from "../style";
+import { useRouter } from "next/router";
+import SocialShareComponent from "../../../common/ShareComponent";
 
 export const BlogActionBtn = ({
   particularBlogContent,
@@ -21,6 +23,10 @@ export const BlogActionBtn = ({
   handleRead,
   isReading,
 }) => {
+  const router = useRouter();
+  // console.log("Print router ==>>", router);
+  const [open, setOpen] = useState(false);
+
   return (
     <Box sx={style.commentDetails}>
       <Box sx={style.commentList}>
@@ -75,6 +81,7 @@ export const BlogActionBtn = ({
                 objectFit: "cover",
                 cursor: "pointer",
               }}
+              onClick={() => setOpen(true)}
               priority
             />
           </Box>
@@ -93,6 +100,12 @@ export const BlogActionBtn = ({
           </Box>
         </Box>
       </Box>
+      <SocialShareComponent
+        callBackName={"uniqueCommunity"}
+        open={open}
+        handleModalClose={() => setOpen(false)}
+        sharingUrl={router?.asPath}
+      />
     </Box>
   );
 };
