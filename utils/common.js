@@ -140,19 +140,19 @@ export const CategoryBar = [
   },
 ];
 
-export const AboutData = [
-  {
-    id: 1,
-    image: "/images/home/paris.jpg",
-    title: "Breakfast - Guest Allowed",
-    subTitle:
-      "The Ultima Gstaad’s Presidential Suite opens the doors to a unique world of luxury. This veritable 160 m 2 apartment offers a private and convivial space for welcoming your guests, with a large lounge and reception area.",
-  },
-  {
-    id: 2,
-    image: "/images/home/paris.jpg",
-    title: "Breakfast - Guest Allowed",
-    subTitle:
-      "The Ultima Gstaad’s Presidential Suite opens the doors to a unique world of luxury. This veritable 160 m 2 apartment offers a private and convivial space for welcoming your guests, with a large lounge and reception area.",
-  },
-];
+export const reverseSlug = (slug) => {
+  if (typeof slug !== "string" || !slug) {
+    // Handle cases where slug is not a string or empty
+    return ""; // Or handle it based on your requirements
+  }
+
+  // Remove leading "/" and "@username/" from the slug
+  const titleWithUsername = slug.replace(/^\/?@.*?\//, "");
+
+  // Replace hyphens with spaces and capitalize each word
+  const title = titleWithUsername
+    .replace(/-/g, " ")
+    .replace(/\b\w/g, (match) => match.toUpperCase());
+
+  return title;
+};
