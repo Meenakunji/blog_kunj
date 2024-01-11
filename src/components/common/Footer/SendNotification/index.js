@@ -106,9 +106,7 @@ export const FooterSendNotification = () => {
                     height: "auto",
                     objectFit: "cover",
                   }}
-                  priority
                 />
-
                 <Box sx={style.bestWeekDetails}>
                   <Typography variant="h5">The best aticles every week</Typography>
                   <Typography variant="body1">

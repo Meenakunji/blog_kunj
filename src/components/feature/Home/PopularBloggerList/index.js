@@ -71,12 +71,6 @@ const PopularBloggerList = ({ popularBlogger }) => {
               return (
                 <Grid item xs={12} sm={4} key={index}>
                   <Box sx={style.popularArticlesList}>
-                    {/* <img
-                      src={item?.result?.[0]?.image || "/images/home/rocket.jpg"}
-                      alt={item?.result?.[0]?.name}
-                      style={{ width: "100%", height: "500px" }}
-                    /> */}
-
                     <Image
                       alt={item?.result?.[0]?.name}
                       src={item?.result?.[0]?.image || "/images/home/rocket.jpg"}
@@ -87,7 +81,6 @@ const PopularBloggerList = ({ popularBlogger }) => {
                         height: "500px",
                         objectFit: "fill",
                       }}
-                      priority
                     />
                     <Box
                       sx={style.popularArticlesHeading}

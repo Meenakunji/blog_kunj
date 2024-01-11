@@ -41,7 +41,6 @@ export const TagListComponent = ({ markedblogList }) => {
                       height: "200px",
                       objectFit: "cover",
                     }}
-                    priority
                     onClick={() => handleBlogContentListPage(item)}
                   />
                   <Typography variant="h2">{item?.blogTitle}</Typography>
@@ -58,7 +57,6 @@ export const TagListComponent = ({ markedblogList }) => {
                         border: "1px solid #c3c3c3",
                         objectFit: "cover",
                       }}
-                      priority
                     />
                     <Typography variant="p">
                       By {item?.userData?.[0]?.name} -{" "}

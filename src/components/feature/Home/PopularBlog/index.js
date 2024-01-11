@@ -78,22 +78,11 @@ const PopularBlog = ({ popularBlogList }) => {
                   onClick={() => handleBlogContentListPage(item)}
                 >
                   <Box sx={style.popularArticlesList}>
-                    {/* <img
-                      src={item?.image || "/images/home/rocket.jpg"}
-                      alt=""
-                      style={{
-                        width: "100%",
-                        height: "370px",
-                        objectFit: "cover",
-                      }}
-                    /> */}
-
                     <Image
                       alt="recommended image"
                       src={item?.image || "/images/home/rocket.jpg"}
                       width={500}
                       height={370}
-                      priority
                       style={{
                         width: "100%",
                         height: "370px",

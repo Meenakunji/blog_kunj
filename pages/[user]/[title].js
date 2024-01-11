@@ -30,7 +30,7 @@ export default function UserNamePage() {
           images: [
             {
               url: `${particularBlogContent?.image}`,
-              alt: { title },
+              alt: particularBlogContent?.blogTitle,
             },
           ],
           type: "website",

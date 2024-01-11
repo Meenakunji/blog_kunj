@@ -139,7 +139,6 @@ const AuthenticationComponent = ({ open, handleModalClose }) => {
                                 style={{
                                   width: "20px",
                                 }}
-                                priority
                               />
                               Email
                             </button>

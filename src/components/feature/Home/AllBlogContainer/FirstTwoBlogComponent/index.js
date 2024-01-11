@@ -43,7 +43,6 @@ export const FirstTwoBlogComponent = ({
                     height: "360px",
                     objectFit: "fill",
                   }}
-                  priority
                 />
 
                 <Box

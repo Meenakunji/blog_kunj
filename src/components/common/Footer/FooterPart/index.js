@@ -84,7 +84,6 @@ export const FooterPartComponent = () => {
                         height: "auto",
                         objectFit: "cover",
                       }}
-                      priority
                     />
                   </Link>
                 </li>
@@ -112,7 +111,6 @@ export const FooterPartComponent = () => {
                 height: "auto",
                 objectFit: "cover",
               }}
-              priority
             />
           </span>
           <Typography>Copyright © 2023. Crafted with love.</Typography>

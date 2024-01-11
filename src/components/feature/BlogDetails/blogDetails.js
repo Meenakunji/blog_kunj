@@ -125,8 +125,6 @@ export default function TemporaryDrawer() {
     deleteBlogCommentMsg({ type: data?.type, commentId: data?._id });
   };
 
-  console.log("commentMsglist", commentMsglist, commentMsglist?.length);
-
   const list = (anchor) => (
     <Box
       sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 340 }}
@@ -152,12 +150,6 @@ export default function TemporaryDrawer() {
         />
         {/* )} */}
         <Box sx={style.bottomSection}>
-          {/* <Box sx={style.LeftBottom}>
-            <Button>B</Button>
-            <Button>
-              <FormatItalicIcon />
-            </Button>
-          </Box> */}
           <Box sx={style.rightBottom}>
             <Button onClick={toggleDrawer(anchor, false)}>Cancel</Button>
             <Button sx={style.respond} onClick={(e) => handleCreateBlogComment(e)}>
@@ -182,7 +174,6 @@ export default function TemporaryDrawer() {
                       border: "1px solid #c3c3c3",
                       objectFit: "cover",
                     }}
-                    priority
                   />
                   <Box sx={style.profileReply}>
                     <Typography variant="h5">{item?.userName}</Typography>
