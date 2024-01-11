@@ -159,7 +159,6 @@ const Header = () => {
                 alt="Create Blog icon"
                 width={40}
                 height={40}
-                priority
                 style={{
                   marginLeft: "auto",
                   cursor: "pointer",

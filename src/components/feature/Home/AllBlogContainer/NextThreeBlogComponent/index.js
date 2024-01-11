@@ -39,7 +39,6 @@ export const NextThreeBlogComponent = ({
                     height: "500px",
                     objectFit: "fill",
                   }}
-                  priority
                 />
                 <Box sx={style.popularArticlesHeading}>
                   <Typography variant="h4">{item?.blogTitle}</Typography>

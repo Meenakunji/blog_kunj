@@ -67,7 +67,6 @@ const BlogSearch = ({ popularBlogTag }) => {
           height: "auto",
           objectFit: "fill",
         }}
-        priority
       />
       <Box sx={style.ourNewRoom}>
         <Typography variant="h6">Our BlogRoom</Typography>

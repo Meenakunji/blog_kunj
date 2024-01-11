@@ -101,7 +101,6 @@ const CaseStudyList = ({ caseStudyList }) => {
                         cursor: "pointer",
                       }}
                       onClick={() => handleBlogContentListPage(item)}
-                      priority
                     />
                   </Grid>
                   <Grid item xs={12} sm={6}>

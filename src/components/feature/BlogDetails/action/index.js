@@ -15,7 +15,6 @@ import { useRouter } from "next/router";
 import SocialShareComponent from "../../../common/ShareComponent";
 
 export const BlogActionBtn = ({
-  particularBlogContent,
   handleBlogLikeCount,
   handleMarkedBlog,
   blogMarked,
@@ -24,7 +23,6 @@ export const BlogActionBtn = ({
   isReading,
 }) => {
   const router = useRouter();
-  // console.log("Print router ==>>", router);
   const [open, setOpen] = useState(false);
 
   return (
@@ -41,13 +39,11 @@ export const BlogActionBtn = ({
                 objectFit: "cover",
                 cursor: "pointer",
               }}
-              priority
             />
             <Typography variant="body1">{formatCount(blogLikeCount)}</Typography>
           </Box>
           <Box sx={style.commentChatList}>
             <SwipeableTemporaryDrawer />
-            {/* <Typography variant="body1">{particularBlogContent?.result?.length}</Typography> */}
           </Box>
         </Box>
         <Box sx={style.commentChat} style={{ gap: "15px" }}>
@@ -67,7 +63,6 @@ export const BlogActionBtn = ({
                   objectFit: "cover",
                   cursor: "pointer",
                 }}
-                priority
               />
             )}
           </Box>
@@ -82,7 +77,6 @@ export const BlogActionBtn = ({
                 cursor: "pointer",
               }}
               onClick={() => setOpen(true)}
-              priority
             />
           </Box>
           <Box sx={style.commentChatList}>
@@ -95,7 +89,6 @@ export const BlogActionBtn = ({
                 objectFit: "cover",
                 cursor: "pointer",
               }}
-              priority
             />
           </Box>
         </Box>

@@ -60,7 +60,6 @@ const RecommendationBlog = ({ recommendationBlogList }) => {
                 alt="recommended image"
                 src={randomBlog?.image || "/images/home/rocket.jpg"}
                 customStyles={style.recommendedImageCss}
-                priority
               />
             </Grid>
             <Grid item xs={12} md={6}>
