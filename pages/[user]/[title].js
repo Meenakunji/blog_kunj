@@ -3,16 +3,32 @@ import BlogDetailComponent from "../../src/components/feature/Blog/BlogDetailCom
 import CommentBlog from "../../src/components/feature/BlogDetails";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { reverseSlug } from "../../utils/common";
+import { useEffect } from "react";
+import fetcher from "../../src/dataProvider";
+import { useMutation } from "react-query";
+import { API_BASE_URL } from "../../src/constant/appConstants";
+import { setParticularBlogContent } from "../../src/redux/slices/user";
 
-export default function UserNamePage() {
+export default function UserNamePage(props) {
   const router = useRouter();
+  const dispatch = useDispatch();
   const { user, title } = router.query;
   const { particularBlogContent } = useSelector((state) => state.user);
 
   const pageTitle = user && title ? `${user} - ${title}` : "Loading...";
 
   const ogTitle = typeof pageTitle === "string" ? pageTitle : "";
+
+  // console.log("Print user route ===>>", props?.blogData?.data?.[0], particularBlogContent);
+
+  useEffect(() => {
+    if (props?.blogData?.data?.length > 0 && !particularBlogContent) {
+      dispatch(setParticularBlogContent(props?.blogData?.data?.[0]));
+    }
+  }, [props?.blogData?.data?.[0]]);
+
   return (
     <>
       <NextSeo
@@ -61,4 +77,32 @@ export default function UserNamePage() {
       </Box>
     </>
   );
+}
+
+export async function getServerSideProps(ctx) {
+  try {
+    const {
+      params: { user, title },
+    } = ctx;
+
+    const blogTitle = reverseSlug(title);
+    // Fetch blog data using fetcher
+    const blogData = await fetcher.get(`${API_BASE_URL}/v1/blog/blog-contents/${blogTitle}`);
+
+    console.log();
+    return {
+      props: {
+        blogData,
+        user,
+        title,
+      },
+    };
+  } catch (err) {
+    console.error("Error occurred while getting data:", err);
+    return {
+      props: {
+        error: err.message, // Pass error message to component
+      },
+    };
+  }
 }
