@@ -41,3 +41,11 @@ export default function ExploreTopics() {
     </>
   );
 }
+
+export async function getServerSideProps(ctx) {
+  return {
+    props: {
+      asLayout: "EmptyLayout",
+    },
+  };
+}

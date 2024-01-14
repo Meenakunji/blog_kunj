@@ -1,6 +1,4 @@
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Container, Typography } from "@mui/material";
 import SearchBar from "material-ui-search-bar";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
@@ -36,12 +34,14 @@ const ExploreTopicsHeadComponent = ({ allTagList }) => {
   const settings = {
     dots: false,
     infinite: true,
-    autoplaySpeed: 700,
+    autoplaySpeed: 2000,
     arrows: true,
-    autoplay: false,
+    centerPadding: "20px",
+    centerMode: true,
+    autoplay: true,
     pauseOnHover: true,
     speed: 700,
-    slidesToShow: 4.2,
+    slidesToShow: 5,
     responsive: [
       {
         breakpoint: 1024,
@@ -65,20 +65,6 @@ const ExploreTopicsHeadComponent = ({ allTagList }) => {
         },
       },
     ],
-    prevArrow: (
-      <Box>
-        <Button className="slick-prev" style={customButtonStyle}>
-          <ArrowBackIosIcon />
-        </Button>
-      </Box>
-    ),
-    nextArrow: (
-      <Box style={{ right: "170px !importanat" }}>
-        <Button className="slick-next" style={customButtonRightStyle}>
-          <ArrowForwardIosIcon />
-        </Button>
-      </Box>
-    ),
   };
 
   const doSomethingWith = (data) => {
@@ -95,37 +81,37 @@ const ExploreTopicsHeadComponent = ({ allTagList }) => {
   };
 
   return (
-    <Box sx={style.container}>
-      <Box sx={style.sliderCSS}>
-        <Slider {...settings}>
-          {allTagList?.flat(1).map((item, index) => (
-            <Box key={index} sx={style.blogSliderTagcss}>
-              <Button onClick={() => handleRedirectionTag(item?.blogTag)}>
-                {item?.blogTag}
-              </Button>
-            </Box>
-          ))}
-        </Slider>
-      </Box>
-
-      <Typography variant="h5">Explore topics</Typography>
-
-      <SearchBar
-        style={{
-          alignItems: "center",
-          width: "566px",
-          left: "200px",
-          marginLeft: "32%",
-          backgroundColor: "#e0eadd",
-          borderRadius: 8,
-          marginTop: "50px",
-        }}
-        value={value}
-        onChange={(newValue) => setValue(newValue)}
-        onRequestSearch={() => doSomethingWith(value)}
-        onCancelSearch={() => handleCancelSearch()}
-      />
-    </Box>
+    <>
+      <Container maxWidth="false" sx={{ maxWidth: "1200px" }}>
+        <Box sx={style.slideList}>
+          <Slider {...settings}>
+            {allTagList?.flat(1).map((item, index) => (
+              <Box key={index} sx={style.blogSliderTagcss}>
+                <Button onClick={() => handleRedirectionTag(item?.blogTag)}>{item?.blogTag}</Button>
+              </Box>
+            ))}
+          </Slider>
+        </Box>
+      </Container>
+      <Container maxWidth="false" sx={{ maxWidth: "600px" }}>
+        <Box sx={style.SearchBarSection}>
+          <Typography variant="h5">Explore topics</Typography>
+          <SearchBar
+            style={{
+              alignItems: "center",
+              width: "566px",
+              border: "1px solid #dfe1e5",
+              borderRadius: "100px",
+              boxShadow: "none",
+            }}
+            value={value}
+            onChange={(newValue) => setValue(newValue)}
+            onRequestSearch={() => doSomethingWith(value)}
+            onCancelSearch={() => handleCancelSearch()}
+          />
+        </Box>
+      </Container>
+    </>
   );
 };
 
