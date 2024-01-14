@@ -6,8 +6,6 @@ import { setTagListName } from "../../../../redux/slices/user";
 import style from "../HeadPart/style";
 
 export const ExploreTopicsDetailsComponent = ({ allTagList }) => {
-  const [showAll, setShowAll] = useState(false);
-
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -16,10 +14,21 @@ export const ExploreTopicsDetailsComponent = ({ allTagList }) => {
     router.push(`/tag/${subItem}`);
   };
 
+  // Maintain separate showAll state for each item
+  const [showAllMap, setShowAllMap] = useState({});
+
+  const toggleShowAll = (index) => {
+    setShowAllMap((prev) => ({
+      ...prev,
+      [index]: !prev[index],
+    }));
+  };
+
   return (
     <Container maxWidth="false" sx={{ maxWidth: "1366px" }}>
       <Box sx={style.blogGrid}>
         {allTagList?.map((item, index) => {
+          const showAll = showAllMap[index] || false;
           const subTagsToShow = showAll ? item?.subTags : item?.subTags?.slice(0, 5);
           return (
             <Box sx={style.blogTittleAndSubTittle} key={index}>
@@ -40,7 +49,7 @@ export const ExploreTopicsDetailsComponent = ({ allTagList }) => {
               </ul>
               {item?.subTags?.length > 5 && (
                 <ul style={{ listStyleType: "none" }}>
-                  <li onClick={() => setShowAll(!showAll)} style={style.showMoreBtn}>
+                  <li onClick={() => toggleShowAll(index)} style={style.showMoreBtn}>
                     {showAll ? "Show Less" : "Show More"}
                   </li>
                 </ul>
