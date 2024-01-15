@@ -49,8 +49,8 @@ export default function Profile() {
 
   return (
     <Container maxWidth="lg" style={{ marginTop: "90px" }}>
-      <Grid container spacing={2}>
-        <Grid item xs={9.5}>
+      <Grid container spacing={2} sx={{ flexDirection: { xs: "column-reverse", md: "row" } }}>
+        <Grid item sm={9.5} xs={12}>
           <Tabs
             value={value}
             onChange={handleChange}
@@ -59,7 +59,7 @@ export default function Profile() {
               borderBottom: "1px solid #C3c3c3",
               color: "red",
               ".Mui-selected": {
-                color: `#16e70d !important`,
+                color: "#16e70d !important",
               },
             }}
             TabIndicatorProps={{
@@ -68,15 +68,13 @@ export default function Profile() {
               },
             }}
           >
-            <Tab label="Home" />
-            <Tab label="List" />
-            <Tab label="About" />
+            <Tab label="Home" style={{ color: "#fff" }} />
+            <Tab label="List" style={{ color: "#fff" }} />
+            <Tab label="About" style={{ color: "#fff" }} />
           </Tabs>
 
           {router?.query?.tab === "home" && (
             <TabPanel value={value} index={0}>
-              {/* <UserProfile /> */}
-              {/* <UserBlog /> */}
               <Typography
                 variant="h4"
                 style={{ textAlign: "left", marginBottom: "20px", color: "#fff", fontSize: "14px" }}
@@ -122,7 +120,7 @@ export default function Profile() {
             </TabPanel>
           )}
         </Grid>
-        <Grid item xs={2.5}>
+        <Grid item sm={2.5} xs={12}>
           <RightSideProfile />
         </Grid>
       </Grid>
