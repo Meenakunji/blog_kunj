@@ -88,8 +88,6 @@ export async function getServerSideProps(ctx) {
     const blogTitle = reverseSlug(title);
     // Fetch blog data using fetcher
     const blogData = await fetcher.get(`${API_BASE_URL}/v1/blog/blog-contents/${blogTitle}`);
-
-    console.log();
     return {
       props: {
         blogData,
