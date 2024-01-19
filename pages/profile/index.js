@@ -107,7 +107,6 @@ export default function Profile() {
                   justifyContent: "space-between",
                   flexWrap: "wrap",
                   gap: "10px",
-                  flexDirection: "column",
                 }}
               >
                 <BookMarkBlogList />

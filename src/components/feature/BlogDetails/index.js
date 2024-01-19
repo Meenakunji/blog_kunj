@@ -194,14 +194,6 @@ const CommentBlog = () => {
     };
   }, [isReading, speechUtterance]);
 
-  // pre code
-  const Pre = ({ children }) => (
-    <pre style={{ position: "relative" }}>
-      <CodeCopyBtn>{children}</CodeCopyBtn>
-      {children}
-    </pre>
-  );
-
   return (
     <>
       <Box sx={style.commentBlog}>
