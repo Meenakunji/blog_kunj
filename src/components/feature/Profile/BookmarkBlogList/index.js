@@ -64,7 +64,7 @@ export const BookMarkBlogList = () => {
                   <Box sx={style.userdetails} onClick={() => router.push(`/profile?tab=home`)}>
                     <Box
                       component="img"
-                      src={item?.userData?.[0].profilePic}
+                      src={item?.userData?.profilePic}
                       style={{
                         borderRadius: "100px",
                         width: "30px",
@@ -73,7 +73,7 @@ export const BookMarkBlogList = () => {
                       }}
                     />
                     <Typography variant="p">
-                      By {item?.userData?.[0]?.name} -{" "}
+                      By {item?.userData?.name} -{" "}
                       {new Date(item?.createdAt).toLocaleDateString("en-US", {
                         day: "numeric",
                         month: "long",
@@ -88,6 +88,7 @@ export const BookMarkBlogList = () => {
                       rehypePlugins={[rehypeKatex, remark2rehype]}
                       components={{
                         img: ({ node, ...props }) => null,
+                        h2: ({ node, ...props }) => null,
                       }}
                     >
                       {item?.description?.split(" ").slice(0, 35).join(" ")}
