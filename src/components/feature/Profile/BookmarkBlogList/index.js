@@ -37,7 +37,7 @@ export const BookMarkBlogList = () => {
 
   const handleBlogContentListPage = (item) => {
     dispatch(setParticularBlogContent(item));
-    const urlSlug = createSlug(item?.userData?.[0]?.name, item?.blogTitle);
+    const urlSlug = createSlug(item?.userData?.name, item?.blogTitle);
     router.push(`/${urlSlug}`);
   };
 
