@@ -178,20 +178,31 @@ export default function TemporaryDrawer() {
                   <Box sx={style.profileReply}>
                     <Typography variant="h5">{item?.userName}</Typography>
                     <Typography variant="body1">
-                      {(new Date() - new Date(item?.createdAt)) / (1000 * 60 * 60 * 24) > 1
+                      {/* {(new Date() - new Date(item?.createdAt)) / (1000 * 60 * 60 * 24) > 1
                         ? `${Math.floor(
                             (new Date() - new Date(item?.createdAt)) / (1000 * 60 * 60 * 24)
                           )} days ago`
-                        : "Today"}
+                        : "Today"} */}
+
+                      {new Date(item?.createdAt).toLocaleString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                        hour: "numeric",
+                        minute: "numeric",
+                        hour12: true,
+                      })}
                     </Typography>
                   </Box>
                 </Box>
-                <Box sx={style.replyRightProfile}>
-                  <Box sx={style.delete} onClick={() => handleBlogCommentDelete(item)}>
-                    {" "}
-                    <DeleteOutlinedIcon />{" "}
+                {userData?.email === item?.email && (
+                  <Box sx={style.replyRightProfile}>
+                    <Box sx={style.delete} onClick={() => handleBlogCommentDelete(item)}>
+                      {" "}
+                      <DeleteOutlinedIcon />{" "}
+                    </Box>
                   </Box>
-                </Box>
+                )}
               </Box>
               <Box sx={style.replySectionComment}>
                 <Typography variant="body1">{item?.message}</Typography>

@@ -178,7 +178,7 @@ const Header = () => {
               }}
             >
               <Tab label="Create Blog" onClick={handleCreateBlog} />
-              <Tab label="Community" onClick={() => router.push("/chat")} />
+              {/* <Tab label="Community" onClick={() => router.push("/chat")} /> */}
               <Tab label="About" onClick={() => router.push("/about")} />
             </Tabs>
           )}
