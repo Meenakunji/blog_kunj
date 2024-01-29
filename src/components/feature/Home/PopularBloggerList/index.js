@@ -43,8 +43,6 @@ const PopularBloggerList = ({ popularBlogger }) => {
 
   const PopularBloggerData = useMemo(() => popularBlogger?.slice(0, 3), [popularBlogger]);
 
-  console.log("PopularBloggerData", PopularBloggerData);
-
   return (
     <section
       style={{

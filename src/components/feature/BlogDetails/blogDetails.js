@@ -147,6 +147,7 @@ export default function TemporaryDrawer() {
 
   // open reply section
   const handleReplyModel = (commentID) => {
+    event.preventDefault();
     setReplyModel(true);
     setSelectedCommentId(commentID);
   };
