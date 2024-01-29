@@ -78,7 +78,7 @@ export default function TemporaryDrawer() {
       userName: userData?.name,
       email: userData?.email,
       message: text,
-      createdAt: new Date().toISOString(),
+      // createdAt: new Date().toISOString(),
       type: "comment",
     };
     if (!isLoggedIn) {
