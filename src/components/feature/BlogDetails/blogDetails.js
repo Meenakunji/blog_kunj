@@ -312,6 +312,7 @@ export default function TemporaryDrawer() {
                     return (
                       <ReplyMessageComponet
                         item={item}
+                        key={index}
                         handleReplyMessageModel={handleReplyMessageModel}
                         handleReplyModel={handleReplyModel}
                         hideReplies={hideReplies}
