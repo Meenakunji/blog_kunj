@@ -344,6 +344,12 @@ const style = {
     justifyContent: "center",
     marginTop: "30px",
   },
+  ImageIConCss: {
+    width: "100%",
+    height: "auto",
+    objectFit: "cover",
+    cursor: "pointer",
+  },
 };
 
 export default style;

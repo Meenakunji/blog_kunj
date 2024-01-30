@@ -221,12 +221,6 @@ export default function TemporaryDrawer() {
                   <Box sx={style.profileReply}>
                     <Typography variant="h5">{item?.userName}</Typography>
                     <Typography variant="body1">
-                      {/* {(new Date() - new Date(item?.createdAt)) / (1000 * 60 * 60 * 24) > 1
-                        ? `${Math.floor(
-                            (new Date() - new Date(item?.createdAt)) / (1000 * 60 * 60 * 24)
-                          )} days ago`
-                        : "Today"} */}
-
                       {new Date(item?.createdAt).toLocaleString("en-US", {
                         year: "numeric",
                         month: "long",
@@ -345,7 +339,6 @@ export default function TemporaryDrawer() {
                 boxShadow: "rgba(0, 0, 0, 0.15) 0px 4px 12px",
                 borderLeft: "0",
                 padding: "25px",
-                // background:"rgb(237 249 255)",
               },
             }}
           >
