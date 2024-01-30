@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 import { API_BASE_URL } from "../../../constant/appConstants";
 import fetcher from "../../../dataProvider";
 import { MarkDownReactCode } from "../../common/MarkDownCode";
-import CodeCopyBtn from "../../common/codeCopyBtn";
 import AuthenticationComponent from "../auth";
 import MetaProperties from "./Meta";
 import { BlogActionBtn } from "./action";

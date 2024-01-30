@@ -30,16 +30,7 @@ export const BlogActionBtn = ({
       <Box sx={style.commentList}>
         <Box sx={style.commentChat}>
           <Box sx={style.commentChatList} onClick={() => handleBlogLikeCount()}>
-            <Image
-              src={LikeImage}
-              alt="like icon"
-              style={{
-                width: "100%",
-                height: "auto",
-                objectFit: "cover",
-                cursor: "pointer",
-              }}
-            />
+            <Image src={LikeImage} alt="like icon" className={style.ImageIConCss} />
             <Typography variant="body1">{formatCount(blogLikeCount)}</Typography>
           </Box>
           <Box sx={style.commentChatList}>
@@ -54,42 +45,19 @@ export const BlogActionBtn = ({
             {isReading ? (
               <PauseCircleFilledIcon />
             ) : (
-              <Image
-                src={UserBlogReadIcon}
-                alt="read blog player"
-                style={{
-                  width: "100%",
-                  height: "auto",
-                  objectFit: "cover",
-                  cursor: "pointer",
-                }}
-              />
+              <Image src={UserBlogReadIcon} alt="read blog player" className={style.ImageIConCss} />
             )}
           </Box>
           <Box sx={style.commentChatList}>
             <Image
               src={UserBlogShareImage}
               alt="share icon"
-              style={{
-                width: "100%",
-                height: "auto",
-                objectFit: "cover",
-                cursor: "pointer",
-              }}
+              className={style.ImageIConCss}
               onClick={() => setOpen(true)}
             />
           </Box>
           <Box sx={style.commentChatList}>
-            <Image
-              src={MoreDetailsIcon}
-              alt="more detail icon"
-              style={{
-                width: "100%",
-                height: "auto",
-                objectFit: "cover",
-                cursor: "pointer",
-              }}
-            />
+            <Image src={MoreDetailsIcon} alt="more detail icon" className={style.ImageIConCss} />
           </Box>
         </Box>
       </Box>
