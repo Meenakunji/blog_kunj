@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { SyntaxHighlighterStyle } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import materialOceanic from "react-syntax-highlighter/dist/cjs/styles/prism/material-oceanic";
 import rehypeKatex from "rehype-katex";
 import remarkGfm from "remark-gfm";
 import RemarkMathPlugin from "remark-math";
@@ -31,7 +31,7 @@ export const MarkDownReactCode = ({ description }) => {
             return !inline && match ? (
               <SyntaxHighlighter
                 {...props}
-                style={SyntaxHighlighterStyle}
+                style={materialOceanic}
                 language={match[1]}
                 PreTag="div"
               >

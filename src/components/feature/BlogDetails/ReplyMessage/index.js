@@ -3,12 +3,7 @@ import style from "../style";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 
-export const ReplyMessageComponet = ({
-  item,
-  handleReplyMessageModel,
-  hideReplies,
-  handleReplyModel,
-}) => {
+export const ReplyMessageComponet = ({ item, handleReplyMessageModel, hideReplies }) => {
   return (
     <Box key={item?._id}>
       <Box sx={style.replySection}>
@@ -38,14 +33,6 @@ export const ReplyMessageComponet = ({
             </Typography>
           </Box>
         </Box>
-        {/* {userData?.email === item?.email && (
-          <Box sx={style.replyRightProfile}>
-            <Box sx={style.delete} onClick={() => handleBlogCommentDelete(item)}>
-              {" "}
-              <DeleteOutlinedIcon />{" "}
-            </Box>
-          </Box>
-        )} */}
       </Box>
       <Box sx={style.replySectionComment}>
         <Typography variant="body1">{item?.message}</Typography>
@@ -69,9 +56,6 @@ export const ReplyMessageComponet = ({
               </Typography>
             )}
           </Box>
-          {/* <Box sx={style.replyRight} onClick={() => handleReplyModel(item?.parentCommentId)}>
-            <Typography variant="h5">Reply</Typography>
-          </Box> */}
         </Box>
       </Box>
     </Box>
