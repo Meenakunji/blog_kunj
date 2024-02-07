@@ -72,7 +72,7 @@ const Home = () => {
   }, []);
 
   return (
-    <>
+    <Box>
       <Head>
         <meta
           name="description"
@@ -120,7 +120,7 @@ const Home = () => {
         <CaseStudyList caseStudyList={caseStudyList} />
         <AllBlogComponent allBlogList={allBlogList} />
       </Box>
-    </>
+    </Box>
   );
 };
 
