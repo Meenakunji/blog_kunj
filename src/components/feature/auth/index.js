@@ -54,7 +54,7 @@ const AuthenticationComponent = ({ open, handleModalClose }) => {
         <div className="juperterLogin" style={isMobile ? { padding: "0" } : { padding: "15px" }}>
           <div className="container">
             <div className="row">
-              <div className="col-md-9 mx-auto">
+              <div className="col-md-9 mx-auto" style={{ width: "35%" }}>
                 <div
                   className="row login-box"
                   style={isMobile ? { background: "#00fff5" } : { background: "#fff" }}
@@ -72,7 +72,7 @@ const AuthenticationComponent = ({ open, handleModalClose }) => {
                     }}
                     onClick={handleModalClose}
                   />
-                  {!isMobile && (
+                  {/* {!isMobile && (
                     <div
                       className="col-lg-6 col-md-12 bg-img"
                       style={{ backgroundColor: "hsl(161deg 87.73% 42.73%)" }}
@@ -91,10 +91,10 @@ const AuthenticationComponent = ({ open, handleModalClose }) => {
                         </div>
                       </div>
                     </div>
-                  )}
+                  )} */}
 
                   <div
-                    className="col-lg-6 col-md-12 form-info"
+                    className="col-md-12 form-info"
                     style={isMobile ? { padding: "15px 15px" } : { padding: "30px 30px" }}
                   >
                     <div
