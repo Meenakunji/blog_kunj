@@ -1,4 +1,5 @@
 import YouTubeComponent from "./youtubeVideos";
+import React from 'react';
 
 const MetaProperties = ({ meta, isMobile = false }) => {
   return (

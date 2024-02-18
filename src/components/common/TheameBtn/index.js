@@ -1,6 +1,7 @@
 import IconButton from "@mui/material/IconButton";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
+import React from "react";
 
 const ToggleThemeBtn = ({ theme }) => {
   return (

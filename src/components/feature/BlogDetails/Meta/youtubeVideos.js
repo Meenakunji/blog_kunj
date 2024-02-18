@@ -1,6 +1,7 @@
 import { Box } from "@mui/system";
 import { useState, useEffect } from "react";
 import ReactPlayer from "react-player";
+import React from 'react';
 
 export default function YouTubeComponent({ meta, isMobile = false }) {
   let width = "480px";

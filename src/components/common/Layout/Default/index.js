@@ -2,6 +2,8 @@ import { Box } from "@mui/system";
 import FooterComponent from "../../Footer";
 import HeaderComponent from "../../Header";
 import style from "../style";
+import React from "react";
+
 
 const DefaultLayout = ({ children, customStyles = {} }) => {
   return (

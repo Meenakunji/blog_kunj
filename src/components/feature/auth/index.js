@@ -7,6 +7,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import GoogleSignInButton from "./googlelogin/index";
 import EmailImage from "../../../../public/images/home/email.svg";
 import Image from "next/image";
+import React from "react";
 
 const AuthenticationComponent = ({ open, handleModalClose }) => {
   const [isOpen, setOpen] = useState(false);

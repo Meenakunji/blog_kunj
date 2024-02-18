@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setTheme } from "../src/redux/slices/layout";
 import { darkTheme, lightTheme } from "./theme";
+import React from "react";
 
 const PageThemeProvider = ({ app, children }) => {
   const { theme } = app || {};
