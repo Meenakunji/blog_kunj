@@ -1,4 +1,5 @@
 import { Box } from "@mui/material";
+import React from "react";
 import BlogDetailComponent from "../../src/components/feature/Blog/BlogDetailComponent";
 import CommentBlog from "../../src/components/feature/BlogDetails";
 import { NextSeo } from "next-seo";

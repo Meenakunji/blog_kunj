@@ -23,6 +23,7 @@ const nextConfig = {
       },
     ],
   },
+  pageDataCollectionTimeout: 120000,
 };
 
 module.exports = nextConfig;

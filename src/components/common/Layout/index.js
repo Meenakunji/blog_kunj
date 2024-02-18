@@ -1,5 +1,6 @@
 import DefaultLayout from "./Default";
 import EmptyLayout from "./Empty";
+import React from "react";
 
 const LayoutTypesMapping = {
   DefaultLayout,

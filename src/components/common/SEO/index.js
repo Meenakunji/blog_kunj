@@ -1,5 +1,7 @@
 import Head from "next/head";
 import { DefaultSeo } from "next-seo";
+import React from 'react';
+
 
 const SEOComponents = ({ title, description, canonical, data }) => {
   const defaultSeoConfig = {

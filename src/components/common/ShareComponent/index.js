@@ -2,6 +2,7 @@ import { ShareSocial } from "react-share-social";
 import style from "./style";
 import { Box, Modal, Typography, useMediaQuery } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import React from "react";
 
 export default function SocialShareComponent({ open, handleModalClose, sharingUrl }) {
   const isMobile = useMediaQuery("(max-width:480px)");
