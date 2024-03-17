@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import LoaderComponent from "../../src/components/common/Loader";
 import { ExploreTopicsDetailsComponent } from "../../src/components/feature/ExploreTopics/DetailsPart";
 import ExploreTopicsHeadComponent from "../../src/components/feature/ExploreTopics/HeadPart";

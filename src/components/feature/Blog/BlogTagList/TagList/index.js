@@ -32,7 +32,7 @@ export const TagListComponent = ({ markedblogList }) => {
                 <Box sx={style.mediaCard} key={index}>
                   <Image
                     src={item?.image}
-                    alt="Profile Pic icon"
+                    alt="Blog Pic icon"
                     width={300}
                     height={200}
                     style={{
