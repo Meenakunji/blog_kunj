@@ -9,23 +9,6 @@ import "slick-carousel/slick/slick.css";
 import { setTagListName } from "../../../../redux/slices/user";
 import style from "./style";
 
-const customButtonStyle = {
-  backgroundColor: "lightgray",
-  color: "black",
-  display: "flex",
-  justifyContent: "center",
-  cursor: "pointer",
-  left: "40px !importanat",
-};
-
-const customButtonRightStyle = {
-  backgroundColor: "lightgray",
-  color: "black",
-  display: "flex",
-  justifyContent: "center",
-  cursor: "pointer",
-};
-
 const ExploreTopicsHeadComponent = ({ allTagList }) => {
   const [value, setValue] = useState("");
   const router = useRouter();

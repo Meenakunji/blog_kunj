@@ -17,6 +17,15 @@ import go from "highlight.js/lib/languages/go";
 import java from "highlight.js/lib/languages/java";
 import FileUploader from "../../common/FileUploader";
 import { API_BASE_URL } from "../../../constant/appConstants";
+import { ErrorMessage } from "../../../lib/ErrorMessage";
+
+const validationRules = {
+  name: { required: "Name is required" },
+  blogTag: { required: "Blog Tag is required" },
+  blogTitle: { required: "Blog Title is required" },
+  blogSubTag: { required: "Blog SubTag is required" },
+  description: { required: "Description is required" },
+};
 
 hljs.registerLanguage("javascript", javascript);
 hljs.registerLanguage("python", python);
@@ -29,6 +38,7 @@ const BlogCreate = () => {
     register,
     formState: { errors },
     getValues,
+    handleSubmit,
     setValue,
   } = useForm({
     criteriaMode: "all",
@@ -54,10 +64,7 @@ const BlogCreate = () => {
 
   const { mutate: getCreateBlogContentData } = useMutation(
     (BlogContentDataObj) =>
-      fetcher.post(
-        `${API_BASE_URL}/v1/blog/create-blog-content`,
-        BlogContentDataObj
-      ),
+      fetcher.post(`${API_BASE_URL}/v1/blog/create-blog-content`, BlogContentDataObj),
     {
       onSuccess: ({ data }) => {
         setSnackbar({
@@ -75,21 +82,13 @@ const BlogCreate = () => {
     }
   );
 
-  const handleCreateBlogContentEntry = () => {
-    if (!isSubmitting) {
-      // Only proceed if not currently submitting
-      setIsSubmitting(true);
-
-      let BlogContentDataObj = getValues();
-      const blogSubTags = BlogContentDataObj.blogSubTag
-        .split(",")
-        .map((tag) => tag.trim());
-      // Update the blogSubTag field in the request body to the array of sub-tags
-      BlogContentDataObj.blogSubTag = blogSubTags;
-
-      BlogContentDataObj.user = "jupiter";
-      getCreateBlogContentData(BlogContentDataObj);
-    }
+  const onSubmit = (data) => {
+    setIsSubmitting(true);
+    let BlogContentDataObj = data;
+    const blogSubTags = BlogContentDataObj.blogSubTag.split(",").map((tag) => tag.trim());
+    BlogContentDataObj.blogSubTag = blogSubTags;
+    BlogContentDataObj.user = "jupiter";
+    getCreateBlogContentData(BlogContentDataObj);
   };
 
   return (
@@ -99,7 +98,7 @@ const BlogCreate = () => {
         <div className="row mt-5">
           <Box sx={style.formSection}>
             <h1>Blog Modal</h1>
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <Box sx={style.formRowSection}>
                 <Box sx={style.formgroup}>
                   <TextField
@@ -187,34 +186,8 @@ const BlogCreate = () => {
                   />
                 </Box>
               </Box>
-              {/* <Box sx={style.formRowSection}>
-                <Box sx={style.formgroup}>
-                  <TextArea
-                    label="Code Snippet"
-                    name={"codeSnippet"}
-                    ref={codeSnippetRef}
-                    register={register}
-                    errors={errors}
-                  />
-                  {errors?.codeSnippet && (
-                    <span
-                      style={{
-                        color: "red",
-                        position: "absolute",
-                        bottom: "auto",
-                        left: "0",
-                      }}
-                    >
-                      {errors?.codeSnippet?.message}
-                    </span>
-                  )}
-                </Box>
-              </Box> */}
               <Box sx={style.buttongroup}>
-                <Button
-                  onClick={handleCreateBlogContentEntry}
-                  disabled={isSubmitting}
-                >
+                <Button type="submit" disabled={isSubmitting}>
                   Save
                 </Button>
               </Box>
@@ -222,6 +195,7 @@ const BlogCreate = () => {
           </Box>
         </div>
         {snackbar.show && <SnackBar {...snackbar} onClose={setSnackbar} />}
+        {errors?.name && <ErrorMessage message={errors.name.message} />}
       </div>
     </>
   );
