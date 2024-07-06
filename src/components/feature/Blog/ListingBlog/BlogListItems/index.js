@@ -16,11 +16,11 @@ import remark2rehype from "remark-rehype";
 import { setTagListName } from "../../../../../redux/slices/user";
 import style from "../../style";
 
-export const BlogListItems = ({ item, handleBlogContentListPage }) => {
+export const BlogListItems = ({ BlogKey, item, handleBlogContentListPage }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   return (
-    <Box sx={style.listingSection} key={index}>
+    <Box sx={style.listingSection} key={BlogKey}>
       <Grid container spacing={3} sx={{ flexDirection: { xs: "column-reverse", md: "row" } }}>
         <Grid item xs={12} md={7}>
           <Box sx={style.listingBlogDetails}>

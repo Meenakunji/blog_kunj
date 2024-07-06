@@ -49,6 +49,7 @@ const ListingBlog = () => {
             .map((item, index) => (
               <BlogListItems
                 key={index}
+                BlogKey={index}
                 item={item}
                 handleBlogContentListPage={handleBlogContentListPage}
               />
