@@ -85,7 +85,7 @@ const style = {
     border: "1px solid #E5EAF4",
     background: "#FFF",
     boxShadow: "0px 10px 35px 0px rgba(0, 0, 0, 0.03)",
-    padding: "40px",
+    padding: "30px",
   },
   commentSection: {
     position: "relative",
@@ -349,6 +349,45 @@ const style = {
     height: "auto",
     objectFit: "cover",
     cursor: "pointer",
+  },
+  markdownTable: {
+    width: "100%",
+    borderCollapse: "collapse",
+    margin: "20px 0",
+    fontSize: "16px",
+    textAlign: "left",
+    backgroundColor: "#ffffff",
+    border: "1px solid #ddd",
+    borderRadius: "8px",
+    overflow: "hidden",
+    "& th, & td": {
+      padding: "10px 15px",
+      border: "1px solid #ddd",
+    },
+    "& th": {
+      backgroundColor: "#f7f7f7",
+      fontWeight: "bold",
+    },
+  },
+  listItem: {
+    marginBottom: "8px",
+  },
+  paragraph: {
+    marginBottom: "16px",
+  },
+  image: {
+    maxWidth: "100%",
+    borderRadius: "8px",
+    marginBottom: "16px",
+    cursor: "pointer",
+  },
+  codeBlock: {
+    position: "relative",
+    backgroundColor: "#282c34",
+    color: "#f8f8f2",
+    padding: "12px",
+    borderRadius: "8px",
+    overflow: "auto",
   },
 };
 

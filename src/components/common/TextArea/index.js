@@ -6,7 +6,7 @@ const TextArea = ({ label, name, rows = 4, register, rules, errors }) => {
     <>
       <Box>
         <label htmlFor={name}>{label}</label>
-        <textarea id={name} rows="4" {...register(`${name}`, rules)} />
+        <textarea id={name} rows={rows} {...register(`${name}`, rules)} />
       </Box>
     </>
   );
