@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Box, Button } from "@mui/material";
 import style from "./styles";
 import HomeBanner from "../../common/HomeBanner";
@@ -16,8 +16,9 @@ import python from "highlight.js/lib/languages/python";
 import go from "highlight.js/lib/languages/go";
 import java from "highlight.js/lib/languages/java";
 import FileUploader from "../../common/FileUploader";
-import { API_BASE_URL } from "../../../constant/appConstants";
+import { API_BASE_URL, API_GENERATIVE_LANGUAGE_CLIENT } from "../../../constant/appConstants";
 import { ErrorMessage } from "../../../lib/ErrorMessage";
+import { debounce } from "../../../../utils/common";
 
 const validationRules = {
   name: { required: "Name is required" },
@@ -37,16 +38,16 @@ const BlogCreate = () => {
   const {
     register,
     formState: { errors },
-    getValues,
     handleSubmit,
-    setValue,
   } = useForm({
     criteriaMode: "all",
     mode: "all",
   });
 
-  const [imageUploadUrl, setImageUploadUrl] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [blogTitle, setBlogTitle] = useState("");
+  const [suggestBlogContent, setSuggestBlogContent] = useState("");
+  const [blogDescription, setBlogDescription] = useState("");
 
   const [snackbar, setSnackbar] = useState({
     show: false,
@@ -55,6 +56,56 @@ const BlogCreate = () => {
   });
 
   const codeSnippetRef = useRef(null);
+
+  // for Blog Content suggest
+  const { mutate: getSuggestBlogContentBasedOnTitle } = useMutation(
+    (suggestBlogTitle) =>
+      fetcher.post(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${API_GENERATIVE_LANGUAGE_CLIENT}`,
+        suggestBlogTitle
+      ),
+    {
+      onSuccess: (data) => {
+        console.log("Print suggest title ==>>", data?.candidates?.[0]?.content?.parts?.[0].text);
+        setSuggestBlogContent(data?.candidates?.[0]?.content?.parts?.[0].text);
+      },
+      onError: (error) => {
+        alert(error?.response?.data?.message);
+        setIsSubmitting(false);
+      },
+    }
+  );
+
+  const handleSuggestBlogContent = async (blogtitle) => {
+    try {
+      const blogsuggestContent = {
+        contents: [
+          {
+            parts: [
+              {
+                text: blogtitle,
+              },
+            ],
+          },
+        ],
+      };
+      // await getSuggestBlogContentBasedOnTitle(blogsuggestContent);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const debouncedSuggestBlogContent = useCallback(
+    debounce((blogtitle) => handleSuggestBlogContent(blogtitle), 1000), // 1 second debounce
+    []
+  );
+
+  useEffect(() => {
+    if (blogTitle) {
+      console.log("Debounced suggesting blog content for:", blogTitle);
+      debouncedSuggestBlogContent(blogTitle);
+    }
+  }, [blogTitle, debouncedSuggestBlogContent]);
 
   useEffect(() => {
     if (codeSnippetRef.current) {
@@ -88,7 +139,16 @@ const BlogCreate = () => {
     const blogSubTags = BlogContentDataObj.blogSubTag.split(",").map((tag) => tag.trim());
     BlogContentDataObj.blogSubTag = blogSubTags;
     BlogContentDataObj.user = "jupiter";
+    // BlogContentDataObj.description = suggestBlogContent || blogDescription;
     getCreateBlogContentData(BlogContentDataObj);
+  };
+
+  const handleBlogTitleChange = (value) => {
+    setBlogTitle(value);
+  };
+
+  const handleBlogDescriptionChange = (value) => {
+    setBlogDescription(value);
   };
 
   return (
@@ -123,13 +183,19 @@ const BlogCreate = () => {
                 </Box>
 
                 <Box sx={style.formgroup}>
-                  <FileUploader
+                  {/* <FileUploader
                     label="Blog Image Upload (csv) *"
                     name={"image"}
                     placeholder="FIle Upload (csv)"
                     register={register}
                     errors={errors}
-                    setValue={setValue}
+                  /> */}
+                  <TextField
+                    label="Blog Image Url*"
+                    name={"image"}
+                    placeholder="Blog Image Url*"
+                    register={register}
+                    errors={errors}
                   />
                 </Box>
               </Box>
@@ -162,6 +228,7 @@ const BlogCreate = () => {
                     placeholder="Blog Title"
                     register={register}
                     errors={errors}
+                    // onChange={handleBlogTitleChange}
                   />
                 </Box>
               </Box>
@@ -183,6 +250,7 @@ const BlogCreate = () => {
                     name="description"
                     register={register}
                     errors={errors}
+                    // onChange={handleBlogDescriptionChange}
                   />
                 </Box>
               </Box>

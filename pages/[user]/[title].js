@@ -22,8 +22,6 @@ export default function UserNamePage(props) {
 
   const ogTitle = typeof pageTitle === "string" ? pageTitle : "";
 
-  // console.log("Print user route ===>>", props?.blogData?.data?.[0], particularBlogContent);
-
   useEffect(() => {
     if (props?.blogData?.data?.length > 0 && !particularBlogContent) {
       dispatch(setParticularBlogContent(props?.blogData?.data?.[0]));
@@ -87,7 +85,6 @@ export async function getServerSideProps(ctx) {
     } = ctx;
 
     const blogTitle = reverseSlug(title);
-    // Fetch blog data using fetcher
     const blogData = await fetcher.get(`${API_BASE_URL}/v1/blog/blog-contents/${blogTitle}`);
     return {
       props: {
@@ -100,7 +97,7 @@ export async function getServerSideProps(ctx) {
     console.error("Error occurred while getting data:", err);
     return {
       props: {
-        error: err.message, // Pass error message to component
+        error: err.message,
       },
     };
   }

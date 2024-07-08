@@ -9,12 +9,10 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import "bootstrap/dist/css/bootstrap.css";
 import Head from "next/head";
-import TagManager from "react-gtm-module";
 import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 import PageThemeProvider from "../styles/PageThemeProvider";
 import "../styles/globals.css";
-// import { SessionProvider } from "next-auth/react";
 
 const persistor = persistStore(store, {}, function () {
   persistor.persist();
@@ -27,20 +25,6 @@ const queryClient = new QueryClient({
 });
 
 function MyApp({ Component, pageProps }) {
-  // use for Tracking Gtm tracking
-  // useEffect(() => {
-  //   const tagManagerArgs = {
-  //     gtmId: "G-3JRNN23QX6",
-  //   };
-  //   console.log("Print consonskle ===>>", tagManagerArgs);
-
-  //   try {
-  //     TagManager.initialize(tagManagerArgs);
-  //   } catch (error) {
-  //     console.error("Error initializing TagManager:", error);
-  //   }
-  // }, []);
-
   return (
     <StrictMode>
       <Head>Sahitya Blog Website</Head>

@@ -39,11 +39,9 @@ const CommentBlog = () => {
       ),
     {
       onSuccess: () => {
-        // Set the visited flag to true in local storage once the count is updated
         localStorage.setItem(`visited_${particularBlogContent?._id}`, "true");
         setReadCountUpdated(true);
 
-        // Increment read count for this blog
         const visitedBlogs = JSON.parse(localStorage.getItem("visitedBlogs")) || {};
         visitedBlogs[particularBlogContent?._id] =
           (visitedBlogs[particularBlogContent?._id] || 0) + 1;
@@ -70,12 +68,11 @@ const CommentBlog = () => {
       newSpeechUtterance.voice = voice;
       speechSynthesis.speak(newSpeechUtterance);
       setSpeechUtterance(newSpeechUtterance);
-      return newSpeechUtterance; // Return the utterance for logging purposes
+      return newSpeechUtterance;
     };
 
     if (speechSynthesis) {
       const voices = speechSynthesis.getVoices();
-      // console.log("Voices:", voices); // Log the voices array
 
       // Filter out empty voice objects
       const validVoices = voices.filter((voice) => voice.name.trim() !== "");
