@@ -70,7 +70,7 @@ export default function UserNamePage(props) {
           },
         ]}
       />
-      <Box style={{ background: "#000" }}>
+      <Box style={{ background: "#04202e" }}>
         {/* <BlogDetailComponent /> */}
         <CommentBlog />
       </Box>

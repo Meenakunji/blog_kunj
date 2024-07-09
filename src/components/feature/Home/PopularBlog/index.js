@@ -1,6 +1,6 @@
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import DoneIcon from "@mui/icons-material/Done";
-import { Avatar, Box, Button, Container, Grid, Typography } from "@mui/material";
+import { Avatar, Box, Button, Container, Grid, Skeleton, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useCallback, useMemo } from "react";
 import ReactMarkdown from "react-markdown";
@@ -43,6 +43,8 @@ const PopularBlog = ({ popularBlogList }) => {
 
   const randomBlog = useMemo(() => popularBlogList?.[0] || {}, [popularBlogList]);
 
+  const isLoading = popularBlogList.length === 0;
+
   return (
     <section
       style={{
@@ -67,9 +69,38 @@ const PopularBlog = ({ popularBlogList }) => {
           </Button>
         </Box>
         <Grid container spacing={2}>
-          {popularBlogList?.length > 0 &&
-            popularBlogList?.slice(0, 4)?.map((item, index) => {
-              return (
+          {isLoading
+            ? Array.from(new Array(4)).map((_, index) => (
+                <Grid item xs={12} sm={6} key={index}>
+                  <Box sx={style.popularArticlesList}>
+                    <Skeleton variant="rectangular" width="100%" height={370} />
+                    <Box sx={style.popularArticlesHeading}>
+                      <Skeleton width="60%" />
+                      <Box sx={style.detailsComment}>
+                        <Skeleton width="100%" />
+                        <Skeleton width="80%" />
+                      </Box>
+                      <Box sx={style.cardBottomSection}>
+                        <Box sx={style.profileDetails}>
+                          <Box sx={style.profileSection}>
+                            <Skeleton variant="circular" width={40} height={40} />
+                          </Box>
+                          <Box sx={style.profileName}>
+                            <Skeleton width="50%" />
+                            <Box sx={style.dFlex}>
+                              <Skeleton width="40%" />
+                            </Box>
+                          </Box>
+                        </Box>
+                        <Box sx={style.date}>
+                          <Skeleton width="30%" />
+                        </Box>
+                      </Box>
+                    </Box>
+                  </Box>
+                </Grid>
+              ))
+            : popularBlogList?.slice(0, 4)?.map((item, index) => (
                 <Grid
                   item
                   xs={12}
@@ -89,7 +120,6 @@ const PopularBlog = ({ popularBlogList }) => {
                         objectFit: "fill",
                       }}
                     />
-
                     <Box sx={style.popularArticlesHeading}>
                       <Typography variant="h3">{item?.blogTitle}</Typography>
                       <Box sx={style.detailsComment}>
@@ -139,8 +169,7 @@ const PopularBlog = ({ popularBlogList }) => {
                     </Box>
                   </Box>
                 </Grid>
-              );
-            })}
+              ))}
         </Grid>
       </Container>
     </section>

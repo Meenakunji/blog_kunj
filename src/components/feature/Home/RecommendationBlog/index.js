@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Card, Container, Grid, Typography } from "@mui/material";
+import { Avatar, Box, Button, Card, Container, Grid, Typography, Skeleton } from "@mui/material";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import DoneIcon from "@mui/icons-material/Done";
 import style from "../style";
@@ -46,51 +46,74 @@ const RecommendationBlog = ({ recommendationBlogList }) => {
     [dispatch, router]
   );
 
+  const isLoading = recommendationBlogList.length === 0;
+
   return (
     <section style={style.RecommendationBlogCSS}>
       <Container maxWidth="lg">
         <Card
           sx={{ borderRadius: "15px" }}
-          onClick={() => handleBlogContentListPage(randomBlog)}
-          style={{ cursor: "pointer" }}
+          onClick={!isLoading ? () => handleBlogContentListPage(randomBlog) : undefined}
+          style={{ cursor: !isLoading ? "pointer" : "default" }}
         >
           <Grid container alignItems={"center"}>
             <Grid item xs={12} md={6}>
-              <UpdateImage
-                alt="recommended image"
-                src={randomBlog?.image || "/images/home/rocket.jpg"}
-                customStyles={style.recommendedImageCss}
-              />
+              {isLoading ? (
+                <Skeleton variant="rectangular" width="100%" height={300} />
+              ) : (
+                <UpdateImage
+                  alt="recommended image"
+                  src={randomBlog?.image || "/images/home/rocket.jpg"}
+                  customStyles={style.recommendedImageCss}
+                />
+              )}
             </Grid>
             <Grid item xs={12} md={6}>
               <Box sx={style.topSectionDetails}>
-                <Button onClick={() => handleTagClick(randomBlog?.blogTag)}>
-                  {randomBlog?.blogTag}
-                </Button>
-                <Typography variant="h1">{randomBlog?.blogTitle}</Typography>
-                <Box sx={style.detailsComment} style={{ color: "#000" }}>
-                  <ReactMarkdown
-                    remarkPlugins={[RemarkMathPlugin, remarkGfm]}
-                    rehypePlugins={[rehypeKatex, remark2rehype]}
-                    components={{
-                      img: ({ node, ...props }) => null,
-                    }}
-                  >
-                    {randomBlog?.description?.split(" ").slice(0, 15).join(" ")}
-                  </ReactMarkdown>
-                </Box>
-
+                {isLoading ? (
+                  <>
+                    <Skeleton width={80} />
+                    <Skeleton width="60%" />
+                    <Skeleton width="80%" />
+                  </>
+                ) : (
+                  <>
+                    <Button onClick={() => handleTagClick(randomBlog?.blogTag)}>
+                      {randomBlog?.blogTag}
+                    </Button>
+                    <Typography variant="h1">{randomBlog?.blogTitle}</Typography>
+                    <Box sx={style.detailsComment} style={{ color: "#000" }}>
+                      <ReactMarkdown
+                        remarkPlugins={[RemarkMathPlugin, remarkGfm]}
+                        rehypePlugins={[rehypeKatex, remark2rehype]}
+                        components={{
+                          img: ({ node, ...props }) => null,
+                        }}
+                      >
+                        {randomBlog?.description?.split(" ").slice(0, 15).join(" ")}
+                      </ReactMarkdown>
+                    </Box>
+                  </>
+                )}
                 <Box sx={style.cardBottomSection}>
                   <Box sx={style.profileDetails}>
-                    <Box sx={style.profileSection}>
-                      <Avatar>
-                        <Image
-                          src={randomBlog?.userData?.[0]?.profilePic || "/images/home/User.jpg"}
-                          fill={true}
-                          alt="user pic"
-                        />
-                      </Avatar>
-                    </Box>
+                    {isLoading ? (
+                      <>
+                        <Skeleton variant="circular" width={40} height={40} />
+                        <Skeleton width="40%" />
+                        <Skeleton width="30%" />
+                      </>
+                    ) : (
+                      <Box sx={style.profileSection}>
+                        <Avatar>
+                          <Image
+                            src={randomBlog?.userData?.[0]?.profilePic || "/images/home/User.jpg"}
+                            fill={true}
+                            alt="user pic"
+                          />
+                        </Avatar>
+                      </Box>
+                    )}
                     <Box sx={style.profileName}>
                       <Typography variant="h5">{randomBlog?.userData?.[0]?.name}</Typography>
                       <Box sx={style.dFlex}>
@@ -102,11 +125,14 @@ const RecommendationBlog = ({ recommendationBlogList }) => {
                     </Box>
                   </Box>
                   <Box sx={style.date}>
-                    {" "}
-                    {new Date(randomBlog?.createdAt).toLocaleDateString("en-US", {
-                      day: "numeric",
-                      month: "short",
-                    })}
+                    {isLoading ? (
+                      <Skeleton width={50} />
+                    ) : (
+                      new Date(randomBlog?.createdAt).toLocaleDateString("en-US", {
+                        day: "numeric",
+                        month: "short",
+                      })
+                    )}
                   </Box>
                 </Box>
               </Box>
