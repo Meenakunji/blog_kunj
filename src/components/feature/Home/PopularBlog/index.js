@@ -57,9 +57,9 @@ const PopularBlog = ({ popularBlogList }) => {
           <Box sx={style.popularArticlesDetails}>
             <Typography variant="h2">Popular Blog</Typography>
             <Typography variant="body1">
-              Welcome to our Popular Blog section! Here, we explore the use of Lorem ipsum in
-              publishing and graphic design. Discover its significance and applications in these
-              industries.
+              Welcome to our Popular Blog section! Here, we explore the use of innovative techniques
+              in publishing and graphic design. Discover their significance and applications in
+              these industries.
             </Typography>
           </Box>
           <Button onClick={handlePopularBlogListing}>

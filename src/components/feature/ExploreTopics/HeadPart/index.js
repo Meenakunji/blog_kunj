@@ -9,7 +9,7 @@ import "slick-carousel/slick/slick.css";
 import { setTagListName } from "../../../../redux/slices/user";
 import style from "./style";
 
-const ExploreTopicsHeadComponent = ({ allTagList }) => {
+const ExploreTopicsHeadComponent = ({ allTagList,isSearchShow }) => {
   const [value, setValue] = useState("");
   const router = useRouter();
   const dispatch = useDispatch();
@@ -76,24 +76,29 @@ const ExploreTopicsHeadComponent = ({ allTagList }) => {
           </Slider>
         </Box>
       </Container>
-      <Container maxWidth="false" sx={{ maxWidth: "600px" }}>
-        <Box sx={style.SearchBarSection}>
-          <Typography variant="h5">Explore topics</Typography>
-          <SearchBar
-            style={{
-              alignItems: "center",
-              width: "566px",
-              border: "1px solid #dfe1e5",
-              borderRadius: "100px",
-              boxShadow: "none",
-            }}
-            value={value}
-            onChange={(newValue) => setValue(newValue)}
-            onRequestSearch={() => doSomethingWith(value)}
-            onCancelSearch={() => handleCancelSearch()}
-          />
-        </Box>
-      </Container>
+      {
+        isSearchShow && (
+          <Container maxWidth="false" sx={{ maxWidth: "600px" }}>
+          <Box sx={style.SearchBarSection}>
+            <Typography variant="h5">Explore topics</Typography>
+            <SearchBar
+              style={{
+                alignItems: "center",
+                width: "566px",
+                border: "1px solid #dfe1e5",
+                borderRadius: "100px",
+                boxShadow: "none",
+              }}
+              value={value}
+              onChange={(newValue) => setValue(newValue)}
+              onRequestSearch={() => doSomethingWith(value)}
+              onCancelSearch={() => handleCancelSearch()}
+            />
+          </Box>
+        </Container>
+        )
+      }
+    
     </>
   );
 };
