@@ -34,7 +34,7 @@ export default function ExploreTopics() {
         <LoaderComponent />
       ) : (
         <Box style={{ paddingTop: "100px", background: "#fff" }}>
-          <ExploreTopicsHeadComponent allTagList={memoizedAllTags} />
+          <ExploreTopicsHeadComponent allTagList={memoizedAllTags} isSearchShow={true} />
           <ExploreTopicsDetailsComponent allTagList={memoizedAllTags} />
         </Box>
       )}
