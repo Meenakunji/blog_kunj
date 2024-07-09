@@ -20,7 +20,6 @@ export const BlogDetailsPageBanner = ({ particularBlogContent }) => {
             height: "100%",
             objectFit: "fill",
           }}
-          
         />
       </Box>
       <Container maxWidth="md">
@@ -38,7 +37,6 @@ export const BlogDetailsPageBanner = ({ particularBlogContent }) => {
                 border: "1px solid #c3c3c3",
                 objectFit: "cover",
               }}
-              
             />
           </Box>
           <Box sx={style.profileName}>
