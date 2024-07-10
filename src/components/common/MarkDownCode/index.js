@@ -1,4 +1,3 @@
-// src/components/MarkDownReactCode.js
 import { Box, Table, TableCell, TableHead, TableBody, TableRow } from "@mui/material";
 import React, { useState } from "react";
 import ReactMarkdown from "react-markdown";
@@ -69,6 +68,9 @@ export const MarkDownReactCode = ({ description }) => {
               </code>
             );
           },
+          a: ({ node, ...props }) => (
+            <a style={{ color: "green" }} {...props} target="_blank" rel="noopener noreferrer" />
+          ),
         }}
       >
         {description}
