@@ -24,8 +24,7 @@ const fetcher = {
     logConfigs = { log: false }
   ) => {
     const instance = fetchAxiosInstanceType(axiosInstanceType);
-    if (logConfigs.log)
-      console.log(`url=>${url} paramConfig=>${JSON.stringify(paramConfigs)}`);
+    if (logConfigs.log) console.log(`url=>${url} paramConfig=>${JSON.stringify(paramConfigs)}`);
     return instance
       .request({
         url,
@@ -92,12 +91,7 @@ const fetcher = {
    * @param {object} paramConfigs axios parameters
    * @returns Promise
    */
-  patch: async (
-    url,
-    data,
-    paramConfigs = {},
-    axiosInstanceType = "default"
-  ) => {
+  patch: async (url, data, paramConfigs = {}, axiosInstanceType = "default") => {
     const instance = fetchAxiosInstanceType(axiosInstanceType);
     return instance
       .request({

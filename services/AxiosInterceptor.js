@@ -1,7 +1,7 @@
 import axios from "axios";
 import logout from "../components/Layout/util/logout";
 import { API_BASE_URL } from "../src/constant/appConstants";
-// import { API_BASE_URL } from "../src/constant/appConstants";
+
 let Api = axios.create({
   baseURL: API_BASE_URL,
   "Content-Type": "application/json",
@@ -38,11 +38,7 @@ Api.interceptors.response.use(
     }
 
     // Do something with response error
-
-    if (
-      error?.response?.status === 401 ||
-      error?.response?.data?.errorCode === 403
-    ) {
+    if (error?.response?.status === 401 || error?.response?.data?.errorCode === 403) {
       logout();
     }
 
