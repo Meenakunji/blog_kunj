@@ -102,7 +102,6 @@ const BlogCreate = () => {
 
   useEffect(() => {
     if (blogTitle) {
-      console.log("Debounced suggesting blog content for:", blogTitle);
       debouncedSuggestBlogContent(blogTitle);
     }
   }, [blogTitle, debouncedSuggestBlogContent]);
