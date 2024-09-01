@@ -10,8 +10,8 @@ import { useSelector } from "react-redux";
 import { API_BASE_URL } from "../../../constant/appConstants";
 import fetcher from "../../../dataProvider";
 import AuthenticationComponent from "../auth";
-import style from "./style";
 import { ReplyMessageComponet } from "./ReplyMessage";
+import style from "./style";
 
 export default function TemporaryDrawer() {
   const [text, setText] = useState("");
@@ -66,7 +66,12 @@ export default function TemporaryDrawer() {
   // create blog Comment
   const { mutate: createBlogComments } = useMutation(
     (commentMsg) =>
-      fetcher.post(`${API_BASE_URL}/v1/blog/comments/${particularBlogContent?._id}`, commentMsg),
+      fetcher.post(
+        `${API_BASE_URL}/v1/blog/comments/${
+          particularBlogContent?._id || particularBlogContent?.blogID
+        }`,
+        commentMsg
+      ),
     {
       onSuccess: (resData) => {
         setText("");
@@ -110,7 +115,12 @@ export default function TemporaryDrawer() {
 
   // get comment messageList
   const { mutate: getCommentMessageList } = useMutation(
-    () => fetcher.get(`${API_BASE_URL}/v1/blog/comments/${particularBlogContent?._id}`),
+    () =>
+      fetcher.get(
+        `${API_BASE_URL}/v1/blog/comments/${
+          particularBlogContent?._id || particularBlogContent?.blogID
+        }`
+      ),
     {
       onSuccess: (resData) => {
         setCommentMsgList(resData?.data);

@@ -135,7 +135,9 @@ const CommentBlog = () => {
   const { mutate: getMarkedBlogStatus } = useMutation(
     () =>
       fetcher.get(
-        `${API_BASE_URL}/v1/blog/bookmark/${userData?._id}/${particularBlogContent?._id}`
+        `${API_BASE_URL}/v1/blog/bookmark/${userData?._id}/${
+          particularBlogContent?._id || particularBlogContent?.blogID
+        }`
       ),
     {
       onSuccess: (resData) => {

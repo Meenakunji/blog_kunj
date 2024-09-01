@@ -1,13 +1,12 @@
-import * as React from "react";
+import { Container, Divider, Grid, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
-import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
 import { useRouter } from "next/router";
+import * as React from "react";
 import { BlogList } from "../../src/components/feature/Profile/BlogList";
 import { BookMarkBlogList } from "../../src/components/feature/Profile/BookmarkBlogList";
 import UserProfile from "../../src/components/feature/Profile/UserProfile";
-import UserBlog from "../../src/components/feature/Profile/UserBlog";
-import { Container, Divider, Grid, Typography } from "@mui/material";
 import RightSideProfile from "../../src/components/feature/RightSide";
 
 export default function Profile() {
@@ -23,14 +22,6 @@ export default function Profile() {
     } else if (newValue === 2) {
       router.push("/profile?tab=bookmark_blog_list");
     }
-  };
-
-  // Sample user details
-  const userDetails = {
-    name: "John Doe",
-    email: "john.doe@example.com",
-    location: "New York, USA",
-    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   };
 
   React.useEffect(() => {
