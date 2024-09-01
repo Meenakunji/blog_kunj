@@ -10,6 +10,7 @@ const nextConfig = {
       "lh3.googleusercontent.com",
       "demo2.joomshaper.com",
       "s3.ap-south-1.amazonaws.com",
+      "blog.logrocket.com",
     ],
     remotePatterns: [
       {
@@ -23,6 +24,12 @@ const nextConfig = {
         hostname: "i.postimg.cc",
         port: "",
         pathname: "/h41XhrFF/**",
+      },
+      {
+        protocol: "https",
+        hostname: "blog.logrocket.com",
+        port: "",
+        pathname: "/wp-content/uploads/**",
       },
     ],
   },

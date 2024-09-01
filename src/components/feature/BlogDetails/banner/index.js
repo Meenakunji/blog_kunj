@@ -26,7 +26,10 @@ export const BlogDetailsPageBanner = ({ particularBlogContent }) => {
         <Box sx={style.bannerBg} onClick={() => router.push(`/profile?tab=home`)}>
           <Box sx={style.profileImg}>
             <Image
-              src={particularBlogContent?.userData?.[0]?.profilePic}
+              src={
+                particularBlogContent?.userData?.[0]?.profilePic ||
+                particularBlogContent?.userData?.profilePic
+              }
               alt="user Profile"
               width={40}
               height={40}
@@ -40,7 +43,9 @@ export const BlogDetailsPageBanner = ({ particularBlogContent }) => {
             />
           </Box>
           <Box sx={style.profileName}>
-            <Typography variant="h5">{particularBlogContent?.userData?.[0]?.name}</Typography>
+            <Typography variant="h5">
+              {particularBlogContent?.userData?.[0]?.name || particularBlogContent?.userData?.name}
+            </Typography>
             <Box sx={style.dFlex}>
               <span>
                 <DoneIcon />
