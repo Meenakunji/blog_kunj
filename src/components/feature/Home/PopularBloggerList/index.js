@@ -102,10 +102,11 @@ const PopularBloggerList = ({ popularBlogger }) => {
                         <Box sx={style.profileDetails}>
                           <Box sx={style.profileSection}>
                             <Avatar>
-                              <img
+                              <Image
                                 src={item?.profilePic}
                                 alt={item?.name}
-                                style={{ width: "40px" }}
+                                width={40}
+                                height={40}
                               />
                             </Avatar>
                           </Box>
