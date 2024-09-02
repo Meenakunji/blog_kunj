@@ -137,10 +137,11 @@ const PopularBlog = ({ popularBlogList }) => {
                         <Box sx={style.profileDetails}>
                           <Box sx={style.profileSection}>
                             <Avatar>
-                              <img
+                              <Image
                                 src={item?.userData?.[0]?.profilePic}
                                 alt="user profile pic"
-                                style={{ width: "40px" }}
+                                width={40}
+                                height={40}
                               />
                             </Avatar>
                           </Box>

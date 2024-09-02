@@ -129,6 +129,10 @@ const Header = () => {
     };
   }, [open]);
 
+  const handleBlogDashBoard = () => {
+    router.push(`/dashboard`);
+  };
+
   return (
     <Box>
       <AuthenticationComponent
@@ -178,6 +182,7 @@ const Header = () => {
               }}
             >
               {/* <Tab label="Create Blog" onClick={handleCreateBlog} /> */}
+              <Tab label="DashBoard" onClick={handleBlogDashBoard} />
               {/* <Tab label="Community" onClick={() => router.push("/chat")} /> */}
               <Tab label="About" onClick={() => router.push("/about")} />
             </Tabs>
