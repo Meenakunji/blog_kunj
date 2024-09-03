@@ -103,7 +103,7 @@ export default function DashBoard() {
               >
                 <DashBoardHome />
               </Typography>
-              <Divider style={{ backgroundColor: "#000", height: "2px" }} />
+              <Divider style={{ backgroundColor: "#fff", height: "2px" }} />
             </TabPanel>
           )}
           {router?.query?.tab === "post" && (
@@ -114,7 +114,7 @@ export default function DashBoard() {
               >
                 Post Tab Content
               </Typography>
-              <Divider style={{ backgroundColor: "#000", height: "2px" }} />
+              <Divider style={{ backgroundColor: "#fff", height: "2px" }} />
             </TabPanel>
           )}
           {router?.query?.tab === "categories" && (
@@ -125,7 +125,7 @@ export default function DashBoard() {
               >
                 Categories Tab Content
               </Typography>
-              <Divider style={{ backgroundColor: "#000", height: "2px" }} />
+              <Divider style={{ backgroundColor: "#fff", height: "2px" }} />
             </TabPanel>
           )}
         </Grid>

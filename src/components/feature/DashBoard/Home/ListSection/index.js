@@ -4,12 +4,33 @@ import PostsIcon from "@mui/icons-material/PostAdd";
 import ViewInArIcon from "@mui/icons-material/ViewInAr";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
-export const DashBoardHomeListSection = () => {
+export const DashBoardHomeListSection = ({ dashBoardInfo }) => {
+  
   const cardData = [
-    { icon: <FollowersIcon />, label: "Followers", value: 120, Iconcolor: "#EC3263" },
-    { icon: <PostsIcon />, label: "Posts", value: 45, Iconcolor: "#00AEB8" },
-    { icon: <FavoriteBorderIcon />, label: "Likes", value: 300, Iconcolor: "#1081E8" },
-    { icon: <ViewInArIcon />, label: "Viewers", value: 75, Iconcolor: "#FF8700" },
+    {
+      icon: <FollowersIcon />,
+      label: "Followers",
+      value: dashBoardInfo?.followerCount[0]?.followCount || 0,
+      Iconcolor: "#EC3263",
+    },
+    {
+      icon: <PostsIcon />,
+      label: "Posts",
+      value: dashBoardInfo?.totalPost,
+      Iconcolor: "#00AEB8",
+    },
+    {
+      icon: <FavoriteBorderIcon />,
+      label: "Likes",
+      value: dashBoardInfo?.totalLike,
+      Iconcolor: "#1081E8",
+    },
+    {
+      icon: <ViewInArIcon />,
+      label: "Viewers",
+      value: dashBoardInfo?.totalViewers,
+      Iconcolor: "#FF8700",
+    },
   ];
 
   return (
