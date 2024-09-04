@@ -9,6 +9,8 @@ import ArchiveIcon from "@mui/icons-material/Archive";
 import SettingsIcon from "@mui/icons-material/Settings";
 import * as React from "react";
 import { DashBoardHome } from "../../src/components/feature/DashBoard/Home";
+import { BlogAllPost } from "../../src/components/feature/DashBoard/BlogAllPost";
+import { AllCategoryList } from "../../src/components/feature/DashBoard/AllCategoryList";
 
 export default function DashBoard() {
   const [value, setValue] = React.useState(0);
@@ -22,6 +24,13 @@ export default function DashBoard() {
       router.push("/dashboard?tab=post");
     } else if (newValue === 2) {
       router.push("/dashboard?tab=categories");
+    } else if (newValue === 3) {
+      router.push("/dashboard?tab=archive");
+    } else if (newValue === 4) {
+      router.push("/dashboard?tab=settings");
+    } else {
+      // Redirect to the default tab
+      router.push("/dashboard?tab=home");
     }
   };
 
@@ -33,6 +42,10 @@ export default function DashBoard() {
       setValue(1);
     } else if (tab === "categories") {
       setValue(2);
+    } else if (tab === "archive") {
+      setValue(3);
+    } else if (tab === "settings") {
+      setValue(4);
     } else {
       // Redirect to the default tab
       router.push("/dashboard?tab=home");
@@ -97,35 +110,22 @@ export default function DashBoard() {
         <Grid item sm={9.5} xs={12}>
           {router?.query?.tab === "home" && (
             <TabPanel value={value} index={0}>
-              <Typography
-                variant="h4"
-                sx={{ textAlign: "left", marginBottom: "20px", fontSize: "14px" }}
-              >
-                <DashBoardHome />
-              </Typography>
-              <Divider style={{ backgroundColor: "#fff", height: "2px" }} />
+              <DashBoardHome />
             </TabPanel>
           )}
           {router?.query?.tab === "post" && (
             <TabPanel value={value} index={1}>
-              <Typography
-                variant="h4"
-                sx={{ textAlign: "left", marginBottom: "20px", fontSize: "14px" }}
-              >
-                Post Tab Content
-              </Typography>
-              <Divider style={{ backgroundColor: "#fff", height: "2px" }} />
+              <BlogAllPost />
             </TabPanel>
           )}
           {router?.query?.tab === "categories" && (
             <TabPanel value={value} index={2}>
-              <Typography
-                variant="h4"
-                sx={{ textAlign: "left", marginBottom: "20px", fontSize: "14px" }}
-              >
-                Categories Tab Content
-              </Typography>
-              <Divider style={{ backgroundColor: "#fff", height: "2px" }} />
+              <AllCategoryList />
+            </TabPanel>
+          )}
+          {router?.query?.tab === "archive" && (
+            <TabPanel value={value} index={3}>
+              <AllCategoryList />
             </TabPanel>
           )}
         </Grid>
