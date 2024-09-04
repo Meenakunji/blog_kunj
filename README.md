@@ -74,37 +74,23 @@ Ensure you have Node.js and Yarn or npm installed.
 9.  This will create an optimized build of your application in the `.next` directory.
 10.  ## Learn More
     
-11.  To learn more about the technologies used in this project, check out the following resources:
+To learn more about the technologies used in this project, check out the following resources:
 
-```plaintext
-[Next.js Documentation](https://nextjs.org/docs)
-
-Socket.io Documentation
-
-[Material-UI Documentation](https://mui.com/)
-
-[React Markdown Documentation](https://github.com/remarkjs/react-markdown)
-```
-
-1.  ## Contributing
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Socket.io Documentation](https://socket.io/)
+- [Material-UI Documentation](https://mui.com/)
+- [React Markdown Documentation](https://github.com/remarkjs/react-markdown)
     
-2.  Contributions are welcome! Feel free to open an issue or submit a pull request.
-3.  ## License
+11.  ## Contributing
     
-
-```plaintext
-This project is licensed under the MIT License - see the LICENSE file for details.
-```
-
-1.  ## Acknowledgments
+12.  Contributions are welcome! Feel free to open an issue or submit a pull request.
+13.  ## License
     
-
-```plaintext
-[Next.js](https://nextjs.org/)
-
-[Socket.io](https://socket.io/)
-
-[Material-UI](https://mui.com/)
-
-[React Markdown](https://github.com/remarkjs/react-markdown)
-```
+     his project is licensed under the MIT License - see the LICENSE file for details.
+    
+14.  ## Acknowledgments
+    
+- [Next.js Documentation](https://nextjs.org/)
+- [Socket.io Documentation](https://socket.io/)
+- [Material-UI Documentation](https://mui.com/)
+- [React Markdown Documentation](https://github.com/remarkjs/react-markdown)
