@@ -170,6 +170,10 @@ const LoginComponent = ({ handleModalClose }) => {
             className="btn-md btn-theme w-100"
             style={{
               background: "hsl(161deg 87.73% 42.73%)",
+              border: "1px solid #000",
+              borderRadius: "14px",
+              height: "40px",
+              marginTop: "33px",
             }}
             onClick={() => handleLoginSubmit()}
           >
