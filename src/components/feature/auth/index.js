@@ -1,13 +1,14 @@
-import { Box, Checkbox, Modal, useMediaQuery } from "@mui/material";
+import { Box, Button, Modal, useMediaQuery } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
-import styles from "./style";
 import SignupComponent from "./signup";
 import LoginComponent from "./login";
+import styles from "./style";
 import CloseIcon from "@mui/icons-material/Close";
 import GoogleSignInButton from "./googlelogin/index";
-import EmailImage from "../../../../public/images/home/email.svg";
+import GoogleIcon from "@mui/icons-material/Google";
 import Image from "next/image";
 import React from "react";
+import EmailImage from "../../../../public/images/home/email.svg";
 
 const AuthenticationComponent = ({ open, handleModalClose }) => {
   const [isOpen, setOpen] = useState(false);
@@ -55,7 +56,7 @@ const AuthenticationComponent = ({ open, handleModalClose }) => {
         <div className="juperterLogin" style={isMobile ? { padding: "0" } : { padding: "15px" }}>
           <div className="container">
             <div className="row">
-              <div className="col-md-9 mx-auto" style={{ width: "35%" }}>
+              <div className="col-md-9 mx-auto" style={{ width: isMobile ? "90%" : "35%" }}>
                 <div
                   className="row login-box"
                   style={isMobile ? { background: "#00fff5" } : { background: "#fff" }}
@@ -73,26 +74,6 @@ const AuthenticationComponent = ({ open, handleModalClose }) => {
                     }}
                     onClick={handleModalClose}
                   />
-                  {/* {!isMobile && (
-                    <div
-                      className="col-lg-6 col-md-12 bg-img"
-                      style={{ backgroundColor: "hsl(161deg 87.73% 42.73%)" }}
-                    >
-                      <div className="info">
-                        <div className="info-text">
-                          <div className="welcomeHeading">
-                            <h1>WELCOME Sahitya BLOG</h1>
-                            <p>
-                              WELCOME Sahitya BLOG, your hub for the latest news, articles, and
-                              insights across various topics. Join us to explore technology,
-                              lifestyle, travel, and more. Engage with valuable content, stay
-                              informed, and embark on a journey of knowledge and discovery!
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )} */}
 
                   <div
                     className="col-md-12 form-info"
@@ -120,41 +101,53 @@ const AuthenticationComponent = ({ open, handleModalClose }) => {
                         />
                       )}
 
-                      {isLoginOpen ? (
-                        <Box>
-                          <p className="text">
-                            Don`&apos;`t have an account?
-                            <a href="#" onClick={toggleDivs}>
-                              Register here
-                            </a>
-                          </p>
-                          <div className="loginSection">
-                            <button>
-                              <GoogleSignInButton handleModalClose={handleModalClose} />
-                            </button>
+                      <Box mt={2} display="flex" flexDirection="column" alignItems="center" gap={2}>
+                        {isLoginOpen ? (
+                          <>
+                            <p className="text">
+                              Don`&apos;`t have an account?{" "}
+                              <a href="#" onClick={toggleDivs}>
+                                Register here
+                              </a>
+                            </p>
 
-                            <button>
-                              <Image
-                                src={EmailImage}
-                                alt="email icon"
-                                style={{
-                                  width: "20px",
+                            <Box display="flex" flexDirection={isMobile ? "column" : "row"} gap={2}>
+                              <Button
+                                startIcon={
+                                  <GoogleSignInButton handleModalClose={handleModalClose} />
+                                }
+                                sx={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  textTransform: "none",
+                                  backgroundColor: "#f5f5f5",
+                                  padding: "8px 16px",
                                 }}
-                              />
-                              Email
-                            </button>
-                          </div>
-                        </Box>
-                      ) : (
-                        <Box>
+                              ></Button>
+
+                              <Button
+                                startIcon={<Image src={EmailImage} alt="email icon" width={20} />}
+                                sx={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  textTransform: "none",
+                                  backgroundColor: "#f5f5f5",
+                                  padding: "8px 16px",
+                                }}
+                              >
+                                Email
+                              </Button>
+                            </Box>
+                          </>
+                        ) : (
                           <p className="text">
-                            Already a member?
+                            Already a member?{" "}
                             <a href="#" onClick={toggleDivs}>
-                              Sign Up here
+                              Sign In here
                             </a>
                           </p>
-                        </Box>
-                      )}
+                        )}
+                      </Box>
                     </div>
                   </div>
                 </div>
