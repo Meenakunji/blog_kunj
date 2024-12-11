@@ -4,97 +4,152 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import { Box, Container, Grid, Link, Typography } from "@mui/material";
 import Image from "next/image";
-import React from "react";
 import TwitterImage from "../../../../../public/images/about/NewTwitterx.svg";
 import HeartImage from "../../../../../public/images/home/Heart.svg";
 import style from "../style";
 
 export const FooterPartComponent = () => {
   return (
-    <Box sx={style.newLatter}>
-      <Container maxWidth="md">
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={6}>
+    <Box sx={{ ...style.newLatter, background: "linear-gradient(to right, #0D2436, #183B56)", py: 6 }}>
+      <Container maxWidth="lg">
+        <Grid container spacing={4}>
+          {/* Brand Section */}
+          <Grid item xs={12} sm={4}>
             <Box sx={style.footerDetails}>
-              <Box
-                style={{
-                  display: "flex",
-                }}
-              >
-                <MenuBookIcon style={{ width: "50px", color: "#fff" }} />
-                <Typography component="h1" style={{ fontSize: "18px", color: "#fff" }}>
+              <Box display="flex" alignItems="center" mb={2}>
+                <MenuBookIcon sx={{ fontSize: 50, color: "#fff" }} />
+                <Typography
+                  component="h1"
+                  sx={{ fontSize: 24, fontWeight: "bold", color: "#fff", ml: 1 }}
+                >
                   Sahitya
                 </Typography>
               </Box>
-              <Typography variant="body1">
-                Sahitya: Your go-to blogging website for sharing ideas,
-                <br />
-                stories, and experiences with a vibrant community of writers and readers. Unleash
-                your creativity and connect with like-minded individuals at Sahitya.
+              <Typography variant="body1" sx={{ color: "#cfd8dc", mb: 2 }}>
+                Sahitya is your go-to blogging platform for sharing ideas, stories, and experiences with a vibrant community of writers and readers.
+                Unleash your creativity and connect with like-minded individuals.
+              </Typography>
+              <Typography variant="body1" sx={{ color: "#cfd8dc" }}>
+                Join us today and embark on a journey of self-expression, inspiration, and learning. Explore, write, and thrive with Sahitya.
               </Typography>
             </Box>
           </Grid>
-          <Grid item xs={6} sm={3}>
+
+          {/* Quick Links */}
+          <Grid item xs={6} sm={2}>
             <Box sx={style.footerList}>
-              <Typography variant="h4">Important Links</Typography>
+              <Typography variant="h6" sx={{ color: "#fff", mb: 2 }}>
+                Quick Links
+              </Typography>
               <ul>
-                <li>About</li>
-                <li>Terms</li>
-                <li>Privacy Policy</li>
+                <li>
+                  <Link href="/about" sx={{ color: "#cfd8dc", textDecoration: "none", "&:hover": { color: "#fff" } }}>
+                    About Us
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/terms" sx={{ color: "#cfd8dc", textDecoration: "none", "&:hover": { color: "#fff" } }}>
+                    Terms & Conditions
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/privacy-policy" sx={{ color: "#cfd8dc", textDecoration: "none", "&:hover": { color: "#fff" } }}>
+                    Privacy Policy
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/contact" sx={{ color: "#cfd8dc", textDecoration: "none", "&:hover": { color: "#fff" } }}>
+                    Contact Us
+                  </Link>
+                </li>
               </ul>
             </Box>
           </Grid>
-          <Grid item xs={6} sm={3}>
-            <Box sx={style.footerList2}>
-              <Typography variant="h4">Follow us at</Typography>
+
+          {/* Explore Categories */}
+          <Grid item xs={6} sm={2}>
+            <Box sx={style.footerList}>
+              <Typography variant="h6" sx={{ color: "#fff", mb: 2 }}>
+                Explore
+              </Typography>
               <ul>
+                <li>
+                  <Link href="/blog" sx={{ color: "#cfd8dc", textDecoration: "none", "&:hover": { color: "#fff" } }}>
+                    Latest Blogs
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/categories" sx={{ color: "#cfd8dc", textDecoration: "none", "&:hover": { color: "#fff" } }}>
+                    Categories
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/resources" sx={{ color: "#cfd8dc", textDecoration: "none", "&:hover": { color: "#fff" } }}>
+                    Resources
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/faqs" sx={{ color: "#cfd8dc", textDecoration: "none", "&:hover": { color: "#fff" } }}>
+                    FAQs
+                  </Link>
+                </li>
+              </ul>
+            </Box>
+          </Grid>
+
+          {/* Social Media Links */}
+          <Grid item xs={12} sm={4}>
+            <Box sx={style.footerList2}>
+              <Typography variant="h6" sx={{ color: "#fff", mb: 2 }}>
+                Connect with Us
+              </Typography>
+              <Typography variant="body1" sx={{ color: "#cfd8dc", mb: 2 }}>
+                Stay updated with the latest blogs and stories. Follow us on social media and never miss an update!
+              </Typography>
+              <ul style={{ display: "flex", gap: "1rem" }}>
                 <li>
                   <Link
                     href="https://www.linkedin.com/in/pankaj-kumar-meena-1b3922176/"
                     target="_blank"
-                    className="me-4 text-reset"
-                    style={{ color: "#fff !important" }}
+                    aria-label="LinkedIn"
+                    sx={{ "&:hover": { color: "#0077b5" } }}
                   >
-                    <LinkedInIcon />
+                    <LinkedInIcon sx={{ color: "#cfd8dc", fontSize: 30 }} />
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href="https://www.linkedin.com/in/pankaj-kumar-meena-1b3922176/"
+                    href="https://www.facebook.com"
                     target="_blank"
-                    className="me-4 text-reset"
-                    style={{ color: "#fff !important" }}
+                    aria-label="Facebook"
+                    sx={{ "&:hover": { color: "#4267B2" } }}
                   >
-                    <FacebookIcon />
+                    <FacebookIcon sx={{ color: "#cfd8dc", fontSize: 30 }} />
                   </Link>
                 </li>
                 <li>
                   <Link
                     href="https://twitter.com/pankajk66711680"
                     target="_blank"
-                    className="me-4 text-reset"
-                    style={{ color: "#fff !important" }}
+                    aria-label="Twitter"
                   >
-                    {" "}
                     <Image
                       src={TwitterImage}
-                      alt="like icon"
-                      style={{
-                        width: "24px",
-                        height: "auto",
-                        objectFit: "cover",
-                      }}
+                      alt="Twitter"
+                      width={30}
+                      height={30}
+                      style={{ objectFit: "contain" }}
                     />
                   </Link>
                 </li>
                 <li>
                   <Link
-                    href="https://www.linkedin.com/in/pankaj-kumar-meena-1b3922176/"
+                    href="https://www.instagram.com"
                     target="_blank"
-                    className="me-4 text-reset"
-                    style={{ color: "#fff !important" }}
+                    aria-label="Instagram"
+                    sx={{ "&:hover": { color: "#E1306C" } }}
                   >
-                    <InstagramIcon />
+                    <InstagramIcon sx={{ color: "#cfd8dc", fontSize: 30 }} />
                   </Link>
                 </li>
               </ul>
@@ -119,3 +174,5 @@ export const FooterPartComponent = () => {
     </Box>
   );
 };
+
+export default FooterPartComponent;

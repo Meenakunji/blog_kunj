@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { API_BASE_URL } from "../../../../constant/appConstants";
+import LocalOfferIcon from "@mui/icons-material/LocalOffer";
+import { setTagListName } from "../../../../redux/slices/user";
+import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
 
 const Card = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -38,6 +42,8 @@ const SubcategoryCard = styled(Box)(({ theme }) => ({
 export const AllCategoryList = () => {
   const [allTagList, setAllTagList] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const dispatch = useDispatch();
+  const router = useRouter();
 
   const fetchAllTags = async () => {
     try {
@@ -72,13 +78,20 @@ export const AllCategoryList = () => {
       {allTagList?.map((category) => (
         <Box key={category.id}>
           <Card onClick={() => handleCategoryClick(category.blogTag)}>
-            <IconWrapper>{category?.icon || "💍"}</IconWrapper>
+            <IconWrapper>{category?.icon || <LocalOfferIcon />} </IconWrapper>
             <Typography variant="h6">{category.blogTag}</Typography>
           </Card>
           {selectedCategory === category.blogTag && (
             <Box sx={{ mt: 2, ml: 2 }}>
               {category?.subTags?.map((sub, index) => (
-                <SubcategoryCard key={index}>
+                <SubcategoryCard
+                  key={index}
+                  sx={{cursor: "pointer"}}
+                  onClick={() => {
+                    dispatch(setTagListName(sub));
+                    router.push(`/tag/${sub}`);
+                  }}
+                >
                   <Typography variant="body2">{sub}</Typography>
                 </SubcategoryCard>
               ))}
