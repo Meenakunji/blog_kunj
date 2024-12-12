@@ -96,11 +96,11 @@ const Header = () => {
   };
 
   const handleCreateBlog = () => {
-    // if (!isLoggedIn) {
-    //   eventBus.dispatch("openLoginModal", { function_name: "unique" });
-    // } else {
-    router.push(`/new-blog/create-blog`);
-    // }
+    if (!isLoggedIn) {
+      eventBus.dispatch("openLoginModal", { function_name: "unique" });
+    } else {
+      router.push(`/new-blog/create-blog`);
+    }
   };
 
   useEffect(() => {
@@ -181,9 +181,9 @@ const Header = () => {
                 style: { background: "white" },
               }}
             >
-              {/* <Tab label="Create Blog" onClick={handleCreateBlog} /> */}
+              <Tab label="Create Blog" onClick={handleCreateBlog} />
               <Tab label="DashBoard" onClick={handleBlogDashBoard} />
-              <Tab label="Contact US" />
+              <Tab label="Contact US" onClick={() => router.push("/contactus")} />
               {/* <Tab label="Community" onClick={() => router.push("/chat")} /> */}
               <Tab label="About" onClick={() => router.push("/about")} />
             </Tabs>

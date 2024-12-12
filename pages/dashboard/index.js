@@ -1,16 +1,18 @@
+import ArchiveIcon from "@mui/icons-material/Archive";
+import PostIcon from "@mui/icons-material/Article";
+import CategoriesIcon from "@mui/icons-material/Category";
+import HomeIcon from "@mui/icons-material/Home";
+import SettingsIcon from "@mui/icons-material/Settings";
 import { Container, Divider, Grid, Typography } from "@mui/material";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import { useRouter } from "next/router";
-import HomeIcon from "@mui/icons-material/Home";
-import PostIcon from "@mui/icons-material/Article";
-import CategoriesIcon from "@mui/icons-material/Category";
-import ArchiveIcon from "@mui/icons-material/Archive";
-import SettingsIcon from "@mui/icons-material/Settings";
 import * as React from "react";
-import { DashBoardHome } from "../../src/components/feature/DashBoard/Home";
-import { BlogAllPost } from "../../src/components/feature/DashBoard/BlogAllPost";
 import { AllCategoryList } from "../../src/components/feature/DashBoard/AllCategoryList";
+import { BlogAllPost } from "../../src/components/feature/DashBoard/BlogAllPost";
+import { DashBoardHome } from "../../src/components/feature/DashBoard/Home";
+import ArchiveSection from "../../src/components/feature/DashBoard/Home/ArchiveSection";
+import BlogDashboardSettings from "../../src/components/feature/DashBoard/Home/BlogDashboardSettings";
 
 export default function DashBoard() {
   const [value, setValue] = React.useState(0);
@@ -125,7 +127,12 @@ export default function DashBoard() {
           )}
           {router?.query?.tab === "archive" && (
             <TabPanel value={value} index={3}>
-              <AllCategoryList />
+              <ArchiveSection />
+            </TabPanel>
+          )}
+          {router?.query?.tab === "settings" && (
+            <TabPanel value={value} index={4}>
+              <BlogDashboardSettings />
             </TabPanel>
           )}
         </Grid>

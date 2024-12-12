@@ -18,7 +18,7 @@ import styles from "./style";
 export const BlogAllPost = () => {
   const [markedblogList, setMarkedblogList] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(16);
+  const [itemsPerPage] = useState(18);
   const router = useRouter();
   const dispatch = useDispatch();
   const { userData } = useSelector((state) => state.user);
@@ -61,8 +61,8 @@ export const BlogAllPost = () => {
       <Box
         sx={{
           display: "grid",
-          gridTemplateColumns: "repeat(4, 1fr)",
-          gap: 2,
+          gridTemplateColumns: "repeat(3, 1fr)",
+          gap: 3,
         }}
       >
         {currentItems.map((item, index) => (
@@ -76,7 +76,7 @@ export const BlogAllPost = () => {
               src={item?.image}
               sx={{
                 width: "100%",
-                height: "150px",
+                height: "200px",
                 objectFit: "cover",
               }}
             />

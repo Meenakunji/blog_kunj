@@ -17,9 +17,12 @@ const RecommendationBlog = dynamic(
   }
 );
 
-const SubScriptionSection = dynamic(() => import("../src/components/common/SubscriptionComponent"), {
-  ssr: false,
-});
+const SubScriptionSection = dynamic(
+  () => import("../src/components/common/SubscriptionComponent"),
+  {
+    ssr: false,
+  }
+);
 
 const PopularBlog = dynamic(() => import("../src/components/feature/Home/PopularBlog"), {
   ssr: false,
@@ -39,7 +42,7 @@ const CaseStudyList = dynamic(() => import("../src/components/feature/Home/CaseS
 const AllBlogComponent = dynamic(() => import("../src/components/feature/Home/AllBlogContainer"), {
   ssr: false,
 });
-const Home = ({subscriptionPlans}) => {
+const Home = ({ subscriptionPlans }) => {
   const [recommendationBlogList, setRecommendationBlogList] = useState([]);
   const [popularBloggerList, setPopularBloggerList] = useState([]);
   const [allBlogList, setAllBlogList] = useState([]);
@@ -119,19 +122,17 @@ const Home = ({subscriptionPlans}) => {
         />
         <BlogSearch popularBlogTag={popularBlogTag?.data} />
         <RecommendationBlog recommendationBlogList={allBlogList} />
-        <SubScriptionSection subscriptionPlans={subscriptionPlans}/>
         <PopularBlog popularBlogList={recommendationBlogList} />
         <PopularBloggerList popularBlogger={popularBloggerList} />
         <CaseStudyList caseStudyList={caseStudyList} />
         <AllBlogComponent allBlogList={allBlogList} />
-        
+        <SubScriptionSection subscriptionPlans={subscriptionPlans} />
       </Box>
     </Box>
   );
 };
 
 export default Home;
-
 
 export async function getServerSideProps() {
   // Mocked Data Fetching (replace with real API calls)
@@ -146,7 +147,7 @@ export async function getServerSideProps() {
         "Standard customer support",
         "Limited access to premium content",
         "Monthly usage report",
-        "Listen to audio narrations"
+        "Listen to audio narrations",
       ],
     },
     {
@@ -159,7 +160,7 @@ export async function getServerSideProps() {
         "Priority customer support",
         "Advanced analytics and reports",
         "Access to exclusive webinars",
-        "Listen to audio narrations"
+        "Listen to audio narrations",
       ],
     },
     {
