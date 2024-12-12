@@ -17,6 +17,10 @@ const RecommendationBlog = dynamic(
   }
 );
 
+const SubScriptionSection = dynamic(() => import("../src/components/common/SubscriptionComponent"), {
+  ssr: false,
+});
+
 const PopularBlog = dynamic(() => import("../src/components/feature/Home/PopularBlog"), {
   ssr: false,
 });
@@ -35,7 +39,7 @@ const CaseStudyList = dynamic(() => import("../src/components/feature/Home/CaseS
 const AllBlogComponent = dynamic(() => import("../src/components/feature/Home/AllBlogContainer"), {
   ssr: false,
 });
-const Home = () => {
+const Home = ({subscriptionPlans}) => {
   const [recommendationBlogList, setRecommendationBlogList] = useState([]);
   const [popularBloggerList, setPopularBloggerList] = useState([]);
   const [allBlogList, setAllBlogList] = useState([]);
@@ -115,13 +119,65 @@ const Home = () => {
         />
         <BlogSearch popularBlogTag={popularBlogTag?.data} />
         <RecommendationBlog recommendationBlogList={allBlogList} />
+        <SubScriptionSection subscriptionPlans={subscriptionPlans}/>
         <PopularBlog popularBlogList={recommendationBlogList} />
         <PopularBloggerList popularBlogger={popularBloggerList} />
         <CaseStudyList caseStudyList={caseStudyList} />
         <AllBlogComponent allBlogList={allBlogList} />
+        
       </Box>
     </Box>
   );
 };
 
 export default Home;
+
+
+export async function getServerSideProps() {
+  // Mocked Data Fetching (replace with real API calls)
+  const subscriptionPlans = [
+    {
+      id: 1,
+      name: "Basic Plan",
+      price: 10,
+      description: "Ideal for individuals who want access to essential features.",
+      features: [
+        "Access to basic tools and features",
+        "Standard customer support",
+        "Limited access to premium content",
+        "Monthly usage report",
+        "Listen to audio narrations"
+      ],
+    },
+    {
+      id: 2,
+      name: "Pro Plan",
+      price: 20,
+      description: "Perfect for professionals who need advanced features.",
+      features: [
+        "Access to all tools and features",
+        "Priority customer support",
+        "Advanced analytics and reports",
+        "Access to exclusive webinars",
+        "Listen to audio narrations"
+      ],
+    },
+    {
+      id: 3,
+      name: "Enterprise Plan",
+      price: 50,
+      description: "Best for businesses and teams requiring premium support and tools.",
+      features: [
+        "Unlimited access to all features",
+        "Dedicated account manager",
+        "Team collaboration tools",
+        "Customizable dashboards and reports",
+        "Premium 24/7 support",
+      ],
+    },
+  ];
+
+  return {
+    props: { subscriptionPlans },
+  };
+}
