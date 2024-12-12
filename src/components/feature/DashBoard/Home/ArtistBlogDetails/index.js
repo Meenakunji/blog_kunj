@@ -9,6 +9,7 @@ import {
   TableRow,
   Paper,
   Avatar,
+  Button,
 } from "@mui/material";
 import moment from "moment/moment";
 import React from "react";
@@ -48,17 +49,34 @@ export const ArtistBlogDetailsGraph = ({ topArtistData }) => {
                   </Typography>
                 </TableCell>
                 <TableCell>
-                  <Typography
-                    variant="body1"
-                    style={{
+                  <Button
+                    variant="contained"
+                    sx={{
                       border: "1px solid green",
-                      padding: "7px",
-                      borderRadius: "29px",
-                      background: "#a7e3ef",
+                      padding: "10px 20px",
+                      backgroundImage:
+                        "linear-gradient(to right, #00d2ff 0%, #3a7bd5 51%, #00d2ff 100%)",
+                      margin: "10px",
+                      textAlign: "center",
+                      textTransform: "uppercase",
+                      transition: "background-position 0.5s ease",
+                      backgroundSize: "200% auto",
+                      color: "white",
+                      boxShadow: "0 0 20px #eee",
+                      borderRadius: "10px",
+                      display: "inline-block",
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      "&:hover": {
+                        backgroundPosition: "right center",
+                        color: "#fff",
+                        textDecoration: "none",
+                      },
                     }}
                   >
                     {row?.category}
-                  </Typography>
+                  </Button>
                 </TableCell>
                 <TableCell>{row?.totalComments}</TableCell>
               </TableRow>

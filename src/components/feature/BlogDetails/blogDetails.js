@@ -185,7 +185,7 @@ export default function TemporaryDrawer() {
       // onKeyDown={toggleDrawer(anchor, false)}
     >
       <Box sx={style.messageSection}>
-        <Typography variant="h1">Responses</Typography>
+        <Typography variant="h1">Responses ({commentMsglist?.length || 0})</Typography>
         <CloseIcon onClick={toggleDrawer(anchor, false)} />
       </Box>
       <Box sx={style.commentChatBox}>
@@ -265,14 +265,14 @@ export default function TemporaryDrawer() {
                         ></path>
                       </svg>{" "}
                     </Typography>
-                    <Typography variant="body1" onClick={() => handleReplyMessageModel(item)}>
+                    {/* <Typography variant="body1" onClick={() => handleReplyMessageModel(item)}>
                       <svg width="29" height="29" className="mg q anq" aria-label="responses">
                         <path d="M21.27 20.06a9.04 9.04 0 0 0 2.75-6.68C24.02 8.21 19.67 4 14.1 4S4 8.21 4 13.38c0 5.18 4.53 9.39 10.1 9.39 1 0 2-.14 2.95-.41.28.25.6.49.92.7a7.46 7.46 0 0 0 4.19 1.3c.27 0 .5-.13.6-.35a.63.63 0 0 0-.05-.65 8.08 8.08 0 0 1-1.29-2.58 5.42 5.42 0 0 1-.15-.75zm-3.85 1.32l-.08-.28-.4.12a9.72 9.72 0 0 1-2.84.43c-4.96 0-9-3.71-9-8.27 0-4.55 4.04-8.26 9-8.26 4.95 0 8.77 3.71 8.77 8.27 0 2.25-.75 4.35-2.5 5.92l-.24.21v.32a5.59 5.59 0 0 0 .21 1.29c.19.7.49 1.4.89 2.08a6.43 6.43 0 0 1-2.67-1.06c-.34-.22-.88-.48-1.16-.74z"></path>
                       </svg>
                       {!hideReplies && selectedCommentId === item.parentCommentId
                         ? `${replyMessageList?.length} replies`
                         : "Hide replies"}
-                    </Typography>
+                    </Typography> */}
                   </Box>
                   <Box
                     sx={style.replyRight}

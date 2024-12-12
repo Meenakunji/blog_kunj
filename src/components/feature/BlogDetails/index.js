@@ -11,6 +11,8 @@ import { BlogActionBtn } from "./action";
 import { BlogDetailsPageBanner } from "./banner";
 import { BlogDetailsFooterSection } from "./footerSection";
 import style from "./style";
+import confetti from "canvas-confetti";
+
 
 const CommentBlog = () => {
   const { particularBlogContent, userData, isLoggedIn } = useSelector((state) => state.user);
@@ -161,6 +163,47 @@ const CommentBlog = () => {
     {
       onSuccess: (resData) => {
         setBlogLikeCount(resData?.data?.blogLike);
+        const emojiConfetti = () => {
+          const emojis = ["🎉", "❤️", "✨", "🎈", "🔥"];
+          const shootEmoji = (emoji) => {
+            confetti({
+              particleCount: 20,
+              angle: Math.random() * 90 + 45, 
+              spread: 70,
+              origin: {
+                x: Math.random(), 
+                y: Math.random() * 0.5, 
+              },
+              scalar: 1.5, 
+              shapes: ["circle"], 
+              colors: ["transparent"], 
+              drift: 0.05, 
+              ticks: 200, 
+            });
+    
+            // Render emoji overlay using DOM
+            const emojiElement = document.createElement("div");
+            emojiElement.textContent = emoji;
+            emojiElement.style.position = "fixed";
+            emojiElement.style.left = `${Math.random() * 100}vw`;
+            emojiElement.style.top = `${Math.random() * 100}vh`;
+            emojiElement.style.fontSize = "24px";
+            emojiElement.style.transform = `translate(-50%, -50%) rotate(${Math.random() * 360}deg)`;
+            emojiElement.style.animation = "float 2s ease-out";
+            document.body.appendChild(emojiElement);
+    
+            setTimeout(() => {
+              emojiElement.remove();
+            }, 3000);
+          };
+    
+          for (let i = 0; i < 5; i++) {
+            const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+            shootEmoji(randomEmoji);
+          }
+        };
+    
+        emojiConfetti();
       },
       onError: (error) => {
         alert(error?.response?.data?.message);
