@@ -43,7 +43,6 @@ const CommentBlog = () => {
       onSuccess: () => {
         localStorage.setItem(`visited_${particularBlogContent?._id}`, "true");
         setReadCountUpdated(true);
-
         const visitedBlogs = JSON.parse(localStorage.getItem("visitedBlogs")) || {};
         visitedBlogs[particularBlogContent?._id] =
           (visitedBlogs[particularBlogContent?._id] || 0) + 1;
