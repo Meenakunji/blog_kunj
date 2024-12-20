@@ -54,3 +54,27 @@ export function debounce(func, wait) {
     timeout = setTimeout(() => func.apply(this, args), wait);
   };
 }
+
+
+export const resources = [
+  {
+    title: "React Documentation",
+    description: "Comprehensive guide and reference for building React applications.",
+    link: "https://reactjs.org/docs/getting-started.html",
+  },
+  {
+    title: "Material-UI",
+    description: "The React component library you need to build your UI faster.",
+    link: "https://mui.com/",
+  },
+  {
+    title: "Next.js Documentation",
+    description: "Learn how to use Next.js to build production-grade React apps.",
+    link: "https://nextjs.org/docs",
+  },
+  {
+    title: "JavaScript Info",
+    description: "Modern JavaScript tutorial and documentation.",
+    link: "https://javascript.info/",
+  },
+];
