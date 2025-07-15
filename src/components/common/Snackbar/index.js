@@ -1,6 +1,8 @@
 import React, { memo, useCallback } from "react";
 import { Slide, Snackbar } from "@mui/material";
-import alert from "@mui/material/alert";
+// import alert from "@mui/material/alert";
+import { Alert } from '@mui/material';
+
 function SnackBar({ show, status, message, onClose }) {
   const handleClose = useCallback(() => {
     onClose({ show: false, error: "", message: "" });
