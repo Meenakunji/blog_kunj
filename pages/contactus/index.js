@@ -141,7 +141,7 @@ const ContactPage = () => {
               Highly recommend!&quot;
             </Typography>
             <Typography variant="body2" sx={{ color: "gray", marginTop: "10px" }}>
-              - Pankaj Kumar Meena, CEO of Company Sahitya
+              - Kunji Meena, CEO of Company Sahitya
             </Typography>
           </Paper>
           <Paper sx={{ padding: "20px", backgroundColor: "#1a1a1a", borderRadius: "8px" }}>
@@ -149,7 +149,7 @@ const ContactPage = () => {
               &quot;Fast and efficient. The team is knowledgeable and always ready to assist!&quot;
             </Typography>
             <Typography variant="body2" sx={{ color: "gray", marginTop: "10px" }}>
-              - Pankaj Kumar Meena, Founder of Startup SmartShield
+              - Kunji Meena, Founder of Startup SmartShield
             </Typography>
           </Paper>
         </Box>

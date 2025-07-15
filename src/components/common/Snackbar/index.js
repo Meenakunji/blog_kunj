@@ -1,6 +1,6 @@
 import React, { memo, useCallback } from "react";
 import { Slide, Snackbar } from "@mui/material";
-import Alert from "@mui/material/Alert";
+import alert from "@mui/material/alert";
 function SnackBar({ show, status, message, onClose }) {
   const handleClose = useCallback(() => {
     onClose({ show: false, error: "", message: "" });
@@ -15,14 +15,14 @@ function SnackBar({ show, status, message, onClose }) {
       TransitionComponent={(props) => <Slide {...props} direction="left" />}
       onClose={handleClose}
     >
-      <Alert
+      <alert
         elevation={6}
         variant="filled"
         severity={status}
         onClose={handleClose}
       >
         {message}
-      </Alert>
+      </alert>
     </Snackbar>
   );
 }

@@ -43,7 +43,7 @@ const UserProfile = () => {
           <ul>
             <li>
               <Link
-                href="https://www.linkedin.com/in/pankaj-kumar-meena-1b3922176/"
+                href="www.linkedin.com/in/kunji-lal-meena-653503194"
                 target="_blank"
                 className="me-4 text-reset"
                 style={{ color: "#fff !important" }}
